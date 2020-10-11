@@ -19,7 +19,7 @@ const ENTRY = gql`
   }
 `;
 
-type Entry = {
+export type Entry = {
   id: string;
   term: string;
   pos: string;
