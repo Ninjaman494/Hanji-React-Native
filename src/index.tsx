@@ -1,10 +1,10 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import {Button, Text} from "react-native-paper";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Button, Text } from "react-native-paper";
 import getEntry from "./hooks/getEntry";
 
 export default function Index() {
-  const { loading, error, data } = getEntry('가다0');
+  const { loading, error, data } = getEntry("가다0");
 
   return (
     <View style={styles.container}>
@@ -21,8 +21,8 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
