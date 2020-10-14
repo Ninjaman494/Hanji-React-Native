@@ -5,6 +5,8 @@ import { Router, Switch, Route } from "./routing";
 import DisplayPage from "./display/displayPage";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import MainPage from "./main/MainPage";
+import SearchPage from "./search/SearchPage";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
@@ -29,7 +31,9 @@ export default function Index() {
           <View style={styles.container}>
             <Router>
               <Switch>
-                <Route exact path="/" component={DisplayPage} />
+                <Route exact path="/" component={MainPage} />
+                <Route path="/search" component={SearchPage} />
+                <Route exact path="/display" component={DisplayPage} />
               </Switch>
             </Router>
           </View>

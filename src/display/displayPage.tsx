@@ -1,10 +1,10 @@
 import React from "react";
 import { List, Headline, Subheading, Text } from "react-native-paper";
-import getEntry from "../hooks/getEntry";
+import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "./BaseCard";
 
 const DisplayPage: React.FC = () => {
-  const { loading, error, data } = getEntry("있다0");
+  const { loading, error, data } = useGetEntry("있다0");
   const entry = data?.entry;
 
   return (

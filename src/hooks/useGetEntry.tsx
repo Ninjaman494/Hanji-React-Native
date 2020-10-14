@@ -38,6 +38,6 @@ type GetEntryResponse = {
   entry: Entry;
 };
 
-export default function getEntry(id: string): QueryResult<GetEntryResponse> {
+export default function useGetEntry(id: string): QueryResult<GetEntryResponse> {
   return useQuery<GetEntryResponse>(ENTRY, { variables: { id: id } });
 }
