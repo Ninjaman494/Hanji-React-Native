@@ -8,6 +8,7 @@ import DefPosCard from "../utils/DefPosCard";
 import AppBar from "../utils/AppBar";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
+import ListItem from "../utils/ListItem";
 
 const DisplayPage: React.FC = () => {
   const id = useGetURLParams().get("id");
@@ -44,7 +45,7 @@ const DisplayPage: React.FC = () => {
       )}
       {entry && (
         <>
-          <DefPosCard entry={entry} />
+          <DefPosCard entry={entry} style={styles.card} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
               <Text>{entry.note}</Text>
@@ -53,15 +54,15 @@ const DisplayPage: React.FC = () => {
           {conjugations && (
             <BaseCard title={"Conjugation"} style={styles.card}>
               <List.Section>
-                <List.Item
+                <ListItem
                   title={conjugations[0].name}
                   description={conjugations[0].conjugation}
                 />
-                <List.Item
+                <ListItem
                   title={conjugations[1].name}
                   description={conjugations[1].conjugation}
                 />
-                <List.Item
+                <ListItem
                   title={conjugations[2].name}
                   description={conjugations[2].conjugation}
                 />
@@ -72,10 +73,9 @@ const DisplayPage: React.FC = () => {
             <BaseCard title={"Examples"} style={styles.card}>
               <List.Section>
                 {entry.examples.map((example, index) => (
-                  <List.Item
+                  <ListItem
                     title={example.sentence}
                     description={example.translation}
-                    style={{ paddingVertical: 0 }}
                     key={index}
                   />
                 ))}
@@ -84,16 +84,12 @@ const DisplayPage: React.FC = () => {
           )}
           {entry?.synonyms && (
             <BaseCard title="Synonyms" style={styles.card}>
-              <Text style={{ paddingLeft: 16, fontSize: 16 }}>
-                {entry.synonyms.join(", ")}
-              </Text>
+              <Text style={styles.synAnt}>{entry.synonyms.join(", ")}</Text>
             </BaseCard>
           )}
           {entry?.antonyms && (
             <BaseCard title="Antonyms" style={styles.card}>
-              <Text style={{ paddingLeft: 16, fontSize: 16 }}>
-                {entry.antonyms.join(", ")}
-              </Text>
+              <Text style={styles.synAnt}>{entry.antonyms.join(", ")}</Text>
             </BaseCard>
           )}
         </>
@@ -104,7 +100,12 @@ const DisplayPage: React.FC = () => {
 
 const styles = StyleSheet.create({
   card: {
-    margin: 8,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  synAnt: {
+    paddingLeft: 16,
+    fontSize: 20,
   },
 });
 

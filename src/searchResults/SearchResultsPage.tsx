@@ -13,11 +13,21 @@ export interface SearchResultsPageProps {
   cursor: number | null | undefined;
 }
 
+const styles = {
+  link: {
+    textDecoration: "none",
+  },
+  card: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+};
+
 const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
   return (
     <TouchableRipple onPress={() => {}} rippleColor="rgba(0, 0, 0, .32)">
-      <Link to={`/display?id=${result.id}`} style={{ textDecoration: "none" }}>
-        <DefPosCard entry={result} />
+      <Link to={`/display?id=${result.id}`} style={styles.link}>
+        <DefPosCard entry={result} style={styles.card} />
       </Link>
     </TouchableRipple>
   );
