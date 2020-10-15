@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HelperText, Searchbar, useTheme } from "react-native-paper";
+import { Searchbar } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
 
