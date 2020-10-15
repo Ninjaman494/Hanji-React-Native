@@ -1,10 +1,11 @@
 import React from "react";
-import { List, Headline, Subheading, Text } from "react-native-paper";
+import { List, Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
-import BaseCard from "./BaseCard";
+import BaseCard from "../utils/BaseCard";
 import { useParams } from "react-router";
 import LoadingScreen from "../utils/LoadingScreen";
 import { StyleSheet } from "react-native";
+import DefPosCard from "../utils/DefPosCard";
 
 const DisplayPage: React.FC = () => {
   const { id } = useParams();
@@ -18,19 +19,7 @@ const DisplayPage: React.FC = () => {
       {error && <Text>Error</Text>}
       {entry && (
         <>
-          <BaseCard style={styles.card}>
-            <Headline style={{ paddingLeft: 16 }}>{entry.term}</Headline>
-            <Subheading style={{ paddingLeft: 16 }}>{entry.pos}</Subheading>
-            <List.Section>
-              {entry.definitions.map((definition, index) => (
-                <List.Item
-                  title={definition}
-                  style={{ paddingVertical: 0 }}
-                  key={index}
-                />
-              ))}
-            </List.Section>
-          </BaseCard>
+          <DefPosCard entry={entry} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
               <Text>{entry.note}</Text>

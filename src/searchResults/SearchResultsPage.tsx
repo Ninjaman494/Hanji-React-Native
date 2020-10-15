@@ -1,10 +1,10 @@
 import { Entry } from "../hooks/useGetEntry";
 import React from "react";
 import { FlatList } from "react-native";
-import { Headline, List, Subheading, Title } from "react-native-paper";
-import BaseCard from "../display/BaseCard";
+import { Title } from "react-native-paper";
 // @ts-ignore
 import { Link } from "../routing";
+import DefPosCard from "../utils/DefPosCard";
 
 export interface SearchResultsPageProps {
   results: Entry[];
@@ -14,19 +14,7 @@ export interface SearchResultsPageProps {
 const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
   return (
     <Link to={`/display/${result.id}`} style={{ textDecoration: "none" }}>
-      <BaseCard style={{ margin: 8 }}>
-        <Headline style={{ paddingLeft: 16 }}>{result.term}</Headline>
-        <Subheading style={{ paddingLeft: 16 }}>{result.pos}</Subheading>
-        <List.Section>
-          {result.definitions.map((definition, index) => (
-            <List.Item
-              title={definition}
-              style={{ paddingVertical: 0 }}
-              key={index}
-            />
-          ))}
-        </List.Section>
-      </BaseCard>
+      <DefPosCard entry={result} />
     </Link>
   );
 };
