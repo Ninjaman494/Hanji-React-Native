@@ -13,7 +13,7 @@ export interface SearchResultsPageProps {
 
 const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
   return (
-    <Link to={`/display/${result.id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/display?id=${result.id}`} style={{ textDecoration: "none" }}>
       <DefPosCard entry={result} />
     </Link>
   );

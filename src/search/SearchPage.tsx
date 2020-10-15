@@ -1,16 +1,13 @@
 import React from "react";
 import { Text } from "react-native-paper";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import useSearch from "../hooks/useSearch";
 import LoadingScreen from "../utils/LoadingScreen";
 import SearchResultsPage from "../searchResults/SearchResultsPage";
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
+import useGetURLParams from "../hooks/useGetURLParams";
 
 const SearchPage: React.FC = () => {
-  const query = useQuery().get("query");
+  const query = useGetURLParams().get("query");
   const history = useHistory();
 
   if (query) {
@@ -24,7 +21,7 @@ const SearchPage: React.FC = () => {
         {results && (
           <>
             {results?.length === 1 ? (
-              history.replace(`/display/${results[0].id}`)
+              history.replace(`/display?id=${results[0].id}`)
             ) : (
               <SearchResultsPage
                 results={results}
