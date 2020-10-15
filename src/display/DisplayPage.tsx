@@ -4,6 +4,7 @@ import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "./BaseCard";
 import { useParams } from "react-router";
 import LoadingScreen from "../utils/LoadingScreen";
+import { StyleSheet } from "react-native";
 
 const DisplayPage: React.FC = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const DisplayPage: React.FC = () => {
       {error && <Text>Error</Text>}
       {entry && (
         <>
-          <BaseCard>
+          <BaseCard style={styles.card}>
             <Headline style={{ paddingLeft: 16 }}>{entry.term}</Headline>
             <Subheading style={{ paddingLeft: 16 }}>{entry.pos}</Subheading>
             <List.Section>
@@ -31,12 +32,12 @@ const DisplayPage: React.FC = () => {
             </List.Section>
           </BaseCard>
           {entry?.note && (
-            <BaseCard title="Note">
+            <BaseCard title="Note" style={styles.card}>
               <Text>{entry.note}</Text>
             </BaseCard>
           )}
           {entry?.examples && (
-            <BaseCard title={"Examples"}>
+            <BaseCard title={"Examples"} style={styles.card}>
               <List.Section>
                 {entry.examples.map((example, index) => (
                   <List.Item
@@ -50,14 +51,14 @@ const DisplayPage: React.FC = () => {
             </BaseCard>
           )}
           {entry?.synonyms && (
-            <BaseCard title="Synonyms">
+            <BaseCard title="Synonyms" style={styles.card}>
               <Text style={{ paddingLeft: 16, fontSize: 16 }}>
                 {entry.synonyms.join(", ")}
               </Text>
             </BaseCard>
           )}
           {entry?.antonyms && (
-            <BaseCard title="Synonyms">
+            <BaseCard title="Antonyms" style={styles.card}>
               <Text style={{ paddingLeft: 16, fontSize: 16 }}>
                 {entry.antonyms.join(", ")}
               </Text>
@@ -68,5 +69,11 @@ const DisplayPage: React.FC = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    marginBottom: 16,
+  },
+});
 
 export default DisplayPage;

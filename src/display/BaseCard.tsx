@@ -1,15 +1,17 @@
 import React from "react";
 import { Card, useTheme } from "react-native-paper";
+import { StyleProp, ViewStyle } from "react-native";
 
 interface BaseCardProps {
   title?: string;
+  style?: StyleProp<ViewStyle>;
 }
 
-const BaseCard: React.FC<BaseCardProps> = ({ title, children }) => {
+const BaseCard: React.FC<BaseCardProps> = ({ title, children, style }) => {
   const { colors } = useTheme();
 
   return (
-    <Card elevation={5} style={{ marginBottom: 16 }}>
+    <Card elevation={5} style={style}>
       {title && (
         <Card.Title
           title={title}
