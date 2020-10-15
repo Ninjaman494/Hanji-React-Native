@@ -3,6 +3,10 @@ import { Appbar, IconButton, TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
 
+export interface AppBarProps {
+  title?: string;
+}
+
 const theme = {
   colors: {
     text: "white",
@@ -13,7 +17,13 @@ const theme = {
 };
 
 const style = StyleSheet.create({
+  inputParent: {
+    flexGrow: 100,
+    flexDirection: "row",
+    alignItems: "center",
+  },
   input: {
+    flexGrow: 100,
     borderRadius: 0,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
@@ -22,8 +32,8 @@ const style = StyleSheet.create({
   },
 });
 
-const AppBar: React.FC = () => {
-  const [showSearch, toggleSearch] = useState(false);
+const AppBar: React.FC<AppBarProps> = ({ title }) => {
+  const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const history = useHistory();
 
@@ -35,9 +45,9 @@ const AppBar: React.FC = () => {
 
   return (
     <Appbar.Header>
-      <Appbar.Content title="Display Page" />
+      <Appbar.Content title={title} />
       {showSearch && (
-        <View style={{ flexDirection: "row" }}>
+        <View style={style.inputParent}>
           <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -46,18 +56,19 @@ const AppBar: React.FC = () => {
             theme={theme}
             style={style.input}
             underlineColor="transparent"
+            autoFocus
           />
           <IconButton
             icon="window-close"
             color="white"
-            onPress={() => toggleSearch(!showSearch)}
+            onPress={() => setShowSearch(!showSearch)}
           />
         </View>
       )}
       {!showSearch && (
         <Appbar.Action
           icon="magnify"
-          onPress={() => toggleSearch(!showSearch)}
+          onPress={() => setShowSearch(!showSearch)}
         />
       )}
       <Appbar.Action icon="dots-vertical" onPress={() => {}} />
