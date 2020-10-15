@@ -7,24 +7,65 @@ import { StyleSheet } from "react-native";
 import DefPosCard from "../utils/DefPosCard";
 import AppBar from "../utils/AppBar";
 import useGetURLParams from "../hooks/useGetURLParams";
+import useConjugations from "../hooks/useConjugations";
 
 const DisplayPage: React.FC = () => {
   const id = useGetURLParams().get("id");
-  const { loading, error, data } = useGetEntry(id as string);
 
-  const entry = data?.entry;
+  const {
+    loading: entryLoading,
+    error: entryError,
+    data: entryData,
+  } = useGetEntry(id as string);
+  const entry = entryData?.entry;
+
+  const {
+    loading: conjLoading,
+    error: conjError,
+    data: conjData,
+  } = useConjugations(
+    {
+      stem: entry?.term as string,
+      isAdj: entry?.pos === "Adjective",
+      honorific: false,
+    },
+    {
+      skip: !entry || !["Adjective", "Verb"].includes(entry?.pos),
+    }
+  );
+  const conjugations = conjData?.conjugations;
 
   return (
     <>
       <AppBar />
-      {loading && <LoadingScreen text="Loading" />}
-      {error && <Text>Error</Text>}
+      {(entryLoading || conjLoading) && <LoadingScreen text="Loading" />}
+      {(entryError || conjError) && (
+        <Text>Error: {entryError ? entryError : conjError}</Text>
+      )}
       {entry && (
         <>
           <DefPosCard entry={entry} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
               <Text>{entry.note}</Text>
+            </BaseCard>
+          )}
+          {conjugations && (
+            <BaseCard title={"Conjugation"} style={styles.card}>
+              <List.Section>
+                <List.Item
+                  title={conjugations[0].name}
+                  description={conjugations[0].conjugation}
+                />
+                <List.Item
+                  title={conjugations[1].name}
+                  description={conjugations[1].conjugation}
+                />
+                <List.Item
+                  title={conjugations[2].name}
+                  description={conjugations[2].conjugation}
+                />
+              </List.Section>
             </BaseCard>
           )}
           {entry?.examples && (
