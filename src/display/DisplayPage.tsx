@@ -2,14 +2,18 @@ import React from "react";
 import { List, Headline, Subheading, Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "./BaseCard";
+import { useParams } from "react-router";
+import LoadingScreen from "../utils/LoadingScreen";
 
 const DisplayPage: React.FC = () => {
-  const { loading, error, data } = useGetEntry("있다0");
+  const { id } = useParams();
+  const { loading, error, data } = useGetEntry(id);
+
   const entry = data?.entry;
 
   return (
     <>
-      {loading && <Text>Loading</Text>}
+      {loading && <LoadingScreen text="Loading" />}
       {error && <Text>Error</Text>}
       {entry && (
         <>
