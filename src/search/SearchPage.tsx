@@ -24,6 +24,7 @@ const SearchPage: React.FC = () => {
               history.replace(`/display?id=${results[0].id}`)
             ) : (
               <SearchResultsPage
+                query={query}
                 results={results}
                 cursor={data?.search?.cursor}
               />
