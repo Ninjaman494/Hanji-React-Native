@@ -33,7 +33,7 @@ export default function Index() {
               <Switch>
                 <Route exact path="/" component={MainPage} />
                 <Route path="/search" component={SearchPage} />
-                <Route exact path="/display/:id" component={DisplayPage} />
+                <Route exact path="/display" component={DisplayPage} />
               </Switch>
             </Router>
           </View>

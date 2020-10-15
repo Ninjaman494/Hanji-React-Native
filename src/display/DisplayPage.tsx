@@ -2,19 +2,21 @@ import React from "react";
 import { List, Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "../utils/BaseCard";
-import { useParams } from "react-router";
 import LoadingScreen from "../utils/LoadingScreen";
 import { StyleSheet } from "react-native";
 import DefPosCard from "../utils/DefPosCard";
+import AppBar from "../utils/AppBar";
+import useGetURLParams from "../hooks/useGetURLParams";
 
 const DisplayPage: React.FC = () => {
-  const { id } = useParams();
-  const { loading, error, data } = useGetEntry(id);
+  const id = useGetURLParams().get("id");
+  const { loading, error, data } = useGetEntry(id as string);
 
   const entry = data?.entry;
 
   return (
     <>
+      <AppBar />
       {loading && <LoadingScreen text="Loading" />}
       {error && <Text>Error</Text>}
       {entry && (
@@ -61,7 +63,7 @@ const DisplayPage: React.FC = () => {
 
 const styles = StyleSheet.create({
   card: {
-    marginBottom: 16,
+    margin: 8,
   },
 });
 
