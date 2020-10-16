@@ -1,19 +1,7 @@
 import React from "react";
-import { List } from "react-native-paper";
+import { List, useTheme } from "react-native-paper";
 
 type ListItemProps = React.ComponentProps<typeof List.Item>;
-
-const styles = {
-  item: {
-    paddingVertical: 0,
-  },
-  title: {
-    fontSize: 20,
-  },
-  description: {
-    fontSize: 18,
-  },
-};
 
 const ListItem: React.FC<ListItemProps> = ({
   style,
@@ -21,6 +9,20 @@ const ListItem: React.FC<ListItemProps> = ({
   descriptionStyle,
   ...rest
 }) => {
+  const { textSizes } = useTheme();
+
+  const styles = {
+    item: {
+      paddingVertical: 0,
+    },
+    title: {
+      fontSize: textSizes.regular,
+    },
+    description: {
+      fontSize: textSizes.secondary,
+    },
+  };
+
   return (
     <List.Item
       {...rest}

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Text } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Conjugation } from "../../hooks/useConjugations";
 import BaseCard, { BaseCardProps } from "../../utils/BaseCard";
@@ -13,6 +13,24 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
   conjugations,
   ...rest
 }) => {
+  const { padding, textSizes } = useTheme();
+
+  const style = StyleSheet.create({
+    conjView: {
+      paddingHorizontal: padding.horizontal,
+    },
+    rowView: {
+      marginBottom: padding.vertical,
+    },
+    text: {
+      fontSize: textSizes.regular,
+    },
+    divider: {
+      fontSize: textSizes.regular,
+      textAlign: "center",
+    },
+  });
+
   return (
     <BaseCard {...rest}>
       <Grid style={style.conjView}>
@@ -33,21 +51,5 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
     </BaseCard>
   );
 };
-
-const style = StyleSheet.create({
-  conjView: {
-    paddingHorizontal: 16,
-  },
-  rowView: {
-    marginBottom: 8,
-  },
-  text: {
-    fontSize: 20,
-  },
-  divider: {
-    fontSize: 20,
-    textAlign: "center",
-  },
-});
 
 export default ConjugationCard;
