@@ -1,15 +1,20 @@
 import React from "react";
-import { useTheme } from "react-native-paper";
-import { Animated, ScrollView, StyleSheet } from "react-native";
+import { useTheme, Text } from "react-native-paper";
+import { Animated, ScrollView, StyleSheet, View } from "react-native";
 import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "./AppBar";
+import LoadingScreen from "../../utils/LoadingScreen";
 
-export interface AppLayoutProps extends AppBarProps {}
+export interface AppLayoutProps extends AppBarProps {
+  loading?: boolean;
+  error?: string;
+}
 
-const style = StyleSheet.create({
-  scrollView: { marginTop: APP_BAR_HEIGHT, flexGrow: 1 },
-});
-
-const AppLayout: React.FC<AppLayoutProps> = ({ title, children }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({
+  title,
+  loading,
+  error,
+  children,
+}) => {
   const { colors } = useTheme();
 
   // Value that will be bound to scroll-y
@@ -23,7 +28,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ title, children }) => {
   });
 
   return (
-    <>
+    <View style={{ flex: 1, height: 500 }}>
       <Animated.View
         style={[
           {
@@ -36,24 +41,38 @@ const AppLayout: React.FC<AppLayoutProps> = ({ title, children }) => {
       >
         <AppBar title={title} />
       </Animated.View>
-      <ScrollView
-        style={style.scrollView}
-        showsVerticalScrollIndicator={false}
-        onScroll={Animated.event([
-          {
-            nativeEvent: {
-              contentOffset: {
-                y: scrollY,
+      {loading ? (
+        <LoadingScreen text="Loading" />
+      ) : error ? (
+        <Text>{error}</Text>
+      ) : (
+        <ScrollView
+          style={style.scrollView}
+          showsVerticalScrollIndicator={false}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: {
+                  y: scrollY,
+                },
               },
             },
-          },
-        ])}
-        scrollEventThrottle={1}
-      >
-        {children}
-      </ScrollView>
-    </>
+          ])}
+          scrollEventThrottle={1}
+        >
+          {children}
+        </ScrollView>
+      )}
+    </View>
   );
 };
+
+const style = StyleSheet.create({
+  scrollView: {
+    marginTop: APP_BAR_HEIGHT,
+    flexGrow: 1,
+    paddingBottom: 8,
+  },
+});
 
 export default AppLayout;
