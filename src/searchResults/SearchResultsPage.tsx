@@ -5,7 +5,6 @@ import { TouchableRipple } from "react-native-paper";
 // @ts-ignore
 import { Link } from "../routing";
 import DefPosCard from "../utils/DefPosCard";
-import AppBar from "../components/AppLayout/AppBar";
 import AppLayout from "../components/AppLayout/AppLayout";
 
 export interface SearchResultsPageProps {
