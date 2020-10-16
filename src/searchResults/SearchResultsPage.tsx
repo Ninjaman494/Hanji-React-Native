@@ -6,6 +6,7 @@ import { TouchableRipple } from "react-native-paper";
 import { Link } from "../routing";
 import DefPosCard from "../utils/DefPosCard";
 import AppBar from "../components/AppLayout/AppBar";
+import AppLayout from "../components/AppLayout/AppLayout";
 
 export interface SearchResultsPageProps {
   query: string;
@@ -38,14 +39,13 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   results,
 }) => {
   return (
-    <>
-      <AppBar title={`Results for: ${query}`} />
+    <AppLayout title={`Results for: ${query}`}>
       <FlatList
         data={results}
         renderItem={({ item }) => <ResultCard result={item} />}
         keyExtractor={(item) => item.id}
       />
-    </>
+    </AppLayout>
   );
 };
 

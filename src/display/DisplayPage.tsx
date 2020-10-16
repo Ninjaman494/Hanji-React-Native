@@ -2,8 +2,7 @@ import React from "react";
 import { List, Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "../utils/BaseCard";
-import LoadingScreen from "../utils/LoadingScreen";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import DefPosCard from "../utils/DefPosCard";
 import AppLayout from "../components/AppLayout/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
@@ -37,13 +36,12 @@ const DisplayPage: React.FC = () => {
   const conjugations = conjData?.conjugations;
 
   return (
-    <View style={{ flex: 1, height: 500 }}>
-      {(entryLoading || conjLoading) && <LoadingScreen text="Loading" />}
-      {(entryError || conjError) && (
-        <Text>Error: {entryError ? entryError : conjError}</Text>
-      )}
+    <>
       {entry && (
-        <AppLayout>
+        <AppLayout
+          loading={entryLoading || conjLoading}
+          error={entryError ? entryError.message : conjError?.message}
+        >
           <DefPosCard entry={entry} style={styles.card} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
@@ -93,7 +91,7 @@ const DisplayPage: React.FC = () => {
           )}
         </AppLayout>
       )}
-    </View>
+    </>
   );
 };
 
