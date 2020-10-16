@@ -8,6 +8,7 @@ import AppLayout from "../components/AppLayout/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
 import ListItem from "../utils/ListItem";
+import ConjugationCard from "./components/ConjugationCard";
 
 const DisplayPage: React.FC = () => {
   const id = useGetURLParams().get("id");
@@ -49,22 +50,11 @@ const DisplayPage: React.FC = () => {
             </BaseCard>
           )}
           {conjugations && (
-            <BaseCard title={"Conjugation"} style={styles.card}>
-              <List.Section>
-                <ListItem
-                  title={conjugations[0].name}
-                  description={conjugations[0].conjugation}
-                />
-                <ListItem
-                  title={conjugations[1].name}
-                  description={conjugations[1].conjugation}
-                />
-                <ListItem
-                  title={conjugations[2].name}
-                  description={conjugations[2].conjugation}
-                />
-              </List.Section>
-            </BaseCard>
+            <ConjugationCard
+              conjugations={conjugations.slice(0, 3)}
+              title="Conjugations"
+              style={styles.card}
+            />
           )}
           {entry?.examples && (
             <BaseCard title={"Examples"} style={styles.card}>
