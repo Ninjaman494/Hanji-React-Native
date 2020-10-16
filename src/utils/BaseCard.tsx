@@ -2,7 +2,7 @@ import React from "react";
 import { Card, useTheme } from "react-native-paper";
 import { StyleProp, ViewStyle } from "react-native";
 
-interface BaseCardProps {
+export interface BaseCardProps {
   title?: string;
   style?: StyleProp<ViewStyle>;
 }
