@@ -3,4 +3,5 @@ export {
   Switch,
   Route,
   Link,
+  useLocation,
 } from "react-router-native";
