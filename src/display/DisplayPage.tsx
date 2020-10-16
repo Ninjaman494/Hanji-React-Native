@@ -3,9 +3,9 @@ import { List, Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "../utils/BaseCard";
 import LoadingScreen from "../utils/LoadingScreen";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import DefPosCard from "../utils/DefPosCard";
-import AppBar from "../utils/AppBar";
+import AppLayout from "../components/AppLayout/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
 import ListItem from "../utils/ListItem";
@@ -37,14 +37,13 @@ const DisplayPage: React.FC = () => {
   const conjugations = conjData?.conjugations;
 
   return (
-    <>
-      <AppBar />
+    <View style={{ flex: 1, height: 500 }}>
       {(entryLoading || conjLoading) && <LoadingScreen text="Loading" />}
       {(entryError || conjError) && (
         <Text>Error: {entryError ? entryError : conjError}</Text>
       )}
       {entry && (
-        <>
+        <AppLayout>
           <DefPosCard entry={entry} style={styles.card} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
@@ -92,9 +91,9 @@ const DisplayPage: React.FC = () => {
               <Text style={styles.synAnt}>{entry.antonyms.join(", ")}</Text>
             </BaseCard>
           )}
-        </>
+        </AppLayout>
       )}
-    </>
+    </View>
   );
 };
 
