@@ -1,4 +1,5 @@
-import { useLocation } from "react-router";
+// @ts-ignore
+import { useLocation } from "../routing";
 
 const useGetURLParams = () => {
   return new URLSearchParams(useLocation().search);

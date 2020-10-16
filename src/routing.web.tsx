@@ -1,1 +1,7 @@
-export { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+export {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
