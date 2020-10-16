@@ -13,6 +13,21 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+declare global {
+  namespace ReactNativePaper {
+    interface Theme {
+      padding: {
+        horizontal: number;
+        vertical: number;
+      };
+      textSizes: {
+        regular: number;
+        secondary: number;
+      };
+    }
+  }
+}
+
 const theme = {
   ...DefaultTheme,
   roundness: 10,
@@ -20,6 +35,14 @@ const theme = {
     ...DefaultTheme.colors,
     primary: "#3F51B5",
     accent: "#F44336",
+  },
+  padding: {
+    horizontal: 16,
+    vertical: 8,
+  },
+  textSizes: {
+    regular: 20,
+    secondary: 18,
   },
 };
 
