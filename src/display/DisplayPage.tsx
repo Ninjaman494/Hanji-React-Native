@@ -9,8 +9,10 @@ import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
 import ConjugationCard from "./components/ConjugationCard";
 import ExamplesCard from "./components/ExamplesCard";
+import { useHistory } from "react-router";
 
 const DisplayPage: React.FC = () => {
+  const history = useHistory();
   const id = useGetURLParams().get("id");
 
   const {
@@ -20,15 +22,19 @@ const DisplayPage: React.FC = () => {
   } = useGetEntry(id as string);
   const entry = entryData?.entry;
 
+  const stem = entry?.term;
+  const isAdj = entry?.pos === "Adjective";
+  const honorific = false;
+
   const {
     loading: conjLoading,
     error: conjError,
     data: conjData,
   } = useConjugations(
     {
-      stem: entry?.term as string,
-      isAdj: entry?.pos === "Adjective",
-      honorific: false,
+      stem: stem as string,
+      isAdj: isAdj,
+      honorific: honorific,
     },
     {
       skip: !entry || !["Adjective", "Verb"].includes(entry?.pos),
@@ -54,6 +60,11 @@ const DisplayPage: React.FC = () => {
               conjugations={conjugations.slice(0, 3)}
               title="Conjugations"
               style={styles.card}
+              onPress={() =>
+                history.push(
+                  `/conjugation?stem=${stem}&isAdj=${isAdj}&honorific=${honorific}`
+                )
+              }
             />
           )}
           {entry?.examples && (
