@@ -22,9 +22,9 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
       <Subheading testID="defPosCardPos" style={textStyle}>
         {entry.pos}
       </Subheading>
-      <List.Section testID="defPosCardDefs">
+      <List.Section>
         {entry.definitions.map((definition, index) => (
-          <ListItem title={definition} key={index} />
+          <ListItem title={definition} key={index} testID="defPosCardDef" />
         ))}
       </List.Section>
     </BaseCard>
