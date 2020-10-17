@@ -27,6 +27,7 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
       {showSearch && (
         <View style={style.inputParent}>
           <TextInput
+            testID="appBarSearch"
             value={searchQuery}
             onChangeText={setSearchQuery}
             onSubmitEditing={doSearch}
@@ -45,6 +46,7 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
       )}
       {!showSearch && (
         <Appbar.Action
+          testID="appBarSearchBtn"
           icon="magnify"
           onPress={() => setShowSearch(!showSearch)}
         />
