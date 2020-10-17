@@ -20,6 +20,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: "#3F51B5",
+    primaryDark: "#303F9F",
     accent: "#F44336",
   },
   padding: {
@@ -37,7 +38,10 @@ export default function Index() {
   return (
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
-        <StatusBar backgroundColor={theme.colors.primary} barStyle="default" />
+        <StatusBar
+          backgroundColor={theme.colors.primaryDark}
+          barStyle="default"
+        />
         <View style={styles.parent}>
           <View style={styles.container}>
             <Router>
