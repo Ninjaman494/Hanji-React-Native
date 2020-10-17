@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 // @ts-ignore
 import { Router, Switch, Route } from "./routing";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -50,6 +50,7 @@ export default function Index() {
   return (
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
+        <StatusBar backgroundColor={theme.colors.primary} barStyle="default" />
         <View style={styles.parent}>
           <View style={styles.container}>
             <Router>
