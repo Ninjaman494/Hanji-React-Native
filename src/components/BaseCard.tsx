@@ -8,14 +8,18 @@ export interface BaseCardProps {
 }
 
 const BaseCard: React.FC<BaseCardProps> = ({ title, children, style }) => {
-  const { colors } = useTheme();
+  const { colors, textSizes } = useTheme();
 
   return (
     <Card elevation={5} style={style}>
       {title && (
         <Card.Title
           title={title}
-          titleStyle={{ color: colors.primary, fontSize: 16 }}
+          titleStyle={{
+            color: colors?.primary,
+            fontSize: textSizes?.cardTitle,
+            textTransform: "capitalize",
+          }}
         />
       )}
       <Card.Content style={{ paddingHorizontal: 0 }}>{children}</Card.Content>

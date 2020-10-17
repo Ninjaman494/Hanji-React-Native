@@ -14,6 +14,7 @@ declare global {
       textSizes: {
         regular: number;
         secondary: number;
+        cardTitle: number;
       };
     }
   }

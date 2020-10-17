@@ -1,16 +1,18 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { Button, Text, useTheme, Card } from "react-native-paper";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Conjugation } from "../../hooks/useConjugations";
 import BaseCard, { BaseCardProps } from "../../components/BaseCard";
 
 export interface ConjugationCardProps extends BaseCardProps {
   conjugations: Conjugation[];
+  onPress?: () => void;
 }
 
 const ConjugationCard: React.FC<ConjugationCardProps> = ({
   conjugations,
+  onPress,
   ...rest
 }) => {
   const { padding, textSizes } = useTheme();
@@ -37,7 +39,11 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
         {conjugations.map((conjugation, index) => (
           <Row style={style.rowView} testID="conjCardRow" key={index}>
             <Col>
-              <Text style={style.text}>{conjugation.name}</Text>
+              <Text style={style.text}>
+                {conjugation.speechLevel === "NONE"
+                  ? conjugation.name
+                  : conjugation.speechLevel.replaceAll("_", " ").toLowerCase()}
+              </Text>
             </Col>
             <Col>
               <Text style={style.divider}>:</Text>
@@ -48,6 +54,11 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
           </Row>
         ))}
       </Grid>
+      {onPress && (
+        <Card.Actions>
+          <Button onPress={onPress}>See all</Button>
+        </Card.Actions>
+      )}
     </BaseCard>
   );
 };

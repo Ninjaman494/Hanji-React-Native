@@ -33,7 +33,12 @@ export type Conjugation = {
   conjugation: string;
   type: string;
   tense: "PRESENT" | "PAST" | "FUTURE" | "NONE";
-  speechLevel: "INFORMAL_LOW" | "INFORMAL_HIGH" | "FORMAL_LOW" | "FORMAL_HIGH";
+  speechLevel:
+    | "INFORMAL_LOW"
+    | "INFORMAL_HIGH"
+    | "FORMAL_LOW"
+    | "FORMAL_HIGH"
+    | "NONE";
   honorific: boolean;
   pronunciation: string;
   romanization: string;
