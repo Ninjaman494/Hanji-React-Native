@@ -17,16 +17,16 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
 
   const style = StyleSheet.create({
     conjView: {
-      paddingHorizontal: padding.horizontal,
+      paddingHorizontal: padding?.horizontal,
     },
     rowView: {
-      marginBottom: padding.vertical,
+      marginBottom: padding?.vertical,
     },
     text: {
-      fontSize: textSizes.regular,
+      fontSize: textSizes?.regular,
     },
     divider: {
-      fontSize: textSizes.regular,
+      fontSize: textSizes?.regular,
       textAlign: "center",
     },
   });
@@ -34,8 +34,8 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
   return (
     <BaseCard {...rest}>
       <Grid style={style.conjView}>
-        {conjugations.map((conjugation) => (
-          <Row style={style.rowView}>
+        {conjugations.map((conjugation, index) => (
+          <Row style={style.rowView} testID="conjCardRow" key={index}>
             <Col>
               <Text style={style.text}>{conjugation.name}</Text>
             </Col>
