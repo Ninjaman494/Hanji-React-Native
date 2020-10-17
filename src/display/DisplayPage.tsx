@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "../components/BaseCard";
 import { StyleSheet } from "react-native";
@@ -7,8 +7,8 @@ import DefPosCard from "../components/DefPosCard";
 import AppLayout from "../components/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
-import ListItem from "../components/ListItem";
 import ConjugationCard from "./components/ConjugationCard";
+import ExamplesCard from "./components/ExamplesCard";
 
 const DisplayPage: React.FC = () => {
   const id = useGetURLParams().get("id");
@@ -57,17 +57,7 @@ const DisplayPage: React.FC = () => {
             />
           )}
           {entry?.examples && (
-            <BaseCard title={"Examples"} style={styles.card}>
-              <List.Section>
-                {entry.examples.map((example, index) => (
-                  <ListItem
-                    title={example.sentence}
-                    description={example.translation}
-                    key={index}
-                  />
-                ))}
-              </List.Section>
-            </BaseCard>
+            <ExamplesCard examples={entry.examples} style={styles.card} />
           )}
           {entry?.synonyms && (
             <BaseCard title="Synonyms" style={styles.card}>
