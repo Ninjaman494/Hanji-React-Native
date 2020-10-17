@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Conjugation } from "../../hooks/useConjugations";
-import BaseCard, { BaseCardProps } from "../../utils/BaseCard";
+import BaseCard, { BaseCardProps } from "../../components/BaseCard";
 
 export interface ConjugationCardProps extends BaseCardProps {
   conjugations: Conjugation[];

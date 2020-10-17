@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native-paper";
 import { useHistory } from "react-router";
 import useSearch from "../hooks/useSearch";
-import LoadingScreen from "../utils/LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen";
 import SearchResultsPage from "../searchResults/SearchResultsPage";
 import useGetURLParams from "../hooks/useGetURLParams";
 
