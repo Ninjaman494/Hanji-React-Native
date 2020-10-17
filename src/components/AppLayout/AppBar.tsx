@@ -77,7 +77,6 @@ const style = StyleSheet.create({
     height: APP_BAR_HEIGHT,
     overflow: "hidden",
   },
-  scrollView: { marginTop: APP_BAR_HEIGHT, flexGrow: 1 },
 });
 
 export default AppBar;

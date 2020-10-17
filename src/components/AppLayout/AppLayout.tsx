@@ -1,6 +1,12 @@
 import React from "react";
 import { useTheme, Text } from "react-native-paper";
-import { Animated, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Animated,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from "react-native";
 import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "./AppBar";
 import LoadingScreen from "../../utils/LoadingScreen";
 
@@ -69,7 +75,8 @@ const AppLayout: React.FC<AppLayoutProps> = ({
 
 const style = StyleSheet.create({
   scrollView: {
-    marginTop: APP_BAR_HEIGHT,
+    marginTop:
+      APP_BAR_HEIGHT + (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
     flexGrow: 1,
     paddingBottom: 8,
   },
