@@ -1,13 +1,13 @@
 import React from "react";
 import { List, Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
-import BaseCard from "../utils/BaseCard";
+import BaseCard from "../components/BaseCard";
 import { StyleSheet } from "react-native";
-import DefPosCard from "../utils/DefPosCard";
-import AppLayout from "../components/AppLayout/AppLayout";
+import DefPosCard from "../components/DefPosCard";
+import AppLayout from "../components/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
-import ListItem from "../utils/ListItem";
+import ListItem from "../components/ListItem";
 import ConjugationCard from "./components/ConjugationCard";
 
 const DisplayPage: React.FC = () => {

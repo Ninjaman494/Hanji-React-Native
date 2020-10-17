@@ -4,8 +4,8 @@ import { FlatList } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 // @ts-ignore
 import { Link } from "../routing";
-import DefPosCard from "../utils/DefPosCard";
-import AppLayout from "../components/AppLayout/AppLayout";
+import DefPosCard from "../components/DefPosCard";
+import AppLayout from "../components/AppLayout";
 
 export interface SearchResultsPageProps {
   query: string;
