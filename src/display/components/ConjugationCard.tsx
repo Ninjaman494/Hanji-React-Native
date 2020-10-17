@@ -15,7 +15,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
   onPress,
   ...rest
 }) => {
-  const { padding, textSizes } = useTheme();
+  const { colors, padding, textSizes } = useTheme();
 
   const style = StyleSheet.create({
     conjView: {
@@ -31,6 +31,10 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
       fontSize: textSizes?.regular,
       textAlign: "center",
     },
+    actions: {
+      justifyContent: "flex-end",
+      paddingBottom: 0,
+    },
   });
 
   return (
@@ -38,7 +42,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
       <Grid style={style.conjView}>
         {conjugations.map((conjugation, index) => (
           <Row style={style.rowView} testID="conjCardRow" key={index}>
-            <Col>
+            <Col size={5}>
               <Text style={style.text}>
                 {conjugation.speechLevel === "NONE"
                   ? conjugation.name
@@ -48,15 +52,17 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
             <Col>
               <Text style={style.divider}>:</Text>
             </Col>
-            <Col>
+            <Col size={5}>
               <Text style={style.text}>{conjugation.conjugation}</Text>
             </Col>
           </Row>
         ))}
       </Grid>
       {onPress && (
-        <Card.Actions>
-          <Button onPress={onPress}>See all</Button>
+        <Card.Actions style={style.actions}>
+          <Button onPress={onPress} color={colors?.accent}>
+            See all
+          </Button>
         </Card.Actions>
       )}
     </BaseCard>
