@@ -16,10 +16,10 @@ const ListItem: React.FC<ListItemProps> = ({
       paddingVertical: 0,
     },
     title: {
-      fontSize: textSizes.regular,
+      fontSize: textSizes?.regular,
     },
     description: {
-      fontSize: textSizes.secondary,
+      fontSize: textSizes?.secondary,
     },
   };
 

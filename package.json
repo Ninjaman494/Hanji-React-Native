@@ -1,7 +1,12 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "jest": {
+    "preset": "react-native",
+    "setupFilesAfterEnv": ["./src/customMatchers.tsx"]
+  },
   "scripts": {
     "start": "expo start",
+    "test": "jest",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -24,13 +29,17 @@
     "react-router-native": "^5.2.0"
   },
   "devDependencies": {
+    "@testing-library/react-native": "^7.0.2",
+    "@types/jest": "^26.0.14",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/react-router-native": "^5.1.0",
+    "@types/react-test-renderer": "^16.9.3",
+    "jest": "26.5.3",
     "prettier": "^2.1.2",
-    "react-native-web": "~0.13.7",
+    "react-test-renderer": "latest",
     "typescript": "~3.9.5"
   },
   "private": true
