@@ -12,13 +12,17 @@ export interface DefPosCardProps {
 
 const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
   const { padding } = useTheme();
-  const textStyle = { paddingLeft: padding.horizontal };
+  const textStyle = { paddingLeft: padding?.horizontal };
 
   return (
     <BaseCard style={style}>
-      <Headline style={textStyle}>{entry.term}</Headline>
-      <Subheading style={textStyle}>{entry.pos}</Subheading>
-      <List.Section>
+      <Headline testID="defPosCardTerm" style={textStyle}>
+        {entry.term}
+      </Headline>
+      <Subheading testID="defPosCardPos" style={textStyle}>
+        {entry.pos}
+      </Subheading>
+      <List.Section testID="defPosCardDefs">
         {entry.definitions.map((definition, index) => (
           <ListItem title={definition} key={index} />
         ))}
