@@ -1,4 +1,4 @@
-import { gql, QueryHookOptions, QueryResult, useQuery } from "@apollo/client";
+import { gql, QueryHookOptions, useQuery } from "@apollo/client";
 
 const CONJUGATIONS = gql`
   query ConjugationsQuery(
@@ -35,8 +35,8 @@ export type Conjugation = {
   tense: "PRESENT" | "PAST" | "FUTURE" | "NONE";
   speechLevel: "INFORMAL_LOW" | "INFORMAL_HIGH" | "FORMAL_LOW" | "FORMAL_HIGH";
   honorific: boolean;
-  pronunciation: boolean;
-  romanization: boolean;
+  pronunciation: string;
+  romanization: string;
   reasons: string[];
 };
 
