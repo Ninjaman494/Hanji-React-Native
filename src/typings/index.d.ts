@@ -6,6 +6,10 @@ declare global {
     }
   }
   namespace ReactNativePaper {
+    interface ThemeColors {
+      primaryDark: string;
+    }
+
     interface Theme {
       padding: {
         horizontal: number;
@@ -14,6 +18,7 @@ declare global {
       textSizes: {
         regular: number;
         secondary: number;
+        cardTitle: number;
       };
     }
   }

@@ -1,19 +1,21 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { Button, Text, useTheme, Card } from "react-native-paper";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Conjugation } from "../../hooks/useConjugations";
 import BaseCard, { BaseCardProps } from "../../components/BaseCard";
 
-export interface ConjugationCardProps extends BaseCardProps {
+export type ConjugationCardProps = BaseCardProps & {
   conjugations: Conjugation[];
-}
+  onPress?: () => void;
+};
 
 const ConjugationCard: React.FC<ConjugationCardProps> = ({
   conjugations,
+  onPress,
   ...rest
 }) => {
-  const { padding, textSizes } = useTheme();
+  const { colors, padding, textSizes } = useTheme();
 
   const style = StyleSheet.create({
     conjView: {
@@ -29,6 +31,10 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
       fontSize: textSizes?.regular,
       textAlign: "center",
     },
+    actions: {
+      justifyContent: "flex-end",
+      paddingBottom: 0,
+    },
   });
 
   return (
@@ -36,18 +42,29 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
       <Grid style={style.conjView}>
         {conjugations.map((conjugation, index) => (
           <Row style={style.rowView} testID="conjCardRow" key={index}>
-            <Col>
-              <Text style={style.text}>{conjugation.name}</Text>
+            <Col size={5}>
+              <Text style={style.text}>
+                {conjugation.speechLevel === "NONE"
+                  ? conjugation.name
+                  : conjugation.speechLevel.replace(/_/g, " ").toLowerCase()}
+              </Text>
             </Col>
             <Col>
               <Text style={style.divider}>:</Text>
             </Col>
-            <Col>
+            <Col size={5}>
               <Text style={style.text}>{conjugation.conjugation}</Text>
             </Col>
           </Row>
         ))}
       </Grid>
+      {onPress && (
+        <Card.Actions style={style.actions}>
+          <Button onPress={onPress} color={colors?.accent}>
+            See all
+          </Button>
+        </Card.Actions>
+      )}
     </BaseCard>
   );
 };
