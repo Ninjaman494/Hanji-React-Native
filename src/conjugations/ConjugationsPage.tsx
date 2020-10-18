@@ -1,15 +1,11 @@
 import React from "react";
 import useGetURLParams from "../hooks/useGetURLParams";
-import useConjugations, { Conjugation } from "../hooks/useConjugations";
-import ConjugationCard from "../display/components/ConjugationCard";
-import { FlatList, View, Animated, StyleSheet } from "react-native";
+import useConjugations from "../hooks/useConjugations";
+import { View, Animated, StyleSheet } from "react-native";
 import { Switch, Text, useTheme } from "react-native-paper";
 import AppBar from "../components/AppBar";
 import LoadingScreen from "../components/LoadingScreen";
-
-interface ConjugationMap {
-  [key: string]: Conjugation[];
-}
+import ConjugationsPageContent from "./components/ConjugationPageContent";
 
 const ConjugationsPage: React.FC = () => {
   const { padding, colors, textSizes } = useTheme();
@@ -18,10 +14,6 @@ const ConjugationsPage: React.FC = () => {
     parent: {
       flex: 1,
       height: 500,
-    },
-    card: {
-      marginVertical: padding?.vertical,
-      marginHorizontal: padding?.horizontal,
     },
     switchBar: {
       flexDirection: "row",
@@ -49,13 +41,7 @@ const ConjugationsPage: React.FC = () => {
     honorific: honorific,
   });
 
-  const conjMap = data?.conjugations
-    ? data?.conjugations.reduce((conjMap: ConjugationMap, value) => {
-        const conjugations = conjMap[value.type];
-        conjMap[value.type] = conjugations ? [...conjugations, value] : [value];
-        return conjMap;
-      }, {})
-    : {};
+  const conjugations = data?.conjugations;
 
   // Value that will be bound to scroll-y
   const scrollY = new Animated.Value(0);
@@ -92,28 +78,16 @@ const ConjugationsPage: React.FC = () => {
       </Animated.View>
       {loading && <LoadingScreen text="Loading" />}
       {error && <Text>{error}</Text>}
-      {conjMap && (
-        <FlatList
-          data={Object.keys(conjMap)}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item}
-          scrollEventThrottle={1}
+      {conjugations && (
+        <ConjugationsPageContent
+          conjugations={conjugations}
           onScroll={Animated.event([
             {
               nativeEvent: {
-                contentOffset: {
-                  y: scrollY,
-                },
+                contentOffset: { y: scrollY },
               },
             },
           ])}
-          renderItem={({ item }) => (
-            <ConjugationCard
-              title={item}
-              conjugations={conjMap[item]}
-              style={styles.card}
-            />
-          )}
         />
       )}
     </View>
