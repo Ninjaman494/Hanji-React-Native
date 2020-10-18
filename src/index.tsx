@@ -7,6 +7,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import DisplayPage from "./display/DisplayPage";
 import MainPage from "./main/MainPage";
 import SearchPage from "./search/SearchPage";
+import ConjugationsPage from "./conjugations/ConjugationsPage";
 
 const client = new ApolloClient({
   uri: "https://hanji-server.appspot.com/graphql",
@@ -19,6 +20,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: "#3F51B5",
+    primaryDark: "#303F9F",
     accent: "#F44336",
   },
   padding: {
@@ -28,6 +30,7 @@ const theme = {
   textSizes: {
     regular: 20,
     secondary: 18,
+    cardTitle: 18,
   },
 };
 
@@ -35,7 +38,10 @@ export default function Index() {
   return (
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
-        <StatusBar backgroundColor={theme.colors.primary} barStyle="default" />
+        <StatusBar
+          backgroundColor={theme.colors.primaryDark}
+          barStyle="default"
+        />
         <View style={styles.parent}>
           <View style={styles.container}>
             <Router>
@@ -43,6 +49,7 @@ export default function Index() {
                 <Route exact path="/" component={MainPage} />
                 <Route path="/search" component={SearchPage} />
                 <Route exact path="/display" component={DisplayPage} />
+                <Route exact path="/conjugation" component={ConjugationsPage} />
               </Switch>
             </Router>
           </View>
