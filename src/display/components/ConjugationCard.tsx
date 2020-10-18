@@ -5,10 +5,10 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { Conjugation } from "../../hooks/useConjugations";
 import BaseCard, { BaseCardProps } from "../../components/BaseCard";
 
-export interface ConjugationCardProps extends BaseCardProps {
+export type ConjugationCardProps = BaseCardProps & {
   conjugations: Conjugation[];
   onPress?: () => void;
-}
+};
 
 const ConjugationCard: React.FC<ConjugationCardProps> = ({
   conjugations,
@@ -46,7 +46,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
               <Text style={style.text}>
                 {conjugation.speechLevel === "NONE"
                   ? conjugation.name
-                  : conjugation.speechLevel.replaceAll("_", " ").toLowerCase()}
+                  : conjugation.speechLevel.replace(/_/g, " ").toLowerCase()}
               </Text>
             </Col>
             <Col>

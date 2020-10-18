@@ -39,7 +39,7 @@ describe("BaseCard component", () => {
     const conjugations = props.conjugations;
 
     component.getAllByTestId("conjCardRow").forEach((row, index) => {
-      expect(row).toContainText(conjugations[index].name);
+      expect(row).toContainText("informal low");
       expect(row).toContainText(":");
       expect(row).toContainText(conjugations[index].conjugation);
     });
