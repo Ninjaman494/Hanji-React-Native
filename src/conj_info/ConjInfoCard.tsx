@@ -1,7 +1,7 @@
 import React from "react";
 import { Conjugation } from "../hooks/useConjugations";
 import { Badge, Text, Title, useTheme } from "react-native-paper";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import BaseCard from "../components/BaseCard";
 
 export type ConjInfoCardProps = {
@@ -11,7 +11,7 @@ export type ConjInfoCardProps = {
 const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
   const { colors, padding } = useTheme();
 
-  const styles = {
+  const styles = StyleSheet.create({
     card: {
       marginHorizontal: padding?.horizontal,
     },
@@ -19,6 +19,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
       paddingHorizontal: padding?.horizontal,
       marginRight: padding?.horizontal,
       backgroundColor: colors?.accent,
+      fontWeight: "500",
     },
     title: {
       fontSize: 18,
@@ -37,7 +38,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
       fontSize: 18,
       color: "#808080",
     },
-  };
+  });
 
   const reasons = conjugation?.reasons.map((reason) => {
     const index = reason.indexOf("(");
