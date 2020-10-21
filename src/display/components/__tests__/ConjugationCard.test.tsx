@@ -27,8 +27,8 @@ describe("BaseCard component", () => {
         ...baseConjugation,
       },
       {
-        name: "name 2",
-        conjugation: "conj 2",
+        name: "name 3",
+        conjugation: "conj 3",
         ...baseConjugation,
       },
     ],
@@ -36,12 +36,6 @@ describe("BaseCard component", () => {
 
   it("displays conjugations", () => {
     const component = render(<ConjugationCard {...props} />);
-    const conjugations = props.conjugations;
-
-    component.getAllByTestId("conjCardRow").forEach((row, index) => {
-      expect(row).toContainText("informal low");
-      expect(row).toContainText(":");
-      expect(row).toContainText(conjugations[index].conjugation);
-    });
+    expect(component).toMatchSnapshot();
   });
 });

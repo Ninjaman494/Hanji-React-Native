@@ -45,7 +45,6 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
         {conjugations.map((conjugation, index) => (
           <Row
             style={style.rowView}
-            testID="conjCardRow"
             key={index}
             onPress={() =>
               history.push("/conjinfo", { conjugation: conjugation })
