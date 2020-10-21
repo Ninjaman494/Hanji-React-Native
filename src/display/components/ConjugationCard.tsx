@@ -4,6 +4,7 @@ import { Button, Text, useTheme, Card } from "react-native-paper";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Conjugation } from "../../hooks/useConjugations";
 import BaseCard, { BaseCardProps } from "../../components/BaseCard";
+import { useHistory } from "react-router";
 
 export type ConjugationCardProps = BaseCardProps & {
   conjugations: Conjugation[];
@@ -16,6 +17,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
   ...rest
 }) => {
   const { colors, padding, textSizes } = useTheme();
+  const history = useHistory();
 
   const style = StyleSheet.create({
     conjView: {
@@ -41,7 +43,13 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
     <BaseCard {...rest}>
       <Grid style={style.conjView}>
         {conjugations.map((conjugation, index) => (
-          <Row style={style.rowView} testID="conjCardRow" key={index}>
+          <Row
+            style={style.rowView}
+            key={index}
+            onPress={() =>
+              history.push("/conjinfo", { conjugation: conjugation })
+            }
+          >
             <Col size={5}>
               <Text style={style.text}>
                 {conjugation.speechLevel === "NONE"
