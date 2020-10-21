@@ -8,9 +8,15 @@ export type BaseCardProps = Omit<
 > & {
   title?: string;
   style?: StyleProp<ViewStyle>;
+  rightIcon?: (props: { size: number }) => React.ReactNode;
 };
 
-const BaseCard: React.FC<BaseCardProps> = ({ title, children, ...rest }) => {
+const BaseCard: React.FC<BaseCardProps> = ({
+  title,
+  children,
+  rightIcon,
+  ...rest
+}) => {
   const { colors, textSizes } = useTheme();
 
   return (
@@ -18,11 +24,14 @@ const BaseCard: React.FC<BaseCardProps> = ({ title, children, ...rest }) => {
       {title && (
         <Card.Title
           title={title}
+          right={rightIcon}
           titleStyle={{
             color: colors?.primary,
             fontSize: textSizes?.cardTitle,
             textTransform: "capitalize",
           }}
+          // Offset added margin from icon
+          style={rightIcon ? { marginTop: -8 } : {}}
         />
       )}
       <Card.Content style={{ paddingHorizontal: 0 }}>{children}</Card.Content>

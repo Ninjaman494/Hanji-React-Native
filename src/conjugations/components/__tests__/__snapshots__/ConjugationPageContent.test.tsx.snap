@@ -83,7 +83,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                 Object {
                   "minHeight": 50,
                 },
-                undefined,
+                Object {},
               ]
             }
           >
@@ -192,279 +192,339 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
               }
             >
               <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "flex": 1,
                     "flexDirection": "row",
                     "marginBottom": undefined,
+                    "opacity": 1,
                   }
                 }
-                testID="conjCardRow"
               >
                 <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
-                    }
-                  >
-                    informal low
-                  </Text>
-                </View>
-                <View
+                  onPress={[Function]}
                   style={
                     Object {
                       "flex": 1,
-                      "flexDirection": "column",
+                      "flexDirection": "row",
+                      "marginBottom": undefined,
                     }
                   }
                 >
-                  <Text
+                  <View
+                    size={5}
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                          "textAlign": "center",
-                        },
-                      ]
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    :
-                  </Text>
-                </View>
-                <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      informal low
+                    </Text>
+                  </View>
+                  <View
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    conj 1
-                  </Text>
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                            "textAlign": "center",
+                          },
+                        ]
+                      }
+                    >
+                      :
+                    </Text>
+                  </View>
+                  <View
+                    size={5}
+                    style={
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      conj 1
+                    </Text>
+                  </View>
                 </View>
               </View>
               <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "flex": 1,
                     "flexDirection": "row",
                     "marginBottom": undefined,
+                    "opacity": 1,
                   }
                 }
-                testID="conjCardRow"
               >
                 <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
-                    }
-                  >
-                    informal high
-                  </Text>
-                </View>
-                <View
+                  onPress={[Function]}
                   style={
                     Object {
                       "flex": 1,
-                      "flexDirection": "column",
+                      "flexDirection": "row",
+                      "marginBottom": undefined,
                     }
                   }
                 >
-                  <Text
+                  <View
+                    size={5}
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                          "textAlign": "center",
-                        },
-                      ]
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    :
-                  </Text>
-                </View>
-                <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      informal high
+                    </Text>
+                  </View>
+                  <View
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    conj 2
-                  </Text>
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                            "textAlign": "center",
+                          },
+                        ]
+                      }
+                    >
+                      :
+                    </Text>
+                  </View>
+                  <View
+                    size={5}
+                    style={
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      conj 2
+                    </Text>
+                  </View>
                 </View>
               </View>
               <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "flex": 1,
                     "flexDirection": "row",
                     "marginBottom": undefined,
+                    "opacity": 1,
                   }
                 }
-                testID="conjCardRow"
               >
                 <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
-                    }
-                  >
-                    formal low
-                  </Text>
-                </View>
-                <View
+                  onPress={[Function]}
                   style={
                     Object {
                       "flex": 1,
-                      "flexDirection": "column",
+                      "flexDirection": "row",
+                      "marginBottom": undefined,
                     }
                   }
                 >
-                  <Text
+                  <View
+                    size={5}
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                          "textAlign": "center",
-                        },
-                      ]
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    :
-                  </Text>
-                </View>
-                <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      formal low
+                    </Text>
+                  </View>
+                  <View
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    conj 3
-                  </Text>
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                            "textAlign": "center",
+                          },
+                        ]
+                      }
+                    >
+                      :
+                    </Text>
+                  </View>
+                  <View
+                    size={5}
+                    style={
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      conj 3
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -523,7 +583,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                 Object {
                   "minHeight": 50,
                 },
-                undefined,
+                Object {},
               ]
             }
           >
@@ -632,279 +692,339 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
               }
             >
               <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "flex": 1,
                     "flexDirection": "row",
                     "marginBottom": undefined,
+                    "opacity": 1,
                   }
                 }
-                testID="conjCardRow"
               >
                 <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
-                    }
-                  >
-                    informal low
-                  </Text>
-                </View>
-                <View
+                  onPress={[Function]}
                   style={
                     Object {
                       "flex": 1,
-                      "flexDirection": "column",
+                      "flexDirection": "row",
+                      "marginBottom": undefined,
                     }
                   }
                 >
-                  <Text
+                  <View
+                    size={5}
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                          "textAlign": "center",
-                        },
-                      ]
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    :
-                  </Text>
-                </View>
-                <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      informal low
+                    </Text>
+                  </View>
+                  <View
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    conj 3
-                  </Text>
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                            "textAlign": "center",
+                          },
+                        ]
+                      }
+                    >
+                      :
+                    </Text>
+                  </View>
+                  <View
+                    size={5}
+                    style={
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      conj 3
+                    </Text>
+                  </View>
                 </View>
               </View>
               <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "flex": 1,
                     "flexDirection": "row",
                     "marginBottom": undefined,
+                    "opacity": 1,
                   }
                 }
-                testID="conjCardRow"
               >
                 <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
-                    }
-                  >
-                    informal high
-                  </Text>
-                </View>
-                <View
+                  onPress={[Function]}
                   style={
                     Object {
                       "flex": 1,
-                      "flexDirection": "column",
+                      "flexDirection": "row",
+                      "marginBottom": undefined,
                     }
                   }
                 >
-                  <Text
+                  <View
+                    size={5}
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                          "textAlign": "center",
-                        },
-                      ]
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    :
-                  </Text>
-                </View>
-                <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      informal high
+                    </Text>
+                  </View>
+                  <View
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    conj 4
-                  </Text>
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                            "textAlign": "center",
+                          },
+                        ]
+                      }
+                    >
+                      :
+                    </Text>
+                  </View>
+                  <View
+                    size={5}
+                    style={
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      conj 4
+                    </Text>
+                  </View>
                 </View>
               </View>
               <View
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "flex": 1,
                     "flexDirection": "row",
                     "marginBottom": undefined,
+                    "opacity": 1,
                   }
                 }
-                testID="conjCardRow"
               >
                 <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
-                    }
-                  >
-                    formal low
-                  </Text>
-                </View>
-                <View
+                  onPress={[Function]}
                   style={
                     Object {
                       "flex": 1,
-                      "flexDirection": "column",
+                      "flexDirection": "row",
+                      "marginBottom": undefined,
                     }
                   }
                 >
-                  <Text
+                  <View
+                    size={5}
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                          "textAlign": "center",
-                        },
-                      ]
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    :
-                  </Text>
-                </View>
-                <View
-                  size={5}
-                  style={
-                    Object {
-                      "flex": 5,
-                      "flexDirection": "column",
-                    }
-                  }
-                >
-                  <Text
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      formal low
+                    </Text>
+                  </View>
+                  <View
                     style={
-                      Array [
-                        Object {
-                          "color": "#000000",
-                          "fontFamily": "System",
-                          "fontWeight": "400",
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "fontSize": undefined,
-                        },
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column",
+                      }
                     }
                   >
-                    conj 5
-                  </Text>
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                            "textAlign": "center",
+                          },
+                        ]
+                      }
+                    >
+                      :
+                    </Text>
+                  </View>
+                  <View
+                    size={5}
+                    style={
+                      Object {
+                        "flex": 5,
+                        "flexDirection": "column",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "color": "#000000",
+                            "fontFamily": "System",
+                            "fontWeight": "400",
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "fontSize": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      conj 5
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
