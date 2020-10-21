@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Title, useTheme } from "react-native-paper";
+import { Text, Title, useTheme, Badge } from "react-native-paper";
 import AppLayout from "../components/AppLayout";
 //@ts-ignore
 import { useLocation } from "../routing";
@@ -15,6 +15,11 @@ const ConjInfoPage: React.FC = () => {
     card: {
       marginHorizontal: padding.horizontal,
     },
+    badge: {
+      paddingHorizontal: padding.horizontal,
+      marginRight: padding.horizontal,
+      backgroundColor: colors.accent,
+    },
     title: {
       fontSize: 18,
       color: colors?.primary,
@@ -23,7 +28,7 @@ const ConjInfoPage: React.FC = () => {
     },
     conjugation: {
       fontSize: 24,
-      marginTop: 0,
+      marginTop: -16,
     },
     text: {
       fontSize: 20,
@@ -44,15 +49,27 @@ const ConjInfoPage: React.FC = () => {
 
   return (
     <AppLayout error={conjugation ? undefined : "Something went wrong"}>
-      <BaseCard title={conjugation?.name} style={styles.card}>
+      <BaseCard
+        title={conjugation?.name}
+        style={styles.card}
+        rightIcon={() => (
+          <Badge
+            size={30}
+            visible={conjugation?.honorific}
+            style={styles.badge}
+          >
+            Honorific
+          </Badge>
+        )}
+      >
         <View style={{ paddingHorizontal: padding.horizontal }}>
           <Text style={styles.conjugation}>{conjugation?.conjugation}</Text>
           <Title style={styles.title}>Pronunciation</Title>
           <Text style={styles.text}>{conjugation?.pronunciation}</Text>
           <Text style={styles.secondary}>{conjugation?.romanization}</Text>
           <Title style={styles.title}>Explanation</Title>
-          {reasons.map((reason) => (
-            <View style={{ marginBottom: padding.vertical }}>
+          {reasons.map((reason, index) => (
+            <View style={{ marginBottom: padding.vertical }} key={index}>
               <Text style={styles.text}>{reason.type}</Text>
               <Text style={styles.secondary}>{reason.details}</Text>
             </View>
