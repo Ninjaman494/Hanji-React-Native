@@ -21,7 +21,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
   onBtnPress,
   ...rest
 }) => {
-  const { colors, textSizes } = useTheme();
+  const { colors, textSizes, padding } = useTheme();
 
   const styles = StyleSheet.create({
     title: {
@@ -29,7 +29,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
       fontSize: textSizes?.cardTitle,
       textTransform: "capitalize",
     },
-    content: { paddingHorizontal: 0 },
+    content: { paddingHorizontal: 0, paddingBottom: padding?.vertical },
     action: { justifyContent: "flex-end" },
   });
 
