@@ -165,10 +165,9 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           Object {
             "paddingHorizontal": 16,
           },
+          undefined,
           Object {
-            "paddingBottom": 16,
-          },
-          Object {
+            "paddingBottom": undefined,
             "paddingHorizontal": 0,
           },
         ]
@@ -636,10 +635,9 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           Object {
             "paddingHorizontal": 16,
           },
+          undefined,
           Object {
-            "paddingBottom": 16,
-          },
-          Object {
+            "paddingBottom": undefined,
             "paddingHorizontal": 0,
           },
         ]
