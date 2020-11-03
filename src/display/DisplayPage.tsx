@@ -3,7 +3,7 @@ import { Text } from "react-native-paper";
 import useGetEntry from "../hooks/useGetEntry";
 import BaseCard from "../components/BaseCard";
 import { StyleSheet } from "react-native";
-import DefPosCard from "../components/DefPosCard";
+import DefPosCard from "./components/DefPosCard";
 import AppLayout from "../components/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";

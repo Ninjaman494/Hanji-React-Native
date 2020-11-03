@@ -4,8 +4,8 @@ import { FlatList } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 // @ts-ignore
 import { Link } from "../routing";
-import DefPosCard from "../components/DefPosCard";
 import AppLayout from "../components/AppLayout";
+import SearchResultsCard from "./SearchResultsCard";
 
 export interface SearchResultsPageProps {
   query: string;
@@ -27,7 +27,7 @@ const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
   return (
     <TouchableRipple onPress={() => {}} rippleColor="rgba(0, 0, 0, .32)">
       <Link to={`/display?id=${result.id}`} style={styles.link}>
-        <DefPosCard entry={result} style={styles.card} />
+        <SearchResultsCard entry={result} style={styles.card} />
       </Link>
     </TouchableRipple>
   );

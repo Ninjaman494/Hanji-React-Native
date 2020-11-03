@@ -40,10 +40,9 @@ exports[`BaseCard component displays conjugations 1`] = `
           Object {
             "paddingHorizontal": 16,
           },
+          undefined,
           Object {
-            "paddingBottom": 16,
-          },
-          Object {
+            "paddingBottom": undefined,
             "paddingHorizontal": 0,
           },
         ]
