@@ -7,13 +7,16 @@ import DefPosCard from "./components/DefPosCard";
 import AppLayout from "../components/AppLayout";
 import useGetURLParams from "../hooks/useGetURLParams";
 import useConjugations from "../hooks/useConjugations";
-import ConjugationCard from "./components/ConjugationCard";
 import ExamplesCard from "./components/ExamplesCard";
 import { useHistory } from "react-router";
+import useGetFavorites from "../hooks/useGetFavorites";
+import FavoritesCard from "./components/FavoritesCard";
 
 const DisplayPage: React.FC = () => {
   const history = useHistory();
   const id = useGetURLParams().get("id");
+
+  const favorites = useGetFavorites();
 
   const {
     loading: entryLoading,
@@ -35,9 +38,13 @@ const DisplayPage: React.FC = () => {
       stem: stem as string,
       isAdj: isAdj,
       honorific: honorific,
+      conjugations: favorites.map((favorite) => favorite.conjugationName),
     },
     {
-      skip: !entry || !["Adjective", "Verb"].includes(entry?.pos),
+      skip:
+        !entry ||
+        !["Adjective", "Verb"].includes(entry?.pos) ||
+        favorites.length === 0,
     }
   );
   const conjugations = conjData?.conjugations;
@@ -56,8 +63,9 @@ const DisplayPage: React.FC = () => {
             </BaseCard>
           )}
           {conjugations && (
-            <ConjugationCard
-              conjugations={conjugations.slice(0, 3)}
+            <FavoritesCard
+              favorites={favorites}
+              conjugations={conjugations}
               title="Conjugations"
               style={styles.card}
               onPress={() =>
