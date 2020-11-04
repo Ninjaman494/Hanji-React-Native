@@ -10,7 +10,7 @@ export type Favorite = {
 export const FAVORITES_KEY = "@favorites_Key";
 
 const useGetFavorites = () => {
-  const [favorites, setFavorites] = useState<Favorite[]>([]);
+  const [favorites, setFavorites] = useState<Favorite[] | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -18,6 +18,8 @@ const useGetFavorites = () => {
         const value = await AsyncStorage.getItem(FAVORITES_KEY);
         if (value !== null) {
           setFavorites(JSON.parse(value));
+        } else {
+          setFavorites([]);
         }
       } catch (e) {
         console.log(e);
