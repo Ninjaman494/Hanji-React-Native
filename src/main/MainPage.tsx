@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
-import useSetFavorites from "../hooks/useSetFavorites";
 
 const MainPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
