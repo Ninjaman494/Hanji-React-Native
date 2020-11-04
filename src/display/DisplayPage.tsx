@@ -12,11 +12,32 @@ import { useHistory } from "react-router";
 import useGetFavorites from "../hooks/useGetFavorites";
 import FavoritesCard from "./components/FavoritesCard";
 
+const DEFAULT_FAVORITES = [
+  {
+    name: "Past d",
+    conjugationName: "declarative past informal high",
+    honorific: false,
+  },
+  {
+    name: "Present d",
+    conjugationName: "declarative present informal high",
+    honorific: false,
+  },
+  {
+    name: "Future d",
+    conjugationName: "declarative future informal high",
+    honorific: false,
+  },
+];
+
 const DisplayPage: React.FC = () => {
   const history = useHistory();
   const id = useGetURLParams().get("id");
 
-  const favorites = useGetFavorites();
+  // Get favorites from storage, use defaults if none are written
+  let favorites = useGetFavorites();
+  favorites =
+    favorites && favorites?.length > 0 ? favorites : DEFAULT_FAVORITES;
 
   const {
     loading: entryLoading,
@@ -44,7 +65,7 @@ const DisplayPage: React.FC = () => {
       skip:
         !entry ||
         !["Adjective", "Verb"].includes(entry?.pos) ||
-        favorites.length === 0,
+        favorites?.length === 0,
     }
   );
   const conjugations = conjData?.conjugations;
