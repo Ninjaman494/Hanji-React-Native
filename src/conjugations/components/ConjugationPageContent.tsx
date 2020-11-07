@@ -5,8 +5,8 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from "react-native";
-import ConjugationCard from "../../display/components/ConjugationCard";
 import { useTheme } from "react-native-paper";
+import ConjugationCard from "./ConjugationCard";
 
 export interface ConjugationPageContentProps {
   conjugations: Conjugation[];
