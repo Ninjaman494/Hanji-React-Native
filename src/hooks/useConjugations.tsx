@@ -50,20 +50,12 @@ export interface UseConjugationsVars {
   isAdj: boolean;
   honorific: boolean;
   regular?: boolean;
-  conjugations?: string;
+  conjugations?: string[];
 }
 
 type ConjugationsResponse = {
   conjugations: Conjugation[];
 };
-
-export interface UseConjugationsVars {
-  stem: string;
-  isAdj: boolean;
-  honorific: boolean;
-  regular?: boolean;
-  conjugations?: string;
-}
 
 const useConjugations = (
   { stem, isAdj, honorific, regular, conjugations }: UseConjugationsVars,

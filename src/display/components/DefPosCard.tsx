@@ -25,7 +25,14 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
   return (
     <BaseCard
       style={style}
-      btnText={!showingMore ? "Show More" : "Collapse"}
+      // Used to show/hide button
+      btnText={
+        entry.definitions.length > 3
+          ? !showingMore
+            ? "Show More"
+            : "Collapse"
+          : undefined
+      }
       onBtnPress={() => setShowMore(!showingMore)}
     >
       <Headline testID="defPosCardTerm" style={styles.text}>

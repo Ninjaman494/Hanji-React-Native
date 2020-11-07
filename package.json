@@ -2,7 +2,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "jest": {
     "preset": "react-native",
-    "setupFilesAfterEnv": ["./src/customMatchers.tsx"]
+    "setupFilesAfterEnv": [
+      "./src/customMatchers.tsx"
+    ]
   },
   "scripts": {
     "start": "expo start",
@@ -14,6 +16,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.2.3",
+    "@react-native-async-storage/async-storage": "^1.13.2",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
     "graphql": "^15.3.0",
