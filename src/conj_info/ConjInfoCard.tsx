@@ -9,7 +9,7 @@ export type ConjInfoCardProps = {
 };
 
 const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
-  const { colors, padding } = useTheme();
+  const { colors, padding, textSizes } = useTheme();
 
   const styles = StyleSheet.create({
     card: {
@@ -22,14 +22,15 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
       fontWeight: "500",
     },
     title: {
-      fontSize: 18,
+      fontSize: textSizes.cardTitle,
+      fontWeight: "400",
       color: colors?.primary,
       marginTop: 16,
       marginBottom: padding?.vertical,
     },
     conjugation: {
       fontSize: 24,
-      marginTop: -16,
+      marginTop: -24,
     },
     text: {
       fontSize: 20,
