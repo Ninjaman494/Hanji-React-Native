@@ -31,7 +31,7 @@ const theme = {
   textSizes: {
     regular: 20,
     secondary: 18,
-    cardTitle: 18,
+    cardTitle: 16,
   },
 };
 

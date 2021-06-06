@@ -26,6 +26,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
   const styles = StyleSheet.create({
     title: {
       color: colors?.primary,
+      fontWeight: "400",
       fontSize: textSizes?.cardTitle,
       textTransform: "capitalize",
     },
