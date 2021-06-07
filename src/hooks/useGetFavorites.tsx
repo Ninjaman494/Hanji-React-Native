@@ -11,6 +11,8 @@ export const FAVORITES_KEY = "@favorites_Key";
 
 const useGetFavorites = () => {
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -22,12 +24,14 @@ const useGetFavorites = () => {
           setFavorites([]);
         }
       } catch (e) {
-        console.log(e);
+        setError(e);
+      } finally {
+        setLoading(false);
       }
     })();
-  }, [setFavorites]);
+  }, [setFavorites, setLoading, setError]);
 
-  return favorites;
+  return { favorites, loading, error };
 };
 
 export default useGetFavorites;
