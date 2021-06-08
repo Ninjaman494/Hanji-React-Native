@@ -63,19 +63,17 @@ const DisplayPage: React.FC = () => {
               <Text>{entry.note}</Text>
             </BaseCard>
           )}
-          {conjugations && (
-            <FavoritesCard
-              favorites={favorites ?? []}
-              conjugations={conjugations}
-              title="Conjugations"
-              style={styles.card}
-              onPress={() =>
-                history.push(
-                  `/conjugation?stem=${stem}&isAdj=${isAdj}&honorific=${honorific}`
-                )
-              }
-            />
-          )}
+          <FavoritesCard
+            favorites={favorites ?? []}
+            conjugations={conjugations}
+            title="Conjugations"
+            style={styles.card}
+            onPress={() =>
+              history.push(
+                `/conjugation?stem=${stem}&isAdj=${isAdj}&honorific=${honorific}`
+              )
+            }
+          />
           {entry?.examples && (
             <ExamplesCard examples={entry.examples} style={styles.card} />
           )}
