@@ -1,7 +1,7 @@
 import "react-native";
 import React from "react";
 import { render } from "@testing-library/react-native";
-import LoadingScreen from "../LoadingScreen";
+import LoadingScreen from "components/LoadingScreen";
 
 describe("LoadingScreen component", () => {
   const props = {

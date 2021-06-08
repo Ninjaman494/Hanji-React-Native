@@ -1,6 +1,6 @@
 import "react-native";
 import React from "react";
-import BaseCard from "../BaseCard";
+import BaseCard from "components/BaseCard";
 import { render } from "@testing-library/react-native";
 
 describe("BaseCard component", () => {

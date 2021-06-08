@@ -1,10 +1,10 @@
 import React from "react";
 import { Text } from "react-native-paper";
 import { useHistory } from "react-router";
-import useSearch from "../hooks/useSearch";
-import LoadingScreen from "../components/LoadingScreen";
-import SearchResultsPage from "../searchResults/SearchResultsPage";
-import useGetURLParams from "../hooks/useGetURLParams";
+import useSearch from "hooks/useSearch";
+import LoadingScreen from "components/LoadingScreen";
+import SearchResultsPage from "pages/searchResults/SearchResultsPage";
+import useGetURLParams from "hooks/useGetURLParams";
 
 const SearchPage: React.FC = () => {
   const query = useGetURLParams().get("query");

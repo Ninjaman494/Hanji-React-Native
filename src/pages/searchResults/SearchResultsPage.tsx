@@ -1,11 +1,11 @@
-import { Entry } from "../hooks/useGetEntry";
+import { Entry } from "hooks/useGetEntry";
 import React from "react";
 import { FlatList } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 // @ts-ignore
-import { Link } from "../routing";
-import AppLayout from "../components/AppLayout";
-import SearchResultsCard from "./SearchResultsCard";
+import { Link } from "routing";
+import AppLayout from "components/AppLayout";
+import SearchResultsCard from "pages/searchResults/SearchResultsCard";
 
 export interface SearchResultsPageProps {
   query: string;

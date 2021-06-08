@@ -1,9 +1,9 @@
 import React from "react";
-import AppLayout from "../components/AppLayout";
-import { Conjugation } from "../hooks/useConjugations";
+import AppLayout from "components/AppLayout";
+import { Conjugation } from "hooks/useConjugations";
 import ConjInfoCard from "./ConjInfoCard";
 //@ts-ignore
-import { useLocation } from "../routing";
+import { useLocation } from "routing";
 
 const ConjInfoPage: React.FC = () => {
   const conjugation: Conjugation = useLocation().state.conjugation;

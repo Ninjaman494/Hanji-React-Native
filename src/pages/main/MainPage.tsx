@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
-import useGetFavorites from "../hooks/useGetFavorites";
-import useSetFavorites from "../hooks/useSetFavorites";
+import useGetFavorites from "hooks/useGetFavorites";
+import useSetFavorites from "hooks/useSetFavorites";
 
 const DEFAULT_FAVORITES = [
   {
