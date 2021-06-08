@@ -9,7 +9,7 @@ import { Favorite } from "../../hooks/useGetFavorites";
 
 export type FavoritesCardProps = BaseCardProps & {
   favorites: Favorite[];
-  conjugations: Conjugation[];
+  conjugations?: Conjugation[];
   onPress?: () => void;
 };
 
@@ -43,7 +43,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
   });
 
   const favoritesMap = favorites.map((favorite) => {
-    const conjugation = conjugations.find(
+    const conjugation = conjugations?.find(
       (c) => c.name === favorite.conjugationName
     );
     return { name: favorite.name, conjugation: conjugation };
@@ -52,27 +52,34 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
   return (
     <BaseCard {...rest}>
       <Grid style={style.conjView}>
-        {favoritesMap.map((favorite, index) => (
-          <Row
-            style={style.rowView}
-            key={index}
-            onPress={() =>
-              history.push("/conjinfo", { conjugation: favorite.conjugation })
-            }
-          >
-            <Col size={5}>
-              <Text style={style.text}>{favorite.name}</Text>
-            </Col>
-            <Col>
-              <Text style={style.divider}>:</Text>
-            </Col>
-            <Col size={5}>
-              <Text style={style.text}>
-                {favorite.conjugation?.conjugation}
-              </Text>
-            </Col>
-          </Row>
-        ))}
+        {favoritesMap.length > 0 ? (
+          favoritesMap.map((favorite, index) => (
+            <Row
+              style={style.rowView}
+              key={index}
+              onPress={() =>
+                history.push("/conjinfo", { conjugation: favorite.conjugation })
+              }
+            >
+              <Col size={5}>
+                <Text style={style.text}>{favorite.name}</Text>
+              </Col>
+              <Col>
+                <Text style={style.divider}>:</Text>
+              </Col>
+              <Col size={5}>
+                <Text style={style.text}>
+                  {favorite.conjugation?.conjugation}
+                </Text>
+              </Col>
+            </Row>
+          ))
+        ) : (
+          <Text style={style.text}>
+            You don't have any favorites. Click on favorites in settings to make
+            some.
+          </Text>
+        )}
       </Grid>
       {onPress && (
         <Card.Actions style={style.actions}>
