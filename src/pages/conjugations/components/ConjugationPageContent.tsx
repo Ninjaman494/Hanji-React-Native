@@ -1,4 +1,4 @@
-import { Conjugation } from "../../hooks/useConjugations";
+import { Conjugation } from "hooks/useConjugations";
 import React from "react";
 import {
   FlatList,

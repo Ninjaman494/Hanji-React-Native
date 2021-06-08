@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Text, useTheme, Card } from "react-native-paper";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { Conjugation } from "../../hooks/useConjugations";
-import BaseCard, { BaseCardProps } from "../../components/BaseCard";
+import { Conjugation } from "hooks/useConjugations";
+import BaseCard, { BaseCardProps } from "components/BaseCard";
 import { useHistory } from "react-router";
 
 export type ConjugationCardProps = BaseCardProps & {

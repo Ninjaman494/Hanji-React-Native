@@ -2,7 +2,7 @@ import "react-native";
 import React from "react";
 import { render } from "@testing-library/react-native";
 import ConjugationsPageContent from "../ConjugationPageContent";
-import { Conjugation } from "../../../hooks/useConjugations";
+import { Conjugation } from "hooks/useConjugations";
 
 describe("ConjugationPageContent component", () => {
   const typeOneBase = {

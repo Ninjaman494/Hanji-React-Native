@@ -1,7 +1,7 @@
 import "react-native";
 import React from "react";
 import { render } from "@testing-library/react-native";
-import DefPosCard from "../DefPosCard";
+import DefPosCard from "../../components/DefPosCard";
 
 describe("DefPosCard component", () => {
   const props = {

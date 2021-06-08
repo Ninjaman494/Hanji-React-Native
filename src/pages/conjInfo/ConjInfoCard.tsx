@@ -1,8 +1,8 @@
 import React from "react";
-import { Conjugation } from "../hooks/useConjugations";
+import { Conjugation } from "hooks/useConjugations";
 import { Badge, Text, Title, useTheme } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
-import BaseCard from "../components/BaseCard";
+import BaseCard from "components/BaseCard";
 
 export type ConjInfoCardProps = {
   conjugation: Conjugation;

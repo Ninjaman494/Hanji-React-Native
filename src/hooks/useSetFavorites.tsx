@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Favorite, FAVORITES_KEY } from "./useGetFavorites";
+import { Favorite, FAVORITES_KEY } from "hooks/useGetFavorites";
 
 const useSetFavorites = () => {
   const [loading, setLoading] = useState(false);

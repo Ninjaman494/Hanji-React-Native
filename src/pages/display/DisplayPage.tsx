@@ -1,15 +1,15 @@
 import React from "react";
 import { Text } from "react-native-paper";
-import useGetEntry from "../hooks/useGetEntry";
-import BaseCard from "../components/BaseCard";
+import useGetEntry from "hooks/useGetEntry";
+import BaseCard from "components/BaseCard";
 import { StyleSheet } from "react-native";
 import DefPosCard from "./components/DefPosCard";
-import AppLayout from "../components/AppLayout";
-import useGetURLParams from "../hooks/useGetURLParams";
-import useConjugations from "../hooks/useConjugations";
+import AppLayout from "components/AppLayout";
+import useGetURLParams from "hooks/useGetURLParams";
+import useConjugations from "hooks/useConjugations";
 import ExamplesCard from "./components/ExamplesCard";
 import { useHistory } from "react-router";
-import useGetFavorites from "../hooks/useGetFavorites";
+import useGetFavorites from "hooks/useGetFavorites";
 import FavoritesCard from "./components/FavoritesCard";
 
 const DisplayPage: React.FC = () => {

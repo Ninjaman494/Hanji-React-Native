@@ -1,14 +1,14 @@
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 // @ts-ignore
-import { Router, Switch, Route } from "./routing";
+import { Router, Switch, Route } from "routing";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import DisplayPage from "./display/DisplayPage";
-import MainPage from "./main/MainPage";
-import SearchPage from "./search/SearchPage";
-import ConjugationsPage from "./conjugations/ConjugationsPage";
-import ConjInfoPage from "./conj_info/ConjInfoPage";
+import DisplayPage from "pages/display/DisplayPage";
+import MainPage from "pages/main/MainPage";
+import SearchPage from "pages/search/SearchPage";
+import ConjugationsPage from "pages/conjugations/ConjugationsPage";
+import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
