@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { List, useTheme } from "react-native-paper";
 
 type ListItemProps = React.ComponentProps<typeof List.Item>;
@@ -11,7 +12,7 @@ const ListItem: React.FC<ListItemProps> = ({
 }) => {
   const { textSizes } = useTheme();
 
-  const styles = {
+  const styles = StyleSheet.create({
     item: {
       paddingVertical: 0,
     },
@@ -21,14 +22,14 @@ const ListItem: React.FC<ListItemProps> = ({
     description: {
       fontSize: textSizes?.secondary,
     },
-  };
+  });
 
   return (
     <List.Item
       {...rest}
       style={styles.item}
-      titleStyle={styles.title}
-      descriptionStyle={styles.description}
+      titleStyle={[styles.title, titleStyle]}
+      descriptionStyle={[styles.description, descriptionStyle]}
     />
   );
 };

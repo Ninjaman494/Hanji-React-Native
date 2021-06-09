@@ -1,8 +1,9 @@
 import React from "react";
 import { Conjugation } from "hooks/useConjugations";
-import { Badge, Text, Title, useTheme } from "react-native-paper";
+import { Text, Title, useTheme } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import BaseCard from "components/BaseCard";
+import HonorificBadge from "components/HonorificBadge";
 
 export type ConjInfoCardProps = {
   conjugation: Conjugation;
@@ -14,12 +15,6 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
   const styles = StyleSheet.create({
     card: {
       marginHorizontal: padding?.horizontal,
-    },
-    badge: {
-      paddingHorizontal: padding?.horizontal,
-      marginRight: padding?.horizontal,
-      backgroundColor: colors?.accent,
-      fontWeight: "500",
     },
     title: {
       fontSize: textSizes.cardTitle,
@@ -53,11 +48,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
     <BaseCard
       title={conjugation?.name}
       style={styles.card}
-      rightIcon={() => (
-        <Badge size={30} visible={conjugation?.honorific} style={styles.badge}>
-          Honorific
-        </Badge>
-      )}
+      rightIcon={() => <HonorificBadge visible={conjugation?.honorific} />}
     >
       <View style={{ paddingHorizontal: padding?.horizontal }}>
         <Text style={styles.conjugation}>{conjugation?.conjugation}</Text>
