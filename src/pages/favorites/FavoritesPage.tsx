@@ -1,6 +1,6 @@
 import React from "react";
 import useGetFavorites from "hooks/useGetFavorites";
-import { Divider, List } from "react-native-paper";
+import { Divider, FAB, List } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import AppBar from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
@@ -15,6 +15,12 @@ const FavoritesPage: React.FC = () => {
       flex: 1,
       height: 500,
     },
+    fab: {
+      position: "absolute",
+      margin: 16,
+      right: 0,
+      bottom: 0,
+    },
   });
 
   return (
@@ -23,7 +29,7 @@ const FavoritesPage: React.FC = () => {
       {loading ? (
         <LoadingScreen text="Loading.." />
       ) : (
-        <View>
+        <View style={{ flex: 1 }}>
           <List.Section>
             {favorites?.map((f) => (
               <>
@@ -43,6 +49,11 @@ const FavoritesPage: React.FC = () => {
               </>
             ))}
           </List.Section>
+          <FAB
+            style={styles.fab}
+            icon="plus"
+            onPress={() => console.log("Pressed")}
+          />
         </View>
       )}
     </View>
