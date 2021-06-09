@@ -9,6 +9,7 @@ import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
+import SettingsPage from "pages/settings/SettingsPage";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
@@ -52,6 +53,7 @@ export default function Index() {
                 <Route exact path="/display" component={DisplayPage} />
                 <Route exact path="/conjugation" component={ConjugationsPage} />
                 <Route exact path="/conjinfo" component={ConjInfoPage} />
+                <Route exact path="/settings" component={SettingsPage} />
               </Switch>
             </Router>
           </View>
