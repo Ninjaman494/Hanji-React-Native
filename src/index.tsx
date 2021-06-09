@@ -10,6 +10,7 @@ import SearchPage from "pages/search/SearchPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import SettingsPage from "pages/settings/SettingsPage";
+import FavoritesPage from "pages/favorites/FavoritesPage";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
@@ -31,7 +32,7 @@ const theme = {
   },
   textSizes: {
     regular: 20,
-    secondary: 18,
+    secondary: 16,
     cardTitle: 16,
   },
 };
@@ -54,6 +55,7 @@ export default function Index() {
                 <Route exact path="/conjugation" component={ConjugationsPage} />
                 <Route exact path="/conjinfo" component={ConjInfoPage} />
                 <Route exact path="/settings" component={SettingsPage} />
+                <Route exact path="/favorites" component={FavoritesPage} />
               </Switch>
             </Router>
           </View>

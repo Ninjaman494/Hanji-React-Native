@@ -13,10 +13,6 @@ const SettingsPage: React.FC = () => {
       flex: 1,
       height: 500,
     },
-    body: {
-      marginHorizontal: padding.horizontal,
-      marginVertical: padding.vertical,
-    },
     header: {
       color: colors.accent,
       paddingBottom: 0,
