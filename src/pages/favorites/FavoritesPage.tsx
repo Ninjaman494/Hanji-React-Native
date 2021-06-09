@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useGetFavorites from "hooks/useGetFavorites";
 import { Divider, FAB, List } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
@@ -6,9 +6,12 @@ import AppBar from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
 import HonorificBadge from "components/HonorificBadge";
 import ListItem from "components/ListItem";
+import AddFavoriteModal from "./AddFavoriteModal";
 
 const FavoritesPage: React.FC = () => {
   const { favorites, loading } = useGetFavorites();
+
+  const [showModal, setShowModal] = useState(false);
 
   const styles = StyleSheet.create({
     parent: {
@@ -52,7 +55,12 @@ const FavoritesPage: React.FC = () => {
           <FAB
             style={styles.fab}
             icon="plus"
-            onPress={() => console.log("Pressed")}
+            onPress={() => setShowModal(true)}
+          />
+          <AddFavoriteModal
+            visible={showModal}
+            onDismiss={() => setShowModal(false)}
+            onSubmit={() => setShowModal(false)}
           />
         </View>
       )}
