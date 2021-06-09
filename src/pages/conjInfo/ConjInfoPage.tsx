@@ -1,5 +1,5 @@
 import React from "react";
-import AppLayout from "components/AppLayout";
+import { AppLayout } from "components";
 import { Conjugation } from "hooks/useConjugations";
 import ConjInfoCard from "./ConjInfoCard";
 //@ts-ignore

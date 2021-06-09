@@ -2,8 +2,7 @@ import React from "react";
 import { Headline, List, Subheading, useTheme } from "react-native-paper";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Entry } from "hooks/useGetEntry";
-import BaseCard from "components/BaseCard";
-import ListItem from "components/ListItem";
+import { BaseCard, ListItem } from "components";
 import { useHistory } from "react-router";
 
 export interface SearchResultsCardProps {

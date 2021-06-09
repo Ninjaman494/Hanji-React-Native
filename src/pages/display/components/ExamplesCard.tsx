@@ -1,6 +1,5 @@
 import { List } from "react-native-paper";
-import ListItem from "components/ListItem";
-import BaseCard, { BaseCardProps } from "components/BaseCard";
+import { ListItem, BaseCard, BaseCardProps } from "components";
 import React from "react";
 
 export type ExamplesCardProps = BaseCardProps & {

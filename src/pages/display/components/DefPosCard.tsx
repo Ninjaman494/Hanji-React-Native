@@ -1,8 +1,7 @@
 import { Entry } from "hooks/useGetEntry";
 import React, { useState } from "react";
-import BaseCard from "components/BaseCard";
 import { Headline, List, Subheading, useTheme } from "react-native-paper";
-import ListItem from "components/ListItem";
+import { ListItem, BaseCard } from "components";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 export interface DefPosCardProps {

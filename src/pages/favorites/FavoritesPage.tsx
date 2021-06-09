@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import useGetFavorites from "hooks/useGetFavorites";
 import { Divider, FAB, List } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
-import AppBar from "components/AppBar";
-import LoadingScreen from "components/LoadingScreen";
-import HonorificBadge from "components/HonorificBadge";
-import ListItem from "components/ListItem";
 import AddFavoriteModal from "./AddFavoriteModal";
+import { AppBar, HonorificBadge, ListItem, LoadingScreen } from "components";
 
 const FavoritesPage: React.FC = () => {
   const { favorites, loading } = useGetFavorites();
