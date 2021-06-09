@@ -2,8 +2,7 @@ import React from "react";
 import { Conjugation } from "hooks/useConjugations";
 import { Text, Title, useTheme } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
-import BaseCard from "components/BaseCard";
-import HonorificBadge from "components/HonorificBadge";
+import { BaseCard, HonorificBadge } from "components";
 
 export type ConjInfoCardProps = {
   conjugation: Conjugation;

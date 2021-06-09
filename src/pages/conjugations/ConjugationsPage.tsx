@@ -3,8 +3,7 @@ import useGetURLParams from "hooks/useGetURLParams";
 import useConjugations from "hooks/useConjugations";
 import { View, Animated, StyleSheet } from "react-native";
 import { Switch, Text, useTheme } from "react-native-paper";
-import AppBar from "components/AppBar";
-import LoadingScreen from "components/LoadingScreen";
+import { AppBar, LoadingScreen } from "components";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
 const ConjugationsPage: React.FC = () => {

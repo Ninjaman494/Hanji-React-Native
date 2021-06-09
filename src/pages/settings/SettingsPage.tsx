@@ -1,4 +1,4 @@
-import AppBar from "components/AppBar";
+import { AppBar } from "components";
 import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { View, StyleSheet, Linking } from "react-native";
