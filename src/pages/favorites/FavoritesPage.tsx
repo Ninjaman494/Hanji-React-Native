@@ -36,14 +36,14 @@ const FavoritesPage: React.FC = () => {
                 <ListItem
                   title={f.name}
                   description={f.conjugationName}
+                  titleStyle={{ marginBottom: 4 }}
+                  descriptionStyle={{ textTransform: "capitalize" }}
                   right={() => (
                     <HonorificBadge
                       visible={f.honorific}
                       style={{ alignSelf: "center" }}
                     />
                   )}
-                  titleStyle={{ marginBottom: 4 }}
-                  descriptionStyle={{ textTransform: "capitalize" }}
                 />
                 <Divider />
               </>
