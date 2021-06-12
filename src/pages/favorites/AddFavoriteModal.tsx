@@ -7,6 +7,7 @@ import {
 import { Formik } from "formik";
 import React, { FC, ComponentProps } from "react";
 import { Portal, Dialog, Button } from "react-native-paper";
+import * as yup from "yup";
 
 export type AddFavoriteModalProps = Omit<
   ComponentProps<typeof Dialog>,
@@ -14,6 +15,11 @@ export type AddFavoriteModalProps = Omit<
 > & {
   onSubmit: () => void;
 };
+
+const validationSchema = yup.object().shape({
+  name: yup.string().label("Name").required(),
+  conjugation: yup.string().label("Conjugation").required(),
+});
 
 const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
   visible,
@@ -30,6 +36,7 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
         <Dialog.Title>Create Favorite</Dialog.Title>
         <Formik
           initialValues={{ name: "", conjugation: "", honorific: false }}
+          validationSchema={validationSchema}
           onSubmit={(v) => {
             console.log(v);
             onSubmit();
@@ -39,11 +46,7 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
             <>
               <Dialog.Content>
                 <FormikForm>
-                  <FormikTextField
-                    name="name"
-                    label="Name"
-                    style={{ marginBottom: 8 }}
-                  />
+                  <FormikTextField name="name" label="Name" />
                   <FormikSelect
                     name="conjugation"
                     label="Conjugation"
@@ -52,16 +55,16 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
                       { label: "connective but", value: "CONNECTIVE_BUT" },
                       { label: "declarative past", value: "DECLARATIVE_PAST" },
                     ]}
-                    inputProps={{ style: { marginBottom: 8 } }}
                   />
                   {values.conjugation && (
                     <FormikSelect
                       name="formality"
                       label="Formality"
                       list={[
-                        { label: "and", value: "and" },
-                        { label: "but", value: "but" },
-                        { label: "past", value: "past" },
+                        { label: "Informal Low", value: "informal low" },
+                        { label: "Informal High", value: "informal high" },
+                        { label: "Formal Low", value: "formal low" },
+                        { label: "Formal High", value: "formal high" },
                       ]}
                     />
                   )}
