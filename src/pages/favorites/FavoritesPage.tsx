@@ -6,7 +6,7 @@ import AddFavoriteModal from "./AddFavoriteModal";
 import { AppBar, HonorificBadge, ListItem, LoadingScreen } from "components";
 
 const FavoritesPage: React.FC = () => {
-  const { favorites, loading } = useGetFavorites();
+  const { favorites, loading, error, refetch } = useGetFavorites();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -27,7 +27,7 @@ const FavoritesPage: React.FC = () => {
     <View style={styles.parent}>
       <AppBar title="Favorites" />
       {loading ? (
-        <LoadingScreen text="Loading.." />
+        <LoadingScreen text="Loading..." />
       ) : (
         <View style={{ flex: 1 }}>
           <List.Section>
@@ -52,12 +52,17 @@ const FavoritesPage: React.FC = () => {
           <FAB
             style={styles.fab}
             icon="plus"
+            disabled={loading || !!error}
             onPress={() => setShowModal(true)}
           />
           <AddFavoriteModal
             visible={showModal}
+            favorites={favorites ?? []}
             onDismiss={() => setShowModal(false)}
-            onSubmit={() => setShowModal(false)}
+            onSubmit={() => {
+              refetch();
+              setShowModal(false);
+            }}
           />
         </View>
       )}

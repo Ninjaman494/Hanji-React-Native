@@ -2,23 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
-import useGetFavorites from "hooks/useGetFavorites";
+import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
+import { ConjugationType, Formality } from "hooks/useGetConjugationNames";
 
-const DEFAULT_FAVORITES = [
+const DEFAULT_FAVORITES: Favorite[] = [
   {
     name: "Past",
-    conjugationName: "declarative past informal high",
+    conjugationName: `${ConjugationType.DECLARATIVE_PAST} ${Formality.INFORMAL_HIGH}`,
     honorific: false,
   },
   {
     name: "Present",
-    conjugationName: "declarative present informal high",
+    conjugationName: `${ConjugationType.DECLARATIVE_PRESENT} ${Formality.INFORMAL_HIGH}`,
     honorific: false,
   },
   {
     name: "Future",
-    conjugationName: "declarative future informal high",
+    conjugationName: `${ConjugationType.DECLARATIVE_FUTURE} ${Formality.INFORMAL_HIGH}`,
     honorific: false,
   },
 ];
@@ -26,7 +27,7 @@ const DEFAULT_FAVORITES = [
 const MainPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const history = useHistory();
-  const { favorites } = useGetFavorites();
+  const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
 
   const doSearch = () => {
@@ -36,7 +37,7 @@ const MainPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (favorites === null) {
+    if (favorites === null && !loading && !error) {
       setFavorites(DEFAULT_FAVORITES);
     }
   }, [favorites, DEFAULT_FAVORITES, setFavorites]);
