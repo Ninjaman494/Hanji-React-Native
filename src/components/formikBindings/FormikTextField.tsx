@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from "react";
+import React, { ComponentProps, FC, forwardRef } from "react";
 import {
   handleTextInput,
   withNextInputAutoFocusInput,
@@ -6,13 +6,15 @@ import {
 import { TextInput } from "react-native-paper";
 import { compose } from "recompose";
 
-export type FormikTextFieldProps = ComponentProps<typeof TextInput>;
-
-const FormikTextField: FC<FormikTextFieldProps> = (props) => {
-  return <TextInput mode="outlined" {...props} />;
+export type FormikTextFieldProps = ComponentProps<typeof TextInput> & {
+  name: string;
 };
 
-export default compose<{}, FormikTextFieldProps>(
+const FormikTextField: FC<FormikTextFieldProps> = forwardRef((props, ref) => {
+  return <TextInput mode="outlined" ref={ref} {...props} />;
+});
+
+export default compose<any, FormikTextFieldProps>(
   handleTextInput,
   withNextInputAutoFocusInput
 )(FormikTextField);
