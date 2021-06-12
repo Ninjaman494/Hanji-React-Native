@@ -5,7 +5,13 @@ import {
   FormikSwitch,
 } from "components";
 import { Formik } from "formik";
-import { Conjugation, Formality } from "hooks/useGetFavorites";
+import {
+  ConjugationName,
+  ConjugationType,
+  Formality,
+} from "hooks/useGetConjugationNames";
+import { Favorite } from "hooks/useGetFavorites";
+import useSetFavorites from "hooks/useSetFavorites";
 import React, { FC, ComponentProps } from "react";
 import { Portal, Dialog, Button } from "react-native-paper";
 import toTitleCase from "utils/toTitleCase";
@@ -15,6 +21,7 @@ export type AddFavoriteModalProps = Omit<
   ComponentProps<typeof Dialog>,
   "children"
 > & {
+  favorites: Favorite[];
   onSubmit: () => void;
 };
 
@@ -23,34 +30,52 @@ const validationSchema = yup.object().shape({
   conjugation: yup.string().label("Conjugation").required(),
 });
 
+const conjugationValues = Object.values(ConjugationType).map((val) => ({
+  label: toTitleCase(val),
+  value: val,
+}));
+
+const formalityValues = Object.values(Formality).map((val) => ({
+  label: toTitleCase(val),
+  value: val,
+}));
+
 const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
-  visible,
+  favorites,
   onDismiss,
   onSubmit,
+  ...rest
 }) => {
-  const conjugationValues = Object.keys(Conjugation).map((key) => ({
-    label: toTitleCase(key),
-    value: key,
-  }));
-
-  const formalityValues = Object.keys(Formality).map((key) => ({
-    label: toTitleCase(key),
-    value: key,
-  }));
+  const { setFavorites } = useSetFavorites();
 
   return (
     <Portal>
       <Dialog
-        visible={visible}
         onDismiss={onDismiss}
-        style={{ maxWidth: 500, width: "90%", alignSelf: "center" }}
+        style={[
+          { maxWidth: 500, width: "90%", alignSelf: "center" },
+          rest.style,
+        ]}
+        {...rest}
       >
         <Dialog.Title>Create Favorite</Dialog.Title>
         <Formik
-          initialValues={{ name: "", conjugation: "", honorific: false }}
           validationSchema={validationSchema}
-          onSubmit={(v) => {
-            console.log(v);
+          initialValues={{
+            name: "",
+            conjugation: "",
+            formality: "",
+            honorific: false,
+          }}
+          onSubmit={async ({ conjugation, formality, ...rest }) => {
+            await setFavorites([
+              ...favorites,
+              {
+                conjugationName:
+                  `${conjugation} ${formality}` as ConjugationName,
+                ...rest,
+              },
+            ]);
             onSubmit();
           }}
         >
@@ -64,13 +89,16 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
                     label="Conjugation"
                     list={conjugationValues}
                   />
-                  {values.conjugation && (
-                    <FormikSelect
-                      name="formality"
-                      label="Formality"
-                      list={formalityValues}
-                    />
-                  )}
+                  {!!values.conjugation &&
+                    !values.conjugation.includes("determiner") &&
+                    !values.conjugation.includes("connective") &&
+                    values.conjugation !== ConjugationType.NOMINAL_ING && (
+                      <FormikSelect
+                        name="formality"
+                        label="Formality"
+                        list={formalityValues}
+                      />
+                    )}
                   <FormikSwitch name="honorific" label="Honorific" />
                 </FormikForm>
               </Dialog.Content>
