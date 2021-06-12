@@ -41,7 +41,7 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
     },
     ref
   ) => {
-    const theme = useTheme();
+    const { colors } = useTheme();
 
     const [showDropdown, setShowDropdown] = useState(false);
     const [displayValue, setDisplayValue] = useState("");
@@ -70,11 +70,11 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
         onDismiss={() => setShowDropdown(false)}
         anchor={
           <TouchableRipple
+            onLayout={onLayout}
             onPress={() => {
               setShowDropdown(true);
               setFieldTouched();
             }}
-            onLayout={onLayout}
           >
             <View pointerEvents={"none"}>
               <TextInput
@@ -99,10 +99,7 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
             <Menu.Item
               key={index}
               titleStyle={{
-                color:
-                  value === item.value
-                    ? theme.colors.primary
-                    : theme.colors.text,
+                color: value === item.value ? colors.primary : colors.text,
               }}
               onPress={() => {
                 setFieldValue(item.value);

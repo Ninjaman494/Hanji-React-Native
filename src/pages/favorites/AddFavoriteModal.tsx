@@ -1,5 +1,6 @@
 import FormikForm from "components/formikBindings/FormikForm";
 import FormikSelect from "components/formikBindings/FormikSelect";
+import FormikSwitch from "components/formikBindings/FormikSwitch";
 import FormikTextField from "components/formikBindings/FormikTextField";
 import { Formik } from "formik";
 import React, { FC, ComponentProps, useState } from "react";
@@ -32,11 +33,15 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
             onSubmit();
           }}
         >
-          {({ handleSubmit }) => (
+          {({ handleSubmit, values }) => (
             <>
               <Dialog.Content>
                 <FormikForm>
-                  <FormikTextField name="name" label="Name" />
+                  <FormikTextField
+                    name="name"
+                    label="Name"
+                    style={{ marginBottom: 8 }}
+                  />
                   <FormikSelect
                     name="conjugation"
                     label="Conjugation"
@@ -45,16 +50,20 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
                       { label: "connective but", value: "CONNECTIVE_BUT" },
                       { label: "declarative past", value: "DECLARATIVE_PAST" },
                     ]}
+                    inputProps={{ style: { marginBottom: 8 } }}
                   />
-                  <FormikSelect
-                    name="tense"
-                    label="Tense"
-                    list={[
-                      { label: "and", value: "and" },
-                      { label: "but", value: "but" },
-                      { label: "past", value: "past" },
-                    ]}
-                  />
+                  {values.conjugation && (
+                    <FormikSelect
+                      name="formality"
+                      label="Formality"
+                      list={[
+                        { label: "and", value: "and" },
+                        { label: "but", value: "but" },
+                        { label: "past", value: "past" },
+                      ]}
+                    />
+                  )}
+                  <FormikSwitch name="honorific" label="Honorific" />
                 </FormikForm>
               </Dialog.Content>
               <Dialog.Actions>
