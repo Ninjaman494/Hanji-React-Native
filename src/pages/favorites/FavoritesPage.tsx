@@ -4,9 +4,12 @@ import { Divider, FAB, List } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import AddFavoriteModal from "./AddFavoriteModal";
 import { AppBar, HonorificBadge, ListItem, LoadingScreen } from "components";
+import FavoriteItem from "./FavoriteItem";
+import useSetFavorites from "hooks/useSetFavorites";
 
 const FavoritesPage: React.FC = () => {
   const { favorites, loading, error, refetch } = useGetFavorites();
+  const { setFavorites } = useSetFavorites();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -31,22 +34,15 @@ const FavoritesPage: React.FC = () => {
       ) : (
         <View style={{ flex: 1 }}>
           <List.Section>
-            {favorites?.map((f) => (
-              <>
-                <ListItem
-                  title={f.name}
-                  description={f.conjugationName}
-                  titleStyle={{ marginBottom: 4 }}
-                  descriptionStyle={{ textTransform: "capitalize" }}
-                  right={() => (
-                    <HonorificBadge
-                      visible={f.honorific}
-                      style={{ alignSelf: "center" }}
-                    />
-                  )}
-                />
-                <Divider />
-              </>
+            {favorites?.map((fav, index) => (
+              <FavoriteItem
+                key={index}
+                favorite={fav}
+                onDelete={async () => {
+                  await setFavorites(favorites.filter((el) => el !== fav));
+                  refetch();
+                }}
+              />
             ))}
           </List.Section>
           <FAB

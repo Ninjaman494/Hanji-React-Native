@@ -21,7 +21,7 @@ const useGetFavorites = () => {
       if (value !== null) {
         setFavorites(JSON.parse(value));
       } else {
-        setFavorites([]);
+        setFavorites(null);
       }
     } catch (e) {
       setError(e);
