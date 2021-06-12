@@ -40,7 +40,7 @@ const MainPage: React.FC = () => {
     if (favorites === null && !loading && !error) {
       setFavorites(DEFAULT_FAVORITES);
     }
-  }, [favorites, DEFAULT_FAVORITES, setFavorites]);
+  }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
   return (
     <View style={styles.container}>
