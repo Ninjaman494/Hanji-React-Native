@@ -5,8 +5,10 @@ import {
   FormikSwitch,
 } from "components";
 import { Formik } from "formik";
+import { Conjugation, Formality } from "hooks/useGetFavorites";
 import React, { FC, ComponentProps } from "react";
 import { Portal, Dialog, Button } from "react-native-paper";
+import toTitleCase from "utils/toTitleCase";
 import * as yup from "yup";
 
 export type AddFavoriteModalProps = Omit<
@@ -26,6 +28,16 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
   onDismiss,
   onSubmit,
 }) => {
+  const conjugationValues = Object.keys(Conjugation).map((key) => ({
+    label: toTitleCase(key),
+    value: key,
+  }));
+
+  const formalityValues = Object.keys(Formality).map((key) => ({
+    label: toTitleCase(key),
+    value: key,
+  }));
+
   return (
     <Portal>
       <Dialog
@@ -50,22 +62,13 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
                   <FormikSelect
                     name="conjugation"
                     label="Conjugation"
-                    list={[
-                      { label: "connective and", value: "CONNECTIVE_AND" },
-                      { label: "connective but", value: "CONNECTIVE_BUT" },
-                      { label: "declarative past", value: "DECLARATIVE_PAST" },
-                    ]}
+                    list={conjugationValues}
                   />
                   {values.conjugation && (
                     <FormikSelect
                       name="formality"
                       label="Formality"
-                      list={[
-                        { label: "Informal Low", value: "informal low" },
-                        { label: "Informal High", value: "informal high" },
-                        { label: "Formal Low", value: "formal low" },
-                        { label: "Formal High", value: "formal high" },
-                      ]}
+                      list={formalityValues}
                     />
                   )}
                   <FormikSwitch name="honorific" label="Honorific" />
