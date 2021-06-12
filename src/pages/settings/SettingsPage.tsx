@@ -3,10 +3,12 @@ import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { Divider, List, useTheme } from "react-native-paper";
+import { useHistory } from "react-router";
 
 const SettingsPage: React.FC = () => {
-  const { colors, padding } = useTheme();
+  const { colors } = useTheme();
   const { favorites, loading } = useGetFavorites();
+  const history = useHistory();
 
   const styles = StyleSheet.create({
     parent: {
@@ -27,6 +29,7 @@ const SettingsPage: React.FC = () => {
         <List.Section>
           <List.Item
             title="Favorites"
+            onPress={() => history.push("/favorites")}
             description={
               loading ? "Loading..." : `You have ${favorites?.length} favorites`
             }
