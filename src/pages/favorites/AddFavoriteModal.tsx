@@ -1,9 +1,11 @@
-import FormikForm from "components/formikBindings/FormikForm";
-import FormikSelect from "components/formikBindings/FormikSelect";
-import FormikSwitch from "components/formikBindings/FormikSwitch";
-import FormikTextField from "components/formikBindings/FormikTextField";
+import {
+  FormikForm,
+  FormikTextField,
+  FormikSelect,
+  FormikSwitch,
+} from "components";
 import { Formik } from "formik";
-import React, { FC, ComponentProps, useState } from "react";
+import React, { FC, ComponentProps } from "react";
 import { Portal, Dialog, Button } from "react-native-paper";
 
 export type AddFavoriteModalProps = Omit<
