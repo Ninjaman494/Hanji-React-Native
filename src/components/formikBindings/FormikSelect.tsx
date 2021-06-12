@@ -5,20 +5,36 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { LayoutChangeEvent, ScrollView, View } from "react-native";
+import { CSSProperties } from "react";
+import {
+  LayoutChangeEvent,
+  ScrollView,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from "react-native";
 import {
   withFormikControl,
   withFormikControlProps,
   withNextInputAutoFocusInput,
 } from "react-native-formik";
-import { Menu, TouchableRipple, TextInput, useTheme } from "react-native-paper";
+import {
+  Menu,
+  TouchableRipple,
+  TextInput,
+  useTheme,
+  HelperText,
+} from "react-native-paper";
 import { compose } from "recompose";
 
 export type FormikSelectProps = {
   name: string;
-  label?: string | undefined;
-  placeholder?: string | undefined;
+  label?: string;
+  placeholder?: string;
+  hint?: string;
   inputProps?: ComponentProps<typeof TextInput>;
+  style?: StyleProp<ViewStyle>;
   list: Array<{
     label: string;
     value: string;
@@ -32,9 +48,11 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
       inputProps,
       list,
       label,
+      hint,
       name,
       value,
       error,
+      style,
       setFieldTouched,
       setFieldValue,
       ...rest
@@ -67,14 +85,15 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
       <Menu
         {...rest}
         visible={showDropdown}
-        onDismiss={() => setShowDropdown(false)}
+        onDismiss={() => {
+          setShowDropdown(false);
+          setFieldTouched();
+        }}
         anchor={
           <TouchableRipple
+            style={[style, { marginBottom: 8 }]}
             onLayout={onLayout}
-            onPress={() => {
-              setShowDropdown(true);
-              setFieldTouched();
-            }}
+            onPress={() => setShowDropdown(true)}
           >
             <View pointerEvents={"none"}>
               <TextInput
@@ -86,6 +105,12 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
                 onFocus={() => setShowDropdown(true)}
                 {...inputProps}
               />
+              <HelperText
+                type={error ? "error" : "info"}
+                visible={!!error || !!hint}
+              >
+                {error ?? hint}
+              </HelperText>
             </View>
           </TouchableRipple>
         }
