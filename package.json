@@ -1,11 +1,5 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "jest": {
-    "preset": "react-native",
-    "setupFilesAfterEnv": [
-      "./src/customMatchers.tsx"
-    ]
-  },
   "scripts": {
     "start": "expo start",
     "test": "jest",
@@ -39,7 +33,7 @@
   },
   "devDependencies": {
     "@testing-library/react-native": "^7.0.2",
-    "@types/jest": "^26.0.14",
+    "@types/jest": "^26.0.23",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
@@ -48,7 +42,7 @@
     "@types/react-test-renderer": "^16.9.3",
     "@types/recompose": "^0.30.7",
     "babel-plugin-module-resolver": "^4.1.0",
-    "jest": "26.5.3",
+    "jest": "^26.6.3",
     "prettier": "^2.3.1",
     "react-test-renderer": "latest",
     "typescript": "^4.3.2"
