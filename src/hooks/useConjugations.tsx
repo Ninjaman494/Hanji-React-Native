@@ -1,4 +1,5 @@
 import { gql, QueryHookOptions, useQuery } from "@apollo/client";
+import { ConjugationName, Formality } from "./useGetConjugationNames";
 
 const CONJUGATIONS = gql`
   query ConjugationsQuery(
@@ -29,7 +30,7 @@ const CONJUGATIONS = gql`
 `;
 
 export type Conjugation = {
-  name: string;
+  name: ConjugationName;
   conjugation: string;
   type: string;
   tense: "PRESENT" | "PAST" | "FUTURE" | "NONE";
