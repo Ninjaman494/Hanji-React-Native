@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
-import { ConjugationType, Formality } from "hooks/useGetConjugationNames";
+import { ConjugationType, Formality } from "utils/conjugationTypes";
 
 const DEFAULT_FAVORITES: Favorite[] = [
   {
