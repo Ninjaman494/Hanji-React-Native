@@ -3,6 +3,7 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 import { Favorite } from "hooks/useGetFavorites";
 import FavoritesCard from "../../components/FavoritesCard";
+import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 
 const favorites: Favorite[] = [
   {
@@ -24,8 +25,8 @@ const favorites: Favorite[] = [
 
 const baseConjugation = {
   type: "type",
-  tense: "PRESENT" as "PRESENT",
-  speechLevel: "INFORMAL_LOW" as "INFORMAL_LOW",
+  tense: Tense.PRESENT,
+  speechLevel: Formality.INFORMAL_HIGH,
   honorific: false,
   pronunciation: "pronunciation",
   romanization: "romanization",
@@ -36,17 +37,17 @@ const props = {
   favorites: favorites,
   conjugations: [
     {
-      name: "declarative past informal high",
+      name: "declarative past informal high" as ConjugationName,
       conjugation: "conj 1",
       ...baseConjugation,
     },
     {
-      name: "declarative present informal high",
+      name: "declarative present informal high" as ConjugationName,
       conjugation: "conj 2",
       ...baseConjugation,
     },
     {
-      name: "declarative future informal high",
+      name: "declarative future informal high" as ConjugationName,
       conjugation: "conj 3",
       ...baseConjugation,
     },
