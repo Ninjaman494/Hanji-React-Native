@@ -133,6 +133,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                           Object {
                             "color": "#6200ee",
                             "fontSize": undefined,
+                            "fontWeight": "400",
                             "textTransform": "capitalize",
                           },
                         ],
@@ -154,6 +155,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                           Object {
                             "color": "#6200ee",
                             "fontSize": undefined,
+                            "fontWeight": "400",
                             "textTransform": "capitalize",
                           },
                         ],
@@ -632,6 +634,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                           Object {
                             "color": "#6200ee",
                             "fontSize": undefined,
+                            "fontWeight": "400",
                             "textTransform": "capitalize",
                           },
                         ],
@@ -653,6 +656,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                           Object {
                             "color": "#6200ee",
                             "fontSize": undefined,
+                            "fontWeight": "400",
                             "textTransform": "capitalize",
                           },
                         ],

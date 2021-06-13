@@ -1,14 +1,20 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
 import ConjInfoCard from "../ConjInfoCard";
+import {
+  ConjugationName,
+  ConjugationType,
+  Formality,
+  Tense,
+} from "utils/conjugationTypes";
 
 describe("ConjInfoCard component", () => {
   const conjugation = {
-    name: "name",
+    name: "name" as ConjugationName,
     conjugation: "conj",
-    type: "declarative present",
-    tense: "PRESENT" as "PRESENT",
-    speechLevel: "INFORMAL_LOW" as "INFORMAL_LOW",
+    type: ConjugationType.DECLARATIVE_PRESENT,
+    tense: Tense.PRESENT,
+    speechLevel: Formality.INFORMAL_LOW,
     honorific: false,
     pronunciation: "pronunciation",
     romanization: "romanization",

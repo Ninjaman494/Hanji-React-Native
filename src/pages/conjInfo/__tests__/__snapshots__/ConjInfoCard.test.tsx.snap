@@ -99,6 +99,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                     Object {
                       "color": "#6200ee",
                       "fontSize": undefined,
+                      "fontWeight": "400",
                       "textTransform": "capitalize",
                     },
                   ],
@@ -120,6 +121,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                     Object {
                       "color": "#6200ee",
                       "fontSize": undefined,
+                      "fontWeight": "400",
                       "textTransform": "capitalize",
                     },
                   ],
@@ -191,7 +193,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
               },
               Object {
                 "fontSize": 24,
-                "marginTop": -16,
+                "marginTop": -24,
               },
             ]
           }
@@ -224,7 +226,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -238,7 +241,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -310,7 +314,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -324,7 +329,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -569,6 +575,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                     Object {
                       "color": "#6200ee",
                       "fontSize": undefined,
+                      "fontWeight": "400",
                       "textTransform": "capitalize",
                     },
                   ],
@@ -590,6 +597,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                     Object {
                       "color": "#6200ee",
                       "fontSize": undefined,
+                      "fontWeight": "400",
                       "textTransform": "capitalize",
                     },
                   ],
@@ -661,7 +669,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
               },
               Object {
                 "fontSize": 24,
-                "marginTop": -16,
+                "marginTop": -24,
               },
             ]
           }
@@ -694,7 +702,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -708,7 +717,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -780,7 +790,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },
@@ -794,7 +805,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                   },
                   Object {
                     "color": "#6200ee",
-                    "fontSize": 18,
+                    "fontSize": undefined,
+                    "fontWeight": "400",
                     "marginBottom": undefined,
                     "marginTop": 16,
                   },

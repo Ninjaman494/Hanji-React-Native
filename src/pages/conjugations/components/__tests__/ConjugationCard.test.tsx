@@ -2,12 +2,13 @@ import "react-native";
 import React from "react";
 import { render } from "@testing-library/react-native";
 import ConjugationCard from "../ConjugationCard";
+import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 
 describe("BaseCard component", () => {
   const baseConjugation = {
     type: "type",
-    tense: "PRESENT" as "PRESENT",
-    speechLevel: "INFORMAL_LOW" as "INFORMAL_LOW",
+    tense: Tense.PRESENT,
+    speechLevel: Formality.INFORMAL_LOW,
     honorific: false,
     pronunciation: "pronunciation",
     romanization: "romanization",
@@ -17,17 +18,17 @@ describe("BaseCard component", () => {
   const props = {
     conjugations: [
       {
-        name: "name 1",
+        name: "name 1" as ConjugationName,
         conjugation: "conj 1",
         ...baseConjugation,
       },
       {
-        name: "name 2",
+        name: "name 2" as ConjugationName,
         conjugation: "conj 2",
         ...baseConjugation,
       },
       {
-        name: "name 3",
+        name: "name 3" as ConjugationName,
         conjugation: "conj 3",
         ...baseConjugation,
       },
