@@ -4,12 +4,12 @@ import { StyleSheet } from "react-native";
 import { useHistory } from "react-router";
 import useGetEntry from "hooks/useGetEntry";
 import useGetURLParams from "hooks/useGetURLParams";
-import useConjugations from "hooks/useConjugations";
-import useGetFavorites from "hooks/useGetFavorites";
+import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import { AppLayout, BaseCard } from "components";
 import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
+import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 
 const DisplayPage: React.FC = () => {
   const history = useHistory();
@@ -33,12 +33,11 @@ const DisplayPage: React.FC = () => {
     loading: conjLoading,
     error: conjError,
     data: conjData,
-  } = useConjugations(
+  } = useGetFavoritesConjugations(
     {
       stem: stem as string,
       isAdj: isAdj,
-      honorific: honorific,
-      conjugations: favorites?.map((favorite) => favorite.conjugationName),
+      favorites: favorites as Favorite[],
     },
     {
       skip:
@@ -47,7 +46,7 @@ const DisplayPage: React.FC = () => {
         favorites?.length === 0,
     }
   );
-  const conjugations = conjData?.conjugations;
+  const conjugations = conjData?.favorites;
 
   return (
     <>
