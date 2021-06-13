@@ -16,7 +16,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
       marginHorizontal: padding?.horizontal,
     },
     title: {
-      fontSize: textSizes.cardTitle,
+      fontSize: textSizes?.cardTitle,
       fontWeight: "400",
       color: colors?.primary,
       marginTop: 16,

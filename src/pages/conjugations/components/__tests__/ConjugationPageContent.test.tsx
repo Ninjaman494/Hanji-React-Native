@@ -3,14 +3,15 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 import ConjugationsPageContent from "../ConjugationPageContent";
 import { Conjugation } from "hooks/useConjugations";
+import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 
 describe("ConjugationPageContent component", () => {
   const typeOneBase = {
-    name: "name 1",
+    name: "name 1" as ConjugationName,
     conjugation: "conj 1",
     type: "declarative present",
-    tense: "PRESENT" as "PRESENT",
-    speechLevel: "INFORMAL_LOW" as "INFORMAL_LOW",
+    tense: Tense.PRESENT,
+    speechLevel: Formality.INFORMAL_LOW,
     honorific: false,
     pronunciation: "pronunciation",
     romanization: "romanization",
@@ -19,16 +20,24 @@ describe("ConjugationPageContent component", () => {
 
   const typeOneConjugations: Conjugation[] = [
     typeOneBase,
-    { ...typeOneBase, speechLevel: "INFORMAL_HIGH", conjugation: "conj 2" },
-    { ...typeOneBase, speechLevel: "FORMAL_LOW", conjugation: "conj 3" },
+    {
+      ...typeOneBase,
+      speechLevel: Formality.INFORMAL_HIGH,
+      conjugation: "conj 2",
+    },
+    {
+      ...typeOneBase,
+      speechLevel: Formality.FORMAL_LOW,
+      conjugation: "conj 3",
+    },
   ];
 
   const typeTwoBase = {
-    name: "name 1",
+    name: "name 1" as ConjugationName,
     conjugation: "conj 3",
     type: "declarative future",
-    tense: "PRESENT" as "PRESENT",
-    speechLevel: "INFORMAL_LOW" as "INFORMAL_LOW",
+    tense: Tense.PRESENT,
+    speechLevel: Formality.INFORMAL_LOW,
     honorific: false,
     pronunciation: "pronunciation",
     romanization: "romanization",
@@ -37,8 +46,16 @@ describe("ConjugationPageContent component", () => {
 
   const typeTwoConjugations: Conjugation[] = [
     typeTwoBase,
-    { ...typeTwoBase, speechLevel: "INFORMAL_HIGH", conjugation: "conj 4" },
-    { ...typeTwoBase, speechLevel: "FORMAL_LOW", conjugation: "conj 5" },
+    {
+      ...typeTwoBase,
+      speechLevel: Formality.INFORMAL_HIGH,
+      conjugation: "conj 4",
+    },
+    {
+      ...typeTwoBase,
+      speechLevel: Formality.FORMAL_LOW,
+      conjugation: "conj 5",
+    },
   ];
 
   const props = {
