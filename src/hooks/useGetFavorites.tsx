@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ConjugationName } from "./useGetConjugationNames";
+import { ConjugationName } from "utils/conjugationTypes";
 
 export type Favorite = {
   name: string;

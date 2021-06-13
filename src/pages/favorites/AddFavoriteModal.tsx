@@ -9,7 +9,7 @@ import {
   ConjugationName,
   ConjugationType,
   Formality,
-} from "hooks/useGetConjugationNames";
+} from "utils/conjugationTypes";
 import { Favorite } from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import React, { FC, ComponentProps } from "react";
