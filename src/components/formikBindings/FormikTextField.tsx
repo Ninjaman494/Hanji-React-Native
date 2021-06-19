@@ -13,21 +13,25 @@ export type FormikTextFieldProps = ComponentProps<typeof TextInput> & {
   hint?: string;
 };
 
-const FormikTextField: FC<
-  FormikTextFieldProps & withFormikControlProps
-> = forwardRef(({ style, hint, ...rest }, ref) => {
-  return (
-    <View style={[style, { marginBottom: 8 }]}>
-      <TextInput mode="outlined" ref={ref} {...rest} />
-      <HelperText
-        type={rest.error ? "error" : "info"}
-        visible={!!rest.error || !!hint}
-      >
-        {rest.error ?? hint}
-      </HelperText>
-    </View>
-  );
-});
+const FormikTextField: FC<FormikTextFieldProps & withFormikControlProps> =
+  forwardRef(({ style, hint, ...rest }, ref) => {
+    return (
+      <View style={[style, { marginBottom: 8 }]}>
+        <TextInput
+          mode="outlined"
+          ref={ref}
+          accessibilityLabel={rest.label}
+          {...rest}
+        />
+        <HelperText
+          type={rest.error ? "error" : "info"}
+          visible={!!rest.error || !!hint}
+        >
+          {rest.error ?? hint}
+        </HelperText>
+      </View>
+    );
+  });
 
 export default compose<any, FormikTextFieldProps>(
   handleTextInput,

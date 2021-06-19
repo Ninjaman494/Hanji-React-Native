@@ -101,6 +101,7 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
                 value={displayValue}
                 mode="outlined"
                 label={label}
+                accessibilityLabel={label}
                 error={!!error}
                 onFocus={() => setShowDropdown(true)}
                 {...inputProps}
