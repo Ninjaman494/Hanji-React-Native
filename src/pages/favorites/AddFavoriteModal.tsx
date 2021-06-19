@@ -49,68 +49,64 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
   const { setFavorites } = useSetFavorites();
 
   return (
-    <Portal>
-      <Dialog
-        onDismiss={onDismiss}
-        style={[
-          { maxWidth: 500, width: "90%", alignSelf: "center" },
-          rest.style,
-        ]}
-        {...rest}
+    <Dialog
+      onDismiss={onDismiss}
+      style={[{ maxWidth: 500, width: "90%", alignSelf: "center" }, rest.style]}
+      {...rest}
+    >
+      <Dialog.Title>Create Favorite</Dialog.Title>
+      <Formik
+        validationSchema={validationSchema}
+        initialValues={{
+          name: "",
+          conjugation: "",
+          formality: "",
+          honorific: false,
+        }}
+        onSubmit={async ({ conjugation, formality, ...rest }) => {
+          await setFavorites([
+            ...favorites,
+            {
+              conjugationName: (formality
+                ? `${conjugation} ${formality}`
+                : conjugation) as ConjugationName,
+              ...rest,
+            },
+          ]);
+          onSubmit();
+        }}
       >
-        <Dialog.Title>Create Favorite</Dialog.Title>
-        <Formik
-          validationSchema={validationSchema}
-          initialValues={{
-            name: "",
-            conjugation: "",
-            formality: "",
-            honorific: false,
-          }}
-          onSubmit={async ({ conjugation, formality, ...rest }) => {
-            await setFavorites([
-              ...favorites,
-              {
-                conjugationName:
-                  `${conjugation} ${formality}` as ConjugationName,
-                ...rest,
-              },
-            ]);
-            onSubmit();
-          }}
-        >
-          {({ handleSubmit, values }) => (
-            <>
-              <Dialog.Content>
-                <FormikForm>
-                  <FormikTextField name="name" label="Name" />
-                  <FormikSelect
-                    name="conjugation"
-                    label="Conjugation"
-                    list={conjugationValues}
-                  />
-                  {!!values.conjugation &&
-                    !values.conjugation.includes("determiner") &&
-                    !values.conjugation.includes("connective") &&
-                    values.conjugation !== ConjugationType.NOMINAL_ING && (
-                      <FormikSelect
-                        name="formality"
-                        label="Formality"
-                        list={formalityValues}
-                      />
-                    )}
-                  <FormikSwitch name="honorific" label="Honorific" />
-                </FormikForm>
-              </Dialog.Content>
-              <Dialog.Actions>
-                <Button onPress={onDismiss}>Cancel</Button>
-                <Button onPress={handleSubmit}>Submit</Button>
-              </Dialog.Actions>
-            </>
-          )}
-        </Formik>
-      </Dialog>
-    </Portal>
+        {({ handleSubmit, values }) => (
+          <>
+            <Dialog.Content>
+              <FormikForm>
+                <FormikTextField name="name" label="Name" />
+                <FormikSelect
+                  name="conjugation"
+                  label="Conjugation"
+                  list={conjugationValues}
+                />
+                {!!values.conjugation &&
+                  !values.conjugation.includes("determiner") &&
+                  !values.conjugation.includes("connective") &&
+                  values.conjugation !== ConjugationType.NOMINAL_ING && (
+                    <FormikSelect
+                      name="formality"
+                      label="Formality"
+                      list={formalityValues}
+                    />
+                  )}
+                <FormikSwitch name="honorific" label="Honorific" />
+              </FormikForm>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={onDismiss}>Cancel</Button>
+              <Button onPress={handleSubmit}>Submit</Button>
+            </Dialog.Actions>
+          </>
+        )}
+      </Formik>
+    </Dialog>
   );
 };
 

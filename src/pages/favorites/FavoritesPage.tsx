@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useGetFavorites from "hooks/useGetFavorites";
-import { Divider, FAB, List } from "react-native-paper";
+import { Divider, FAB, List, Portal } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import AddFavoriteModal from "./AddFavoriteModal";
 import { AppBar, HonorificBadge, ListItem, LoadingScreen } from "components";
@@ -51,15 +51,17 @@ const FavoritesPage: React.FC = () => {
             disabled={loading || !!error}
             onPress={() => setShowModal(true)}
           />
-          <AddFavoriteModal
-            visible={showModal}
-            favorites={favorites ?? []}
-            onDismiss={() => setShowModal(false)}
-            onSubmit={() => {
-              refetch();
-              setShowModal(false);
-            }}
-          />
+          <Portal>
+            <AddFavoriteModal
+              visible={showModal}
+              favorites={favorites ?? []}
+              onDismiss={() => setShowModal(false)}
+              onSubmit={() => {
+                refetch();
+                setShowModal(false);
+              }}
+            />
+          </Portal>
         </View>
       )}
     </View>

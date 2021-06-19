@@ -25,6 +25,7 @@ const FormikSwitch: FC<FormikSelectProps & withFormikControlProps> = ({
     <View style={styles.root}>
       <Text style={styles.text}>{rest.label}</Text>
       <Switch
+        accessibilityLabel={rest.label}
         value={value as any}
         onValueChange={(v) => {
           setFieldValue(v as any);

@@ -4,7 +4,7 @@ import { render } from "@testing-library/react-native";
 import ConjugationCard from "../ConjugationCard";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 
-describe("BaseCard component", () => {
+describe("ConjugationCard", () => {
   const baseConjugation = {
     type: "type",
     tense: Tense.PRESENT,
