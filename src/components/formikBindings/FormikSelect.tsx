@@ -1,18 +1,11 @@
-import React, {
-  ComponentProps,
-  FC,
-  forwardRef,
-  useEffect,
-  useState,
-} from "react";
-import { CSSProperties } from "react";
+import React, { ComponentProps, forwardRef, useEffect, useState } from "react";
 import {
   LayoutChangeEvent,
   ScrollView,
   StyleProp,
-  StyleSheet,
   View,
   ViewStyle,
+  TextInput as ReactNativeTextInput,
 } from "react-native";
 import {
   withFormikControl,
@@ -42,14 +35,16 @@ export type FormikSelectProps = {
 };
 
 // Based on react-native-paper-dropdown
-const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
+const FormikSelect = forwardRef<
+  ReactNativeTextInput,
+  FormikSelectProps & withFormikControlProps
+>(
   (
     {
       inputProps,
       list,
       label,
       hint,
-      name,
       value,
       error,
       style,
@@ -97,7 +92,7 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
           >
             <View pointerEvents={"none"}>
               <TextInput
-                ref={ref as any} // Needed for nextInputAutoFocus
+                ref={ref} // Needed for nextInputAutoFocus
                 value={displayValue}
                 mode="outlined"
                 label={label}
@@ -141,7 +136,10 @@ const FormikSelect: FC<FormikSelectProps & withFormikControlProps> = forwardRef(
   }
 );
 
-export default compose<any, FormikSelectProps>(
+export default compose<
+  FormikSelectProps & withFormikControlProps,
+  FormikSelectProps
+>(
   withFormikControl,
   withNextInputAutoFocusInput
 )(FormikSelect);

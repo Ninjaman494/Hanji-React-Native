@@ -9,7 +9,7 @@ describe("BaseCard component", () => {
   };
 
   it("has a title", () => {
-    let component = render(<BaseCard {...props} />);
+    const component = render(<BaseCard {...props} />);
 
     expect(component.getByText(props.title)).toBeTruthy();
   });

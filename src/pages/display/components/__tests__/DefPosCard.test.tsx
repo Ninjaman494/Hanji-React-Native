@@ -14,7 +14,7 @@ describe("DefPosCard component", () => {
   };
 
   it("displays content", () => {
-    let component = render(<DefPosCard {...props} />);
+    const component = render(<DefPosCard {...props} />);
     const entry = props.entry;
 
     expect(component.getByTestId("defPosCardTerm")).toContainText(entry.term);

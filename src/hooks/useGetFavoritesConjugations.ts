@@ -1,4 +1,4 @@
-import { gql, QueryHookOptions, useQuery } from "@apollo/client";
+import { gql, QueryHookOptions, QueryResult, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Formality } from "utils/conjugationTypes";
 import { Conjugation } from "./useConjugations";
@@ -37,7 +37,7 @@ interface FavoritesConjugationsVars {
 const useGetFavoritesConjugations = (
   variables: FavoritesConjugationsVars,
   options?: QueryHookOptions
-) => {
+): QueryResult<FavoritesResponse> => {
   const { data, ...rest } = useQuery<FavoritesResponse>(FAVORITES, {
     ...options,
     variables,
@@ -61,7 +61,7 @@ const useGetFavoritesConjugations = (
     }
   }, [data, setFavorites]);
 
-  return { data: { favorites }, ...rest };
+  return { data: favorites && { favorites }, ...rest };
 };
 
 export default useGetFavoritesConjugations;

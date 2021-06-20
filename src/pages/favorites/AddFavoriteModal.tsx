@@ -13,7 +13,7 @@ import {
 import { Favorite } from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import React, { FC, ComponentProps } from "react";
-import { Portal, Dialog, Button } from "react-native-paper";
+import { Dialog, Button } from "react-native-paper";
 import toTitleCase from "utils/toTitleCase";
 import * as yup from "yup";
 

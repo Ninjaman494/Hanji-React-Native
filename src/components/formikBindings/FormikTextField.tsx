@@ -33,7 +33,10 @@ const FormikTextField: FC<FormikTextFieldProps & withFormikControlProps> =
     );
   });
 
-export default compose<any, FormikTextFieldProps>(
+export default compose<
+  FormikTextFieldProps & withFormikControlProps,
+  FormikTextFieldProps
+>(
   handleTextInput,
   withNextInputAutoFocusInput
 )(FormikTextField);

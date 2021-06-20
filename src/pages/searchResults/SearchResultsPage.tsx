@@ -25,7 +25,7 @@ const styles = {
 
 const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
   return (
-    <TouchableRipple onPress={() => {}} rippleColor="rgba(0, 0, 0, .32)">
+    <TouchableRipple onPress={() => null} rippleColor="rgba(0, 0, 0, .32)">
       <Link to={`/display?id=${result.id}`} style={styles.link}>
         <SearchResultsCard entry={result} style={styles.card} />
       </Link>
