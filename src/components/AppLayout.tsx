@@ -7,8 +7,8 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "./AppBar";
-import LoadingScreen from "./LoadingScreen";
+import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "components/AppBar";
+import LoadingScreen from "components/LoadingScreen";
 
 export interface AppLayoutProps extends AppBarProps {
   loading?: boolean;

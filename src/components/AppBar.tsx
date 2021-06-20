@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Appbar, IconButton, TextInput } from "react-native-paper";
+import { Appbar, IconButton, Menu, TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -13,6 +13,7 @@ export interface AppBarProps {
 const AppBar: React.FC<AppBarProps> = ({ title }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
   const doSearch = () => {
@@ -51,7 +52,21 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
           onPress={() => setShowSearch(!showSearch)}
         />
       )}
-      <Appbar.Action icon="dots-vertical" onPress={() => {}} />
+      <Menu
+        visible={showMenu}
+        onDismiss={() => setShowMenu(false)}
+        anchor={
+          <Appbar.Action
+            icon="dots-vertical"
+            color="white"
+            onPress={() => setShowMenu(true)}
+          />
+        }
+      >
+        <Menu.Item onPress={() => history.push(`/settings`)} title="Settings" />
+        <Menu.Item onPress={() => {}} title="About" />
+        <Menu.Item onPress={() => {}} title="Report a Bug" />
+      </Menu>
     </Appbar.Header>
   );
 };
