@@ -1,6 +1,6 @@
 import "react-native";
 import React from "react";
-import BaseCard from "../BaseCard";
+import BaseCard from "components/BaseCard";
 import { render } from "@testing-library/react-native";
 
 describe("BaseCard component", () => {
@@ -9,7 +9,7 @@ describe("BaseCard component", () => {
   };
 
   it("has a title", () => {
-    let component = render(<BaseCard {...props} />);
+    const component = render(<BaseCard {...props} />);
 
     expect(component.getByText(props.title)).toBeTruthy();
   });

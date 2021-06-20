@@ -8,6 +8,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
     "typeRoots": ["./node_modules/@types", "./src/typings"]
-  }
+  },
+  "extends": "expo/tsconfig.base"
 }

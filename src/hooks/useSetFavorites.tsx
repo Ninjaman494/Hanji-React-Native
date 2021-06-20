@@ -1,23 +1,32 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Favorite, FAVORITES_KEY } from "./useGetFavorites";
+import { Favorite, FAVORITES_KEY } from "hooks/useGetFavorites";
 
-const useSetFavorites = (favorites: Favorite[]) => {
-  const [loading, setLoading] = useState(true);
+export interface SetFavoritesResponse {
+  setFavorites: (favorites: Favorite[]) => Promise<void>;
+  loading: boolean;
+  error?: Error;
+}
 
-  useEffect(() => {
-    (async () => {
+const useSetFavorites = (): SetFavoritesResponse => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | undefined>(undefined);
+
+  const setFavorites = useCallback(
+    async (favorites: Favorite[]) => {
+      setLoading(true);
       try {
         await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
       } catch (e) {
-        console.log(e);
+        setError(e);
       } finally {
         setLoading(false);
       }
-    })();
-  }, [setLoading]);
+    },
+    [FAVORITES_KEY, setLoading, setError]
+  );
 
-  return loading;
+  return { setFavorites, loading, error };
 };
 
 export default useSetFavorites;

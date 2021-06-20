@@ -1,14 +1,16 @@
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 // @ts-ignore
-import { Router, Switch, Route } from "./routing";
+import { Router, Switch, Route } from "routing";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import DisplayPage from "./display/DisplayPage";
-import MainPage from "./main/MainPage";
-import SearchPage from "./search/SearchPage";
-import ConjugationsPage from "./conjugations/ConjugationsPage";
-import ConjInfoPage from "./conj_info/ConjInfoPage";
+import DisplayPage from "pages/display/DisplayPage";
+import MainPage from "pages/main/MainPage";
+import SearchPage from "pages/search/SearchPage";
+import ConjugationsPage from "pages/conjugations/ConjugationsPage";
+import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
+import SettingsPage from "pages/settings/SettingsPage";
+import FavoritesPage from "pages/favorites/FavoritesPage";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
@@ -30,12 +32,12 @@ const theme = {
   },
   textSizes: {
     regular: 20,
-    secondary: 18,
-    cardTitle: 18,
+    secondary: 16,
+    cardTitle: 16,
   },
 };
 
-export default function Index() {
+export default function Index(): JSX.Element {
   return (
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
@@ -52,6 +54,8 @@ export default function Index() {
                 <Route exact path="/display" component={DisplayPage} />
                 <Route exact path="/conjugation" component={ConjugationsPage} />
                 <Route exact path="/conjinfo" component={ConjInfoPage} />
+                <Route exact path="/settings" component={SettingsPage} />
+                <Route exact path="/favorites" component={FavoritesPage} />
               </Switch>
             </Router>
           </View>

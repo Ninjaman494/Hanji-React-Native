@@ -1,5 +1,5 @@
 import { gql, QueryResult, useQuery } from "@apollo/client";
-import { Entry } from "./useGetEntry";
+import { Entry } from "hooks/useGetEntry";
 
 const SEARCH = gql`
   query SearchQuery($query: String!, $cursor: Int) {

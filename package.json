@@ -1,11 +1,5 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "jest": {
-    "preset": "react-native",
-    "setupFilesAfterEnv": [
-      "./src/customMatchers.tsx"
-    ]
-  },
   "scripts": {
     "start": "expo start",
     "test": "jest",
@@ -16,34 +10,47 @@
   },
   "dependencies": {
     "@apollo/client": "^3.2.3",
-    "@react-native-async-storage/async-storage": "^1.13.2",
-    "expo": "~39.0.2",
-    "expo-status-bar": "~1.0.2",
+    "@babel/core": "^7.14.5",
+    "@react-native-async-storage/async-storage": "^1.15.5",
+    "expo": "^41.0.1",
+    "expo-status-bar": "~1.0.4",
+    "formik": "^2.2.9",
     "graphql": "^15.3.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-easy-grid": "^0.2.2",
+    "react-native-formik": "^1.7.8",
     "react-native-paper": "^4.2.0",
+    "react-native-paper-dropdown": "^1.0.3",
     "react-native-url-polyfill": "^1.2.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
     "react-router-dom": "^5.2.0",
-    "react-router-native": "^5.2.0"
+    "react-router-native": "^5.2.0",
+    "recompose": "^0.30.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@testing-library/react-native": "^7.0.2",
-    "@types/jest": "^26.0.14",
+    "@testing-library/dom": "^7.31.2",
+    "@testing-library/react-native": "^7.2.0",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.23",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/react-router-native": "^5.1.0",
     "@types/react-test-renderer": "^16.9.3",
-    "jest": "26.5.3",
-    "prettier": "^2.1.2",
+    "@types/recompose": "^0.30.7",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^7.29.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.3.1",
     "react-test-renderer": "latest",
-    "typescript": "~3.9.5"
+    "typescript": "^4.3.4"
   },
   "private": true
 }

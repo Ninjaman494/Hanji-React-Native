@@ -1,7 +1,7 @@
 // @ts-ignore
-import { useLocation } from "../routing";
+import { useLocation } from "routing";
 
-const useGetURLParams = () => {
+const useGetURLParams = (): URLSearchParams => {
   return new URLSearchParams(useLocation().search);
 };
 

@@ -1,4 +1,7 @@
-import { gql, QueryHookOptions, useQuery } from "@apollo/client";
+import { gql, QueryHookOptions, QueryResult, useQuery } from "@apollo/client";
+import { useState } from "react";
+import { useEffect } from "react";
+import { ConjugationName, Formality, Tense } from "../utils/conjugationTypes";
 
 const CONJUGATIONS = gql`
   query ConjugationsQuery(
@@ -29,16 +32,11 @@ const CONJUGATIONS = gql`
 `;
 
 export type Conjugation = {
-  name: string;
+  name: ConjugationName;
   conjugation: string;
   type: string;
-  tense: "PRESENT" | "PAST" | "FUTURE" | "NONE";
-  speechLevel:
-    | "INFORMAL_LOW"
-    | "INFORMAL_HIGH"
-    | "FORMAL_LOW"
-    | "FORMAL_HIGH"
-    | "NONE";
+  tense: Tense;
+  speechLevel: Formality;
   honorific: boolean;
   pronunciation: string;
   romanization: string;
@@ -54,23 +52,37 @@ export interface UseConjugationsVars {
 }
 
 type ConjugationsResponse = {
-  conjugations: Conjugation[];
+  conjugations?: Conjugation[];
 };
 
 const useConjugations = (
-  { stem, isAdj, honorific, regular, conjugations }: UseConjugationsVars,
+  vars: UseConjugationsVars,
   options?: QueryHookOptions
-) => {
-  return useQuery<ConjugationsResponse>(CONJUGATIONS, {
+): QueryResult<ConjugationsResponse> => {
+  const { data, ...rest } = useQuery<ConjugationsResponse>(CONJUGATIONS, {
     ...options,
-    variables: {
-      stem: stem,
-      isAdj: isAdj,
-      honorific: honorific,
-      regular: regular,
-      conjugations: conjugations,
-    },
+    variables: vars,
   });
+
+  const [conjugations, setConjugations] = useState<Conjugation[] | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    if (data) {
+      setConjugations(
+        data.conjugations?.map((c) => ({
+          ...c,
+          speechLevel: c.speechLevel
+            .toLowerCase()
+            .split("_")
+            .join(" ") as Formality,
+        }))
+      );
+    }
+  }, [data, setConjugations]);
+
+  return { data: { conjugations }, ...rest };
 };
 
 export default useConjugations;
