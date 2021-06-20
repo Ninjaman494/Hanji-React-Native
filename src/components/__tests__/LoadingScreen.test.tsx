@@ -9,7 +9,7 @@ describe("LoadingScreen component", () => {
   };
 
   it("has a title", () => {
-    let component = render(<LoadingScreen {...props} />);
+    const component = render(<LoadingScreen {...props} />);
 
     expect(component.getByText(props.text)).toBeTruthy();
   });

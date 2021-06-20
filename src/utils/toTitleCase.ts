@@ -1,4 +1,4 @@
-const toTitleCase = (text: string) =>
+const toTitleCase = (text: string): string =>
   text
     .toLowerCase()
     .split(" ")

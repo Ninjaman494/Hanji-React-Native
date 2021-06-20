@@ -3,7 +3,7 @@ import Index from "./src/index";
 import { StatusBar } from "expo-status-bar";
 import "react-native-url-polyfill/auto";
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <>
       <Index />

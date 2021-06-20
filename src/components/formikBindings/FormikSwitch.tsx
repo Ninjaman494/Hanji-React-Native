@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React from "react";
 import { FC } from "react";
 import { View, StyleSheet } from "react-native";
 import {
@@ -8,14 +8,13 @@ import {
 } from "react-native-formik";
 import { Text, Switch } from "react-native-paper";
 import { compose } from "recompose";
-import { FormikSelectProps } from "./FormikSelect";
 
-export type FormikSwitchProps = ComponentProps<typeof Switch> & {
+export type FormikSwitchProps = {
   name: string;
   label: string;
 };
 
-const FormikSwitch: FC<FormikSelectProps & withFormikControlProps> = ({
+const FormikSwitch: FC<FormikSwitchProps & withFormikControlProps> = ({
   value,
   setFieldTouched,
   setFieldValue,
@@ -26,9 +25,9 @@ const FormikSwitch: FC<FormikSelectProps & withFormikControlProps> = ({
       <Text style={styles.text}>{rest.label}</Text>
       <Switch
         accessibilityLabel={rest.label}
-        value={value as any}
+        value={value as unknown as boolean}
         onValueChange={(v) => {
-          setFieldValue(v as any);
+          setFieldValue(v as unknown as string);
           setFieldTouched();
         }}
         {...rest}
@@ -50,7 +49,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose<any, FormikSwitchProps>(
+export default compose<
+  FormikSwitchProps & withFormikControlProps,
+  FormikSwitchProps
+>(
   withFormikControl,
   withNextInputAutoFocusInput
 )(FormikSwitch);

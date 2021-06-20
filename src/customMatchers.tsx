@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 expect.extend({
   toContainText(received, text: string) {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import useGetFavorites from "hooks/useGetFavorites";
-import { Divider, FAB, List, Portal } from "react-native-paper";
+import { FAB, List, Portal } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import AddFavoriteModal from "./AddFavoriteModal";
-import { AppBar, HonorificBadge, ListItem, LoadingScreen } from "components";
+import { AppBar, LoadingScreen } from "components";
 import FavoriteItem from "./FavoriteItem";
 import useSetFavorites from "hooks/useSetFavorites";
 

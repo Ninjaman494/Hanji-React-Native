@@ -27,7 +27,7 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <List.Item
       {...rest}
-      style={styles.item}
+      style={[styles.item, style]}
       titleStyle={[styles.title, titleStyle]}
       descriptionStyle={[styles.description, descriptionStyle]}
     />

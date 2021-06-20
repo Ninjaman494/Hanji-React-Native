@@ -8,9 +8,16 @@ export type Favorite = {
   honorific: boolean;
 };
 
+export interface GetFavoritesResponse {
+  favorites: Favorite[] | null;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => Promise<void>;
+}
+
 export const FAVORITES_KEY = "@favorites_Key";
 
-const useGetFavorites = () => {
+const useGetFavorites = (): GetFavoritesResponse => {
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

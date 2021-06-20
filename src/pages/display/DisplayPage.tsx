@@ -16,7 +16,7 @@ const DisplayPage: React.FC = () => {
   const id = useGetURLParams().get("id");
 
   // Get favorites from storage, use defaults if none are written
-  let { favorites } = useGetFavorites();
+  const { favorites } = useGetFavorites();
 
   const {
     loading: entryLoading,

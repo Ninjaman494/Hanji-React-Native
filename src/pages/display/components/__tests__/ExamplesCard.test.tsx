@@ -22,7 +22,7 @@ describe("DefPosCard component", () => {
   };
 
   it("displays examples", () => {
-    let component = render(<ExamplesCard {...props} />);
+    const component = render(<ExamplesCard {...props} />);
     const examples = props.examples;
 
     component.getAllByTestId("examplesCardItem").forEach((item, index) => {

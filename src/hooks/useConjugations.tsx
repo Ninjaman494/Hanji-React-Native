@@ -1,4 +1,4 @@
-import { gql, QueryHookOptions, useQuery } from "@apollo/client";
+import { gql, QueryHookOptions, QueryResult, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ConjugationName, Formality, Tense } from "../utils/conjugationTypes";
@@ -52,13 +52,13 @@ export interface UseConjugationsVars {
 }
 
 type ConjugationsResponse = {
-  conjugations: Conjugation[];
+  conjugations?: Conjugation[];
 };
 
 const useConjugations = (
   vars: UseConjugationsVars,
   options?: QueryHookOptions
-) => {
+): QueryResult<ConjugationsResponse> => {
   const { data, ...rest } = useQuery<ConjugationsResponse>(CONJUGATIONS, {
     ...options,
     variables: vars,
@@ -71,7 +71,7 @@ const useConjugations = (
   useEffect(() => {
     if (data) {
       setConjugations(
-        data.conjugations.map((c) => ({
+        data.conjugations?.map((c) => ({
           ...c,
           speechLevel: c.speechLevel
             .toLowerCase()
