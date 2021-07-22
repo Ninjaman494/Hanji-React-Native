@@ -2,24 +2,31 @@ import React, { useEffect, useState } from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
-import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
+import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
-import { ConjugationType, Formality } from "utils/conjugationTypes";
+import {
+  ConjugationName,
+  ConjugationType,
+  Formality,
+} from "utils/conjugationTypes";
 
-const DEFAULT_FAVORITES: Favorite[] = [
+const DEFAULT_FAVORITES = [
   {
     name: "Past",
-    conjugationName: `${ConjugationType.DECLARATIVE_PAST} ${Formality.INFORMAL_HIGH}`,
+    conjugationName:
+      `${ConjugationType.DECLARATIVE_PAST} ${Formality.INFORMAL_HIGH}` as ConjugationName,
     honorific: false,
   },
   {
     name: "Present",
-    conjugationName: `${ConjugationType.DECLARATIVE_PRESENT} ${Formality.INFORMAL_HIGH}`,
+    conjugationName:
+      `${ConjugationType.DECLARATIVE_PRESENT} ${Formality.INFORMAL_HIGH}` as ConjugationName,
     honorific: false,
   },
   {
     name: "Future",
-    conjugationName: `${ConjugationType.DECLARATIVE_FUTURE} ${Formality.INFORMAL_HIGH}`,
+    conjugationName:
+      `${ConjugationType.DECLARATIVE_FUTURE} ${Formality.INFORMAL_HIGH}` as ConjugationName,
     honorific: false,
   },
 ];
