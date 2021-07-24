@@ -52,7 +52,10 @@ const SettingsPage: React.FC = () => {
         <List.Subheader style={styles.header}>About</List.Subheader>
         <List.Section>
           <List.Item title="Leave a Review" />
-          <List.Item title="Acknowledgements" />
+          <List.Item
+            title="Acknowledgements"
+            onPress={() => history.push("/acknowledgements")}
+          />
           <List.Item title="Version" description={version} />
         </List.Section>
       </View>
