@@ -2,8 +2,9 @@ import { AppBar } from "components";
 import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { View, StyleSheet, Linking } from "react-native";
-import { Divider, List, useTheme } from "react-native-paper";
+import { List, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
+import { version } from "../../../package.json";
 
 const SettingsPage: React.FC = () => {
   const { colors } = useTheme();
@@ -41,12 +42,19 @@ const SettingsPage: React.FC = () => {
             title="Terms &amp; Conditions of Use"
             onPress={() => Linking.openURL("https://hanji.vercel.app/terms")}
           />
-          <Divider />
           <List.Item
             title="Privacy Policy"
             onPress={() => Linking.openURL("https://hanji.vercel.app/privacy")}
           />
-          <Divider />
+        </List.Section>
+        <List.Subheader style={styles.header}>About</List.Subheader>
+        <List.Section>
+          <List.Item title="Leave a Review" />
+          <List.Item
+            title="Acknowledgements"
+            onPress={() => history.push("/acknowledgements")}
+          />
+          <List.Item title="Version" description={version} />
         </List.Section>
       </View>
     </View>

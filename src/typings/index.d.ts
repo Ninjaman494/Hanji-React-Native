@@ -1,4 +1,6 @@
 export {};
+declare module "@react-native-async-storage/async-storage/jest/async-storage-mock";
+
 declare global {
   namespace jest {
     interface Matchers<R> {

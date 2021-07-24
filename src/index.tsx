@@ -11,6 +11,7 @@ import ConjugationsPage from "pages/conjugations/ConjugationsPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import FavoritesPage from "pages/favorites/FavoritesPage";
+import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
@@ -56,6 +57,11 @@ export default function Index(): JSX.Element {
                 <Route exact path="/conjinfo" component={ConjInfoPage} />
                 <Route exact path="/settings" component={SettingsPage} />
                 <Route exact path="/favorites" component={FavoritesPage} />
+                <Route
+                  exact
+                  path="/acknowledgements"
+                  component={AcknowledgementsPage}
+                />
               </Switch>
             </Router>
           </View>
