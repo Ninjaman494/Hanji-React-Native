@@ -1,12 +1,15 @@
 {
+  "name": "hanji-app",
   "main": "node_modules/expo/AppEntry.js",
+  "version": "0.0.1",
   "scripts": {
     "start": "expo start",
     "test": "jest",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "postinstall": "npx npm-license-crawler -onlyDirectDependencies -json src/pages/settings/licenses.json"
   },
   "dependencies": {
     "@apollo/client": "^3.2.3",
@@ -16,6 +19,7 @@
     "expo-status-bar": "~1.0.4",
     "formik": "^2.2.9",
     "graphql": "^15.3.0",
+    "npm-license-crawler": "^0.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",

@@ -7,13 +7,13 @@ import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import useSetFavorites from "hooks/useSetFavorites";
 import { ConjugationType, Formality } from "utils/conjugationTypes";
 import AddFavoriteModal from "../AddFavoriteModal";
-import { Favorite } from "hooks/useGetFavorites";
 import { Provider } from "react-native-paper";
+import { Favorite } from "hooks/useGetFavorites";
 
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
 
-const favorites: Favorite[] = [
+const favorites = [
   {
     name: "Past",
     conjugationName: `${ConjugationType.DECLARATIVE_PAST} ${Formality.INFORMAL_HIGH}`,
@@ -33,7 +33,7 @@ const favorites: Favorite[] = [
 
 const props = {
   visible: true,
-  favorites: favorites,
+  favorites: favorites as Favorite[],
   onDismiss: jest.fn(),
   onSubmit: jest.fn(),
 };

@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 .jest/
+licenses.json
 
 # macOS
 .DS_Store

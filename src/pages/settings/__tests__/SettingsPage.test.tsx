@@ -67,4 +67,23 @@ describe("SettingsPage", () => {
       expect(openURL).toHaveBeenCalledWith("https://hanji.vercel.app/terms");
     });
   });
+
+  describe("About section", () => {
+    it("displays the app version", () => {
+      const result = render(<SettingsPage />);
+
+      expect(result.getByText("Version")).toBeTruthy();
+      expect(result.getByText("0.0.1")).toBeTruthy();
+    });
+
+    it("redirects to Acknowledgements", async () => {
+      const result = render(<SettingsPage />);
+
+      fireEvent.press(result.getByText("Acknowledgements"));
+
+      await waitFor(() => {
+        expect(pushHistory).toHaveBeenCalledWith("/acknowledgements");
+      });
+    });
+  });
 });
