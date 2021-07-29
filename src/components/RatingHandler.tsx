@@ -9,7 +9,7 @@ export interface RatingDialog {
 const SESSIONS_KEY = "NUM_SESSIONS";
 const SHOWN_KEY = "ALREADY_SHOWN";
 
-const options = {
+export const ratingOptions = {
   AppleAppID: "TO-DO",
   GooglePackageName: "com.a494studios.koreanconjugator",
   AmazonPackageName: "com.a494studios.koreanconjugator",
@@ -30,7 +30,7 @@ const RatingHandler: FC<RatingDialog> = ({ numSessions }) => {
 
       if (shownString !== "true" && sessions >= numSessions) {
         Rate.rate(
-          options,
+          ratingOptions,
           async (success) =>
             await AsyncStorage.setItem(SHOWN_KEY, success.toString())
         );
