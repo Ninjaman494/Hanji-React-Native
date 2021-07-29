@@ -4,7 +4,9 @@ import React from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
+import Rate from "react-native-rate";
 import { version } from "../../../package.json";
+import { ratingOptions } from "components/RatingHandler";
 
 const SettingsPage: React.FC = () => {
   const { colors } = useTheme();
@@ -49,7 +51,12 @@ const SettingsPage: React.FC = () => {
         </List.Section>
         <List.Subheader style={styles.header}>About</List.Subheader>
         <List.Section>
-          <List.Item title="Leave a Review" />
+          <List.Item
+            title="Leave a Review"
+            onPress={() =>
+              Rate.rate({ ...ratingOptions, preferInApp: false }, () => {})
+            }
+          />
           <List.Item
             title="Acknowledgements"
             onPress={() => history.push("/acknowledgements")}
