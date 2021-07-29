@@ -27,6 +27,7 @@
     "react-native-formik": "^1.7.8",
     "react-native-paper": "^4.2.0",
     "react-native-paper-dropdown": "^1.0.3",
+    "react-native-rate": "^1.2.6",
     "react-native-url-polyfill": "^1.2.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
