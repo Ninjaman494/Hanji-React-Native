@@ -48,7 +48,7 @@ export default function Index(): JSX.Element {
           barStyle="default"
         />
         <View style={styles.parent}>
-          <RatingHandler numSessions={3} />
+          <RatingHandler numSessions={5} />
           <View style={styles.container}>
             <Router>
               <Switch>
