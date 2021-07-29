@@ -12,6 +12,7 @@ import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import FavoritesPage from "pages/favorites/FavoritesPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
+import RatingHandler from "components/RatingHandler";
 
 const client = new ApolloClient({
   uri: "***REMOVED***",
@@ -47,6 +48,7 @@ export default function Index(): JSX.Element {
           barStyle="default"
         />
         <View style={styles.parent}>
+          <RatingHandler numSessions={5} />
           <View style={styles.container}>
             <Router>
               <Switch>

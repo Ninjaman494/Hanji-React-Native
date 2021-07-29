@@ -1,0 +1,53 @@
+jest.mock("@react-native-async-storage/async-storage");
+jest.mock("react-native-rate");
+
+import React from "react";
+import Rate from "react-native-rate";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import RatingHandler from "components/RatingHandler";
+import { render, waitFor } from "@testing-library/react-native";
+
+describe("RatingHandler component", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("shows rating after x sessions", async () => {
+    (AsyncStorage.getItem as jest.Mock).mockImplementation((key: string) =>
+      key === "NUM_SESSIONS" ? "5" : "false"
+    );
+
+    render(<RatingHandler numSessions={5} />);
+
+    await waitFor(() => {
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith("NUM_SESSIONS", "6");
+      expect(Rate.rate).toHaveBeenCalled();
+    });
+  });
+
+  it("does not show rating before x sessions", async () => {
+    (AsyncStorage.getItem as jest.Mock).mockImplementation((key: string) =>
+      key === "NUM_SESSIONS" ? "3" : "false"
+    );
+
+    render(<RatingHandler numSessions={5} />);
+
+    await waitFor(() => {
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith("NUM_SESSIONS", "4");
+      expect(Rate.rate).not.toHaveBeenCalled();
+    });
+  });
+
+  it("does not show rating if already shown", async () => {
+    (AsyncStorage.getItem as jest.Mock).mockImplementation((key: string) =>
+      key === "NUM_SESSIONS" ? "5" : "true"
+    );
+
+    render(<RatingHandler numSessions={5} />);
+
+    await waitFor(() => {
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith("NUM_SESSIONS", "6");
+      expect(Rate.rate).not.toHaveBeenCalled();
+    });
+  });
+});
