@@ -12,7 +12,7 @@ import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import FavoritesPage from "pages/favorites/FavoritesPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
-import RatingDialog from "components/RatingDialog";
+import RatingHandler from "components/RatingHandler";
 
 const client = new ApolloClient({
   uri: "https://hanji-server.appspot.com/graphql",
@@ -48,7 +48,7 @@ export default function Index(): JSX.Element {
           barStyle="default"
         />
         <View style={styles.parent}>
-          <RatingDialog numSessions={3} />
+          <RatingHandler numSessions={3} />
           <View style={styles.container}>
             <Router>
               <Switch>
