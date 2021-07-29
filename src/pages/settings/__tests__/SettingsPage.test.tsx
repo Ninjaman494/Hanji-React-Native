@@ -1,14 +1,17 @@
 jest.mock("hooks/useGetFavorites");
 jest.mock("react-router");
 jest.mock("react-native/Libraries/Linking/Linking");
+jest.mock("react-native-rate");
 
 import { Linking } from "react-native";
 import React from "react";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import Rate from "react-native-rate";
 import SettingsPage from "../SettingsPage";
 import { useHistory } from "react-router";
 import useGetFavorites from "hooks/useGetFavorites";
 import { ConjugationType, Formality } from "utils/conjugationTypes";
+import { ratingOptions } from "components/RatingHandler";
 
 const pushHistory = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({
@@ -83,6 +86,19 @@ describe("SettingsPage", () => {
 
       await waitFor(() => {
         expect(pushHistory).toHaveBeenCalledWith("/acknowledgements");
+      });
+    });
+
+    it("lets user leave a review", async () => {
+      const result = render(<SettingsPage />);
+
+      fireEvent.press(result.getByText("Leave a Review"));
+
+      await waitFor(() => {
+        expect(Rate.rate).toHaveBeenCalledWith(
+          { ...ratingOptions, preferInApp: false },
+          expect.any(Function)
+        );
       });
     });
   });
