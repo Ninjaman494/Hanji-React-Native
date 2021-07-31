@@ -2,6 +2,7 @@ import { Conjugation } from "hooks/useConjugations";
 import React from "react";
 import { Animated, FlatListProps } from "react-native";
 import { useTheme } from "react-native-paper";
+import toTitleCase from "utils/toTitleCase";
 import ConjugationCard from "./ConjugationCard";
 
 export interface ConjugationPageContentProps
@@ -40,7 +41,7 @@ const ConjugationsPageContent: React.FC<ConjugationPageContentProps> = ({
       scrollEventThrottle={1}
       renderItem={({ item }) => (
         <ConjugationCard
-          title={item}
+          title={toTitleCase(item)}
           conjugations={conjMap[item]}
           style={style}
         />
