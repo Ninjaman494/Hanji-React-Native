@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import "@testing-library/jest-dom";
 
 expect.extend({
   toContainText(received, text: string) {

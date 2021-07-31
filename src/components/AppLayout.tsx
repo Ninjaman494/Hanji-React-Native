@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useTheme, Text } from "react-native-paper";
 import { Animated, Easing, StatusBar, StyleSheet, View } from "react-native";
 import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
+import { useHistory } from "react-router";
 
 export interface AppLayoutProps extends AppBarProps {
   loading?: boolean;
@@ -17,8 +18,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({
   error,
   children,
 }) => {
-  const { colors } = useTheme();
+  const history = useHistory();
 
+  const { colors } = useTheme();
   const style = StyleSheet.create({
     parent: { flex: 1, height: 500 },
     appBar: {
@@ -27,9 +29,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
       backgroundColor: colors.primary,
     },
     scrollView: {
-      marginTop:
-        APP_BAR_HEIGHT +
-        (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
+      marginTop: APP_BAR_HEIGHT + (StatusBar.currentHeight ?? 0),
       flexGrow: 1,
       paddingBottom: 8,
     },
@@ -51,24 +51,28 @@ const AppLayout: React.FC<AppLayoutProps> = ({
     outputRange: ["100%", "0%"],
   });
 
-  useEffect(() => {
-    if (!loading && !error) {
-      Animated.parallel([
-        Animated.timing(scrollY, {
-          toValue: 0,
-          duration: 500,
-          easing: easeOutExpo,
-          useNativeDriver: false,
-        }),
-        Animated.timing(containerY, {
-          toValue: 100,
-          duration: 500,
-          easing: easeOutExpo,
-          useNativeDriver: false,
-        }),
-      ]).start();
-    }
-  }, [loading, error]);
+  if (!loading && !error) {
+    Animated.parallel([
+      Animated.timing(scrollY, {
+        toValue: 0,
+        duration: 500,
+        easing: easeOutExpo,
+        useNativeDriver: false,
+      }),
+      Animated.timing(containerY, {
+        toValue: 100,
+        duration: 500,
+        easing: easeOutExpo,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  }
+
+  // Reset animations on page leave
+  history.listen(() => {
+    scrollY.setValue(150);
+    containerY.setValue(0);
+  });
 
   return (
     <View style={style.parent}>

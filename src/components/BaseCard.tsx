@@ -28,7 +28,6 @@ const BaseCard: React.FC<BaseCardProps> = ({
       color: colors?.primary,
       fontWeight: "400",
       fontSize: textSizes?.cardTitle,
-      textTransform: "capitalize",
     },
     content: { paddingHorizontal: 0, paddingBottom: padding?.vertical },
     action: { justifyContent: "flex-end" },

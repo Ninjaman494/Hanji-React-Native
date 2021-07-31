@@ -100,7 +100,6 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                       "color": "#6200ee",
                       "fontSize": undefined,
                       "fontWeight": "400",
-                      "textTransform": "capitalize",
                     },
                   ],
                 ],
@@ -122,7 +121,6 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                       "color": "#6200ee",
                       "fontSize": undefined,
                       "fontWeight": "400",
-                      "textTransform": "capitalize",
                     },
                   ],
                 ],
@@ -130,7 +128,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             ]
           }
         >
-          name
+          Name
         </Text>
       </View>
       <View>
@@ -576,7 +574,6 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                       "color": "#6200ee",
                       "fontSize": undefined,
                       "fontWeight": "400",
-                      "textTransform": "capitalize",
                     },
                   ],
                 ],
@@ -598,7 +595,6 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                       "color": "#6200ee",
                       "fontSize": undefined,
                       "fontWeight": "400",
-                      "textTransform": "capitalize",
                     },
                   ],
                 ],
@@ -606,7 +602,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             ]
           }
         >
-          name
+          Name
         </Text>
       </View>
       <View>
