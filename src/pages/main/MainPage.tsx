@@ -9,6 +9,7 @@ import {
   ConjugationType,
   Formality,
 } from "utils/conjugationTypes";
+import WODCard from "./WODCard";
 
 const DEFAULT_FAVORITES = [
   {
@@ -57,7 +58,9 @@ const MainPage: React.FC = () => {
         value={searchQuery}
         onSubmitEditing={doSearch}
         onIconPress={doSearch}
+        style={styles.card}
       />
+      <WODCard style={styles.card} />
     </View>
   );
 };
@@ -67,6 +70,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: "stretch",
     justifyContent: "center",
+  },
+  card: {
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
 });
 

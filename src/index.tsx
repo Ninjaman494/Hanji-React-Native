@@ -3,7 +3,11 @@ import { StatusBar, StyleSheet, View } from "react-native";
 // @ts-ignore
 import { Router, Switch, Route } from "routing";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import {
+  Colors,
+  DefaultTheme,
+  Provider as PaperProvider,
+} from "react-native-paper";
 import DisplayPage from "pages/display/DisplayPage";
 import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
@@ -27,6 +31,7 @@ const theme = {
     primary: "#3F51B5",
     primaryDark: "#303F9F",
     accent: "#F44336",
+    grey: Colors.grey600,
   },
   padding: {
     horizontal: 16,
@@ -84,6 +89,5 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    maxWidth: 500,
   },
 });

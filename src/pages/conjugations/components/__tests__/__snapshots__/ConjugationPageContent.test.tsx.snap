@@ -134,7 +134,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                             "color": "#6200ee",
                             "fontSize": undefined,
                             "fontWeight": "400",
-                            "textTransform": "capitalize",
                           },
                         ],
                       ],
@@ -156,7 +155,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                             "color": "#6200ee",
                             "fontSize": undefined,
                             "fontWeight": "400",
-                            "textTransform": "capitalize",
                           },
                         ],
                       ],
@@ -164,7 +162,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   ]
                 }
               >
-                declarative present
+                Declarative Present
               </Text>
             </View>
             <View />
@@ -635,7 +633,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                             "color": "#6200ee",
                             "fontSize": undefined,
                             "fontWeight": "400",
-                            "textTransform": "capitalize",
                           },
                         ],
                       ],
@@ -657,7 +654,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                             "color": "#6200ee",
                             "fontSize": undefined,
                             "fontWeight": "400",
-                            "textTransform": "capitalize",
                           },
                         ],
                       ],
@@ -665,7 +661,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   ]
                 }
               >
-                declarative future
+                Declarative Future
               </Text>
             </View>
             <View />
