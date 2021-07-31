@@ -1,12 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useTheme, Text } from "react-native-paper";
-import {
-  Animated,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Animated, Easing, StatusBar, StyleSheet, View } from "react-native";
 import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
 
@@ -23,28 +17,62 @@ const AppLayout: React.FC<AppLayoutProps> = ({
 }) => {
   const { colors } = useTheme();
 
-  // Value that will be bound to scroll-y
-  const scrollY = new Animated.Value(0);
+  const style = StyleSheet.create({
+    parent: { flex: 1, height: 500 },
+    appBar: {
+      position: "absolute",
+      width: "100%",
+      backgroundColor: colors.primary,
+    },
+    scrollView: {
+      marginTop:
+        APP_BAR_HEIGHT +
+        (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
+      flexGrow: 1,
+      paddingBottom: 8,
+    },
+  });
 
-  // Range is based on extend bar's height
-  const extendedHeight = scrollY.interpolate({
+  // Value that will be bound to scroll-y
+  const scrollY = useRef(new Animated.Value(150)).current;
+  // Value used for transition animations on container
+  const containerY = useRef(new Animated.Value(0)).current;
+
+  const appBarHeight = scrollY.interpolate({
     inputRange: [0, 150],
     outputRange: [150, 0],
     extrapolate: "clamp",
   });
 
+  const containerTranslate = containerY.interpolate({
+    inputRange: [0, 100],
+    outputRange: ["100%", "0%"],
+  });
+
+  useEffect(() => {
+    if (!loading && !error) {
+      const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
+
+      Animated.parallel([
+        Animated.timing(scrollY, {
+          toValue: 0,
+          duration: 500,
+          easing: easeOutExpo,
+          useNativeDriver: false,
+        }),
+        Animated.timing(containerY, {
+          toValue: 100,
+          duration: 500,
+          easing: easeOutExpo,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    }
+  }, [loading, error]);
+
   return (
-    <View style={{ flex: 1, height: 500 }}>
-      <Animated.View
-        style={[
-          {
-            position: "absolute",
-            width: "100%",
-            backgroundColor: colors.primary,
-          },
-          { height: extendedHeight },
-        ]}
-      >
+    <View style={style.parent}>
+      <Animated.View style={[style.appBar, { height: appBarHeight }]}>
         <AppBar title={title} />
       </Animated.View>
       {loading ? (
@@ -52,34 +80,24 @@ const AppLayout: React.FC<AppLayoutProps> = ({
       ) : error ? (
         <Text>{error}</Text>
       ) : (
-        <ScrollView
-          style={style.scrollView}
-          showsVerticalScrollIndicator={false}
-          onScroll={Animated.event([
+        <Animated.ScrollView
+          style={[
+            style.scrollView,
             {
-              nativeEvent: {
-                contentOffset: {
-                  y: scrollY,
-                },
-              },
+              transform: [{ translateY: containerTranslate }],
             },
+          ]}
+          onScroll={Animated.event([
+            { nativeEvent: { contentOffset: { y: scrollY } } },
           ])}
           scrollEventThrottle={1}
+          showsVerticalScrollIndicator={false}
         >
           {children}
-        </ScrollView>
+        </Animated.ScrollView>
       )}
     </View>
   );
 };
-
-const style = StyleSheet.create({
-  scrollView: {
-    marginTop:
-      APP_BAR_HEIGHT + (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
-    flexGrow: 1,
-    paddingBottom: 8,
-  },
-});
 
 export default AppLayout;
