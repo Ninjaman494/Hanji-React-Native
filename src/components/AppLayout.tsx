@@ -9,6 +9,8 @@ export interface AppLayoutProps extends AppBarProps {
   error?: string;
 }
 
+export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
+
 const AppLayout: React.FC<AppLayoutProps> = ({
   title,
   loading,
@@ -51,8 +53,6 @@ const AppLayout: React.FC<AppLayoutProps> = ({
 
   useEffect(() => {
     if (!loading && !error) {
-      const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
-
       Animated.parallel([
         Animated.timing(scrollY, {
           toValue: 0,

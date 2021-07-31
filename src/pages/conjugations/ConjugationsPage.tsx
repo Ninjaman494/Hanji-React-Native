@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import useGetURLParams from "hooks/useGetURLParams";
 import useConjugations from "hooks/useConjugations";
 import { View, Animated, StyleSheet } from "react-native";
 import { Switch, Text, useTheme } from "react-native-paper";
 import { AppBar, LoadingScreen } from "components";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
+import { easeOutExpo } from "components/AppLayout";
 
 const ConjugationsPage: React.FC = () => {
   const { padding, colors, textSizes } = useTheme();
@@ -18,7 +19,6 @@ const ConjugationsPage: React.FC = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       paddingHorizontal: padding?.horizontal,
-      paddingBottom: padding?.vertical,
       backgroundColor: colors?.primary,
     },
     switchText: {
@@ -45,23 +45,43 @@ const ConjugationsPage: React.FC = () => {
 
   // Value that will be bound to scroll-y
   const scrollY = new Animated.Value(0);
-  const headerTranslate = Animated.diffClamp(scrollY, 0, 60).interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -1],
+  const extendedHeight = Animated.diffClamp(scrollY, 0, 40).interpolate({
+    inputRange: [0, 40],
+    outputRange: [40, 0],
+    extrapolate: "clamp",
   });
-  const viewTranslate = Animated.diffClamp(scrollY, 0, 60).interpolate({
-    inputRange: [0, 1],
+  const opacity = Animated.diffClamp(scrollY, 0, 40).interpolate({
+    inputRange: [0, 40],
     outputRange: [1, 0],
+    extrapolate: "clamp",
   });
+
+  // Content animation
+  const containerY = useRef(new Animated.Value(0)).current;
+  const viewTranslate = containerY.interpolate({
+    inputRange: [0, 100],
+    outputRange: ["100%", "0%"],
+  });
+
+  useEffect(() => {
+    if (!loading && conjugations) {
+      Animated.timing(containerY, {
+        toValue: 100,
+        duration: 500,
+        easing: easeOutExpo,
+        useNativeDriver: false,
+      }).start();
+    } else if (loading && conjugations) {
+      // Reset animation on toggle
+      containerY.setValue(0);
+    }
+  }, [loading, conjugations]);
 
   return (
     <View style={styles.parent}>
       <AppBar title="Conjugations" />
       <Animated.View
-        style={[
-          styles.switchBar,
-          { transform: [{ translateY: headerTranslate }] },
-        ]}
+        style={[styles.switchBar, { height: extendedHeight, opacity: opacity }]}
       >
         <Text style={styles.switchText}>
           {honorific ? "Honorific" : "Regular"} Forms
