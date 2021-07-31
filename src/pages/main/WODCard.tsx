@@ -28,6 +28,7 @@ const WODCard: FC<BaseCardProps> = (props) => {
       <Card.Actions style={styles.actions}>
         <Button
           onPress={() => history.push(`/display?id=${wod?.id}`)}
+          disabled={loading || !!error}
           color={colors?.accent}
         >
           See entry
