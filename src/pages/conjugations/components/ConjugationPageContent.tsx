@@ -1,16 +1,15 @@
 import { Conjugation } from "hooks/useConjugations";
 import React from "react";
-import {
-  FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-} from "react-native";
+import { Animated, FlatListProps } from "react-native";
 import { useTheme } from "react-native-paper";
 import ConjugationCard from "./ConjugationCard";
 
-export interface ConjugationPageContentProps {
+export interface ConjugationPageContentProps
+  extends Omit<
+    Animated.AnimatedProps<FlatListProps<string>>,
+    "data" | "renderItem"
+  > {
   conjugations: Conjugation[];
-  onScroll: (e: NativeSyntheticEvent<NativeScrollEvent>) => void;
 }
 
 interface ConjugationMap {
@@ -19,7 +18,7 @@ interface ConjugationMap {
 
 const ConjugationsPageContent: React.FC<ConjugationPageContentProps> = ({
   conjugations,
-  onScroll,
+  ...rest
 }) => {
   const { padding } = useTheme();
   const style = {
@@ -34,12 +33,11 @@ const ConjugationsPageContent: React.FC<ConjugationPageContentProps> = ({
   }, {});
 
   return (
-    <FlatList
+    <Animated.FlatList
       data={Object.keys(conjMap)}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item}
       scrollEventThrottle={1}
-      onScroll={onScroll}
       renderItem={({ item }) => (
         <ConjugationCard
           title={item}
@@ -47,6 +45,7 @@ const ConjugationsPageContent: React.FC<ConjugationPageContentProps> = ({
           style={style}
         />
       )}
+      {...rest}
     />
   );
 };

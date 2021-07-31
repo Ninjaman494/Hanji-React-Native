@@ -18,6 +18,7 @@ const ConjugationsPage: React.FC = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       paddingHorizontal: padding?.horizontal,
+      paddingBottom: padding?.vertical,
       backgroundColor: colors?.primary,
     },
     switchText: {
@@ -44,24 +45,23 @@ const ConjugationsPage: React.FC = () => {
 
   // Value that will be bound to scroll-y
   const scrollY = new Animated.Value(0);
-
-  // Ranges is based on extend bar's height
-  const extendedHeight = scrollY.interpolate({
-    inputRange: [0, 40],
-    outputRange: [40, 0],
-    extrapolate: "clamp",
+  const headerTranslate = Animated.diffClamp(scrollY, 0, 60).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -1],
   });
-  const opacity = scrollY.interpolate({
-    inputRange: [0, 40],
+  const viewTranslate = Animated.diffClamp(scrollY, 0, 60).interpolate({
+    inputRange: [0, 1],
     outputRange: [1, 0],
-    extrapolate: "clamp",
   });
 
   return (
     <View style={styles.parent}>
       <AppBar title="Conjugations" />
       <Animated.View
-        style={[styles.switchBar, { height: extendedHeight, opacity: opacity }]}
+        style={[
+          styles.switchBar,
+          { transform: [{ translateY: headerTranslate }] },
+        ]}
       >
         <Text style={styles.switchText}>
           {honorific ? "Honorific" : "Regular"} Forms
@@ -77,9 +77,10 @@ const ConjugationsPage: React.FC = () => {
       </Animated.View>
       {loading && <LoadingScreen text="Loading" />}
       {error && <Text>{error}</Text>}
-      {conjugations && (
+      {conjugations && !loading && (
         <ConjugationsPageContent
           conjugations={conjugations}
+          style={{ transform: [{ translateY: viewTranslate }] }}
           onScroll={Animated.event([
             {
               nativeEvent: {

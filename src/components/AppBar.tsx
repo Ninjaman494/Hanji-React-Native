@@ -23,7 +23,7 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
   };
 
   return (
-    <Appbar.Header style={{ elevation: 0 }}>
+    <Appbar.Header style={{ elevation: 0, zIndex: 100 }}>
       <Appbar.Content title={title} />
       {showSearch && (
         <View style={style.inputParent}>
