@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Card, useTheme } from "react-native-paper";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import toTitleCase from "utils/toTitleCase";
 
 export type BaseCardProps = Omit<
   React.ComponentProps<typeof Card>,
@@ -28,7 +29,6 @@ const BaseCard: React.FC<BaseCardProps> = ({
       color: colors?.primary,
       fontWeight: "400",
       fontSize: textSizes?.cardTitle,
-      textTransform: "capitalize",
     },
     content: { paddingHorizontal: 0, paddingBottom: padding?.vertical },
     action: { justifyContent: "flex-end" },
@@ -38,7 +38,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
     <Card elevation={5} {...rest}>
       {title && (
         <Card.Title
-          title={title}
+          title={toTitleCase(title)}
           right={rightIcon}
           titleStyle={styles.title}
           // Offset added margin from icon
