@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Searchbar, useTheme, Text } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
@@ -103,8 +103,8 @@ const MainPage: React.FC = () => {
           </Text>
         }
         topStyles={styles.appBar}
-        bottomComponent={
-          <>
+        bottomComponent={(props) => (
+          <Animated.ScrollView {...props}>
             <Searchbar
               placeholder="Search in Korean or English..."
               onChangeText={(query: string) => setSearchQuery(query)}
@@ -114,8 +114,8 @@ const MainPage: React.FC = () => {
               style={styles.card}
             />
             <WODCard style={styles.card} />
-          </>
-        }
+          </Animated.ScrollView>
+        )}
         bottomStyles={styles.scrollView}
         shouldAnimate
       />

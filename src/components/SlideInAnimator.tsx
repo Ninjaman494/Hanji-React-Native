@@ -1,13 +1,16 @@
-import React, { FC, ReactNode, useRef } from "react";
-import { Animated, Easing, ViewStyle } from "react-native";
+import React, { ComponentType, FC, ReactNode, useRef } from "react";
+import { Animated, Easing, ScrollViewProps, ViewStyle } from "react-native";
 import { useHistory } from "react-router";
 
 export interface SlideInAnimatorProps {
   shouldAnimate: boolean;
   topComponent: ReactNode;
-  bottomComponent: ReactNode;
+  bottomComponent: ComponentType<Animated.AnimatedProps<ScrollViewProps>>;
   topStyles?: ViewStyle;
   bottomStyles?: ViewStyle;
+  extendedHeight?: number;
+  showOnScroll?: boolean;
+  includeOpacity?: boolean;
 }
 
 export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
@@ -15,9 +18,12 @@ export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 const SlideInAnimator: FC<SlideInAnimatorProps> = ({
   shouldAnimate,
   topComponent,
-  bottomComponent,
+  bottomComponent: BottomComponent,
   topStyles,
   bottomStyles,
+  extendedHeight = 150,
+  showOnScroll,
+  includeOpacity,
 }) => {
   const history = useHistory();
 
@@ -26,9 +32,18 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
   // Value used for transition animations on container
   const containerY = useRef(new Animated.Value(0)).current;
 
-  const appBarHeight = scrollY.interpolate({
-    inputRange: [0, 150],
-    outputRange: [150, 0],
+  const appBarHeight = (
+    showOnScroll ? Animated.diffClamp(scrollY, 0, 40) : scrollY
+  ).interpolate({
+    inputRange: [0, extendedHeight],
+    outputRange: [extendedHeight, 0],
+    extrapolate: "clamp",
+  });
+  const opacity = (
+    showOnScroll ? Animated.diffClamp(scrollY, 0, 40) : scrollY
+  ).interpolate({
+    inputRange: [0, 40],
+    outputRange: [1, 0],
     extrapolate: "clamp",
   });
 
@@ -62,24 +77,25 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
 
   return (
     <>
-      <Animated.View style={[topStyles, { height: appBarHeight }]}>
+      <Animated.View
+        style={[
+          topStyles,
+          { height: appBarHeight, opacity: includeOpacity ? opacity : 1 },
+        ]}
+      >
         {topComponent}
       </Animated.View>
-      <Animated.ScrollView
+      <BottomComponent
         style={[
           bottomStyles,
-          {
-            transform: [{ translateY: containerTranslate }],
-          },
+          { transform: [{ translateY: containerTranslate }] },
         ]}
         onScroll={Animated.event([
           { nativeEvent: { contentOffset: { y: scrollY } } },
         ])}
         scrollEventThrottle={1}
         showsVerticalScrollIndicator={false}
-      >
-        {bottomComponent}
-      </Animated.ScrollView>
+      />
     </>
   );
 };
