@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Searchbar } from "react-native-paper";
+import { Searchbar, useTheme, Text } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useHistory } from "react-router";
 import useGetFavorites from "hooks/useGetFavorites";
@@ -10,6 +10,7 @@ import {
   Formality,
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
+import SlideInAnimator from "components/SlideInAnimator";
 
 const DEFAULT_FAVORITES = [
   {
@@ -37,6 +38,32 @@ const MainPage: React.FC = () => {
   const history = useHistory();
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
+  const { colors } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+    },
+    appBar: {
+      backgroundColor: colors.primary,
+      justifyContent: "center",
+    },
+    card: {
+      marginVertical: 8,
+      marginHorizontal: 16,
+    },
+    scrollView: {
+      marginTop: -32,
+      flexGrow: 1,
+      paddingBottom: 8,
+    },
+    title: {
+      fontSize: 48,
+      color: "#FFFFFF",
+      textAlign: "center",
+    },
+  });
 
   const doSearch = () => {
     if (searchQuery) {
@@ -52,29 +79,27 @@ const MainPage: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Searchbar
-        placeholder="Search in Korean or English..."
-        onChangeText={(query: string) => setSearchQuery(query)}
-        value={searchQuery}
-        onSubmitEditing={doSearch}
-        onIconPress={doSearch}
-        style={styles.card}
+      <SlideInAnimator
+        shouldAnimate={true}
+        topComponent={<Text style={styles.title}>한지 |Hanji</Text>}
+        topStyles={styles.appBar}
+        bottomComponent={
+          <>
+            <Searchbar
+              placeholder="Search in Korean or English..."
+              onChangeText={(query: string) => setSearchQuery(query)}
+              value={searchQuery}
+              onSubmitEditing={doSearch}
+              onIconPress={doSearch}
+              style={styles.card}
+            />
+            <WODCard style={styles.card} />
+          </>
+        }
+        bottomStyles={styles.scrollView}
       />
-      <WODCard style={styles.card} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: "stretch",
-    justifyContent: "center",
-  },
-  card: {
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-});
 
 export default MainPage;
