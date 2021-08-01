@@ -11,6 +11,8 @@ import {
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
 import SlideInAnimator from "components/SlideInAnimator";
+import { useFonts, Laila_500Medium } from "@expo-google-fonts/laila";
+import AppLoading from "expo-app-loading";
 
 const DEFAULT_FAVORITES = [
   {
@@ -40,6 +42,11 @@ const MainPage: React.FC = () => {
   const { setFavorites } = useSetFavorites();
   const { colors } = useTheme();
 
+  const [fontLoaded] = useFonts({
+    Laila_500Medium,
+    "Hangang-Bold": require("../../../assets/hangang-B.ttf"),
+  });
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -58,10 +65,15 @@ const MainPage: React.FC = () => {
       flexGrow: 1,
       paddingBottom: 8,
     },
-    title: {
+    titleContainer: {
       fontSize: 48,
+      fontFamily: "Laila_500Medium",
       color: "#FFFFFF",
       textAlign: "center",
+    },
+    title: {
+      fontFamily: "inherit",
+      color: "inherit",
     },
   });
 
@@ -77,11 +89,19 @@ const MainPage: React.FC = () => {
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
-  return (
+  return !fontLoaded ? (
+    <AppLoading />
+  ) : (
     <View style={styles.container}>
       <SlideInAnimator
-        shouldAnimate={true}
-        topComponent={<Text style={styles.title}>한지 |Hanji</Text>}
+        topComponent={
+          <Text style={styles.titleContainer}>
+            <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
+              한지
+            </Text>
+            <Text style={styles.title}> |Hanji</Text>
+          </Text>
+        }
         topStyles={styles.appBar}
         bottomComponent={
           <>
@@ -97,6 +117,7 @@ const MainPage: React.FC = () => {
           </>
         }
         bottomStyles={styles.scrollView}
+        shouldAnimate
       />
     </View>
   );
