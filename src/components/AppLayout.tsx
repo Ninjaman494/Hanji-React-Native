@@ -1,8 +1,8 @@
-import React from "react";
-import { useTheme, Text } from "react-native-paper";
-import { Animated, StyleSheet, View } from "react-native";
-import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "components/AppBar";
+import AppBar, { AppBarProps, APP_BAR_HEIGHT } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Text, useTheme } from "react-native-paper";
 import SlideInAnimator from "./SlideInAnimator";
 
 export interface AppLayoutProps extends AppBarProps {
@@ -42,9 +42,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
           shouldAnimate={!loading && !error}
           topComponent={<AppBar title={title} />}
           topStyles={style.appBar}
-          bottomComponent={(props) => (
-            <Animated.ScrollView {...props}>{children}</Animated.ScrollView>
-          )}
+          bottomComponent={children}
           bottomStyles={style.scrollView}
         />
       )}

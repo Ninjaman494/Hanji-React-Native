@@ -1,17 +1,11 @@
-import React, { ComponentType, FC, ReactNode, useRef } from "react";
-import {
-  Animated,
-  Dimensions,
-  Easing,
-  ScrollViewProps,
-  ViewStyle,
-} from "react-native";
+import React, { FC, ReactNode, useRef } from "react";
+import { Animated, Dimensions, Easing, ViewStyle } from "react-native";
 import { useHistory } from "react-router";
 
 export interface SlideInAnimatorProps {
   shouldAnimate: boolean;
   topComponent: ReactNode;
-  bottomComponent: ComponentType<Animated.AnimatedProps<ScrollViewProps>>;
+  bottomComponent: ReactNode;
   topStyles?: ViewStyle;
   bottomStyles?: ViewStyle;
   extendedHeight?: number;
@@ -91,7 +85,7 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
       >
         {topComponent}
       </Animated.View>
-      <BottomComponent
+      <Animated.ScrollView
         style={[
           bottomStyles,
           { transform: [{ translateY: containerTranslate }] },
@@ -102,7 +96,9 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
         )}
         scrollEventThrottle={1}
         showsVerticalScrollIndicator={false}
-      />
+      >
+        {BottomComponent}
+      </Animated.ScrollView>
     </>
   );
 };
