@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Searchbar, useTheme, Text } from "react-native-paper";
-import { Animated, StyleSheet, View } from "react-native";
-import { useHistory } from "react-router";
+import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
+import SlideInAnimator from "components/SlideInAnimator";
+import AppLoading from "expo-app-loading";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Searchbar, Text, useTheme } from "react-native-paper";
+import { useHistory } from "react-router";
 import {
   ConjugationName,
   ConjugationType,
   Formality,
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
-import SlideInAnimator from "components/SlideInAnimator";
-import { useFonts, Laila_500Medium } from "@expo-google-fonts/laila";
-import AppLoading from "expo-app-loading";
 
 const DEFAULT_FAVORITES = [
   {
@@ -101,8 +101,8 @@ const MainPage: React.FC = () => {
           </Text>
         }
         topStyles={styles.appBar}
-        bottomComponent={(props) => (
-          <Animated.ScrollView {...props}>
+        bottomComponent={
+          <>
             <Searchbar
               placeholder="Search in Korean or English..."
               onChangeText={(query: string) => setSearchQuery(query)}
@@ -112,8 +112,8 @@ const MainPage: React.FC = () => {
               style={styles.card}
             />
             <WODCard style={styles.card} />
-          </Animated.ScrollView>
-        )}
+          </>
+        }
         bottomStyles={styles.scrollView}
         shouldAnimate
       />
