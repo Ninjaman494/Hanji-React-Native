@@ -1,5 +1,11 @@
 import React, { ComponentType, FC, ReactNode, useRef } from "react";
-import { Animated, Easing, ScrollViewProps, ViewStyle } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  Easing,
+  ScrollViewProps,
+  ViewStyle,
+} from "react-native";
 import { useHistory } from "react-router";
 
 export interface SlideInAnimatorProps {
@@ -49,7 +55,7 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
 
   const containerTranslate = containerY.interpolate({
     inputRange: [0, 100],
-    outputRange: [0, 0],
+    outputRange: [Dimensions.get("window").height, 0],
   });
 
   if (shouldAnimate) {
