@@ -4,9 +4,8 @@ import React from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
-import Rate from "react-native-rate";
+import * as StoreReview from "expo-store-review";
 import { version } from "../../../package.json";
-import { ratingOptions } from "components/RatingHandler";
 
 const SettingsPage: React.FC = () => {
   const { colors } = useTheme();
@@ -53,9 +52,10 @@ const SettingsPage: React.FC = () => {
         <List.Section>
           <List.Item
             title="Leave a Review"
-            onPress={() =>
-              Rate.rate({ ...ratingOptions, preferInApp: false }, () => {})
-            }
+            onPress={() => {
+              const url = StoreReview.storeUrl();
+              url && Linking.openURL(url);
+            }}
           />
           <List.Item
             title="Acknowledgements"
