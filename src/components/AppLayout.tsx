@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme, Text } from "react-native-paper";
-import { Animated, StatusBar, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 import AppBar, { APP_BAR_HEIGHT, AppBarProps } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
 import SlideInAnimator from "./SlideInAnimator";
@@ -25,7 +25,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
       backgroundColor: colors.primary,
     },
     scrollView: {
-      marginTop: APP_BAR_HEIGHT + (StatusBar.currentHeight ?? 0),
+      marginTop: APP_BAR_HEIGHT,
       flexGrow: 1,
       paddingBottom: 8,
     },

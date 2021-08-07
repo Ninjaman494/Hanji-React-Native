@@ -49,7 +49,7 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
 
   const containerTranslate = containerY.interpolate({
     inputRange: [0, 100],
-    outputRange: ["100%", "0%"],
+    outputRange: [0, 0],
   });
 
   if (shouldAnimate) {
@@ -90,9 +90,10 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
           bottomStyles,
           { transform: [{ translateY: containerTranslate }] },
         ]}
-        onScroll={Animated.event([
-          { nativeEvent: { contentOffset: { y: scrollY } } },
-        ])}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false }
+        )}
         scrollEventThrottle={1}
         showsVerticalScrollIndicator={false}
       />
