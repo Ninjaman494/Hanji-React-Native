@@ -22,7 +22,9 @@ const WODCard: FC<BaseCardProps> = (props) => {
 
   return (
     <BaseCard title="Word of the Day" {...props}>
-      <Text style={[styles.text, { color: loading ? colors.grey : "inherit" }]}>
+      <Text
+        style={[styles.text, { color: loading ? colors.grey : colors.text }]}
+      >
         {text}
       </Text>
       <Card.Actions style={styles.actions}>

@@ -67,13 +67,11 @@ const MainPage: React.FC = () => {
     },
     titleContainer: {
       fontSize: 48,
-      fontFamily: "Laila_500Medium",
-      color: "#FFFFFF",
       textAlign: "center",
     },
     title: {
-      fontFamily: "inherit",
-      color: "inherit",
+      fontFamily: "Laila_500Medium",
+      color: "#ffffff",
     },
   });
 

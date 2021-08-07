@@ -3,6 +3,7 @@ import { Appbar, IconButton, Menu, TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useViewShot } from "./ViewShotProvider";
 
 export const APP_BAR_HEIGHT = 56;
 
@@ -15,6 +16,7 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
+  const takeScreenshot = useViewShot();
 
   const doSearch = () => {
     if (searchQuery) {
@@ -65,7 +67,13 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
       >
         <Menu.Item onPress={() => history.push(`/settings`)} title="Settings" />
         <Menu.Item onPress={() => {}} title="About" />
-        <Menu.Item onPress={() => {}} title="Report a Bug" />
+        <Menu.Item
+          onPress={async () => {
+            const uri = await takeScreenshot?.();
+            history.push("/bugReport", { screenshot: uri });
+          }}
+          title="Report a Bug"
+        />
       </Menu>
     </Appbar.Header>
   );
