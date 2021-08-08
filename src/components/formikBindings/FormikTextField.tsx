@@ -1,5 +1,5 @@
 import React, { ComponentProps, FC, forwardRef } from "react";
-import { View } from "react-native";
+import { TextInput as NativeTextInput, View } from "react-native";
 import {
   handleTextInput,
   withFormikControlProps,
@@ -22,6 +22,21 @@ const FormikTextField: FC<FormikTextFieldProps & withFormikControlProps> =
           ref={ref}
           accessibilityLabel={rest.label}
           {...rest}
+          render={(innerProps) => (
+            <NativeTextInput
+              {...innerProps}
+              style={[
+                innerProps.style,
+                rest.multiline
+                  ? {
+                      paddingTop: 8,
+                      paddingBottom: 8,
+                      height: 100,
+                    }
+                  : null,
+              ]}
+            />
+          )}
         />
         <HelperText
           type={rest.error ? "error" : "info"}
