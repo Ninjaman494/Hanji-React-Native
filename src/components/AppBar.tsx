@@ -1,7 +1,8 @@
+import Constants from "expo-constants";
 import * as React from "react";
-import { Appbar, IconButton, Menu, TextInput } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
 import { useState } from "react";
+import { TextInput as NativeInput } from "react-native";
+import { Appbar, Menu, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
 import { useViewShot } from "./ViewShotProvider";
 
@@ -15,8 +16,17 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
+
   const history = useHistory();
   const takeScreenshot = useViewShot();
+  const { colors, padding } = useTheme();
+
+  const inputStyle = {
+    flexGrow: 1,
+    marginLeft: padding.horizontal,
+    fontSize: 18,
+    color: "white",
+  };
 
   const doSearch = () => {
     if (searchQuery) {
@@ -26,37 +36,30 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
 
   return (
     <Appbar.Header style={{ elevation: 0, zIndex: 100 }}>
-      <Appbar.Content title={title} />
-      {showSearch && (
-        <View style={style.inputParent}>
-          <TextInput
-            testID="appBarSearch"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            onSubmitEditing={doSearch}
-            placeholder="Search in Korean or English..."
-            theme={theme}
-            style={style.input}
-            underlineColor="transparent"
-            autoFocus
-          />
-          <IconButton
-            icon="window-close"
-            color="white"
-            onPress={() => setShowSearch(!showSearch)}
-          />
-        </View>
-      )}
-      {!showSearch && (
-        <Appbar.Action
-          testID="appBarSearchBtn"
-          icon="magnify"
-          onPress={() => setShowSearch(!showSearch)}
+      {showSearch ? (
+        <NativeInput
+          testID="appBarSearch"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          onSubmitEditing={doSearch}
+          placeholder="Search in Korean or English..."
+          placeholderTextColor={colors.primaryLight}
+          selectionColor={colors.accent}
+          style={inputStyle}
+          autoFocus
         />
+      ) : (
+        <Appbar.Content title={title} />
       )}
+      <Appbar.Action
+        testID="appBarSearchBtn"
+        icon={showSearch ? "window-close" : "magnify"}
+        onPress={() => setShowSearch(!showSearch)}
+      />
       <Menu
         visible={showMenu}
         onDismiss={() => setShowMenu(false)}
+        statusBarHeight={Constants.statusBarHeight}
         anchor={
           <Appbar.Action
             icon="dots-vertical"
@@ -78,30 +81,5 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
     </Appbar.Header>
   );
 };
-
-const theme = {
-  colors: {
-    text: "white",
-    color: "white",
-    primary: "white",
-    background: "transparent",
-  },
-};
-
-const style = StyleSheet.create({
-  inputParent: {
-    flexGrow: 100,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  input: {
-    flexGrow: 100,
-    borderRadius: 0,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    height: APP_BAR_HEIGHT,
-    overflow: "hidden",
-  },
-});
 
 export default AppBar;
