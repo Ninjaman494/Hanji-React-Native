@@ -2,6 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import RatingHandler from "components/RatingHandler";
 import ViewShotProvider from "components/ViewShotProvider";
 import Constants from "expo-constants";
+import { StatusBar } from "expo-status-bar";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
@@ -12,7 +13,7 @@ import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import React from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   Colors,
   DefaultTheme,
@@ -36,6 +37,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: "#3F51B5",
+    primaryLight: "#B7BEFF",
     primaryDark: "#303F9F",
     accent: "#F44336",
     grey: Colors.grey600,
@@ -56,11 +58,11 @@ export default function Index(): JSX.Element {
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
         <ViewShotProvider>
-          <StatusBar
-            backgroundColor={theme.colors.primaryDark}
-            barStyle="default"
-          />
           <View style={styles.parent}>
+            <StatusBar
+              backgroundColor={theme.colors.primaryDark}
+              style="light"
+            />
             <RatingHandler numSessions={5} />
             <View style={styles.container}>
               <Router>

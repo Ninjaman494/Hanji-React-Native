@@ -9,6 +9,7 @@ declare global {
   }
   namespace ReactNativePaper {
     interface ThemeColors {
+      primaryLight: string;
       primaryDark: string;
       grey: string;
     }
