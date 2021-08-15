@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import useGetFavorites from "hooks/useGetFavorites";
-import { FAB, List, Portal } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
-import AddFavoriteModal from "./AddFavoriteModal";
 import { AppBar, LoadingScreen } from "components";
-import FavoriteItem from "./FavoriteItem";
+import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { FAB, List, Portal } from "react-native-paper";
+import AddFavoriteModal from "./AddFavoriteModal";
+import FavoriteItem from "./FavoriteItem";
 
 const FavoritesPage: React.FC = () => {
   const { favorites, loading, error, refetch } = useGetFavorites();
@@ -30,7 +30,7 @@ const FavoritesPage: React.FC = () => {
     <View style={styles.parent}>
       <AppBar title="Favorites" />
       {loading ? (
-        <LoadingScreen text="Loading..." />
+        <LoadingScreen />
       ) : (
         <View style={{ flex: 1 }}>
           <List.Section>
