@@ -1,12 +1,21 @@
+import { ReactNativeFile } from "apollo-upload-client";
 import { AppBar, FormikForm, FormikTextField } from "components";
 import FormikCheckbox from "components/formikBindings/FormikCheckbox";
 import FormikRadioGroup from "components/formikBindings/FormikRadioGroup";
 import { Formik } from "formik";
+import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
 import { useLocation } from "react-router-native";
 import * as yup from "yup";
+
+interface BugReportForm {
+  feedback: string;
+  email?: string;
+  type: ReportType;
+  includeImage: boolean;
+}
 
 const validationSchema = yup.object().shape({
   feedback: yup.string().label("Feedback").required(),
@@ -16,6 +25,8 @@ const validationSchema = yup.object().shape({
 const BugReportPage: FC = () => {
   const { padding, colors } = useTheme();
   const uri = useLocation<{ screenshot: string }>().state.screenshot;
+
+  const [sendBugReport] = useSendBugReport();
 
   const styles = StyleSheet.create({
     form: {
@@ -50,30 +61,52 @@ const BugReportPage: FC = () => {
   const typeOptions = [
     {
       label: "Found a Bug",
-      value: "bug",
+      value: ReportType.BUG,
     },
     {
       label: "Suggesting a New Feature",
-      value: "newFeature",
+      value: ReportType.NEW_FEATURE,
     },
     {
       label: "Just Saying Hi",
-      value: "other",
+      value: ReportType.OTHER,
     },
   ];
+
+  const onSubmit = async (values: BugReportForm) => {
+    const file = new ReactNativeFile({
+      name: "screenshot.png",
+      type: "image/png",
+      uri,
+    });
+    console.log("File", file);
+
+    try {
+      await sendBugReport({
+        variables: {
+          feedback: values.feedback,
+          email: values.email,
+          type: values.type,
+          image: values.includeImage ? file : undefined,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <AppBar title="Report a Bug" />
       <ScrollView>
-        <Formik
+        <Formik<BugReportForm>
           initialValues={{
             feedback: "",
             email: "",
             type: typeOptions[0].value,
             includeImage: true,
           }}
-          onSubmit={() => {}}
+          onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
           {({ handleSubmit, isSubmitting }) => (

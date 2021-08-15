@@ -1,4 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { SERVER_URL } from "@env";
+import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import ViewShotProvider from "components/ViewShotProvider";
 import Constants from "expo-constants";
@@ -27,7 +29,9 @@ import {
 } from "react-router-native";
 
 const client = new ApolloClient({
-  uri: "https://hanji-server.appspot.com/graphql",
+  link: createUploadLink({
+    uri: SERVER_URL,
+  }),
   cache: new InMemoryCache(),
 });
 
