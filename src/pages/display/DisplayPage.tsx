@@ -1,15 +1,15 @@
-import React from "react";
-import { Text } from "react-native-paper";
-import { StyleSheet } from "react-native";
-import { useHistory } from "react-router";
-import useGetEntry from "hooks/useGetEntry";
-import useGetURLParams from "hooks/useGetURLParams";
-import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import { AppLayout, BaseCard } from "components";
+import useGetEntry from "hooks/useGetEntry";
+import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
+import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
+import useGetURLParams from "hooks/useGetURLParams";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
+import { useHistory } from "react-router";
 import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
-import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 
 const DisplayPage: React.FC = () => {
   const history = useHistory();
@@ -29,6 +29,8 @@ const DisplayPage: React.FC = () => {
   const isAdj = entry?.pos === "Adjective";
   const honorific = false;
 
+  const isAdjVerb = isAdj || entry?.pos === "Verb";
+
   const {
     loading: conjLoading,
     error: conjError,
@@ -40,10 +42,7 @@ const DisplayPage: React.FC = () => {
       favorites: favorites as Favorite[],
     },
     {
-      skip:
-        !entry ||
-        !["Adjective", "Verb"].includes(entry?.pos) ||
-        favorites?.length === 0,
+      skip: !entry || !isAdjVerb || favorites?.length === 0,
     }
   );
   const conjugations = conjData?.favorites;
@@ -61,17 +60,19 @@ const DisplayPage: React.FC = () => {
               <Text>{entry.note}</Text>
             </BaseCard>
           )}
-          <FavoritesCard
-            favorites={favorites ?? []}
-            conjugations={conjugations}
-            title="Conjugations"
-            style={styles.card}
-            onPress={() =>
-              history.push(
-                `/conjugation?stem=${stem}&isAdj=${isAdj}&honorific=${honorific}`
-              )
-            }
-          />
+          {isAdjVerb && (
+            <FavoritesCard
+              favorites={favorites ?? []}
+              conjugations={conjugations}
+              title="Conjugations"
+              style={styles.card}
+              onPress={() =>
+                history.push(
+                  `/conjugation?stem=${stem}&isAdj=${isAdj}&honorific=${honorific}`
+                )
+              }
+            />
+          )}
           {entry?.examples && (
             <ExamplesCard examples={entry.examples} style={styles.card} />
           )}

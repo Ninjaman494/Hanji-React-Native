@@ -34,7 +34,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
   return (
     <View style={style.parent}>
       {loading ? (
-        <LoadingScreen text="Loading" />
+        <LoadingScreen />
       ) : error ? (
         <Text>{error}</Text>
       ) : (

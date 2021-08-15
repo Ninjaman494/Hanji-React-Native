@@ -99,7 +99,7 @@ const ConjugationsPage: React.FC = () => {
           }}
         />
       ) : (
-        <LoadingScreen text="Loading" />
+        <LoadingScreen />
       )}
     </View>
   );
