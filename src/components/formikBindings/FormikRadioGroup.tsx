@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
 import { withFormikControl, withFormikControlProps } from "react-native-formik";
-import { RadioButton, Text, useTheme } from "react-native-paper";
+import { Caption, RadioButton, Text, useTheme } from "react-native-paper";
 import { compose } from "recompose";
 
 export type FormikRadioGroup = ViewProps & {
@@ -50,6 +50,7 @@ const FormikRadioGroup: FC<FormikRadioGroup & withFormikControlProps> = ({
           setFieldTouched();
         }}
         value={value}
+        {...rest}
       >
         {options.map(({ label, value }) => (
           <View style={styles.groupItem} key={value}>
@@ -58,6 +59,9 @@ const FormikRadioGroup: FC<FormikRadioGroup & withFormikControlProps> = ({
           </View>
         ))}
       </RadioButton.Group>
+      {rest.error && (
+        <Caption style={{ color: colors.error }}>{rest.error}</Caption>
+      )}
     </View>
   );
 };

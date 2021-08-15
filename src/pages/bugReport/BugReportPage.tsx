@@ -4,8 +4,14 @@ import FormikRadioGroup from "components/formikBindings/FormikRadioGroup";
 import { Formik } from "formik";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { useTheme } from "react-native-paper";
+import { Button, useTheme } from "react-native-paper";
 import { useLocation } from "react-router-native";
+import * as yup from "yup";
+
+const validationSchema = yup.object().shape({
+  feedback: yup.string().label("Feedback").required(),
+  type: yup.string().label("Feedback Type").required(),
+});
 
 const BugReportPage: FC = () => {
   const { padding, colors } = useTheme();
@@ -21,7 +27,6 @@ const BugReportPage: FC = () => {
       flexDirection: "row",
       alignContent: "flex-start",
       marginHorizontal: padding.horizontal,
-      marginBottom: padding.vertical,
     },
     image: {
       flex: 1,
@@ -34,6 +39,11 @@ const BugReportPage: FC = () => {
     imageText: {
       flex: 1,
       marginStart: padding.horizontal,
+    },
+    button: {
+      marginHorizontal: padding.horizontal,
+      marginTop: 32,
+      marginBottom: 16,
     },
   });
 
@@ -57,31 +67,50 @@ const BugReportPage: FC = () => {
       <AppBar title="Report a Bug" />
       <ScrollView>
         <Formik
-          initialValues={{ feedback: "", email: "", includeImage: true }}
+          initialValues={{
+            feedback: "",
+            email: "",
+            type: typeOptions[0].value,
+            includeImage: true,
+          }}
           onSubmit={() => {}}
+          validationSchema={validationSchema}
         >
-          <FormikForm style={styles.form}>
-            <FormikTextField name="feedback" label="Feedback" multiline />
-            <FormikTextField name="email" label="Email (optional)" />
-            <FormikRadioGroup
-              name="type"
-              label="Select Feeback Type"
-              options={typeOptions}
-            />
-            <FormikCheckbox
-              name="includeImage"
-              label="Include screenshot?"
-              style={{ margin: -8, marginTop: 8 }}
-            />
-          </FormikForm>
+          {({ handleSubmit, isSubmitting }) => (
+            <>
+              <FormikForm style={styles.form}>
+                <FormikTextField name="feedback" label="Feedback" multiline />
+                <FormikTextField name="email" label="Email (optional)" />
+                <FormikRadioGroup
+                  name="type"
+                  label="Select Feeback Type"
+                  options={typeOptions}
+                />
+                <FormikCheckbox
+                  name="includeImage"
+                  label="Include screenshot?"
+                  style={{ margin: -8, marginTop: 8 }}
+                />
+              </FormikForm>
+              <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri }} />
+                <Text style={styles.imageText}>
+                  The screenshot allows us to have more contextual information
+                  about your feedback
+                </Text>
+              </View>
+              <Button
+                onPress={handleSubmit}
+                mode="contained"
+                color={colors.accent}
+                style={styles.button}
+                loading={isSubmitting}
+              >
+                Submit
+              </Button>
+            </>
+          )}
         </Formik>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri }} />
-          <Text style={styles.imageText}>
-            The screenshot allows us to have more contextual information about
-            your feedback
-          </Text>
-        </View>
       </ScrollView>
     </>
   );
