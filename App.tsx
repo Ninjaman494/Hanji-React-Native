@@ -1,13 +1,7 @@
 import React from "react";
-import Index from "./src/index";
-import { StatusBar } from "expo-status-bar";
 import "react-native-url-polyfill/auto";
+import Index from "./src/index";
 
 export default function App(): JSX.Element {
-  return (
-    <>
-      <Index />
-      <StatusBar style="auto" />
-    </>
-  );
+  return <Index />;
 }
