@@ -4,14 +4,16 @@ import { ReactNativeFile } from "extract-files";
 const SEND_REPORT = gql`
   mutation SendBugReport(
     $feedback: String!
-    $email: String
     $type: BugReportType!
+    $deviceInfo: DeviceInfo!
+    $email: String
     $image: Upload
   ) {
     sendBugReport(
       feedback: $feedback
-      email: $email
       type: $type
+      deviceInfo: $deviceInfo
+      email: $email
       image: $image
     ) {
       success
@@ -26,10 +28,19 @@ export enum ReportType {
   OTHER = "OTHER",
 }
 
+export type DeviceInfo = {
+  version: string;
+  brand: string;
+  manufacturer: string;
+  model: string;
+  sdkVersion: string;
+};
+
 interface SendBugRequestVars {
   feedback: string;
-  email?: string;
   type: ReportType;
+  deviceInfo: DeviceInfo;
+  email?: string;
   image?: ReactNativeFile;
 }
 

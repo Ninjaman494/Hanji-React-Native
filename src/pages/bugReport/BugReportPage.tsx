@@ -2,6 +2,8 @@ import { ReactNativeFile } from "apollo-upload-client";
 import { AppBar, FormikForm, FormikTextField } from "components";
 import FormikCheckbox from "components/formikBindings/FormikCheckbox";
 import FormikRadioGroup from "components/formikBindings/FormikRadioGroup";
+import Constants from "expo-constants";
+import * as Device from "expo-device";
 import { Formik } from "formik";
 import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React, { FC } from "react";
@@ -79,15 +81,23 @@ const BugReportPage: FC = () => {
       type: "image/png",
       uri,
     });
-    console.log("File", file);
+
+    const deviceInfo = {
+      version: Constants.nativeAppVersion ?? "missing",
+      brand: Device.brand ?? "missing",
+      manufacturer: Device.manufacturer ?? "missing",
+      model: Device.modelName ?? "missing",
+      sdkVersion: Device.osVersion ?? "missing",
+    };
 
     try {
       await sendBugReport({
         variables: {
           feedback: values.feedback,
-          email: values.email,
           type: values.type,
+          email: values.email,
           image: values.includeImage ? file : undefined,
+          deviceInfo,
         },
       });
     } catch (error) {
@@ -102,7 +112,6 @@ const BugReportPage: FC = () => {
         <Formik<BugReportForm>
           initialValues={{
             feedback: "",
-            email: "",
             type: typeOptions[0].value,
             includeImage: true,
           }}
