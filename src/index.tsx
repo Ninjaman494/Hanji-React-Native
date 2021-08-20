@@ -2,6 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
+import SnackbarProvider from "components/SnackBarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
@@ -67,31 +68,33 @@ export default function Index(): JSX.Element {
               backgroundColor={theme.colors.primaryDark}
               style="light"
             />
-            <RatingHandler numSessions={5} />
-            <View style={styles.container}>
-              <Router>
-                <BackButton />
-                <Switch>
-                  <Route exact path="/" component={MainPage} />
-                  <Route path="/search" component={SearchPage} />
-                  <Route exact path="/display" component={DisplayPage} />
-                  <Route
-                    exact
-                    path="/conjugation"
-                    component={ConjugationsPage}
-                  />
-                  <Route exact path="/conjinfo" component={ConjInfoPage} />
-                  <Route exact path="/settings" component={SettingsPage} />
-                  <Route exact path="/favorites" component={FavoritesPage} />
-                  <Route
-                    exact
-                    path="/acknowledgements"
-                    component={AcknowledgementsPage}
-                  />
-                  <Route exact path="/bugReport" component={BugReportPage} />
-                </Switch>
-              </Router>
-            </View>
+            <SnackbarProvider>
+              <RatingHandler numSessions={5} />
+              <View style={styles.container}>
+                <Router>
+                  <BackButton />
+                  <Switch>
+                    <Route exact path="/" component={MainPage} />
+                    <Route path="/search" component={SearchPage} />
+                    <Route exact path="/display" component={DisplayPage} />
+                    <Route
+                      exact
+                      path="/conjugation"
+                      component={ConjugationsPage}
+                    />
+                    <Route exact path="/conjinfo" component={ConjInfoPage} />
+                    <Route exact path="/settings" component={SettingsPage} />
+                    <Route exact path="/favorites" component={FavoritesPage} />
+                    <Route
+                      exact
+                      path="/acknowledgements"
+                      component={AcknowledgementsPage}
+                    />
+                    <Route exact path="/bugReport" component={BugReportPage} />
+                  </Switch>
+                </Router>
+              </View>
+            </SnackbarProvider>
           </View>
         </ViewShotProvider>
       </PaperProvider>

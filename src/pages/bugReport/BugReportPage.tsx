@@ -2,6 +2,7 @@ import { ReactNativeFile } from "apollo-upload-client";
 import { AppBar, FormikForm, FormikTextField } from "components";
 import FormikCheckbox from "components/formikBindings/FormikCheckbox";
 import FormikRadioGroup from "components/formikBindings/FormikRadioGroup";
+import { useSnackbar } from "components/SnackBarProvider";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import { Formik } from "formik";
@@ -9,7 +10,7 @@ import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
-import { useLocation } from "react-router-native";
+import { useHistory, useLocation } from "react-router-native";
 import * as yup from "yup";
 
 interface BugReportForm {
@@ -27,8 +28,10 @@ const validationSchema = yup.object().shape({
 const BugReportPage: FC = () => {
   const { padding, colors } = useTheme();
   const uri = useLocation<{ screenshot: string }>().state.screenshot;
+  const { goBack } = useHistory();
 
   const [sendBugReport] = useSendBugReport();
+  const { showSnackbar } = useSnackbar();
 
   const styles = StyleSheet.create({
     form: {
@@ -100,8 +103,12 @@ const BugReportPage: FC = () => {
           deviceInfo,
         },
       });
+
+      showSnackbar("Report sent. Thanks for the feedback!");
+      goBack();
     } catch (error) {
       console.log(error);
+      showSnackbar("An error occurred. Please try again later");
     }
   };
 
@@ -118,7 +125,7 @@ const BugReportPage: FC = () => {
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          {({ handleSubmit, isSubmitting }) => (
+          {({ handleSubmit, isSubmitting, isValid, dirty }) => (
             <>
               <FormikForm style={styles.form}>
                 <FormikTextField name="feedback" label="Feedback" multiline />
@@ -147,6 +154,7 @@ const BugReportPage: FC = () => {
                 color={colors.accent}
                 style={styles.button}
                 loading={isSubmitting}
+                disabled={!isValid || !dirty}
               >
                 Submit
               </Button>
