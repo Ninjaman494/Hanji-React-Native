@@ -36,6 +36,7 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
 
   return (
     <Appbar.Header style={{ elevation: 0, zIndex: 100 }}>
+      <Appbar.BackAction onPress={() => history.goBack()} />
       {showSearch ? (
         <NativeInput
           testID="appBarSearch"
