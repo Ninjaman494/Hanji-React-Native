@@ -1,5 +1,5 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
-import SlideInAnimator from "components/SlideInAnimator";
+import { SlideInScrollView, SlideInTop } from "components/SlideInAnimator";
 import AppLoading from "expo-app-loading";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
@@ -91,32 +91,25 @@ const MainPage: React.FC = () => {
     <AppLoading />
   ) : (
     <View style={styles.container}>
-      <SlideInAnimator
-        topComponent={
-          <Text style={styles.titleContainer}>
-            <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
-              한지
-            </Text>
-            <Text style={styles.title}> |Hanji</Text>
+      <SlideInTop shouldAnimate style={styles.appBar}>
+        <Text style={styles.titleContainer}>
+          <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
+            한지
           </Text>
-        }
-        topStyles={styles.appBar}
-        bottomComponent={
-          <>
-            <Searchbar
-              placeholder="Search in Korean or English..."
-              onChangeText={(query: string) => setSearchQuery(query)}
-              value={searchQuery}
-              onSubmitEditing={doSearch}
-              onIconPress={doSearch}
-              style={styles.card}
-            />
-            <WODCard style={styles.card} />
-          </>
-        }
-        bottomStyles={styles.scrollView}
-        shouldAnimate
-      />
+          <Text style={styles.title}> |Hanji</Text>
+        </Text>
+      </SlideInTop>
+      <SlideInScrollView style={styles.scrollView} shouldAnimate>
+        <Searchbar
+          placeholder="Search in Korean or English..."
+          onChangeText={(query: string) => setSearchQuery(query)}
+          value={searchQuery}
+          onSubmitEditing={doSearch}
+          onIconPress={doSearch}
+          style={styles.card}
+        />
+        <WODCard style={styles.card} />
+      </SlideInScrollView>
     </View>
   );
 };

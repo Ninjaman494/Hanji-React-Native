@@ -1,5 +1,13 @@
-import React, { FC, ReactNode, useRef } from "react";
-import { Animated, Dimensions, Easing, ViewStyle } from "react-native";
+import React, { FC, ReactNode } from "react";
+import {
+  Animated,
+  Dimensions,
+  Easing,
+  FlatList,
+  ScrollView,
+  View,
+  ViewStyle,
+} from "react-native";
 import { useHistory } from "react-router";
 
 export interface SlideInAnimatorProps {
@@ -13,24 +21,39 @@ export interface SlideInAnimatorProps {
   includeOpacity?: boolean;
 }
 
+export interface SlideInTopProps extends Animated.ComponentProps<View> {
+  shouldAnimate: boolean;
+  showOnScroll?: boolean;
+  extendedHeight?: number;
+  includeOpacity?: boolean;
+}
+
+export interface SlideInScrollViewProps
+  extends Animated.ComponentProps<ScrollView> {
+  shouldAnimate: boolean;
+}
+
+export interface SlideInFlatListProps
+  extends Animated.ComponentProps<FlatList> {
+  shouldAnimate: boolean;
+}
+
 export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 
-const SlideInAnimator: FC<SlideInAnimatorProps> = ({
+// Value that will be bound to scroll-y
+const scrollY = new Animated.Value(150);
+// Value used for transition animations on container
+const containerY = new Animated.Value(0);
+
+export const SlideInTop: FC<SlideInTopProps> = ({
+  children,
+  style,
   shouldAnimate,
-  topComponent,
-  bottomComponent: BottomComponent,
-  topStyles,
-  bottomStyles,
-  extendedHeight = 150,
   showOnScroll,
-  includeOpacity,
+  ...rest
 }) => {
   const history = useHistory();
-
-  // Value that will be bound to scroll-y
-  const scrollY = useRef(new Animated.Value(150)).current;
-  // Value used for transition animations on container
-  const containerY = useRef(new Animated.Value(0)).current;
+  const extendedHeight = 150;
 
   const appBarHeight = (
     showOnScroll ? Animated.diffClamp(scrollY, 0, 40) : scrollY
@@ -39,13 +62,77 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
     outputRange: [extendedHeight, 0],
     extrapolate: "clamp",
   });
-  const opacity = (
-    showOnScroll ? Animated.diffClamp(scrollY, 0, 40) : scrollY
-  ).interpolate({
-    inputRange: [0, 40],
-    outputRange: [1, 0],
-    extrapolate: "clamp",
+
+  if (shouldAnimate) {
+    Animated.timing(scrollY, {
+      toValue: 0,
+      duration: 500,
+      easing: easeOutExpo,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  // Reset animations on page leave
+  history.listen(() => scrollY.setValue(150));
+
+  return (
+    <Animated.View
+      style={[style, { height: appBarHeight, opacity: 1 }]}
+      {...rest}
+    >
+      {children}
+    </Animated.View>
+  );
+};
+
+export const SlideInScrollView: FC<SlideInScrollViewProps> = ({
+  children,
+  style,
+  shouldAnimate,
+  ...rest
+}) => {
+  const history = useHistory();
+
+  const containerTranslate = containerY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [Dimensions.get("window").height, 0],
   });
+
+  // Reset animations on page leave
+  history.listen(() => containerY.setValue(0));
+
+  if (shouldAnimate) {
+    Animated.timing(containerY, {
+      toValue: 100,
+      duration: 500,
+      easing: easeOutExpo,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  return (
+    <Animated.ScrollView
+      style={[style, { transform: [{ translateY: containerTranslate }] }]}
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+        { useNativeDriver: false }
+      )}
+      scrollEventThrottle={1}
+      showsVerticalScrollIndicator={false}
+      {...rest}
+    >
+      {children}
+    </Animated.ScrollView>
+  );
+};
+
+export const SlideInFlatList: FC<SlideInFlatListProps> = ({
+  children,
+  style,
+  shouldAnimate,
+  ...rest
+}) => {
+  const history = useHistory();
 
   const containerTranslate = containerY.interpolate({
     inputRange: [0, 100],
@@ -53,54 +140,29 @@ const SlideInAnimator: FC<SlideInAnimatorProps> = ({
   });
 
   if (shouldAnimate) {
-    Animated.parallel([
-      Animated.timing(scrollY, {
-        toValue: 0,
-        duration: 500,
-        easing: easeOutExpo,
-        useNativeDriver: false,
-      }),
-      Animated.timing(containerY, {
-        toValue: 100,
-        duration: 500,
-        easing: easeOutExpo,
-        useNativeDriver: false,
-      }),
-    ]).start();
+    Animated.timing(containerY, {
+      toValue: 100,
+      duration: 500,
+      easing: easeOutExpo,
+      useNativeDriver: false,
+    }).start();
   }
 
   // Reset animations on page leave
-  history.listen(() => {
-    scrollY.setValue(150);
-    containerY.setValue(0);
-  });
+  history.listen(() => containerY.setValue(0));
 
   return (
-    <>
-      <Animated.View
-        style={[
-          topStyles,
-          { height: appBarHeight, opacity: includeOpacity ? opacity : 1 },
-        ]}
-      >
-        {topComponent}
-      </Animated.View>
-      <Animated.ScrollView
-        style={[
-          bottomStyles,
-          { transform: [{ translateY: containerTranslate }] },
-        ]}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-        scrollEventThrottle={1}
-        showsVerticalScrollIndicator={false}
-      >
-        {BottomComponent}
-      </Animated.ScrollView>
-    </>
+    <Animated.FlatList
+      style={[style, { transform: [{ translateY: containerTranslate }] }]}
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+        { useNativeDriver: false }
+      )}
+      scrollEventThrottle={1}
+      showsVerticalScrollIndicator={false}
+      {...rest}
+    >
+      {children}
+    </Animated.FlatList>
   );
 };
-
-export default SlideInAnimator;

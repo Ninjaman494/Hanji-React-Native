@@ -3,7 +3,7 @@ import LoadingScreen from "components/LoadingScreen";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
-import SlideInAnimator from "./SlideInAnimator";
+import { SlideInTop } from "./SlideInAnimator";
 
 export interface AppLayoutProps extends AppBarProps {
   loading?: boolean;
@@ -38,13 +38,12 @@ const AppLayout: React.FC<AppLayoutProps> = ({
       ) : error ? (
         <Text>{error}</Text>
       ) : (
-        <SlideInAnimator
-          shouldAnimate={!loading && !error}
-          topComponent={<AppBar title={title} />}
-          topStyles={style.appBar}
-          bottomComponent={children}
-          bottomStyles={style.scrollView}
-        />
+        <>
+          <SlideInTop style={style.appBar} shouldAnimate>
+            <AppBar title={title} />
+          </SlideInTop>
+          <View style={style.scrollView}>{children}</View>
+        </>
       )}
     </View>
   );

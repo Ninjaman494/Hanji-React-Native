@@ -1,7 +1,7 @@
 import { AppLayout } from "components";
+import { SlideInFlatList } from "components/SlideInAnimator";
 import { Entry } from "hooks/useGetEntry";
 import React from "react";
-import { FlatList } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 import { Link } from "react-router-native";
 import SearchResultsCard from "./SearchResultsCard";
@@ -38,10 +38,11 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
 }) => {
   return (
     <AppLayout title={`Results for: ${query}`}>
-      <FlatList
+      <SlideInFlatList
         data={results}
         renderItem={({ item }) => <ResultCard result={item} />}
         keyExtractor={(item) => item.id}
+        shouldAnimate
       />
     </AppLayout>
   );

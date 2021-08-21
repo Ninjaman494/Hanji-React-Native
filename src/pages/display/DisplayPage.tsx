@@ -1,5 +1,6 @@
 import { AppLayout, BaseCard } from "components";
-import useGetEntry from "hooks/useGetEntry";
+import { SlideInScrollView } from "components/SlideInAnimator";
+import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import useGetURLParams from "hooks/useGetURLParams";
@@ -49,12 +50,12 @@ const DisplayPage: React.FC = () => {
 
   return (
     <>
-      {entry && (
-        <AppLayout
-          loading={entryLoading || conjLoading}
-          error={entryError ? entryError.message : conjError?.message}
-        >
-          <DefPosCard entry={entry} style={styles.card} />
+      <AppLayout
+        loading={entryLoading || conjLoading}
+        error={entryError ? entryError.message : conjError?.message}
+      >
+        <SlideInScrollView shouldAnimate>
+          <DefPosCard entry={entry as Entry} style={styles.card} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
               <Text>{entry.note}</Text>
@@ -86,8 +87,8 @@ const DisplayPage: React.FC = () => {
               <Text style={styles.synAnt}>{entry.antonyms.join(", ")}</Text>
             </BaseCard>
           )}
-        </AppLayout>
-      )}
+        </SlideInScrollView>
+      </AppLayout>
     </>
   );
 };
