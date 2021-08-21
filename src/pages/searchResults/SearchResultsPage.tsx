@@ -1,10 +1,9 @@
+import { AppLayout } from "components";
 import { Entry } from "hooks/useGetEntry";
 import React from "react";
 import { FlatList } from "react-native";
 import { TouchableRipple } from "react-native-paper";
-// @ts-ignore
-import { Link } from "routing";
-import { AppLayout } from "components";
+import { Link } from "react-router-native";
 import SearchResultsCard from "./SearchResultsCard";
 
 export interface SearchResultsPageProps {
