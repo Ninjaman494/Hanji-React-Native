@@ -1,11 +1,13 @@
+jest.mock("expo-store-review");
 jest.mock("@react-native-async-storage/async-storage");
-jest.mock("react-native-rate");
 
-import React from "react";
-import Rate from "react-native-rate";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import RatingHandler from "components/RatingHandler";
 import { render, waitFor } from "@testing-library/react-native";
+import RatingHandler from "components/RatingHandler";
+import * as StoreReview from "expo-store-review";
+import React from "react";
+
+jest.spyOn(StoreReview, "hasAction").mockReturnValue(Promise.resolve(true));
 
 describe("RatingHandler component", () => {
   beforeEach(() => {
@@ -21,7 +23,7 @@ describe("RatingHandler component", () => {
 
     await waitFor(() => {
       expect(AsyncStorage.setItem).toHaveBeenCalledWith("NUM_SESSIONS", "6");
-      expect(Rate.rate).toHaveBeenCalled();
+      expect(StoreReview.requestReview).toHaveBeenCalled();
     });
   });
 
@@ -34,7 +36,7 @@ describe("RatingHandler component", () => {
 
     await waitFor(() => {
       expect(AsyncStorage.setItem).toHaveBeenCalledWith("NUM_SESSIONS", "4");
-      expect(Rate.rate).not.toHaveBeenCalled();
+      expect(StoreReview.requestReview).not.toHaveBeenCalled();
     });
   });
 
@@ -47,7 +49,7 @@ describe("RatingHandler component", () => {
 
     await waitFor(() => {
       expect(AsyncStorage.setItem).toHaveBeenCalledWith("NUM_SESSIONS", "6");
-      expect(Rate.rate).not.toHaveBeenCalled();
+      expect(StoreReview.requestReview).not.toHaveBeenCalled();
     });
   });
 });

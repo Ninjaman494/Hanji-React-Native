@@ -3,11 +3,26 @@ import { StyleSheet, View } from "react-native";
 import { Headline, ProgressBar, useTheme } from "react-native-paper";
 
 export interface LoadingScreenProps {
-  text: string;
+  text?: string;
 }
 
-const LoadingScreen: React.FC<LoadingScreenProps> = ({ text }) => {
-  const { colors } = useTheme();
+const LoadingScreen: React.FC<LoadingScreenProps> = ({
+  text = "Loading...",
+}) => {
+  const { colors, padding } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignContent: "center",
+      justifyContent: "center",
+      paddingHorizontal: padding?.horizontal,
+    },
+    loadingText: {
+      textAlign: "center",
+      paddingBottom: 16,
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -16,17 +31,5 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ text }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
-  },
-  loadingText: {
-    textAlign: "center",
-    paddingBottom: 16,
-  },
-});
 
 export default LoadingScreen;

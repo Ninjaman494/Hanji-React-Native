@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Searchbar, useTheme, Text } from "react-native-paper";
-import { Animated, StyleSheet, View } from "react-native";
-import { useHistory } from "react-router";
+import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
+import { SlideInBody, SlideInTop } from "components/animations";
+import AppLoading from "expo-app-loading";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
+import React, { useEffect, useMemo, useState } from "react";
+import { Animated, StyleSheet, View } from "react-native";
+import { Searchbar, Text, useTheme } from "react-native-paper";
+import { useHistory } from "react-router";
 import {
   ConjugationName,
   ConjugationType,
   Formality,
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
-import SlideInAnimator from "components/SlideInAnimator";
-import { useFonts, Laila_500Medium } from "@expo-google-fonts/laila";
-import AppLoading from "expo-app-loading";
 
 const DEFAULT_FAVORITES = [
   {
@@ -67,13 +67,11 @@ const MainPage: React.FC = () => {
     },
     titleContainer: {
       fontSize: 48,
-      fontFamily: "Laila_500Medium",
-      color: "#FFFFFF",
       textAlign: "center",
     },
     title: {
-      fontFamily: "inherit",
-      color: "inherit",
+      fontFamily: "Laila_500Medium",
+      color: "#ffffff",
     },
   });
 
@@ -89,36 +87,38 @@ const MainPage: React.FC = () => {
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
+  const scrollY = useMemo(() => new Animated.Value(150), []);
+  const containerY = useMemo(() => new Animated.Value(0), []);
+
   return !fontLoaded ? (
     <AppLoading />
   ) : (
     <View style={styles.container}>
-      <SlideInAnimator
-        topComponent={
-          <Text style={styles.titleContainer}>
-            <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
-              한지
-            </Text>
-            <Text style={styles.title}> |Hanji</Text>
+      <SlideInTop shouldAnimate style={styles.appBar} scrollY={scrollY}>
+        <Text style={styles.titleContainer}>
+          <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
+            한지
           </Text>
-        }
-        topStyles={styles.appBar}
-        bottomComponent={(props) => (
-          <Animated.ScrollView {...props}>
-            <Searchbar
-              placeholder="Search in Korean or English..."
-              onChangeText={(query: string) => setSearchQuery(query)}
-              value={searchQuery}
-              onSubmitEditing={doSearch}
-              onIconPress={doSearch}
-              style={styles.card}
-            />
-            <WODCard style={styles.card} />
-          </Animated.ScrollView>
-        )}
-        bottomStyles={styles.scrollView}
+          <Text style={styles.title}> |Hanji</Text>
+        </Text>
+      </SlideInTop>
+      <SlideInBody
+        style={styles.scrollView}
+        scrollY={scrollY}
+        containerY={containerY}
+        flatlist={false}
         shouldAnimate
-      />
+      >
+        <Searchbar
+          placeholder="Search in Korean or English..."
+          onChangeText={(query: string) => setSearchQuery(query)}
+          value={searchQuery}
+          onSubmitEditing={doSearch}
+          onIconPress={doSearch}
+          style={styles.card}
+        />
+        <WODCard style={styles.card} />
+      </SlideInBody>
     </View>
   );
 };

@@ -1,11 +1,11 @@
+import { BaseCard, BaseCardProps } from "components";
+import { Conjugation } from "hooks/useConjugations";
+import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Button, Text, useTheme, Card } from "react-native-paper";
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { Conjugation } from "hooks/useConjugations";
-import { BaseCard, BaseCardProps } from "components";
+import { Col, Grid, Row } from "react-native-easy-grid";
+import { Button, Card, Text, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
-import { Favorite } from "hooks/useGetFavorites";
 
 export type FavoritesCardProps = BaseCardProps & {
   favorites: Favorite[];
@@ -42,13 +42,16 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
     },
   });
 
-  const favoritesMap = favorites.map((favorite) => {
-    const conjugation = conjugations?.find(
-      ({ name, honorific }) =>
-        name === favorite.conjugationName && honorific === favorite.honorific
-    );
-    return { name: favorite.name, conjugation: conjugation };
-  });
+  const favoritesMap = conjugations?.length
+    ? favorites.map((favorite) => {
+        const conjugation = conjugations?.find(
+          ({ name, honorific }) =>
+            name === favorite.conjugationName &&
+            honorific === favorite.honorific
+        );
+        return { name: favorite.name, conjugation: conjugation };
+      })
+    : [];
 
   return (
     <BaseCard {...rest}>

@@ -38,7 +38,9 @@ const ConjugationsPageContent: React.FC<ConjugationPageContentProps> = ({
       data={Object.keys(conjMap)}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item}
-      scrollEventThrottle={1}
+      bounces={false}
+      initialNumToRender={4}
+      windowSize={5}
       renderItem={({ item }) => (
         <ConjugationCard
           title={toTitleCase(item)}

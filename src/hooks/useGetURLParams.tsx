@@ -1,5 +1,4 @@
-// @ts-ignore
-import { useLocation } from "routing";
+import { useLocation } from "react-router-native";
 
 const useGetURLParams = (): URLSearchParams => {
   return new URLSearchParams(useLocation().search);
