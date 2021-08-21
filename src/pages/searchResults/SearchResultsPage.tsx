@@ -1,7 +1,8 @@
-import { AppLayout } from "components";
-import { SlideInFlatList } from "components/SlideInAnimator";
+import { AppBar, AppLayout } from "components";
+import { SlideInBody, SlideInTop } from "components/animations";
 import { Entry } from "hooks/useGetEntry";
-import React from "react";
+import React, { useMemo } from "react";
+import { Animated, View } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 import { Link } from "react-router-native";
 import SearchResultsCard from "./SearchResultsCard";
@@ -36,15 +37,26 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   results,
 }) => {
+  const scrollY = useMemo(() => new Animated.Value(150), []);
+  const containerY = useMemo(() => new Animated.Value(0), []);
+
   return (
-    <AppLayout title={`Results for: ${query}`}>
-      <SlideInFlatList
-        data={results}
-        renderItem={({ item }) => <ResultCard result={item} />}
-        keyExtractor={(item) => item.id}
-        shouldAnimate
-      />
-    </AppLayout>
+    <View style={{ flex: 1 }}>
+      <SlideInTop scrollY={scrollY} shouldAnimate>
+        <AppBar title={`Results for: ${query}`} />
+      </SlideInTop>
+      <AppLayout>
+        <SlideInBody
+          data={results}
+          renderItem={({ item }) => <ResultCard result={item} />}
+          keyExtractor={(item) => item.id}
+          scrollY={scrollY}
+          containerY={containerY}
+          flatlist
+          shouldAnimate
+        />
+      </AppLayout>
+    </View>
   );
 };
 

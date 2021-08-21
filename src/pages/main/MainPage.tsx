@@ -1,10 +1,10 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
-import { SlideInScrollView, SlideInTop } from "components/SlideInAnimator";
+import { SlideInBody, SlideInTop } from "components/animations";
 import AppLoading from "expo-app-loading";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { Animated, StyleSheet, View } from "react-native";
 import { Searchbar, Text, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
 import {
@@ -87,11 +87,14 @@ const MainPage: React.FC = () => {
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
+  const scrollY = useMemo(() => new Animated.Value(150), []);
+  const containerY = useMemo(() => new Animated.Value(0), []);
+
   return !fontLoaded ? (
     <AppLoading />
   ) : (
     <View style={styles.container}>
-      <SlideInTop shouldAnimate style={styles.appBar}>
+      <SlideInTop shouldAnimate style={styles.appBar} scrollY={scrollY}>
         <Text style={styles.titleContainer}>
           <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
             한지
@@ -99,7 +102,13 @@ const MainPage: React.FC = () => {
           <Text style={styles.title}> |Hanji</Text>
         </Text>
       </SlideInTop>
-      <SlideInScrollView style={styles.scrollView} shouldAnimate>
+      <SlideInBody
+        style={styles.scrollView}
+        scrollY={scrollY}
+        containerY={containerY}
+        flatlist={false}
+        shouldAnimate
+      >
         <Searchbar
           placeholder="Search in Korean or English..."
           onChangeText={(query: string) => setSearchQuery(query)}
@@ -109,7 +118,7 @@ const MainPage: React.FC = () => {
           style={styles.card}
         />
         <WODCard style={styles.card} />
-      </SlideInScrollView>
+      </SlideInBody>
     </View>
   );
 };

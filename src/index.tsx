@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
-import SnackbarProvider from "components/SnackBarProvider";
+import SnackbarProvider from "components/SnackbarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";

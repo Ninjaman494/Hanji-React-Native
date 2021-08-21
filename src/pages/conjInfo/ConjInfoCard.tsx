@@ -1,8 +1,8 @@
-import React from "react";
-import { Conjugation } from "hooks/useConjugations";
-import { Text, Title, useTheme } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
 import { BaseCard, HonorificBadge } from "components";
+import { Conjugation } from "hooks/useConjugations";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Text, Title, useTheme } from "react-native-paper";
 import toTitleCase from "utils/toTitleCase";
 
 export type ConjInfoCardProps = {
@@ -15,6 +15,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
   const styles = StyleSheet.create({
     card: {
       marginHorizontal: padding?.horizontal,
+      marginBottom: 8,
     },
     title: {
       fontSize: textSizes?.cardTitle,
