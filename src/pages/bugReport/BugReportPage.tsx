@@ -35,29 +35,29 @@ const BugReportPage: FC = () => {
 
   const styles = StyleSheet.create({
     form: {
-      paddingHorizontal: padding.horizontal,
-      paddingVertical: padding.vertical,
+      paddingHorizontal: padding?.horizontal,
+      paddingVertical: padding?.vertical,
     },
     imageContainer: {
       flex: 1,
       flexDirection: "row",
       alignContent: "flex-start",
-      marginHorizontal: padding.horizontal,
+      marginHorizontal: padding?.horizontal,
     },
     image: {
       flex: 1,
       height: 400,
-      borderColor: colors.grey,
+      borderColor: colors?.grey,
       borderWidth: 1,
-      backgroundColor: colors.grey,
+      backgroundColor: colors?.grey,
       resizeMode: "contain",
     },
     imageText: {
       flex: 1,
-      marginStart: padding.horizontal,
+      marginStart: padding?.horizontal,
     },
     button: {
-      marginHorizontal: padding.horizontal,
+      marginHorizontal: padding?.horizontal,
       marginTop: 32,
       marginBottom: 16,
     },
