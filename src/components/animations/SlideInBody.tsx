@@ -1,6 +1,11 @@
 import React, { FC, useEffect } from "react";
-import { Animated, Dimensions, FlatList, ScrollView } from "react-native";
-import { easeOutExpo } from ".";
+import {
+  Animated,
+  Dimensions,
+  Easing,
+  FlatList,
+  ScrollView,
+} from "react-native";
 
 interface SlideInScrollView extends Animated.ComponentProps<ScrollView> {
   flatlist: false;
@@ -17,6 +22,8 @@ interface SlideInFlatList extends Animated.ComponentProps<FlatList> {
 }
 
 export type SlideInBodyProps = SlideInScrollView | SlideInFlatList;
+
+export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 
 const SlideInBody: FC<SlideInBodyProps> = (props) => {
   const { containerY, scrollY, shouldAnimate } = props;
