@@ -23,7 +23,7 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
 
   const inputStyle = {
     flexGrow: 1,
-    marginLeft: padding.horizontal,
+    marginLeft: padding?.horizontal,
     fontSize: 18,
     color: "white",
   };
