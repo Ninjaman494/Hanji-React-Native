@@ -16,7 +16,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
       flex: 1,
       alignContent: "center",
       justifyContent: "center",
-      paddingHorizontal: padding.horizontal,
+      paddingHorizontal: padding?.horizontal,
     },
     loadingText: {
       textAlign: "center",
