@@ -1,17 +1,18 @@
 jest.mock("hooks/useGetFavorites");
 jest.mock("react-router");
 jest.mock("react-native/Libraries/Linking/Linking");
-jest.mock("react-native-rate");
+jest.mock("expo-store-review");
 
-import { Linking } from "react-native";
-import React from "react";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
-import Rate from "react-native-rate";
-import SettingsPage from "../SettingsPage";
-import { useHistory } from "react-router";
+import * as StoreReview from "expo-store-review";
 import useGetFavorites from "hooks/useGetFavorites";
+import React from "react";
+import { Linking } from "react-native";
+import { useHistory } from "react-router";
 import { ConjugationType, Formality } from "utils/conjugationTypes";
-import { ratingOptions } from "components/RatingHandler";
+import SettingsPage from "../SettingsPage";
+
+jest.spyOn(StoreReview, "storeUrl").mockReturnValue("store-url");
 
 const pushHistory = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({
@@ -90,15 +91,13 @@ describe("SettingsPage", () => {
     });
 
     it("lets user leave a review", async () => {
+      const openURL = jest.spyOn(Linking, "openURL");
       const result = render(<SettingsPage />);
 
       fireEvent.press(result.getByText("Leave a Review"));
 
       await waitFor(() => {
-        expect(Rate.rate).toHaveBeenCalledWith(
-          { ...ratingOptions, preferInApp: false },
-          expect.any(Function)
-        );
+        expect(openURL).toHaveBeenCalledWith(StoreReview.storeUrl());
       });
     });
   });

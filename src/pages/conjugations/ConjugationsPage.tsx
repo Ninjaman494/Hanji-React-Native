@@ -1,11 +1,16 @@
-import React from "react";
-import useGetURLParams from "hooks/useGetURLParams";
-import useConjugations from "hooks/useConjugations";
-import { View, StyleSheet } from "react-native";
-import { Switch, Text, useTheme } from "react-native-paper";
 import { AppBar, LoadingScreen } from "components";
+import useConjugations from "hooks/useConjugations";
+import useGetURLParams from "hooks/useGetURLParams";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, Dimensions, Easing, StyleSheet, View } from "react-native";
+import { Switch, Text, useTheme } from "react-native-paper";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
-import SlideInAnimator from "components/SlideInAnimator";
+
+const easeInOutCubic = Easing.bezier(0.645, 0.045, 0.355, 1.0);
+
+// intial state - loading false, conjugations null
+// First switch - loading true, conjugations not-null
+// later switches - loading false, conjugations not-null
 
 const ConjugationsPage: React.FC = () => {
   const { padding, colors, textSizes } = useTheme();
@@ -13,12 +18,12 @@ const ConjugationsPage: React.FC = () => {
   const styles = StyleSheet.create({
     parent: {
       flex: 1,
-      height: 500,
     },
     switchBar: {
       flexDirection: "row",
       justifyContent: "space-between",
       paddingHorizontal: padding?.horizontal,
+      paddingBottom: 8,
       backgroundColor: colors?.primary,
     },
     switchText: {
@@ -31,7 +36,7 @@ const ConjugationsPage: React.FC = () => {
   const stem = params.get("stem") as string;
   const isAdj = params.get("isAdj") === "true";
 
-  const [honorific, setHonorific] = React.useState(
+  const [honorific, setHonorific] = useState(
     params.get("honorific") === "true"
   );
 
@@ -40,40 +45,61 @@ const ConjugationsPage: React.FC = () => {
     isAdj: isAdj,
     honorific: honorific,
   });
-
   const conjugations = data?.conjugations;
+
+  // For switch, Apollo doesn't reset loading when fetching from cache
+  const [animate, setAnimate] = useState(false);
+
+  // Value used for transition animations on container
+  const containerY = useRef(new Animated.Value(0)).current;
+
+  const containerTranslate = containerY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [Dimensions.get("window").height, 0],
+  });
+
+  useEffect(() => {
+    if (animate || (!loading && conjugations)) {
+      Animated.timing(containerY, {
+        toValue: 100,
+        duration: 500,
+        easing: easeInOutCubic,
+        useNativeDriver: false,
+      }).start();
+
+      setAnimate(false);
+    }
+  }, [animate, loading, conjugations]);
 
   return (
     <View style={styles.parent}>
       <AppBar title="Conjugations" />
-      {loading && <LoadingScreen text="Loading" />}
-      {error && <Text>{error}</Text>}
-      {!!conjugations && !loading && (
-        <SlideInAnimator
-          shouldAnimate={!!conjugations && !loading}
-          extendedHeight={40}
-          topComponent={
-            <>
-              <Text style={styles.switchText}>
-                {honorific ? "Honorific" : "Regular"} Forms
-              </Text>
-              <Switch
-                value={honorific}
-                thumbColor="white"
-                trackColor={{ false: colors?.primaryDark, true: "#FFFFFF88" }}
-                onValueChange={() => setHonorific(!honorific)}
-                //@ts-ignore web-only attribute
-                activeThumbColor="white"
-              />
-            </>
-          }
-          topStyles={styles.switchBar}
-          bottomComponent={(props) => (
-            <ConjugationsPageContent {...props} conjugations={conjugations} />
-          )}
-          showOnScroll
-          includeOpacity
+      <View style={styles.switchBar}>
+        <Text style={styles.switchText}>
+          {honorific ? "Honorific" : "Regular"} Forms
+        </Text>
+        <Switch
+          value={honorific}
+          thumbColor="white"
+          trackColor={{ false: colors?.primaryDark, true: "#FFFFFF88" }}
+          onValueChange={() => {
+            setHonorific(!honorific);
+            setAnimate(true);
+            containerY.setValue(0);
+          }}
         />
+      </View>
+      {error && <Text>{error}</Text>}
+      {conjugations ? (
+        <ConjugationsPageContent
+          conjugations={conjugations}
+          style={{
+            transform: [{ translateY: containerTranslate }],
+            height: 500,
+          }}
+        />
+      ) : (
+        <LoadingScreen />
       )}
     </View>
   );

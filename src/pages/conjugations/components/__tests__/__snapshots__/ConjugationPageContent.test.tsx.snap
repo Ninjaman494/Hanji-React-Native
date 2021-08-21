@@ -2,6 +2,7 @@
 
 exports[`ConjugationPageContent component groups conjugations based on type 1`] = `
 <RCTScrollView
+  bounces={false}
   data={
     Array [
       "declarative present",
@@ -12,7 +13,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
   getItem={[Function]}
   getItemCount={[Function]}
   horizontal={false}
-  initialNumToRender={10}
+  initialNumToRender={4}
   keyExtractor={[Function]}
   maxToRenderPerBatch={10}
   onContentSizeChange={[Function]}
@@ -24,12 +25,12 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
   onScrollEndDrag={[Function]}
   removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={1}
+  scrollEventThrottle={0.0001}
   showsVerticalScrollIndicator={false}
   stickyHeaderIndices={Array []}
   updateCellsBatchingPeriod={50}
   viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
+  windowSize={5}
 >
   <View>
     <View
