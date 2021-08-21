@@ -2,7 +2,7 @@ import { APP_BAR_HEIGHT } from "components/AppBar";
 import React, { FC, useEffect } from "react";
 import { Animated, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { easeOutExpo } from ".";
+import { easeOutExpo } from "./SlideInBody";
 
 export interface SlideInTopProps extends Animated.ComponentProps<View> {
   scrollY: Animated.Value;
