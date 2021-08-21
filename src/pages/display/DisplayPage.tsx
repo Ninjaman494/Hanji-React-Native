@@ -1,11 +1,11 @@
-import { AppLayout, BaseCard } from "components";
-import { SlideInScrollView } from "components/SlideInAnimator";
+import { AppBar, AppLayout, BaseCard } from "components";
+import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import useGetURLParams from "hooks/useGetURLParams";
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useMemo } from "react";
+import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { useHistory } from "react-router";
 import DefPosCard from "./components/DefPosCard";
@@ -48,13 +48,24 @@ const DisplayPage: React.FC = () => {
   );
   const conjugations = conjData?.favorites;
 
+  const scrollY = useMemo(() => new Animated.Value(150), []);
+  const containerY = useMemo(() => new Animated.Value(0), []);
+
   return (
-    <>
+    <View style={{ flex: 1 }}>
+      <SlideInTop scrollY={scrollY} shouldAnimate={!!entry}>
+        <AppBar />
+      </SlideInTop>
       <AppLayout
         loading={entryLoading || conjLoading}
         error={entryError ? entryError.message : conjError?.message}
       >
-        <SlideInScrollView shouldAnimate>
+        <SlideInBody
+          shouldAnimate
+          scrollY={scrollY}
+          containerY={containerY}
+          flatlist={false}
+        >
           <DefPosCard entry={entry as Entry} style={styles.card} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
@@ -87,9 +98,9 @@ const DisplayPage: React.FC = () => {
               <Text style={styles.synAnt}>{entry.antonyms.join(", ")}</Text>
             </BaseCard>
           )}
-        </SlideInScrollView>
+        </SlideInBody>
       </AppLayout>
-    </>
+    </View>
   );
 };
 
