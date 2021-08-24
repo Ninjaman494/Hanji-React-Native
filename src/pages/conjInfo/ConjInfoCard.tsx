@@ -52,15 +52,25 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
       rightIcon={() => <HonorificBadge visible={conjugation?.honorific} />}
     >
       <View style={{ paddingHorizontal: padding?.horizontal }}>
-        <Text style={styles.conjugation}>{conjugation?.conjugation}</Text>
+        <Text style={styles.conjugation} selectable>
+          {conjugation?.conjugation}
+        </Text>
         <Title style={styles.title}>Pronunciation</Title>
-        <Text style={styles.text}>{conjugation?.pronunciation}</Text>
-        <Text style={styles.secondary}>{conjugation?.romanization}</Text>
+        <Text style={styles.text} selectable>
+          {conjugation?.pronunciation}
+        </Text>
+        <Text style={styles.secondary} selectable>
+          {conjugation?.romanization}
+        </Text>
         <Title style={styles.title}>Explanation</Title>
         {reasons.map((reason, index) => (
           <View style={{ marginBottom: padding?.vertical }} key={index}>
-            <Text style={styles.text}>{reason.type}</Text>
-            <Text style={styles.secondary}>{reason.details}</Text>
+            <Text style={styles.text} selectable>
+              {reason.type}
+            </Text>
+            <Text style={styles.secondary} selectable>
+              {reason.details}
+            </Text>
           </View>
         ))}
       </View>
