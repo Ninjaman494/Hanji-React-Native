@@ -1,8 +1,8 @@
+import { BaseCard, ListItem } from "components";
 import { Entry } from "hooks/useGetEntry";
 import React, { useState } from "react";
-import { Headline, List, Subheading, useTheme } from "react-native-paper";
-import { ListItem, BaseCard } from "components";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Headline, List, Subheading, useTheme } from "react-native-paper";
 
 export interface DefPosCardProps {
   entry: Entry;
@@ -34,7 +34,7 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
       }
       onBtnPress={() => setShowMore(!showingMore)}
     >
-      <Headline testID="defPosCardTerm" style={styles.text}>
+      <Headline testID="defPosCardTerm" style={styles.text} selectable>
         {entry.term}
       </Headline>
       <Subheading testID="defPosCardPos" style={styles.text}>

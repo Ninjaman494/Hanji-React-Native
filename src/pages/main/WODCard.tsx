@@ -1,9 +1,9 @@
 import BaseCard, { BaseCardProps } from "components/BaseCard";
-import { Button, Card, Text, useTheme } from "react-native-paper";
-import { StyleSheet } from "react-native";
-import { useHistory } from "react-router";
-import React, { FC } from "react";
 import useGetWOD from "hooks/useGetWOD";
+import React, { FC } from "react";
+import { StyleSheet } from "react-native";
+import { Button, Card, Text, useTheme } from "react-native-paper";
+import { useHistory } from "react-router";
 
 const WODCard: FC<BaseCardProps> = (props) => {
   const history = useHistory();
@@ -24,6 +24,7 @@ const WODCard: FC<BaseCardProps> = (props) => {
     <BaseCard title="Word of the Day" {...props}>
       <Text
         style={[styles.text, { color: loading ? colors.grey : colors.text }]}
+        selectable
       >
         {text}
       </Text>
