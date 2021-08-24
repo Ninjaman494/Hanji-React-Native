@@ -182,6 +182,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             Array [
               Object {
@@ -253,6 +254,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           Pronunciation
         </Text>
         <Text
+          selectable={true}
           style={
             Array [
               Object {
@@ -270,6 +272,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           pronunciation
         </Text>
         <Text
+          selectable={true}
           style={
             Array [
               Object {
@@ -348,6 +351,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -365,6 +369,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             reason 1 
           </Text>
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -391,6 +396,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -408,6 +414,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             reason 2 
           </Text>
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -434,6 +441,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -451,6 +459,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             reason 3 
           </Text>
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -657,6 +666,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             Array [
               Object {
@@ -728,6 +738,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           Pronunciation
         </Text>
         <Text
+          selectable={true}
           style={
             Array [
               Object {
@@ -745,6 +756,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           pronunciation
         </Text>
         <Text
+          selectable={true}
           style={
             Array [
               Object {
@@ -823,6 +835,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -840,6 +853,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             reason 1 
           </Text>
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -866,6 +880,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -883,6 +898,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             reason 2 
           </Text>
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -909,6 +925,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
@@ -926,6 +943,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             reason 3 
           </Text>
           <Text
+            selectable={true}
             style={
               Array [
                 Object {
