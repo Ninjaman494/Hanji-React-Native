@@ -29,7 +29,9 @@ const ListItem: React.FC<ListItemProps> = ({
       {...rest}
       style={[styles.item, style]}
       titleStyle={[styles.title, titleStyle]}
+      titleNumberOfLines={5}
       descriptionStyle={[styles.description, descriptionStyle]}
+      descriptionNumberOfLines={10}
     />
   );
 };
