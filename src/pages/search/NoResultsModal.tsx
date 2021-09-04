@@ -13,7 +13,7 @@ const NoResultsModal: FC<NoResultsModalProps> = ({ query, ...rest }) => {
     <Dialog {...rest}>
       <Dialog.Title>No Results Found</Dialog.Title>
       <Dialog.Content>
-        <Text style={{ fontSize: textSizes.secondary }}>
+        <Text style={{ fontSize: textSizes?.secondary }}>
           We couldn't find anything matching "{query}".
         </Text>
       </Dialog.Content>
