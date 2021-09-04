@@ -1,10 +1,11 @@
+import { LoadingScreen } from "components";
+import useGetURLParams from "hooks/useGetURLParams";
+import useSearch from "hooks/useSearch";
+import SearchResultsPage from "pages/searchResults/SearchResultsPage";
 import React, { useEffect } from "react";
 import { Text } from "react-native-paper";
 import { useHistory } from "react-router";
-import useSearch from "hooks/useSearch";
-import { LoadingScreen } from "components";
-import SearchResultsPage from "pages/searchResults/SearchResultsPage";
-import useGetURLParams from "hooks/useGetURLParams";
+import NoResultsModal from "./NoResultsModal";
 
 const SearchPage: React.FC = () => {
   const query = useGetURLParams().get("query");
@@ -31,6 +32,11 @@ const SearchPage: React.FC = () => {
             cursor={data?.search?.cursor}
           />
         )}
+        <NoResultsModal
+          visible={results?.length === 0}
+          query={query}
+          onDismiss={history.goBack}
+        />
       </>
     );
   } else {
