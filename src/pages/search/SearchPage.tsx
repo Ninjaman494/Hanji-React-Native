@@ -35,7 +35,7 @@ const SearchPage: React.FC = () => {
         <NoResultsModal
           visible={results?.length === 0}
           query={query}
-          onDismiss={() => history.goBack()}
+          onDismiss={history.goBack}
         />
       </>
     );
