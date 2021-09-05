@@ -9,6 +9,7 @@ import { StatusBar } from "expo-status-bar";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
+import ConjugatorPage from "pages/conjugator/ConjugatorPage";
 import DisplayPage from "pages/display/DisplayPage";
 import FavoritesPage from "pages/favorites/FavoritesPage";
 import MainPage from "pages/main/MainPage";
@@ -91,6 +92,11 @@ export default function Index(): JSX.Element {
                       component={AcknowledgementsPage}
                     />
                     <Route exact path="/bugReport" component={BugReportPage} />
+                    <Route
+                      exact
+                      path="/conjugator"
+                      component={ConjugatorPage}
+                    />
                   </Switch>
                 </Router>
               </View>
