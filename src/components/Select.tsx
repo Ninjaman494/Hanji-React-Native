@@ -92,8 +92,6 @@ const Select = forwardRef<ReactNativeTextInput, SelectProps>(
         style={{
           maxWidth: inputLayout?.width,
           width: inputLayout?.width,
-          marginBottom: 0,
-          paddingBottom: 0,
         }}
       >
         <ScrollView style={{ maxHeight: 200 }}>
