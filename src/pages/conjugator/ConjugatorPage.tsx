@@ -2,7 +2,14 @@ import { AppBar, HonorificSwitch } from "components";
 import Select from "components/Select";
 import useConjugations from "hooks/useConjugations";
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, Easing, ScrollView, View } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  Easing,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import { ProgressBar, useTheme } from "react-native-paper";
 import ConjugationsList from "./ConjugationsList";
 
@@ -30,6 +37,17 @@ interface FormValues {
 
 const ConjugatorPage: FC = () => {
   const { padding, colors } = useTheme();
+  const styles = StyleSheet.create({
+    formContainer: {
+      marginHorizontal: padding.horizontal,
+      marginTop: padding.vertical,
+    },
+    select: { marginBottom: -16 },
+    progressBar: {
+      marginHorizontal: padding.horizontal,
+      marginTop: 32,
+    },
+  });
 
   const [formValues, setFormValues] = useState<FormValues>({
     stem: "먹다",
@@ -80,17 +98,12 @@ const ConjugatorPage: FC = () => {
         onPress={(value) => updateForm({ ...formValues, honorific: value })}
       />
       <ScrollView>
-        <View
-          style={{
-            marginHorizontal: padding.horizontal,
-            marginTop: padding.vertical,
-          }}
-        >
+        <View style={styles.formContainer}>
           <Select
             label="Possible Stems"
             list={stems}
             value={formValues.stem}
-            inputProps={{ style: { marginBottom: -16 } }}
+            inputProps={{ style: styles.select }}
             onChange={(value) =>
               updateForm({
                 ...formValues,
@@ -102,7 +115,7 @@ const ConjugatorPage: FC = () => {
             label="Part of Speech"
             list={pos}
             value={formValues.isAdj ? "Adjective" : "Verb"}
-            inputProps={{ style: { marginBottom: -16 } }}
+            inputProps={{ style: styles.select }}
             onChange={(value) =>
               updateForm({
                 ...formValues,
@@ -114,7 +127,7 @@ const ConjugatorPage: FC = () => {
             label="Regularity"
             list={regularity}
             value={formValues.regular ? "regular" : "irregular"}
-            inputProps={{ style: { marginBottom: -16 } }}
+            inputProps={{ style: styles.select }}
             onChange={(value) =>
               updateForm({
                 ...formValues,
@@ -133,7 +146,7 @@ const ConjugatorPage: FC = () => {
         ) : (
           <ProgressBar
             color={colors.accent}
-            style={{ marginHorizontal: padding.horizontal, marginTop: 32 }}
+            style={styles.progressBar}
             indeterminate
           />
         )}
