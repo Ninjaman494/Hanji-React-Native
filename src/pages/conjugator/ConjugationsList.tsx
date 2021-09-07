@@ -1,10 +1,12 @@
 import { Conjugation } from "hooks/useConjugations";
 import ConjugationCard from "pages/conjugations/components/ConjugationCard";
 import React, { FC, useMemo } from "react";
+import { Animated, ViewProps } from "react-native";
 import { useTheme } from "react-native-paper";
 import toTitleCase from "utils/toTitleCase";
 
-export interface ConjugationsListProps {
+export interface ConjugationsListProps
+  extends Animated.AnimatedProps<ViewProps> {
   conjugations: Conjugation[];
 }
 
@@ -12,12 +14,11 @@ interface ConjugationMap {
   [key: string]: Conjugation[];
 }
 
-const ConjugationsList: FC<ConjugationsListProps> = ({ conjugations }) => {
+const ConjugationsList: FC<ConjugationsListProps> = ({
+  conjugations,
+  ...rest
+}) => {
   const { padding } = useTheme();
-  const style = {
-    marginVertical: padding?.vertical,
-    marginHorizontal: padding?.horizontal,
-  };
 
   const conjMap = useMemo(
     () =>
@@ -30,16 +31,19 @@ const ConjugationsList: FC<ConjugationsListProps> = ({ conjugations }) => {
   );
 
   return (
-    <>
+    <Animated.View {...rest}>
       {Object.keys(conjMap).map((key) => (
         <ConjugationCard
           key={key}
           title={toTitleCase(key)}
           conjugations={conjMap[key]}
-          style={style}
+          style={{
+            marginVertical: padding.vertical,
+            marginHorizontal: padding.horizontal,
+          }}
         />
       ))}
-    </>
+    </Animated.View>
   );
 };
 
