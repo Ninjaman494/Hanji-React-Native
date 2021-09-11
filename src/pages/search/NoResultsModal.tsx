@@ -24,7 +24,7 @@ const NoResultsModal: FC<NoResultsModalProps> = ({ query, ...rest }) => {
       <Dialog.Actions>
         <Button onPress={rest.onDismiss}>OK</Button>
         {isAdjVerb && (
-          <Button onPress={() => history.push("/conjugator")}>
+          <Button onPress={() => history.push(`/conjugator?term=${query}`)}>
             Use Conjugator
           </Button>
         )}

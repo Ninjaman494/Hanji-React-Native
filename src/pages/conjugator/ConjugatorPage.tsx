@@ -1,6 +1,8 @@
-import { AppBar, HonorificSwitch } from "components";
+import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import Select from "components/Select";
 import useConjugations from "hooks/useConjugations";
+import useGetStems from "hooks/useGetStems";
+import useGetURLParams from "hooks/useGetURLParams";
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -12,11 +14,6 @@ import {
 } from "react-native";
 import { ProgressBar, useTheme } from "react-native-paper";
 import ConjugationsList from "./ConjugationsList";
-
-const stems = [
-  { label: "먹다", value: "먹다" },
-  { label: "먹드다", value: "먹드다" },
-];
 
 const pos = [
   { label: "Verb", value: "Verb" },
@@ -36,6 +33,7 @@ interface FormValues {
 }
 
 const ConjugatorPage: FC = () => {
+  // Styling
   const { padding, colors } = useTheme();
   const styles = StyleSheet.create({
     formContainer: {
@@ -49,14 +47,22 @@ const ConjugatorPage: FC = () => {
     },
   });
 
+  const term = useGetURLParams().get("term");
+  const { data: stems } = useGetStems(term as string, {
+    skip: !term,
+  });
+
   const [formValues, setFormValues] = useState<FormValues>({
-    stem: "먹다",
+    stem: "",
     isAdj: false,
     regular: false,
     honorific: false,
   });
 
-  const { data, loading } = useConjugations(formValues);
+  const { data: conjugations, loading: conjLoading } = useConjugations(
+    formValues,
+    { skip: !stems }
+  );
 
   // For switch, Apollo doesn't reset loading when fetching from cache
   const [animate, setAnimate] = useState(false);
@@ -69,7 +75,7 @@ const ConjugatorPage: FC = () => {
   });
 
   useEffect(() => {
-    if (animate || (!loading && data?.conjugations)) {
+    if (animate || (!conjLoading && conjugations?.conjugations)) {
       Animated.timing(containerY, {
         toValue: 100,
         duration: 500,
@@ -79,7 +85,16 @@ const ConjugatorPage: FC = () => {
 
       setAnimate(false);
     }
-  }, [animate, loading, data]);
+  }, [animate, conjLoading, conjugations]);
+
+  useEffect(() => {
+    if (stems?.stems) {
+      setFormValues({
+        ...formValues,
+        stem: stems.stems[0],
+      });
+    }
+  }, [stems]);
 
   const updateForm = useCallback(
     (formValues: FormValues) => {
@@ -97,60 +112,67 @@ const ConjugatorPage: FC = () => {
         honorific={formValues.honorific}
         onPress={(value) => updateForm({ ...formValues, honorific: value })}
       />
-      <ScrollView>
-        <View style={styles.formContainer}>
-          <Select
-            label="Possible Stems"
-            list={stems}
-            value={formValues.stem}
-            inputProps={{ style: styles.select }}
-            onChange={(value) =>
-              updateForm({
-                ...formValues,
-                stem: value,
-              })
-            }
-          />
-          <Select
-            label="Part of Speech"
-            list={pos}
-            value={formValues.isAdj ? "Adjective" : "Verb"}
-            inputProps={{ style: styles.select }}
-            onChange={(value) =>
-              updateForm({
-                ...formValues,
-                isAdj: value === "Adjective",
-              })
-            }
-          />
-          <Select
-            label="Regularity"
-            list={regularity}
-            value={formValues.regular ? "regular" : "irregular"}
-            inputProps={{ style: styles.select }}
-            onChange={(value) =>
-              updateForm({
-                ...formValues,
-                regular: value === "regular",
-              })
-            }
-          />
-        </View>
-        {data?.conjugations ? (
-          <ConjugationsList
-            conjugations={data.conjugations}
-            style={{
-              transform: [{ translateY: containerTranslate }],
-            }}
-          />
-        ) : (
-          <ProgressBar
-            color={colors.accent}
-            style={styles.progressBar}
-            indeterminate
-          />
-        )}
-      </ScrollView>
+      {stems?.stems ? (
+        <ScrollView>
+          <View style={styles.formContainer}>
+            <Select
+              label="Possible Stems"
+              list={stems.stems.map((stem) => ({
+                label: stem,
+                value: stem,
+              }))}
+              value={formValues.stem}
+              inputProps={{ style: styles.select }}
+              onChange={(value) =>
+                updateForm({
+                  ...formValues,
+                  stem: value,
+                })
+              }
+            />
+            <Select
+              label="Part of Speech"
+              list={pos}
+              value={formValues.isAdj ? "Adjective" : "Verb"}
+              inputProps={{ style: styles.select }}
+              onChange={(value) =>
+                updateForm({
+                  ...formValues,
+                  isAdj: value === "Adjective",
+                })
+              }
+            />
+            <Select
+              label="Regularity"
+              list={regularity}
+              value={formValues.regular ? "regular" : "irregular"}
+              inputProps={{ style: styles.select }}
+              onChange={(value) =>
+                updateForm({
+                  ...formValues,
+                  regular: value === "regular",
+                })
+              }
+            />
+          </View>
+          {conjugations?.conjugations ? (
+            <ConjugationsList
+              conjugations={conjugations.conjugations}
+              style={{
+                transform: [{ translateY: containerTranslate }],
+              }}
+            />
+          ) : (
+            <ProgressBar
+              color={colors.accent}
+              style={styles.progressBar}
+              indeterminate
+            />
+          )}
+        </ScrollView>
+      ) : (
+        <LoadingScreen />
+      )}
     </View>
   );
 };
