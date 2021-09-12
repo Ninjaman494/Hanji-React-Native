@@ -1,16 +1,11 @@
 import { AppBar, LoadingScreen } from "components";
+import { easeOutExpo } from "components/animations/SlideInBody";
 import useConjugations from "hooks/useConjugations";
 import useGetURLParams from "hooks/useGetURLParams";
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, Easing, StyleSheet, View } from "react-native";
+import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { Switch, Text, useTheme } from "react-native-paper";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
-
-const easeInOutCubic = Easing.bezier(0.645, 0.045, 0.355, 1.0);
-
-// intial state - loading false, conjugations null
-// First switch - loading true, conjugations not-null
-// later switches - loading false, conjugations not-null
 
 const ConjugationsPage: React.FC = () => {
   const { padding, colors, textSizes } = useTheme();
@@ -40,36 +35,33 @@ const ConjugationsPage: React.FC = () => {
     params.get("honorific") === "true"
   );
 
-  const { loading, error, data } = useConjugations({
-    stem: stem,
-    isAdj: isAdj,
-    honorific: honorific,
-  });
+  const { loading, error, data } = useConjugations(
+    {
+      stem: stem,
+      isAdj: isAdj,
+      honorific: honorific,
+    },
+    { notifyOnNetworkStatusChange: true, fetchPolicy: "cache-and-network" }
+  );
   const conjugations = data?.conjugations;
-
-  // For switch, Apollo doesn't reset loading when fetching from cache
-  const [animate, setAnimate] = useState(false);
 
   // Value used for transition animations on container
   const containerY = useRef(new Animated.Value(0)).current;
-
   const containerTranslate = containerY.interpolate({
     inputRange: [0, 100],
     outputRange: [Dimensions.get("window").height, 0],
   });
 
   useEffect(() => {
-    if (animate || (!loading && conjugations)) {
+    if (!loading && conjugations) {
       Animated.timing(containerY, {
         toValue: 100,
         duration: 500,
-        easing: easeInOutCubic,
+        easing: easeOutExpo,
         useNativeDriver: false,
       }).start();
-
-      setAnimate(false);
     }
-  }, [animate, loading, conjugations]);
+  }, [loading, conjugations]);
 
   return (
     <View style={styles.parent}>
@@ -84,22 +76,21 @@ const ConjugationsPage: React.FC = () => {
           trackColor={{ false: colors?.primaryDark, true: "#FFFFFF88" }}
           onValueChange={() => {
             setHonorific(!honorific);
-            setAnimate(true);
             containerY.setValue(0);
           }}
         />
       </View>
       {error && <Text>{error}</Text>}
-      {conjugations ? (
+      {loading ? (
+        <LoadingScreen />
+      ) : (
         <ConjugationsPageContent
-          conjugations={conjugations}
+          conjugations={conjugations ?? []}
           style={{
             transform: [{ translateY: containerTranslate }],
             height: 500,
           }}
         />
-      ) : (
-        <LoadingScreen />
       )}
     </View>
   );
