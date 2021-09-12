@@ -1,9 +1,8 @@
-import { AppBarProps } from "components/AppBar";
+import { AppBarProps, APP_BAR_HEIGHT } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
 import React from "react";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
-import Body from "./Body";
 
 export interface AppLayoutProps extends AppBarProps {
   loading?: boolean;
@@ -18,7 +17,14 @@ const AppLayout: React.FC<AppLayoutProps> = ({ loading, error, children }) => {
       ) : error ? (
         <Text>{error}</Text>
       ) : (
-        <Body>{children}</Body>
+        <View
+          style={{
+            marginTop: APP_BAR_HEIGHT,
+            flexGrow: 1,
+          }}
+        >
+          {children}
+        </View>
       )}
     </View>
   );
