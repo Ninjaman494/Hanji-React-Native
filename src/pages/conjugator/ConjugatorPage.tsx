@@ -150,18 +150,18 @@ const ConjugatorPage: FC = () => {
               }
             />
           </View>
-          {!conjLoading ? (
+          {conjLoading ? (
+            <ProgressBar
+              color={colors.accent}
+              style={styles.progressBar}
+              indeterminate
+            />
+          ) : (
             <ConjugationsList
               conjugations={conjugations?.conjugations ?? []}
               style={{
                 transform: [{ translateY: containerTranslate }],
               }}
-            />
-          ) : (
-            <ProgressBar
-              color={colors.accent}
-              style={styles.progressBar}
-              indeterminate
             />
           )}
         </ScrollView>
