@@ -37,12 +37,12 @@ const ConjugatorPage: FC = () => {
   const { padding, colors } = useTheme();
   const styles = StyleSheet.create({
     formContainer: {
-      marginHorizontal: padding.horizontal,
-      marginTop: padding.vertical,
+      marginHorizontal: padding?.horizontal,
+      marginTop: padding?.vertical,
     },
     select: { marginBottom: -16 },
     progressBar: {
-      marginHorizontal: padding.horizontal,
+      marginHorizontal: padding?.horizontal,
       marginTop: 32,
     },
   });
@@ -55,7 +55,7 @@ const ConjugatorPage: FC = () => {
   const [formValues, setFormValues] = useState<FormValues>({
     stem: "",
     isAdj: false,
-    regular: false,
+    regular: true,
     honorific: false,
   });
 
