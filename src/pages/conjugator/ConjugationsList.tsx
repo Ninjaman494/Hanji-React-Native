@@ -38,8 +38,8 @@ const ConjugationsList: FC<ConjugationsListProps> = ({
           title={toTitleCase(key)}
           conjugations={conjMap[key]}
           style={{
-            marginVertical: padding.vertical,
-            marginHorizontal: padding.horizontal,
+            marginVertical: padding?.vertical,
+            marginHorizontal: padding?.horizontal,
           }}
         />
       ))}
