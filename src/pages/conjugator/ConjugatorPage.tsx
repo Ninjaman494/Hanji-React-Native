@@ -61,11 +61,12 @@ const ConjugatorPage: FC = () => {
 
   const { data: conjugations, loading: conjLoading } = useConjugations(
     formValues,
-    { skip: !stems }
+    {
+      skip: !stems,
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: "cache-and-network",
+    }
   );
-
-  // For switch, Apollo doesn't reset loading when fetching from cache
-  const [animate, setAnimate] = useState(false);
 
   // Value used for transition animations on container
   const containerY = useRef(new Animated.Value(0)).current;
@@ -75,34 +76,28 @@ const ConjugatorPage: FC = () => {
   });
 
   useEffect(() => {
-    if (animate || (!conjLoading && conjugations?.conjugations)) {
+    if (!conjLoading) {
       Animated.timing(containerY, {
         toValue: 100,
         duration: 500,
         easing: Easing.bezier(0.645, 0.045, 0.355, 1.0),
         useNativeDriver: false,
       }).start();
-
-      setAnimate(false);
     }
-  }, [animate, conjLoading, conjugations]);
+  }, [conjLoading]);
 
   useEffect(() => {
     if (stems?.stems) {
-      setFormValues({
-        ...formValues,
-        stem: stems.stems[0],
-      });
+      setFormValues({ ...formValues, stem: stems.stems[0] });
     }
-  }, [stems]);
+  }, [stems, setFormValues]);
 
   const updateForm = useCallback(
     (formValues: FormValues) => {
       setFormValues(formValues);
-      setAnimate(true);
       containerY.setValue(0);
     },
-    [formValues, containerY, setFormValues, setAnimate]
+    [containerY, setFormValues]
   );
 
   return (
@@ -155,9 +150,9 @@ const ConjugatorPage: FC = () => {
               }
             />
           </View>
-          {conjugations?.conjugations ? (
+          {!conjLoading ? (
             <ConjugationsList
-              conjugations={conjugations.conjugations}
+              conjugations={conjugations?.conjugations ?? []}
               style={{
                 transform: [{ translateY: containerTranslate }],
               }}
