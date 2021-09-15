@@ -2,13 +2,13 @@ jest.mock("hooks/useSendBugReport");
 jest.mock("components/SnackbarProvider");
 jest.mock("react-router-native");
 
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { useSnackbar } from "components/SnackbarProvider";
 import { ReactNativeFile } from "extract-files";
 import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React from "react";
 import "react-native";
 import { useHistory, useLocation } from "react-router-native";
+import { fireEvent, render, waitFor } from "utils/testUtils";
 import BugReportPage from "../BugReportPage";
 
 const deviceInfo = {

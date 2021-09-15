@@ -4,11 +4,11 @@ import {
   RenderOptions,
 } from "@testing-library/react-native";
 import React, { FC, ReactElement } from "react";
-import { ThemeProvider } from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import theme from "theme";
 
 const Providers: FC = ({ children }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return <PaperProvider theme={theme}>{children}</PaperProvider>;
 };
 
 const customRender = (

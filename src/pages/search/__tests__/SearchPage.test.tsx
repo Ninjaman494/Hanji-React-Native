@@ -1,12 +1,12 @@
 jest.mock("react-router");
 jest.mock("hooks/useSearch");
 
-import { fireEvent, render } from "@testing-library/react-native";
 import { Entry } from "hooks/useGetEntry";
 import useSearch from "hooks/useSearch";
 import React from "react";
 import "react-native";
 import { useHistory, useLocation } from "react-router";
+import { fireEvent, render } from "utils/testUtils";
 import SearchPage from "../SearchPage";
 
 const replace = jest.fn();
