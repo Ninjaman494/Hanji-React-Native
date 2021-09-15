@@ -2,354 +2,266 @@
 
 exports[`ConjInfoCard component displays a regular conjugation 1`] = `
 <View
+  collapsable={false}
+  pointerEvents="box-none"
   style={
     Object {
-      "backgroundColor": "#ffffff",
-      "borderRadius": 4,
-      "elevation": 5,
-      "marginBottom": 8,
-      "marginHorizontal": undefined,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 4,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 5,
+      "flex": 1,
     }
   }
 >
   <View
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "flexGrow": 1,
-        "flexShrink": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": 10,
+        "elevation": 5,
+        "marginBottom": 8,
+        "marginHorizontal": 16,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 5,
       }
     }
   >
     <View
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "paddingLeft": 16,
-          },
-          Object {
-            "minHeight": 72,
-          },
-          Object {
-            "marginTop": -8,
-          },
-        ]
+        Object {
+          "flexGrow": 1,
+          "flexShrink": 1,
+        }
       }
     >
       <View
         style={
           Array [
             Object {
-              "flex": 1,
-              "flexDirection": "column",
-              "justifyContent": "center",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingLeft": 16,
+            },
+            Object {
+              "minHeight": 72,
+            },
+            Object {
+              "marginTop": -8,
             },
           ]
         }
       >
-        <Text
-          numberOfLines={1}
+        <View
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
+                "flex": 1,
+                "flexDirection": "column",
+                "justifyContent": "center",
               },
-              Array [
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Array [
-                    Object {
-                      "minHeight": 30,
-                    },
-                    Object {
-                      "marginBottom": 2,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontSize": undefined,
-                      "fontWeight": "400",
-                    },
-                  ],
-                ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Array [
-                    Object {
-                      "minHeight": 30,
-                    },
-                    Object {
-                      "marginBottom": 2,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontSize": undefined,
-                      "fontWeight": "400",
-                    },
-                  ],
-                ],
-              ],
             ]
           }
         >
-          Name
-        </Text>
-      </View>
-      <View>
-        <Text
-          numberOfLines={1}
-          style={
-            Object {
-              "alignSelf": "flex-end",
-              "backgroundColor": "#03dac4",
-              "borderRadius": 15,
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontSize": 15,
-              "fontWeight": "500",
-              "height": 30,
-              "lineHeight": 30,
-              "marginRight": undefined,
-              "minWidth": 30,
-              "opacity": 0,
-              "overflow": "hidden",
-              "paddingHorizontal": undefined,
-              "textAlign": "center",
-              "textAlignVertical": "center",
+          <Text
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Array [
+                      Object {
+                        "minHeight": 30,
+                      },
+                      Object {
+                        "marginBottom": 2,
+                      },
+                      Object {
+                        "color": "#3F51B5",
+                        "fontSize": 16,
+                        "fontWeight": "400",
+                      },
+                    ],
+                  ],
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Array [
+                      Object {
+                        "minHeight": 30,
+                      },
+                      Object {
+                        "marginBottom": 2,
+                      },
+                      Object {
+                        "color": "#3F51B5",
+                        "fontSize": 16,
+                        "fontWeight": "400",
+                      },
+                    ],
+                  ],
+                ],
+              ]
             }
-          }
-        >
-          Honorific
-        </Text>
+          >
+            Name
+          </Text>
+        </View>
+        <View>
+          <Text
+            numberOfLines={1}
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "backgroundColor": "#F44336",
+                "borderRadius": 15,
+                "color": "#ffffff",
+                "fontFamily": "System",
+                "fontSize": 15,
+                "fontWeight": "500",
+                "height": 30,
+                "lineHeight": 30,
+                "marginRight": 16,
+                "minWidth": 30,
+                "opacity": 0,
+                "overflow": "hidden",
+                "paddingHorizontal": 16,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            Honorific
+          </Text>
+        </View>
       </View>
-    </View>
-    <View
-      style={
-        Array [
-          Object {
-            "paddingHorizontal": 16,
-          },
-          undefined,
-          Object {
-            "paddingBottom": undefined,
-            "paddingHorizontal": 0,
-          },
-        ]
-      }
-    >
       <View
         style={
-          Object {
-            "paddingHorizontal": undefined,
-          }
+          Array [
+            Object {
+              "paddingHorizontal": 16,
+            },
+            undefined,
+            Object {
+              "paddingBottom": 8,
+              "paddingHorizontal": 0,
+            },
+          ]
         }
       >
-        <Text
-          selectable={true}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Object {
-                "fontSize": 24,
-                "marginTop": -24,
-              },
-            ]
-          }
-        >
-          conj
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Array [
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-              ],
-            ]
-          }
-        >
-          Pronunciation
-        </Text>
-        <Text
-          selectable={true}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Object {
-                "fontSize": 20,
-              },
-            ]
-          }
-        >
-          pronunciation
-        </Text>
-        <Text
-          selectable={true}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Object {
-                "color": "#808080",
-                "fontSize": 18,
-              },
-            ]
-          }
-        >
-          romanization
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Array [
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-              ],
-            ]
-          }
-        >
-          Explanation
-        </Text>
         <View
           style={
             Object {
-              "marginBottom": undefined,
+              "paddingHorizontal": 16,
             }
           }
         >
+          <Text
+            selectable={true}
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "textAlign": "left",
+                },
+                Object {
+                  "fontSize": 24,
+                  "marginTop": -24,
+                },
+              ]
+            }
+          >
+            conj
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Pronunciation
+          </Text>
           <Text
             selectable={true}
             style={
@@ -366,7 +278,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
               ]
             }
           >
-            reason 1 
+            pronunciation
           </Text>
           <Text
             selectable={true}
@@ -385,18 +297,9 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
               ]
             }
           >
-            (details)
+            romanization
           </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "marginBottom": undefined,
-            }
-          }
-        >
           <Text
-            selectable={true}
             style={
               Array [
                 Object {
@@ -405,78 +308,185 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
-                  "fontSize": 20,
-                },
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                ],
               ]
             }
           >
-            reason 2 
+            Explanation
           </Text>
-          <Text
-            selectable={true}
+          <View
             style={
-              Array [
-                Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "textAlign": "left",
-                },
-                Object {
-                  "color": "#808080",
-                  "fontSize": 18,
-                },
-              ]
+              Object {
+                "marginBottom": 8,
+              }
             }
           >
-            (details)
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "marginBottom": undefined,
-            }
-          }
-        >
-          <Text
-            selectable={true}
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 20,
+                  },
+                ]
+              }
+            >
+              reason 1 
+            </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "#808080",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              (details)
+            </Text>
+          </View>
+          <View
             style={
-              Array [
-                Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "textAlign": "left",
-                },
-                Object {
-                  "fontSize": 20,
-                },
-              ]
+              Object {
+                "marginBottom": 8,
+              }
             }
           >
-            reason 3 
-          </Text>
-          <Text
-            selectable={true}
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 20,
+                  },
+                ]
+              }
+            >
+              reason 2 
+            </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "#808080",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              (details)
+            </Text>
+          </View>
+          <View
             style={
-              Array [
-                Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "textAlign": "left",
-                },
-                Object {
-                  "color": "#808080",
-                  "fontSize": 18,
-                },
-              ]
+              Object {
+                "marginBottom": 8,
+              }
             }
           >
-            (details)
-          </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 20,
+                  },
+                ]
+              }
+            >
+              reason 3 
+            </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "#808080",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              (details)
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -486,354 +496,266 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
 
 exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
 <View
+  collapsable={false}
+  pointerEvents="box-none"
   style={
     Object {
-      "backgroundColor": "#ffffff",
-      "borderRadius": 4,
-      "elevation": 5,
-      "marginBottom": 8,
-      "marginHorizontal": undefined,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 4,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 5,
+      "flex": 1,
     }
   }
 >
   <View
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "flexGrow": 1,
-        "flexShrink": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": 10,
+        "elevation": 5,
+        "marginBottom": 8,
+        "marginHorizontal": 16,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 5,
       }
     }
   >
     <View
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "paddingLeft": 16,
-          },
-          Object {
-            "minHeight": 72,
-          },
-          Object {
-            "marginTop": -8,
-          },
-        ]
+        Object {
+          "flexGrow": 1,
+          "flexShrink": 1,
+        }
       }
     >
       <View
         style={
           Array [
             Object {
-              "flex": 1,
-              "flexDirection": "column",
-              "justifyContent": "center",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingLeft": 16,
+            },
+            Object {
+              "minHeight": 72,
+            },
+            Object {
+              "marginTop": -8,
             },
           ]
         }
       >
-        <Text
-          numberOfLines={1}
+        <View
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
+                "flex": 1,
+                "flexDirection": "column",
+                "justifyContent": "center",
               },
-              Array [
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Array [
-                    Object {
-                      "minHeight": 30,
-                    },
-                    Object {
-                      "marginBottom": 2,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontSize": undefined,
-                      "fontWeight": "400",
-                    },
-                  ],
-                ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Array [
-                    Object {
-                      "minHeight": 30,
-                    },
-                    Object {
-                      "marginBottom": 2,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontSize": undefined,
-                      "fontWeight": "400",
-                    },
-                  ],
-                ],
-              ],
             ]
           }
         >
-          Name
-        </Text>
-      </View>
-      <View>
-        <Text
-          numberOfLines={1}
-          style={
-            Object {
-              "alignSelf": "flex-end",
-              "backgroundColor": "#03dac4",
-              "borderRadius": 15,
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontSize": 15,
-              "fontWeight": "500",
-              "height": 30,
-              "lineHeight": 30,
-              "marginRight": undefined,
-              "minWidth": 30,
-              "opacity": 1,
-              "overflow": "hidden",
-              "paddingHorizontal": undefined,
-              "textAlign": "center",
-              "textAlignVertical": "center",
+          <Text
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Array [
+                      Object {
+                        "minHeight": 30,
+                      },
+                      Object {
+                        "marginBottom": 2,
+                      },
+                      Object {
+                        "color": "#3F51B5",
+                        "fontSize": 16,
+                        "fontWeight": "400",
+                      },
+                    ],
+                  ],
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Array [
+                      Object {
+                        "minHeight": 30,
+                      },
+                      Object {
+                        "marginBottom": 2,
+                      },
+                      Object {
+                        "color": "#3F51B5",
+                        "fontSize": 16,
+                        "fontWeight": "400",
+                      },
+                    ],
+                  ],
+                ],
+              ]
             }
-          }
-        >
-          Honorific
-        </Text>
+          >
+            Name
+          </Text>
+        </View>
+        <View>
+          <Text
+            numberOfLines={1}
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "backgroundColor": "#F44336",
+                "borderRadius": 15,
+                "color": "#ffffff",
+                "fontFamily": "System",
+                "fontSize": 15,
+                "fontWeight": "500",
+                "height": 30,
+                "lineHeight": 30,
+                "marginRight": 16,
+                "minWidth": 30,
+                "opacity": 1,
+                "overflow": "hidden",
+                "paddingHorizontal": 16,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            Honorific
+          </Text>
+        </View>
       </View>
-    </View>
-    <View
-      style={
-        Array [
-          Object {
-            "paddingHorizontal": 16,
-          },
-          undefined,
-          Object {
-            "paddingBottom": undefined,
-            "paddingHorizontal": 0,
-          },
-        ]
-      }
-    >
       <View
         style={
-          Object {
-            "paddingHorizontal": undefined,
-          }
+          Array [
+            Object {
+              "paddingHorizontal": 16,
+            },
+            undefined,
+            Object {
+              "paddingBottom": 8,
+              "paddingHorizontal": 0,
+            },
+          ]
         }
       >
-        <Text
-          selectable={true}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Object {
-                "fontSize": 24,
-                "marginTop": -24,
-              },
-            ]
-          }
-        >
-          conj
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Array [
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-              ],
-            ]
-          }
-        >
-          Pronunciation
-        </Text>
-        <Text
-          selectable={true}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Object {
-                "fontSize": 20,
-              },
-            ]
-          }
-        >
-          pronunciation
-        </Text>
-        <Text
-          selectable={true}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Object {
-                "color": "#808080",
-                "fontSize": 18,
-              },
-            ]
-          }
-        >
-          romanization
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "textAlign": "left",
-              },
-              Array [
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "color": "#6200ee",
-                    "fontSize": undefined,
-                    "fontWeight": "400",
-                    "marginBottom": undefined,
-                    "marginTop": 16,
-                  },
-                ],
-              ],
-            ]
-          }
-        >
-          Explanation
-        </Text>
         <View
           style={
             Object {
-              "marginBottom": undefined,
+              "paddingHorizontal": 16,
             }
           }
         >
+          <Text
+            selectable={true}
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "textAlign": "left",
+                },
+                Object {
+                  "fontSize": 24,
+                  "marginTop": -24,
+                },
+              ]
+            }
+          >
+            conj
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Pronunciation
+          </Text>
           <Text
             selectable={true}
             style={
@@ -850,7 +772,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
               ]
             }
           >
-            reason 1 
+            pronunciation
           </Text>
           <Text
             selectable={true}
@@ -869,18 +791,9 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
               ]
             }
           >
-            (details)
+            romanization
           </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "marginBottom": undefined,
-            }
-          }
-        >
           <Text
-            selectable={true}
             style={
               Array [
                 Object {
@@ -889,78 +802,185 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
-                  "fontSize": 20,
-                },
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "color": "#3F51B5",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "marginBottom": 8,
+                      "marginTop": 16,
+                    },
+                  ],
+                ],
               ]
             }
           >
-            reason 2 
+            Explanation
           </Text>
-          <Text
-            selectable={true}
+          <View
             style={
-              Array [
-                Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "textAlign": "left",
-                },
-                Object {
-                  "color": "#808080",
-                  "fontSize": 18,
-                },
-              ]
+              Object {
+                "marginBottom": 8,
+              }
             }
           >
-            (details)
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "marginBottom": undefined,
-            }
-          }
-        >
-          <Text
-            selectable={true}
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 20,
+                  },
+                ]
+              }
+            >
+              reason 1 
+            </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "#808080",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              (details)
+            </Text>
+          </View>
+          <View
             style={
-              Array [
-                Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "textAlign": "left",
-                },
-                Object {
-                  "fontSize": 20,
-                },
-              ]
+              Object {
+                "marginBottom": 8,
+              }
             }
           >
-            reason 3 
-          </Text>
-          <Text
-            selectable={true}
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 20,
+                  },
+                ]
+              }
+            >
+              reason 2 
+            </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "#808080",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              (details)
+            </Text>
+          </View>
+          <View
             style={
-              Array [
-                Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "textAlign": "left",
-                },
-                Object {
-                  "color": "#808080",
-                  "fontSize": 18,
-                },
-              ]
+              Object {
+                "marginBottom": 8,
+              }
             }
           >
-            (details)
-          </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 20,
+                  },
+                ]
+              }
+            >
+              reason 3 
+            </Text>
+            <Text
+              selectable={true}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "#808080",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              (details)
+            </Text>
+          </View>
         </View>
       </View>
     </View>

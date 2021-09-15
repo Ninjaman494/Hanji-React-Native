@@ -2,14 +2,13 @@ jest.mock("react-router");
 jest.mock("hooks/useGetStems");
 jest.mock("hooks/useConjugations");
 
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import useConjugations from "hooks/useConjugations";
 import useGetStems from "hooks/useGetStems";
 import React from "react";
 import "react-native";
-import { Provider } from "react-native-paper";
 import { useLocation } from "react-router";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
+import { fireEvent, render, waitFor } from "utils/testUtils";
 import ConjugatorPage from "../ConjugatorPage";
 
 const conjugation = {
@@ -64,11 +63,7 @@ describe("Conjugator Page", () => {
   });
 
   it("refetches on form change", async () => {
-    const result = render(
-      <Provider>
-        <ConjugatorPage />
-      </Provider>
-    );
+    const result = render(<ConjugatorPage />);
 
     // Select second stem
     fireEvent.press(result.getByLabelText("Possible Stems"));

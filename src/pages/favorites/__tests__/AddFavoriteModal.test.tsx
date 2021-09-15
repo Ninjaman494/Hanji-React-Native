@@ -1,14 +1,13 @@
 jest.mock("hooks/useSetFavorites");
 jest.mock("hooks/useGetFavorites");
 
-import "react-native";
-import React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
-import useSetFavorites from "hooks/useSetFavorites";
-import { ConjugationType, Formality } from "utils/conjugationTypes";
-import AddFavoriteModal from "../AddFavoriteModal";
-import { Provider } from "react-native-paper";
 import { Favorite } from "hooks/useGetFavorites";
+import useSetFavorites from "hooks/useSetFavorites";
+import React from "react";
+import "react-native";
+import { ConjugationType, Formality } from "utils/conjugationTypes";
+import { fireEvent, render, waitFor } from "utils/testUtils";
+import AddFavoriteModal from "../AddFavoriteModal";
 
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
@@ -44,11 +43,7 @@ describe("AddFavoritesModal", () => {
   });
 
   it("adds favorite", async () => {
-    const component = render(
-      <Provider>
-        <AddFavoriteModal {...props} />
-      </Provider>
-    );
+    const component = render(<AddFavoriteModal {...props} />);
 
     fireEvent.changeText(component.getByLabelText("Name"), "name");
 
@@ -85,11 +80,7 @@ describe("AddFavoritesModal", () => {
   });
 
   it("hides formality field for determiners", async () => {
-    const component = render(
-      <Provider>
-        <AddFavoriteModal {...props} />
-      </Provider>
-    );
+    const component = render(<AddFavoriteModal {...props} />);
 
     fireEvent.changeText(component.getByLabelText("Name"), "name");
 
@@ -118,11 +109,7 @@ describe("AddFavoritesModal", () => {
   });
 
   it("hides formality field for connectives", async () => {
-    const component = render(
-      <Provider>
-        <AddFavoriteModal {...props} />
-      </Provider>
-    );
+    const component = render(<AddFavoriteModal {...props} />);
 
     fireEvent.changeText(component.getByLabelText("Name"), "name");
 
@@ -151,11 +138,7 @@ describe("AddFavoritesModal", () => {
   });
 
   it("hides formality field for nominal ing", async () => {
-    const component = render(
-      <Provider>
-        <AddFavoriteModal {...props} />
-      </Provider>
-    );
+    const component = render(<AddFavoriteModal {...props} />);
 
     fireEvent.changeText(component.getByLabelText("Name"), "name");
 

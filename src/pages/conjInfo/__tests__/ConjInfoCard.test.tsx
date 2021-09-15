@@ -1,12 +1,12 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
-import ConjInfoCard from "../ConjInfoCard";
 import {
   ConjugationName,
   ConjugationType,
   Formality,
   Tense,
 } from "utils/conjugationTypes";
+import { render } from "utils/testUtils";
+import ConjInfoCard from "../ConjInfoCard";
 
 describe("ConjInfoCard component", () => {
   const conjugation = {

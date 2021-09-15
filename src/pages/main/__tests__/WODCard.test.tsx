@@ -1,12 +1,12 @@
 jest.mock("react-router");
 jest.mock("hooks/useGetWOD");
 
-import "react-native";
-import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
-import { useHistory } from "react-router";
-import WODCard from "../WODCard";
 import useGetWOD from "hooks/useGetWOD";
+import React from "react";
+import "react-native";
+import { useHistory } from "react-router";
+import { fireEvent, render } from "utils/testUtils";
+import WODCard from "../WODCard";
 
 const pushHistory = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({

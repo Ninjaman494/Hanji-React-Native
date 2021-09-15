@@ -37,12 +37,12 @@ const ConjugatorPage: FC = () => {
   const { padding, colors } = useTheme();
   const styles = StyleSheet.create({
     formContainer: {
-      marginHorizontal: padding?.horizontal,
-      marginTop: padding?.vertical,
+      marginHorizontal: padding.horizontal,
+      marginTop: padding.vertical,
     },
     select: { marginBottom: -16 },
     progressBar: {
-      marginHorizontal: padding?.horizontal,
+      marginHorizontal: padding.horizontal,
       marginTop: 32,
     },
   });
