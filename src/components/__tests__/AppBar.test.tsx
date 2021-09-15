@@ -1,10 +1,10 @@
 jest.mock("react-router");
 
-import "react-native";
-import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
 import AppBar from "components/AppBar";
+import React from "react";
+import "react-native";
 import { useHistory } from "react-router";
+import { fireEvent, render } from "utils/testUtils";
 
 const pushHistory = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({

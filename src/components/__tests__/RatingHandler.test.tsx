@@ -2,10 +2,10 @@ jest.mock("expo-store-review");
 jest.mock("@react-native-async-storage/async-storage");
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { render, waitFor } from "@testing-library/react-native";
 import RatingHandler from "components/RatingHandler";
 import * as StoreReview from "expo-store-review";
 import React from "react";
+import { render, waitFor } from "utils/testUtils";
 
 jest.spyOn(StoreReview, "hasAction").mockReturnValue(Promise.resolve(true));
 
