@@ -5,7 +5,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
   style={
     Object {
       "backgroundColor": "#ffffff",
-      "borderRadius": 4,
+      "borderRadius": 10,
       "elevation": 5,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -42,7 +42,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
           },
           undefined,
           Object {
-            "paddingBottom": undefined,
+            "paddingBottom": 8,
             "paddingHorizontal": 0,
           },
         ]
@@ -53,7 +53,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
           Object {
             "flex": 1,
             "flexDirection": "column",
-            "paddingHorizontal": undefined,
+            "paddingHorizontal": 16,
           }
         }
       >
@@ -71,7 +71,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
             Object {
               "flex": 1,
               "flexDirection": "row",
-              "marginBottom": undefined,
+              "marginBottom": 8,
               "opacity": 1,
             }
           }
@@ -82,7 +82,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
               Object {
                 "flex": 1,
                 "flexDirection": "row",
-                "marginBottom": undefined,
+                "marginBottom": 8,
               }
             }
           >
@@ -105,7 +105,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                     },
                   ]
                 }
@@ -131,7 +131,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                       "textAlign": "center",
                     },
                   ]
@@ -159,7 +159,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                     },
                   ]
                 }
@@ -183,7 +183,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
             Object {
               "flex": 1,
               "flexDirection": "row",
-              "marginBottom": undefined,
+              "marginBottom": 8,
               "opacity": 1,
             }
           }
@@ -194,7 +194,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
               Object {
                 "flex": 1,
                 "flexDirection": "row",
-                "marginBottom": undefined,
+                "marginBottom": 8,
               }
             }
           >
@@ -217,7 +217,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                     },
                   ]
                 }
@@ -243,7 +243,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                       "textAlign": "center",
                     },
                   ]
@@ -271,7 +271,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                     },
                   ]
                 }
@@ -295,7 +295,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
             Object {
               "flex": 1,
               "flexDirection": "row",
-              "marginBottom": undefined,
+              "marginBottom": 8,
               "opacity": 1,
             }
           }
@@ -306,7 +306,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
               Object {
                 "flex": 1,
                 "flexDirection": "row",
-                "marginBottom": undefined,
+                "marginBottom": 8,
               }
             }
           >
@@ -329,7 +329,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                     },
                   ]
                 }
@@ -355,7 +355,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                       "textAlign": "center",
                     },
                   ]
@@ -383,7 +383,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                       "textAlign": "left",
                     },
                     Object {
-                      "fontSize": undefined,
+                      "fontSize": 20,
                     },
                   ]
                 }

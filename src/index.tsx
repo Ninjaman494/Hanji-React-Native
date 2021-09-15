@@ -18,17 +18,14 @@ import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  Colors,
-  DefaultTheme,
-  Provider as PaperProvider,
-} from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import {
   BackButton,
   NativeRouter as Router,
   Route,
   Switch,
 } from "react-router-native";
+import theme from "theme";
 
 const client = new ApolloClient({
   link: createUploadLink({
@@ -36,28 +33,6 @@ const client = new ApolloClient({
   }),
   cache: new InMemoryCache(),
 });
-
-const theme = {
-  ...DefaultTheme,
-  roundness: 10,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#3F51B5",
-    primaryLight: "#B7BEFF",
-    primaryDark: "#303F9F",
-    accent: "#F44336",
-    grey: Colors.grey600,
-  },
-  padding: {
-    horizontal: 16,
-    vertical: 8,
-  },
-  textSizes: {
-    regular: 20,
-    secondary: 16,
-    cardTitle: 16,
-  },
-};
 
 export default function Index(): JSX.Element {
   return (
