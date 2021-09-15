@@ -13,7 +13,7 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
   const { padding } = useTheme();
   const [showingMore, setShowMore] = useState(false);
   const styles = StyleSheet.create({
-    text: { paddingLeft: padding?.horizontal },
+    text: { paddingLeft: padding.horizontal },
   });
 
   let definitions = entry.definitions;

@@ -24,16 +24,16 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
 
   const style = StyleSheet.create({
     conjView: {
-      paddingHorizontal: padding?.horizontal,
+      paddingHorizontal: padding.horizontal,
     },
     rowView: {
-      marginBottom: padding?.vertical,
+      marginBottom: padding.vertical,
     },
     text: {
-      fontSize: textSizes?.regular,
+      fontSize: textSizes.regular,
     },
     divider: {
-      fontSize: textSizes?.regular,
+      fontSize: textSizes.regular,
       textAlign: "center",
     },
     actions: {
@@ -87,7 +87,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
       </Grid>
       {onPress && (
         <Card.Actions style={style.actions}>
-          <Button onPress={onPress} color={colors?.accent}>
+          <Button onPress={onPress} color={colors.accent}>
             See all
           </Button>
         </Card.Actions>

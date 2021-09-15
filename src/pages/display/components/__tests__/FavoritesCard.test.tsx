@@ -1,9 +1,9 @@
-import "react-native";
-import React from "react";
-import { render } from "@testing-library/react-native";
 import { Favorite } from "hooks/useGetFavorites";
-import FavoritesCard from "../../components/FavoritesCard";
+import React from "react";
+import "react-native";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
+import { render } from "utils/testUtils";
+import FavoritesCard from "../../components/FavoritesCard";
 
 const favorites: Favorite[] = [
   {
