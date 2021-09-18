@@ -11,6 +11,7 @@ web-build/
 .jest/
 licenses.json
 .env
+coverage
 
 # macOS
 .DS_Store

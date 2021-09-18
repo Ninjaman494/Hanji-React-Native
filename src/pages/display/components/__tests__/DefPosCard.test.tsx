@@ -17,13 +17,10 @@ describe("DefPosCard component", () => {
     const component = render(<DefPosCard {...props} />);
     const entry = props.entry;
 
-    expect(component.getByTestId("defPosCardTerm")).toContainText(entry.term);
-    expect(component.getByTestId("defPosCardPos")).toContainText(entry.pos);
-
-    component
-      .getAllByTestId("defPosCardDef")
-      .forEach((item, index) =>
-        expect(item).toContainText(entry.definitions[index])
-      );
+    expect(component.getByText(entry.term)).toBeTruthy();
+    expect(component.getByText(entry.pos)).toBeTruthy();
+    entry.definitions.forEach((def) =>
+      expect(component.getByText(def)).toBeTruthy()
+    );
   });
 });

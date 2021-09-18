@@ -23,11 +23,10 @@ describe("ExamplesCard component", () => {
 
   it("displays examples", () => {
     const component = render(<ExamplesCard {...props} />);
-    const examples = props.examples;
 
-    component.getAllByTestId("examplesCardItem").forEach((item, index) => {
-      expect(item).toContainText(examples[index].sentence);
-      expect(item).toContainText(examples[index].translation);
+    props.examples.forEach(({ sentence, translation }) => {
+      expect(component.getByText(sentence)).toBeTruthy();
+      expect(component.getByText(translation)).toBeTruthy();
     });
   });
 });
