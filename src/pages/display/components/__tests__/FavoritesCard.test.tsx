@@ -2,7 +2,7 @@ import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
 import "react-native";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
-import { render } from "utils/testUtils";
+import { fireEvent, render, waitFor } from "utils/testUtils";
 import FavoritesCard from "../../components/FavoritesCard";
 
 const favorites: Favorite[] = [
@@ -52,11 +52,20 @@ const props = {
       ...baseConjugation,
     },
   ],
+  onPress: jest.fn(),
 };
 
 describe("FavoritesCard component", () => {
   it("displays favorites", () => {
     const component = render(<FavoritesCard {...props} />);
     expect(component).toMatchSnapshot();
+  });
+
+  it("triggers onClick", async () => {
+    const component = render(<FavoritesCard {...props} />);
+
+    fireEvent.press(component.getByText("See all"));
+
+    await waitFor(() => expect(props.onPress).toHaveBeenCalled());
   });
 });
