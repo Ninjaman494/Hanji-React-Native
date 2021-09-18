@@ -403,6 +403,117 @@ exports[`FavoritesCard component displays favorites 1`] = `
             </View>
           </View>
         </View>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+                "padding": 8,
+              },
+              Object {
+                "justifyContent": "flex-end",
+                "paddingBottom": 0,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderRadius": 10,
+                "borderStyle": "solid",
+                "borderWidth": 0,
+                "elevation": 0,
+                "minWidth": "auto",
+              }
+            }
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "disabled": undefined,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "borderRadius": 10,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                        "textAlign": "left",
+                      },
+                      Array [
+                        Object {
+                          "letterSpacing": 1,
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "marginHorizontal": 8,
+                        },
+                        Object {
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "color": "#F44336",
+                          "fontFamily": "System",
+                          "fontWeight": "500",
+                        },
+                        Object {
+                          "fontFamily": "System",
+                          "fontWeight": "500",
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  See all
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   </View>

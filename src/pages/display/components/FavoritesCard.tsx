@@ -10,7 +10,7 @@ import { useHistory } from "react-router";
 export type FavoritesCardProps = BaseCardProps & {
   favorites: Favorite[];
   conjugations?: Conjugation[];
-  onPress?: () => void;
+  onPress: () => void;
 };
 
 const FavoritesCard: React.FC<FavoritesCardProps> = ({
@@ -85,13 +85,11 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
           </Text>
         )}
       </Grid>
-      {onPress && (
-        <Card.Actions style={style.actions}>
-          <Button onPress={onPress} color={colors.accent}>
-            See all
-          </Button>
-        </Card.Actions>
-      )}
+      <Card.Actions style={style.actions}>
+        <Button onPress={onPress} color={colors.accent}>
+          See all
+        </Button>
+      </Card.Actions>
     </BaseCard>
   );
 };
