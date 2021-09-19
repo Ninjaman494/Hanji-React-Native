@@ -1,10 +1,10 @@
-import { AppBar, LoadingScreen } from "components";
+import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
 import useConjugations from "hooks/useConjugations";
 import useGetURLParams from "hooks/useGetURLParams";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
-import { Switch, Text, useTheme } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
 const ConjugationsPage: React.FC = () => {
@@ -66,20 +66,13 @@ const ConjugationsPage: React.FC = () => {
   return (
     <View style={styles.parent}>
       <AppBar title="Conjugations" />
-      <View style={styles.switchBar}>
-        <Text style={styles.switchText}>
-          {honorific ? "Honorific" : "Regular"} Forms
-        </Text>
-        <Switch
-          value={honorific}
-          thumbColor="white"
-          trackColor={{ false: colors?.primaryDark, true: "#FFFFFF88" }}
-          onValueChange={() => {
-            setHonorific(!honorific);
-            containerY.setValue(0);
-          }}
-        />
-      </View>
+      <HonorificSwitch
+        honorific={honorific}
+        onPress={() => {
+          setHonorific(!honorific);
+          containerY.setValue(0);
+        }}
+      />
       {error && <Text>{error}</Text>}
       {loading ? (
         <LoadingScreen />
