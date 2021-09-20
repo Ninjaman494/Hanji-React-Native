@@ -46,6 +46,7 @@ const FavoritesPage: React.FC = () => {
             ))}
           </List.Section>
           <FAB
+            accessibilityLabel="add favorite button"
             style={styles.fab}
             icon="plus"
             disabled={loading || !!error}
