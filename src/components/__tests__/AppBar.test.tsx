@@ -1,15 +1,22 @@
 jest.mock("react-router");
+jest.mock("components/ViewShotProvider");
 
 import AppBar from "components/AppBar";
+import { useViewShot } from "components/ViewShotProvider";
 import React from "react";
 import "react-native";
 import { useHistory } from "react-router";
-import { fireEvent, render } from "utils/testUtils";
+import { fireEvent, render, waitFor } from "utils/testUtils";
 
 const pushHistory = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({
   push: pushHistory,
 });
+
+const screenshotUri = "uri";
+(useViewShot as jest.Mock).mockReturnValue(() =>
+  Promise.resolve(screenshotUri)
+);
 
 describe("AppBar component", () => {
   const props = {
@@ -47,5 +54,33 @@ describe("AppBar component", () => {
     fireEvent(component.getByTestId("appBarSearch"), "onSubmitEditing");
 
     expect(pushHistory).toHaveBeenCalledWith("/search?query=query");
+  });
+
+  it("redirects to settings page", async () => {
+    const component = render(<AppBar {...props} />);
+
+    fireEvent.press(component.getByLabelText("overflow menu button"));
+
+    await waitFor(() => expect(component.getByText("Settings")).toBeTruthy());
+    fireEvent.press(component.getByText("Settings"));
+
+    expect(pushHistory).toHaveBeenCalledWith("/settings");
+  });
+
+  it("redirects to bug report page", async () => {
+    const component = render(<AppBar {...props} />);
+
+    fireEvent.press(component.getByLabelText("overflow menu button"));
+
+    await waitFor(() =>
+      expect(component.getByText("Report a Bug")).toBeTruthy()
+    );
+    fireEvent.press(component.getByText("Report a Bug"));
+
+    await waitFor(() =>
+      expect(pushHistory).toHaveBeenCalledWith("/bugReport", {
+        screenshot: screenshotUri,
+      })
+    );
   });
 });

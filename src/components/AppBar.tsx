@@ -65,12 +65,12 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
           <Appbar.Action
             icon="dots-vertical"
             color="white"
+            accessibilityLabel="overflow menu button"
             onPress={() => setShowMenu(true)}
           />
         }
       >
-        <Menu.Item onPress={() => history.push(`/settings`)} title="Settings" />
-        <Menu.Item onPress={() => {}} title="About" />
+        <Menu.Item onPress={() => history.push("/settings")} title="Settings" />
         <Menu.Item
           onPress={async () => {
             const uri = await takeScreenshot?.();

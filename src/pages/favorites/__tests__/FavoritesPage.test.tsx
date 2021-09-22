@@ -58,11 +58,10 @@ describe("FavoritesPage", () => {
     const result = render(<FavoritesPage />);
 
     fireEvent.press(result.getByLabelText("add favorite button"));
-    await waitFor(() =>
-      expect(result.getByText("Create Favorite")).toBeTruthy()
-    );
 
+    await waitFor(() => expect(result.getByText("Cancel")).toBeTruthy());
     fireEvent.press(result.getByText("Cancel"));
+
     await waitFor(() =>
       expect(
         result.getByText("Create Favorite").parent?.props.visible
