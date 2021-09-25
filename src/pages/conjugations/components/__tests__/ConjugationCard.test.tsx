@@ -1,8 +1,8 @@
-import "react-native";
 import React from "react";
-import { render } from "@testing-library/react-native";
-import ConjugationCard from "../ConjugationCard";
+import "react-native";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
+import { render } from "utils/testUtils";
+import ConjugationCard from "../ConjugationCard";
 
 describe("ConjugationCard", () => {
   const baseConjugation = {

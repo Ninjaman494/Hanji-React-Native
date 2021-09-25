@@ -14,7 +14,7 @@ import {
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
 
-const DEFAULT_FAVORITES = [
+export const DEFAULT_FAVORITES = [
   {
     name: "Past",
     conjugationName:
@@ -115,6 +115,7 @@ const MainPage: React.FC = () => {
           value={searchQuery}
           onSubmitEditing={doSearch}
           onIconPress={doSearch}
+          searchAccessibilityLabel="search button"
           style={styles.card}
         />
         <WODCard style={styles.card} />

@@ -1,6 +1,6 @@
-import "react-native";
 import React from "react";
-import { render } from "@testing-library/react-native";
+import "react-native";
+import { render } from "utils/testUtils";
 import ExamplesCard from "../../components/ExamplesCard";
 
 describe("ExamplesCard component", () => {
@@ -23,11 +23,10 @@ describe("ExamplesCard component", () => {
 
   it("displays examples", () => {
     const component = render(<ExamplesCard {...props} />);
-    const examples = props.examples;
 
-    component.getAllByTestId("examplesCardItem").forEach((item, index) => {
-      expect(item).toContainText(examples[index].sentence);
-      expect(item).toContainText(examples[index].translation);
+    props.examples.forEach(({ sentence, translation }) => {
+      expect(component.getByText(sentence)).toBeTruthy();
+      expect(component.getByText(translation)).toBeTruthy();
     });
   });
 });

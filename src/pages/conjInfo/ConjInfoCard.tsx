@@ -14,15 +14,15 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
 
   const styles = StyleSheet.create({
     card: {
-      marginHorizontal: padding?.horizontal,
+      marginHorizontal: padding.horizontal,
       marginBottom: 8,
     },
     title: {
-      fontSize: textSizes?.cardTitle,
+      fontSize: textSizes.cardTitle,
       fontWeight: "400",
-      color: colors?.primary,
+      color: colors.primary,
       marginTop: 16,
-      marginBottom: padding?.vertical,
+      marginBottom: padding.vertical,
     },
     conjugation: {
       fontSize: 24,
@@ -51,7 +51,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
       style={styles.card}
       rightIcon={() => <HonorificBadge visible={conjugation?.honorific} />}
     >
-      <View style={{ paddingHorizontal: padding?.horizontal }}>
+      <View style={{ paddingHorizontal: padding.horizontal }}>
         <Text style={styles.conjugation} selectable>
           {conjugation?.conjugation}
         </Text>
@@ -64,7 +64,7 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
         </Text>
         <Title style={styles.title}>Explanation</Title>
         {reasons.map((reason, index) => (
-          <View style={{ marginBottom: padding?.vertical }} key={index}>
+          <View style={{ marginBottom: padding.vertical }} key={index}>
             <Text style={styles.text} selectable>
               {reason.type}
             </Text>

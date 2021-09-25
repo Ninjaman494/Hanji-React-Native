@@ -23,8 +23,8 @@ const ConjugationsPageContent: React.FC<ConjugationPageContentProps> = ({
 }) => {
   const { padding } = useTheme();
   const style = {
-    marginVertical: padding?.vertical,
-    marginHorizontal: padding?.horizontal,
+    marginVertical: padding.vertical,
+    marginHorizontal: padding.horizontal,
   };
 
   const conjMap = conjugations.reduce((conjMap: ConjugationMap, value) => {

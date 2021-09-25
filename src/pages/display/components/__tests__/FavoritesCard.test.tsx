@@ -1,9 +1,17 @@
-import "react-native";
-import React from "react";
-import { render } from "@testing-library/react-native";
+jest.mock("react-router");
+
 import { Favorite } from "hooks/useGetFavorites";
-import FavoritesCard from "../../components/FavoritesCard";
+import React from "react";
+import "react-native";
+import { useHistory } from "react-router";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
+import { fireEvent, render, waitFor } from "utils/testUtils";
+import FavoritesCard from "../../components/FavoritesCard";
+
+const pushHistory = jest.fn();
+(useHistory as jest.Mock).mockReturnValue({
+  push: pushHistory,
+});
 
 const favorites: Favorite[] = [
   {
@@ -52,11 +60,41 @@ const props = {
       ...baseConjugation,
     },
   ],
+  onPress: jest.fn(),
 };
 
 describe("FavoritesCard component", () => {
   it("displays favorites", () => {
     const component = render(<FavoritesCard {...props} />);
     expect(component).toMatchSnapshot();
+  });
+
+  it("displays empty state", () => {
+    const component = render(<FavoritesCard {...props} favorites={[]} />);
+    expect(
+      component.getByText(
+        "You don't have any favorites. Click on favorites in settings to make some."
+      )
+    ).toBeTruthy();
+  });
+
+  it("triggers onClick", async () => {
+    const component = render(<FavoritesCard {...props} />);
+
+    fireEvent.press(component.getByText("See all"));
+
+    await waitFor(() => expect(props.onPress).toHaveBeenCalled());
+  });
+
+  it("redirects to ConjInfo page", async () => {
+    const component = render(<FavoritesCard {...props} />);
+
+    fireEvent.press(component.getByText("Favorite 1"));
+
+    await waitFor(() =>
+      expect(pushHistory).toHaveBeenCalledWith("/conjinfo", {
+        conjugation: props.conjugations[0],
+      })
+    );
   });
 });
