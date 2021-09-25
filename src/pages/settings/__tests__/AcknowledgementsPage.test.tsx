@@ -1,9 +1,9 @@
 jest.mock("react-router");
 jest.mock("react-native/Libraries/Linking/Linking");
 
-import { Linking } from "react-native";
 import React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { Linking } from "react-native";
+import { fireEvent, render, waitFor } from "utils/testUtils";
 import AcknowledgementsPage from "../AcknowledgementsPage";
 
 describe("AcknowledgementsPage", () => {

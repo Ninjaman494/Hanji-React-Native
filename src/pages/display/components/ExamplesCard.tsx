@@ -1,6 +1,6 @@
-import { List } from "react-native-paper";
-import { ListItem, BaseCard, BaseCardProps } from "components";
+import { BaseCard, BaseCardProps, ListItem } from "components";
 import React from "react";
+import { List } from "react-native-paper";
 
 export type ExamplesCardProps = BaseCardProps & {
   examples: {
@@ -17,7 +17,6 @@ const ExamplesCard: React.FC<ExamplesCardProps> = ({ examples, ...rest }) => (
           title={example.sentence}
           description={example.translation}
           key={index}
-          testID="examplesCardItem"
         />
       ))}
     </List.Section>

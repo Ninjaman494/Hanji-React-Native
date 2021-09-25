@@ -13,7 +13,7 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
   const { padding } = useTheme();
   const [showingMore, setShowMore] = useState(false);
   const styles = StyleSheet.create({
-    text: { paddingLeft: padding?.horizontal },
+    text: { paddingLeft: padding.horizontal },
   });
 
   let definitions = entry.definitions;
@@ -34,15 +34,13 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
       }
       onBtnPress={() => setShowMore(!showingMore)}
     >
-      <Headline testID="defPosCardTerm" style={styles.text} selectable>
+      <Headline style={styles.text} selectable>
         {entry.term}
       </Headline>
-      <Subheading testID="defPosCardPos" style={styles.text}>
-        {entry.pos}
-      </Subheading>
+      <Subheading style={styles.text}>{entry.pos}</Subheading>
       <List.Section>
         {definitions.map((definition, index) => (
-          <ListItem title={definition} key={index} testID="defPosCardDef" />
+          <ListItem title={definition} key={index} />
         ))}
       </List.Section>
     </BaseCard>

@@ -3,13 +3,13 @@ jest.mock("react-router");
 jest.mock("react-native/Libraries/Linking/Linking");
 jest.mock("expo-store-review");
 
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import * as StoreReview from "expo-store-review";
 import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { Linking } from "react-native";
 import { useHistory } from "react-router";
 import { ConjugationType, Formality } from "utils/conjugationTypes";
+import { fireEvent, render, waitFor } from "utils/testUtils";
 import SettingsPage from "../SettingsPage";
 
 jest.spyOn(StoreReview, "storeUrl").mockReturnValue("store-url");
