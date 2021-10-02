@@ -4,7 +4,6 @@ import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
-import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
@@ -91,7 +90,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     backgroundColor: "#f8f8f8",
-    marginTop: Constants.statusBarHeight,
   },
   container: {
     flex: 1,
