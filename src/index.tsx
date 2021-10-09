@@ -1,5 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import crashlytics from "@react-native-firebase/crashlytics";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
@@ -15,9 +17,10 @@ import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
+import uuid from "react-native-uuid";
 import {
   BackButton,
   NativeRouter as Router,
@@ -33,7 +36,20 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const USER_ID_KEY = "USER_ID";
+
 export default function Index(): JSX.Element {
+  useEffect(() => {
+    (async () => {
+      let id = await AsyncStorage.getItem(USER_ID_KEY);
+      if (!id) {
+        id = uuid.v4().toString();
+        await AsyncStorage.setItem(USER_ID_KEY, id);
+      }
+      crashlytics().setUserId(id);
+    })();
+  }, []);
+
   return (
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
