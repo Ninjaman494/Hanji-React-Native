@@ -1,4 +1,3 @@
-import { ApolloError } from "@apollo/client";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
 import ErrorDialog from "components/ErrorDialog";
@@ -78,11 +77,7 @@ const ConjugationsPage: React.FC = () => {
         }}
       />
       {error ? (
-        <ErrorDialog
-          visible={!!error}
-          error={error as ApolloError}
-          onDismiss={history.goBack}
-        />
+        <ErrorDialog visible error={error} onDismiss={history.goBack} />
       ) : loading ? (
         <LoadingScreen />
       ) : (
