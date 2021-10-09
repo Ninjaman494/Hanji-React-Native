@@ -1,15 +1,19 @@
+import { ApolloError } from "@apollo/client";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
+import ErrorDialog from "components/ErrorDialog";
 import useConjugations from "hooks/useConjugations";
 import useGetURLParams from "hooks/useGetURLParams";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
+import { useHistory } from "react-router";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
 const ConjugationsPage: React.FC = () => {
-  const { padding, colors, textSizes } = useTheme();
+  const history = useHistory();
 
+  const { padding, colors, textSizes } = useTheme();
   const styles = StyleSheet.create({
     parent: {
       flex: 1,
@@ -73,8 +77,13 @@ const ConjugationsPage: React.FC = () => {
           containerY.setValue(0);
         }}
       />
-      {error && <Text>{error}</Text>}
-      {loading ? (
+      {error ? (
+        <ErrorDialog
+          visible={!!error}
+          error={error as ApolloError}
+          onDismiss={history.goBack}
+        />
+      ) : loading ? (
         <LoadingScreen />
       ) : (
         <ConjugationsPageContent
