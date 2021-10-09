@@ -1,7 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import crashlytics from "@react-native-firebase/crashlytics";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
@@ -46,7 +45,6 @@ export default function Index(): JSX.Element {
         id = uuid.v4().toString();
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
-      crashlytics().setUserId(id);
     })();
   }, []);
 

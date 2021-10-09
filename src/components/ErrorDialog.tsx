@@ -1,6 +1,5 @@
 import { ApolloError } from "@apollo/client";
-import crashlytics from "@react-native-firebase/crashlytics";
-import React, { ComponentProps, FC, useEffect } from "react";
+import React, { ComponentProps, FC } from "react";
 import { Button, Dialog, Text } from "react-native-paper";
 
 export interface ErrorDialog
@@ -9,9 +8,6 @@ export interface ErrorDialog
 }
 
 const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
-  useEffect(() => {
-    crashlytics().recordError(error);
-  }, [error]);
   return (
     <Dialog {...rest}>
       <Dialog.Title>An Error Occurred</Dialog.Title>
