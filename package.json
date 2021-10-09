@@ -19,7 +19,6 @@
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-firebase/analytics": "^12.8.0",
     "@react-native-firebase/app": "^12.8.0",
-    "@react-native-firebase/crashlytics": "^12.8.0",
     "@react-native-firebase/perf": "^12.8.0",
     "apollo-upload-client": "^16.0.0",
     "expo": "^42.0.0",
