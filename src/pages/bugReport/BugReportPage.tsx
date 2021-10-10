@@ -11,6 +11,7 @@ import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
 import { useHistory, useLocation } from "react-router-native";
+import { Native } from "sentry-expo";
 import * as yup from "yup";
 
 interface BugReportForm {
@@ -93,23 +94,26 @@ const BugReportPage: FC = () => {
       sdkVersion: Device.osVersion ?? "missing",
     };
 
-    try {
-      await sendBugReport({
-        variables: {
-          feedback: values.feedback,
-          type: values.type,
-          email: values.email,
-          image: values.includeImage ? file : undefined,
-          deviceInfo,
-        },
-      });
+    Native.withScope(async (scope) => {
+      const user = scope.getUser();
+      try {
+        await sendBugReport({
+          variables: {
+            feedback: values.feedback,
+            type: values.type,
+            email: user?.id,
+            image: values.includeImage ? file : undefined,
+            deviceInfo,
+          },
+        });
 
-      showSnackbar("Report sent. Thanks for the feedback!");
-      goBack();
-    } catch (error) {
-      console.log(error);
-      showSnackbar("An error occurred. Please try again later");
-    }
+        showSnackbar("Report sent. Thanks for the feedback!");
+        goBack();
+      } catch (error) {
+        console.log(error);
+        showSnackbar("An error occurred. Please try again later");
+      }
+    });
   };
 
   return (

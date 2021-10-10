@@ -24,6 +24,24 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["@react-native-firebase/app", "@react-native-firebase/perf"]
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/perf",
+      "sentry-expo",
+      "expo-updates"
+    ],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "akash-eldo",
+            "project": "hanji",
+            "authToken": "SENTRY_AUTH_TOKEN",
+            "setCommits": true
+          }
+        }
+      ]
+    }
   }
 }

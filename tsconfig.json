@@ -13,5 +13,6 @@
     "baseUrl": "./src",
     "typeRoots": ["./node_modules/@types", "./src/typings"]
   },
+  "exclude": ["./node_modules"],
   "extends": "expo/tsconfig.base"
 }

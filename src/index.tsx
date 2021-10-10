@@ -26,6 +26,7 @@ import {
   Route,
   Switch,
 } from "react-router-native";
+import * as Sentry from "sentry-expo";
 import theme from "theme";
 
 const client = new ApolloClient({
@@ -33,6 +34,12 @@ const client = new ApolloClient({
     uri: SERVER_URL,
   }),
   cache: new InMemoryCache(),
+});
+
+Sentry.init({
+  dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
+  enableInExpoDevelopment: true,
+  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
 });
 
 const USER_ID_KEY = "USER_ID";
@@ -45,6 +52,7 @@ export default function Index(): JSX.Element {
         id = uuid.v4().toString();
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
+      Sentry.Native.setUser({ id });
     })();
   }, []);
 
