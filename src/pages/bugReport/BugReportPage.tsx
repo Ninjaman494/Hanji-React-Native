@@ -110,7 +110,7 @@ const BugReportPage: FC = () => {
         showSnackbar("Report sent. Thanks for the feedback!");
         goBack();
       } catch (error) {
-        console.log(error);
+        Native.captureException(error);
         showSnackbar("An error occurred. Please try again later");
       }
     });

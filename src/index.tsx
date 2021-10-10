@@ -38,7 +38,7 @@ const client = new ApolloClient({
 
 Sentry.init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
-  enableInExpoDevelopment: true,
+  enableInExpoDevelopment: false,
   debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
 });
 

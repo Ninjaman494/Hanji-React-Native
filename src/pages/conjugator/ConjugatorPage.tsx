@@ -1,4 +1,6 @@
+import { ApolloError } from "@apollo/client";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
+import ErrorDialog from "components/ErrorDialog";
 import Select from "components/Select";
 import useConjugations from "hooks/useConjugations";
 import useGetStems from "hooks/useGetStems";
@@ -12,7 +14,8 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { ProgressBar, useTheme } from "react-native-paper";
+import { Portal, ProgressBar, useTheme } from "react-native-paper";
+import { useHistory } from "react-router";
 import ConjugationsList from "./ConjugationsList";
 
 const pos = [
@@ -47,8 +50,10 @@ const ConjugatorPage: FC = () => {
     },
   });
 
+  const history = useHistory();
+
   const term = useGetURLParams().get("term");
-  const { data: stems } = useGetStems(term as string, {
+  const { data: stems, error: stemsError } = useGetStems(term as string, {
     skip: !term,
   });
 
@@ -59,14 +64,15 @@ const ConjugatorPage: FC = () => {
     honorific: false,
   });
 
-  const { data: conjugations, loading: conjLoading } = useConjugations(
-    formValues,
-    {
-      skip: !stems,
-      notifyOnNetworkStatusChange: true,
-      fetchPolicy: "cache-and-network",
-    }
-  );
+  const {
+    data: conjugations,
+    loading: conjLoading,
+    error: conjError,
+  } = useConjugations(formValues, {
+    skip: !stems,
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: "cache-and-network",
+  });
 
   // Value used for transition animations on container
   const containerY = useRef(new Animated.Value(0)).current;
@@ -107,6 +113,13 @@ const ConjugatorPage: FC = () => {
         honorific={formValues.honorific}
         onPress={(value) => updateForm({ ...formValues, honorific: value })}
       />
+      <Portal>
+        <ErrorDialog
+          visible={!!(conjError || stemsError)}
+          error={conjError ?? (stemsError as ApolloError)}
+          onDismiss={history.goBack}
+        />
+      </Portal>
       {stems?.stems ? (
         <ScrollView>
           <View style={styles.formContainer}>

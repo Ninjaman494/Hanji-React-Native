@@ -10,7 +10,9 @@ export interface ErrorDialog
 
 const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
   useEffect(() => {
-    Sentry.Native.captureException(error);
+    if (error) {
+      Sentry.Native.captureException(error);
+    }
   }, [error]);
 
   return (
