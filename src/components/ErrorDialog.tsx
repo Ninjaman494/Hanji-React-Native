@@ -1,6 +1,7 @@
 import { ApolloError } from "@apollo/client";
-import React, { ComponentProps, FC } from "react";
+import React, { ComponentProps, FC, useEffect } from "react";
 import { Button, Dialog, Text } from "react-native-paper";
+import * as Sentry from "sentry-expo";
 
 export interface ErrorDialog
   extends Omit<ComponentProps<typeof Dialog>, "children"> {
@@ -8,6 +9,10 @@ export interface ErrorDialog
 }
 
 const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
+  useEffect(() => {
+    Sentry.Native.captureException(error);
+  }, [error]);
+
   return (
     <Dialog {...rest}>
       <Dialog.Title>An Error Occurred</Dialog.Title>
