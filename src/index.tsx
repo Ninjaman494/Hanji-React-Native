@@ -6,13 +6,15 @@ import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
 import { StatusBar } from "expo-status-bar";
+import useGetFavorites from "hooks/useGetFavorites";
+import useSetFavorites from "hooks/useSetFavorites";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
 import ConjugatorPage from "pages/conjugator/ConjugatorPage";
 import DisplayPage from "pages/display/DisplayPage";
 import FavoritesPage from "pages/favorites/FavoritesPage";
-import MainPage from "pages/main/MainPage";
+import MainPage, { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
@@ -20,12 +22,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
-import {
-  BackButton,
-  NativeRouter as Router,
-  Route,
-  Switch,
-} from "react-router-native";
+import { BackButton, Route, Switch, useLocation } from "react-router-native";
 import * as Sentry from "sentry-expo";
 import theme from "theme";
 
@@ -38,13 +35,17 @@ const client = new ApolloClient({
 
 Sentry.init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
-  enableInExpoDevelopment: false,
+  enableInExpoDevelopment: true,
   debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
 });
 
 const USER_ID_KEY = "USER_ID";
 
 export default function Index(): JSX.Element {
+  const location = useLocation();
+  const { favorites, loading, error } = useGetFavorites();
+  const { setFavorites } = useSetFavorites();
+
   useEffect(() => {
     (async () => {
       let id = await AsyncStorage.getItem(USER_ID_KEY);
@@ -55,6 +56,24 @@ export default function Index(): JSX.Element {
       Sentry.Native.setUser({ id });
     })();
   }, []);
+
+  useEffect(() => {
+    Sentry.Native.addBreadcrumb({
+      category: "navigation",
+      message: `Route changed to ${location.pathname}`,
+      level: Sentry.Native.Severity.Info,
+      data: location,
+    });
+  }, [location]);
+
+  useEffect(() => {
+    if (favorites === null && !loading && !error) {
+      setFavorites(DEFAULT_FAVORITES);
+      Sentry.Native.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
+    } else if (favorites) {
+      Sentry.Native.setContext("Favorites", { favorites });
+    }
+  }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
   return (
     <ApolloProvider client={client}>
@@ -68,33 +87,27 @@ export default function Index(): JSX.Element {
             <SnackbarProvider>
               <RatingHandler numSessions={5} />
               <View style={styles.container}>
-                <Router>
-                  <BackButton />
-                  <Switch>
-                    <Route exact path="/" component={MainPage} />
-                    <Route path="/search" component={SearchPage} />
-                    <Route exact path="/display" component={DisplayPage} />
-                    <Route
-                      exact
-                      path="/conjugation"
-                      component={ConjugationsPage}
-                    />
-                    <Route exact path="/conjinfo" component={ConjInfoPage} />
-                    <Route exact path="/settings" component={SettingsPage} />
-                    <Route exact path="/favorites" component={FavoritesPage} />
-                    <Route
-                      exact
-                      path="/acknowledgements"
-                      component={AcknowledgementsPage}
-                    />
-                    <Route exact path="/bugReport" component={BugReportPage} />
-                    <Route
-                      exact
-                      path="/conjugator"
-                      component={ConjugatorPage}
-                    />
-                  </Switch>
-                </Router>
+                <BackButton />
+                <Switch>
+                  <Route exact path="/" component={MainPage} />
+                  <Route path="/search" component={SearchPage} />
+                  <Route exact path="/display" component={DisplayPage} />
+                  <Route
+                    exact
+                    path="/conjugation"
+                    component={ConjugationsPage}
+                  />
+                  <Route exact path="/conjinfo" component={ConjInfoPage} />
+                  <Route exact path="/settings" component={SettingsPage} />
+                  <Route exact path="/favorites" component={FavoritesPage} />
+                  <Route
+                    exact
+                    path="/acknowledgements"
+                    component={AcknowledgementsPage}
+                  />
+                  <Route exact path="/bugReport" component={BugReportPage} />
+                  <Route exact path="/conjugator" component={ConjugatorPage} />
+                </Switch>
               </View>
             </SnackbarProvider>
           </View>
