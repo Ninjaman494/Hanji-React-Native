@@ -1,13 +1,16 @@
 jest.mock("hooks/useSendBugReport");
 jest.mock("components/SnackbarProvider");
-jest.mock("react-router-native");
+jest.mock("utils/getUser");
+jest.mock("react-router");
+jest.mock("sentry-expo");
 
 import { useSnackbar } from "components/SnackbarProvider";
 import { ReactNativeFile } from "extract-files";
 import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React from "react";
 import "react-native";
-import { useHistory, useLocation } from "react-router-native";
+import { useHistory, useLocation } from "react-router";
+import getUser from "utils/getUser";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import BugReportPage from "../BugReportPage";
 
@@ -19,7 +22,10 @@ const deviceInfo = {
   sdkVersion: "4.2.0",
 };
 
-jest.mock("expo-constants", () => ({ nativeAppVersion: deviceInfo.version }));
+jest.mock("expo-constants", () => ({
+  ...jest.requireActual("expo-constants"),
+  nativeAppVersion: deviceInfo.version,
+}));
 jest.mock("expo-device", () => ({
   brand: deviceInfo.brand,
   manufacturer: deviceInfo.manufacturer,
@@ -44,6 +50,9 @@ const goBack = jest.fn();
 const showSnackbar = jest.fn();
 (useSnackbar as jest.Mock).mockReturnValue({ showSnackbar });
 
+const userId = "user-id";
+(getUser as jest.Mock).mockReturnValue({ id: userId });
+
 describe("BugReportPage", () => {
   beforeEach(() => jest.clearAllMocks());
 
@@ -51,10 +60,6 @@ describe("BugReportPage", () => {
     const result = render(<BugReportPage />);
 
     fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
-    fireEvent.changeText(
-      result.getByLabelText("Email (optional)"),
-      "test@email.com"
-    );
     fireEvent.press(result.getByText("Submit"));
 
     await waitFor(() => {
@@ -62,7 +67,7 @@ describe("BugReportPage", () => {
         variables: {
           feedback: "foobar",
           type: ReportType.BUG,
-          email: "test@email.com",
+          email: userId,
           image: new ReactNativeFile({
             name: "screenshot.png",
             type: "image/png",
@@ -82,10 +87,6 @@ describe("BugReportPage", () => {
     const result = render(<BugReportPage />);
 
     fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
-    fireEvent.changeText(
-      result.getByLabelText("Email (optional)"),
-      "test@email.com"
-    );
     fireEvent.press(result.getByLabelText("Include screenshot?"));
     fireEvent.press(result.getByText("Submit"));
 
@@ -94,7 +95,7 @@ describe("BugReportPage", () => {
         variables: {
           feedback: "foobar",
           type: ReportType.BUG,
-          email: "test@email.com",
+          email: userId,
           deviceInfo,
         },
       });
@@ -112,10 +113,6 @@ describe("BugReportPage", () => {
     const result = render(<BugReportPage />);
 
     fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
-    fireEvent.changeText(
-      result.getByLabelText("Email (optional)"),
-      "test@email.com"
-    );
     fireEvent.press(result.getByText("Submit"));
 
     await waitFor(() => {
@@ -123,7 +120,7 @@ describe("BugReportPage", () => {
         variables: {
           feedback: "foobar",
           type: ReportType.BUG,
-          email: "test@email.com",
+          email: userId,
           image: new ReactNativeFile({
             name: "screenshot.png",
             type: "image/png",
