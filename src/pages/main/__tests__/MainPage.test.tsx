@@ -3,7 +3,6 @@ jest.mock("react-router");
 jest.mock("hooks/useGetWOD");
 
 import { useFonts } from "@expo-google-fonts/laila";
-import useGetFavorites from "hooks/useGetFavorites";
 import useGetWOD from "hooks/useGetWOD";
 import React from "react";
 import "react-native";
@@ -30,14 +29,6 @@ const pushHistory = jest.fn();
 });
 
 describe("MainPage", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-    (useGetFavorites as jest.Mock).mockReturnValue({
-      loading: false,
-      favorites: [],
-    });
-  });
-
   it("can perform a search", async () => {
     const result = render(<MainPage />);
 
