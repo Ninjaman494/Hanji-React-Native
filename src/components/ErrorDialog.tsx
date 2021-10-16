@@ -17,9 +17,11 @@ const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
 
   return (
     <Dialog {...rest}>
-      <Dialog.Title>An Error Occurred</Dialog.Title>
+      <Dialog.Title>Error Occurred</Dialog.Title>
       <Dialog.Content>
-        <Text>Error: {JSON.stringify(error, null, 2)}</Text>
+        <Text>
+          An error occurred. Please try again later or contact support.
+        </Text>
       </Dialog.Content>
       <Dialog.Actions>
         <Button onPress={rest.onDismiss}>OK</Button>
