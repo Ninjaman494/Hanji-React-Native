@@ -40,8 +40,8 @@ const client = new ApolloClient({
 
 init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
-  enableInExpoDevelopment: true,
-  debug: true, // log debug info in dev mode
+  // enableInExpoDevelopment: true,
+  // debug: true, // log debug info in dev mode
 });
 
 const USER_ID_KEY = "USER_ID";
