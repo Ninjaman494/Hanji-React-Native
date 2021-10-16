@@ -28,7 +28,7 @@ import {
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
 import { BackButton, Route, Switch, useLocation } from "react-router-native";
-import * as Sentry from "sentry-expo";
+import { init, Native } from "sentry-expo";
 import theme from "theme";
 
 const client = new ApolloClient({
@@ -38,7 +38,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-Sentry.init({
+init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
   enableInExpoDevelopment: true,
   debug: true, // log debug info in dev mode
@@ -47,9 +47,9 @@ Sentry.init({
 const USER_ID_KEY = "USER_ID";
 
 // Global error handlers
-const { Fatal, Error } = Sentry.Native.Severity;
+const { Fatal, Error } = Native.Severity;
 setJSExceptionHandler((error, isFatal) => {
-  Sentry.Native.captureException(error, {
+  Native.captureException(error, {
     level: isFatal ? Fatal : Error,
   });
 
@@ -65,7 +65,7 @@ setJSExceptionHandler((error, isFatal) => {
   );
 }, true);
 setNativeExceptionHandler(
-  (errStr) => Sentry.Native.captureException(errStr, { level: Fatal }),
+  (errStr) => Native.captureException(errStr, { level: Fatal }),
   false,
   true
 );
@@ -82,15 +82,15 @@ export default function Index(): JSX.Element {
         id = uuid.v4().toString();
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
-      Sentry.Native.setUser({ id });
+      Native.setUser({ id });
     })();
   }, []);
 
   useEffect(() => {
-    Sentry.Native.addBreadcrumb({
+    Native.addBreadcrumb({
       category: "navigation",
       message: `Route changed to ${location.pathname}`,
-      level: Sentry.Native.Severity.Info,
+      level: Native.Severity.Info,
       data: location,
     });
   }, [location]);
@@ -98,9 +98,9 @@ export default function Index(): JSX.Element {
   useEffect(() => {
     if (favorites === null && !loading && !error) {
       setFavorites(DEFAULT_FAVORITES);
-      Sentry.Native.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
+      Native.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
     } else if (favorites) {
-      Sentry.Native.setContext("Favorites", { favorites });
+      Native.setContext("Favorites", { favorites });
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
