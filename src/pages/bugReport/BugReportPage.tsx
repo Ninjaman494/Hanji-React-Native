@@ -12,6 +12,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
 import { useHistory, useLocation } from "react-router-native";
 import { Native } from "sentry-expo";
+import getUser from "utils/getUser";
 import * as yup from "yup";
 
 interface BugReportForm {
@@ -94,26 +95,24 @@ const BugReportPage: FC = () => {
       sdkVersion: Device.osVersion ?? "missing",
     };
 
-    Native.withScope(async (scope) => {
-      const user = scope.getUser();
-      try {
-        await sendBugReport({
-          variables: {
-            feedback: values.feedback,
-            type: values.type,
-            email: user?.id,
-            image: values.includeImage ? file : undefined,
-            deviceInfo,
-          },
-        });
+    const user = getUser();
+    try {
+      await sendBugReport({
+        variables: {
+          feedback: values.feedback,
+          type: values.type,
+          email: user?.id,
+          image: values.includeImage ? file : undefined,
+          deviceInfo,
+        },
+      });
 
-        showSnackbar("Report sent. Thanks for the feedback!");
-        goBack();
-      } catch (error) {
-        Native.captureException(error);
-        showSnackbar("An error occurred. Please try again later");
-      }
-    });
+      showSnackbar("Report sent. Thanks for the feedback!");
+      goBack();
+    } catch (error) {
+      Native.captureException(error);
+      showSnackbar("An error occurred. Please try again later");
+    }
   };
 
   return (
@@ -133,7 +132,6 @@ const BugReportPage: FC = () => {
             <>
               <FormikForm style={styles.form}>
                 <FormikTextField name="feedback" label="Feedback" multiline />
-                <FormikTextField name="email" label="Email (optional)" />
                 <FormikRadioGroup
                   name="type"
                   label="Select Feeback Type"
