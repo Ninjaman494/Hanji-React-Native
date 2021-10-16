@@ -6,6 +6,7 @@ import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
 import { StatusBar } from "expo-status-bar";
+import { reloadAsync } from "expo-updates";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import BugReportPage from "pages/bugReport/BugReportPage";
@@ -19,7 +20,11 @@ import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+import {
+  setJSExceptionHandler,
+  setNativeExceptionHandler,
+} from "react-native-exception-handler";
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
 import { BackButton, Route, Switch, useLocation } from "react-router-native";
@@ -36,10 +41,34 @@ const client = new ApolloClient({
 Sentry.init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
   enableInExpoDevelopment: true,
-  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
+  debug: true, // log debug info in dev mode
 });
 
 const USER_ID_KEY = "USER_ID";
+
+// Global error handlers
+const { Fatal, Error } = Sentry.Native.Severity;
+setJSExceptionHandler((error, isFatal) => {
+  Sentry.Native.captureException(error, {
+    level: isFatal ? Fatal : Error,
+  });
+
+  Alert.alert(
+    "Unexpected Error",
+    "An unexpected error occured. We will need to restart the app.",
+    [
+      {
+        text: "Restart",
+        onPress: async () => await reloadAsync(),
+      },
+    ]
+  );
+}, true);
+setNativeExceptionHandler(
+  (errStr) => Sentry.Native.captureException(errStr, { level: Fatal }),
+  false,
+  true
+);
 
 export default function Index(): JSX.Element {
   const location = useLocation();
