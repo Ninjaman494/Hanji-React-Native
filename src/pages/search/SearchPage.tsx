@@ -1,4 +1,5 @@
 import { LoadingScreen } from "components";
+import ErrorDialog from "components/ErrorDialog";
 import useGetURLParams from "hooks/useGetURLParams";
 import useSearch from "hooks/useSearch";
 import SearchResultsPage from "pages/searchResults/SearchResultsPage";
@@ -24,7 +25,9 @@ const SearchPage: React.FC = () => {
     return (
       <>
         {loading && <LoadingScreen text="Searching..." />}
-        {error && <Text>Error: {error}</Text>}
+        {error && (
+          <ErrorDialog error={error} onDismiss={history.goBack} visible />
+        )}
         {results && results.length > 1 && (
           <SearchResultsPage
             query={query}

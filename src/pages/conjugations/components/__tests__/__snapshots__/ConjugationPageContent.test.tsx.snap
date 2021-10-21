@@ -50,6 +50,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
           style={
             Object {
               "backgroundColor": "#ffffff",
+              "borderColor": "rgba(0, 0, 0, 0.12)",
               "borderRadius": 10,
               "elevation": 5,
               "marginHorizontal": 16,
@@ -116,37 +117,20 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
                         Object {
+                          "textAlign": "left",
+                        },
+                        Object {
                           "color": "rgba(0, 0, 0, 0.87)",
                           "fontFamily": "System",
                           "fontWeight": "500",
-                          "textAlign": "left",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
-                            "fontSize": 20,
-                            "letterSpacing": 0.15,
-                            "lineHeight": 30,
-                            "marginVertical": 2,
-                          },
-                          Array [
-                            Object {
-                              "minHeight": 30,
-                            },
-                            Object {
-                              "marginBottom": 2,
-                            },
-                            Object {
-                              "color": "#3F51B5",
-                              "fontSize": 16,
-                              "fontWeight": "400",
-                            },
-                          ],
-                        ],
                         Array [
                           Object {
                             "fontSize": 20,
@@ -245,6 +229,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -271,6 +257,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -299,6 +287,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -357,6 +347,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -383,6 +375,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -411,6 +405,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -469,6 +465,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -495,6 +493,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -523,6 +523,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -549,6 +551,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
           style={
             Object {
               "backgroundColor": "#ffffff",
+              "borderColor": "rgba(0, 0, 0, 0.12)",
               "borderRadius": 10,
               "elevation": 5,
               "marginHorizontal": 16,
@@ -615,37 +618,20 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
                         Object {
+                          "textAlign": "left",
+                        },
+                        Object {
                           "color": "rgba(0, 0, 0, 0.87)",
                           "fontFamily": "System",
                           "fontWeight": "500",
-                          "textAlign": "left",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
-                            "fontSize": 20,
-                            "letterSpacing": 0.15,
-                            "lineHeight": 30,
-                            "marginVertical": 2,
-                          },
-                          Array [
-                            Object {
-                              "minHeight": 30,
-                            },
-                            Object {
-                              "marginBottom": 2,
-                            },
-                            Object {
-                              "color": "#3F51B5",
-                              "fontSize": 16,
-                              "fontWeight": "400",
-                            },
-                          ],
-                        ],
                         Array [
                           Object {
                             "fontSize": 20,
@@ -744,6 +730,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -770,6 +758,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -798,6 +788,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -856,6 +848,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -882,6 +876,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -910,6 +906,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -968,6 +966,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -994,6 +994,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {
@@ -1022,6 +1024,8 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {

@@ -6,7 +6,7 @@ import { Appbar, Menu, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
 import { useViewShot } from "./ViewShotProvider";
 
-export const APP_BAR_HEIGHT = 56;
+export const APP_BAR_HEIGHT = 84;
 
 export interface AppBarProps {
   title?: string;

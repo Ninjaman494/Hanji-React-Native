@@ -1,4 +1,3 @@
-import { APP_BAR_HEIGHT } from "components/AppBar";
 import React, { FC, useEffect } from "react";
 import { Animated, View } from "react-native";
 import { useTheme } from "react-native-paper";
@@ -51,7 +50,6 @@ const SlideInTop: FC<SlideInTopProps> = ({
           position: "absolute",
           width: "100%",
           backgroundColor: colors.primary,
-          marginBottom: APP_BAR_HEIGHT,
         },
         { height: appBarHeight, opacity: 1 },
       ]}

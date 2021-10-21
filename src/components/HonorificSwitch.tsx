@@ -17,6 +17,7 @@ const HonorificSwitch: FC<HonorificSwitchProps> = ({ honorific, onPress }) => {
       paddingHorizontal: padding?.horizontal,
       paddingBottom: 8,
       backgroundColor: colors?.primary,
+      zIndex: 100,
     },
     switchText: {
       fontSize: textSizes?.secondary,
