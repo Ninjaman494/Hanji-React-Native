@@ -18,7 +18,7 @@ const ConjInfoPage: React.FC = () => {
       <SlideInTop scrollY={scrollY} shouldAnimate>
         <AppBar />
       </SlideInTop>
-      <AppLayout error={conjugation ? undefined : "Something went wrong"}>
+      <AppLayout>
         <SlideInBody
           shouldAnimate
           scrollY={scrollY}

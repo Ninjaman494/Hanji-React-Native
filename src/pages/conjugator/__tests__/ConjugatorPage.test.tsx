@@ -6,7 +6,7 @@ import useConjugations from "hooks/useConjugations";
 import useGetStems from "hooks/useGetStems";
 import React from "react";
 import "react-native";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import ConjugatorPage from "../ConjugatorPage";
@@ -43,6 +43,9 @@ const hookOptions = {
 (useLocation as jest.Mock).mockReturnValue({
   search: "term=term",
 });
+
+const goBack = jest.fn();
+(useHistory as jest.Mock).mockReturnValue({ goBack });
 
 describe("Conjugator Page", () => {
   it("fetches conjugations", async () => {

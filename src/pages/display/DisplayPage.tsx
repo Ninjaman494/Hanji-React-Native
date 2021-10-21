@@ -58,7 +58,7 @@ const DisplayPage: React.FC = () => {
       </SlideInTop>
       <AppLayout
         loading={entryLoading || conjLoading}
-        error={entryError ? entryError.message : conjError?.message}
+        error={entryError || conjError}
       >
         <SlideInBody
           shouldAnimate

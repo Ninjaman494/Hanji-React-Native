@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Hanji-Web",
-    "slug": "Hanji-Web",
-    "version": "1.0.0",
+    "name": "Korean-Conjugator",
+    "slug": "Korean-Conjugator",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,8 +17,31 @@
     "ios": {
       "supportsTablet": true
     },
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "com.a494studios.koreanconjugator"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/perf",
+      "sentry-expo",
+      "expo-updates"
+    ],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "akash-eldo",
+            "project": "hanji",
+            "authToken": "SENTRY_AUTH_TOKEN",
+            "setCommits": true
+          }
+        }
+      ]
     }
   }
 }
