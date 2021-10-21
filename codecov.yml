@@ -1,9 +1,6 @@
 coverage:
   status:
-    patch:
-      default:
-        paths:
-          - "src"
+    patch: off
     project:
       default:
         target: 80%
