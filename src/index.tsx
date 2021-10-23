@@ -63,7 +63,7 @@ setJSExceptionHandler((error, isFatal) => {
       },
     ]
   );
-}, true);
+}, false);
 setNativeExceptionHandler(
   (errStr) => Native.captureException(errStr, { level: Fatal }),
   false,
