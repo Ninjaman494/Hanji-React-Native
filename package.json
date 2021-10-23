@@ -1,6 +1,6 @@
 {
   "name": "hanji-app",
-  "version": "0.0.1",
+  "version": "3.0.0",
   "scripts": {
     "start": "expo start --dev-client",
     "test": "jest",
@@ -8,6 +8,7 @@
     "prebuild": "expo prebuild",
     "build:android": "expo run:android",
     "build:ios": "expo run:ios",
+    "build-release": "react-native run-android --variant=release",
     "web": "expo start --web",
     "eject": "expo eject",
     "postinstall": "npx npm-license-crawler -onlyDirectDependencies -json src/pages/settings/licenses.json"
