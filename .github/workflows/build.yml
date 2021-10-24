@@ -26,6 +26,6 @@ jobs:
         version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
     - name: Upload APK
       uses: actions/upload-artifact@v1
-        with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+      with:
+        name: app-release.apk
+        path: android/app/build/outputs/apk/release/
