@@ -1,0 +1,31 @@
+name: Build
+
+on: push
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: npm ci
+    - name: Build APK
+      run: cd android && ./gradlew assembleRelease
+    - name: Create Sentry release
+      uses: getsentry/action-release@v1
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+        SENTRY_PROJECT: hanji
+        VERSION_CODE: $(grep -o "versionCode\s\+.*" app/build.gradle | awk '{print $2}')
+        VERSION_NAME: $(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')
+      with:
+        environment: production
+        version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
+    - name: Upload APK
+      uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
