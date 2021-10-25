@@ -11,19 +11,12 @@ jobs:
       with:
         node-version: 12.x
     - run: npm ci
+    - run: echo ${{ secrets.FIREBASE_SECRET }} > google-services.json
     - name: Build APK
       run:  |
         cd android && 
         chmod +x gradlew && 
         ./gradlew assembleRelease
-    - name: Build Sourcemaps
-      run: |
-        react-native bundle \
-          --dev false \
-          --platform android \
-          --entry-file index.android.js \
-          --bundle-output index.android.bundle \
-          --sourcemap-output index.android.bundle.map
     - name: Create Sentry release
       uses: getsentry/action-release@v1
       env:
@@ -35,7 +28,7 @@ jobs:
       with:
         environment: production
         version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
-        sourcemaps: index.android.bundle index.android.bundle.map
+        sourcemaps: android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
         strip_common_prefix: true
     - name: Upload APK
       uses: actions/upload-artifact@v1
