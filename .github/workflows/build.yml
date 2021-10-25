@@ -15,7 +15,16 @@ jobs:
       env: 
         FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
       run: echo $FIREBASE_SECRET > android/app/google-services.json
+    - name: Decode Keystore
+      uses: timheuer/base64-to-file@v1
+      with:
+        fileName: android/keystore.jks
+        encodedString: ${{ secrets.KEYSTORE }}
     - name: Build APK
+      env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
       run:  |
         cd android && 
         chmod +x gradlew && 
