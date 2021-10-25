@@ -30,8 +30,8 @@ jobs:
         ./gradlew assembleRelease
     - id: get_version
       run: |
-        echo "::set-output name=VERSION_CODE::$(grep -o "versionCode\s\+.*" app/build.gradle | awk '{print $2}')" &&
-        echo "::set-output name=VERSION_NAME::$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')"
+        echo "::set-output name=VERSION_CODE::$(grep -o "versionCode\s\+.*" android/app/build.gradle | awk '{print $2}')" &&
+        echo "::set-output name=VERSION_NAME::$(grep "versionName" android/app/build.gradle | awk '{print $2}' | tr -d \''"\')"
     - name: Create Sentry release
       uses: getsentry/action-release@v1
       env:
