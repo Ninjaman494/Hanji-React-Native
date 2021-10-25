@@ -18,7 +18,7 @@ jobs:
     - name: Decode Keystore
       uses: timheuer/base64-to-file@v1
       with:
-        fileName: android/app/keystore.jks
+        fileName: 'android/app/keystore.jks'
         encodedString: ${{ secrets.KEYSTORE }}
     - name: Build APK
       env:
