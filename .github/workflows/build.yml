@@ -21,6 +21,7 @@ jobs:
         ENCODED_STRING: ${{ secrets.KEYSTORE }}
     - name: Build APK
       env:
+          SERVER_URL: ${{ secrets.SERVER_URL }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
@@ -44,7 +45,6 @@ jobs:
         environment: production
         version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
         sourcemaps: android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
-        strip_common_prefix: true
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
