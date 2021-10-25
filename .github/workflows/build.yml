@@ -26,8 +26,8 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
       run:  |
-        ls -l && 
         cd android && 
+        ls -l app/
         chmod +x gradlew && 
         ./gradlew assembleRelease
     - name: Create Sentry release
