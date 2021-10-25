@@ -26,6 +26,7 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
       run:  |
+        ls -l && 
         cd android && 
         chmod +x gradlew && 
         ./gradlew assembleRelease
