@@ -16,13 +16,9 @@ jobs:
         FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
       run: echo $FIREBASE_SECRET > android/app/google-services.json
     - name: Decode Keystore
-      id: write_file
-      uses: timheuer/base64-to-file@v1
-      with:
-        fileDir: 'android/app'
-        fileName: 'keystore.jks'
-        encodedString: ${{ secrets.KEYSTORE }}
-    - run: echo ${{ steps.write_file.outputs.filePath }}
+      run: echo $ENCODED_STRING | base64 -di > android/app/keys.jks
+      env:
+        ENCODED_STRING: ${{ secrets.KEYSTORE }}
     - name: Build APK
       env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
