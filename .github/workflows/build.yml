@@ -44,7 +44,7 @@ jobs:
         sentry-cli releases \
           files com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }} \
           upload-sourcemaps \
-          --dist ${{ env.VERSION_CODE } \
+          --dist ${{ env.VERSION_CODE }} \
           android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
       env:
         VERSION_CODE: ${{ steps.get_version.outputs.VERSION_CODE }}
