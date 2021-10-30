@@ -33,20 +33,36 @@ jobs:
       run: |
         echo "::set-output name=VERSION_CODE::$(grep -o "versionCode\s\+.*" android/app/build.gradle | awk '{print $2}')" &&
         echo "::set-output name=VERSION_NAME::$(grep "versionName" android/app/build.gradle | awk '{print $2}' | tr -d \''"\')"
+    - name: Setup Sentry CLI
+      uses: mathieu-bour/setup-sentry-cli@1.2.0
+      with:
+        token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        organization: ${{ secrets.SENTRY_ORG }}
+        project: hanji
     - name: Create Sentry release
-      uses: Ninjaman494/action-release@master
+      run: |
+        sentry-cli releases \
+          files com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }} \
+          upload-sourcemaps \
+          --dist ${{ env.VERSION_CODE } \
+          android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
       env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-        SENTRY_PROJECT: hanji
         VERSION_CODE: ${{ steps.get_version.outputs.VERSION_CODE }}
         VERSION_NAME: ${{ steps.get_version.outputs.VERSION_NAME }}
-      with:
-        environment: production
-        version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
-        url_prefix: app:///
-        dist: ${{ env.VERSION_CODE }}
-        sourcemaps: android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
+    # - name: Create Sentry release
+    #   uses: Ninjaman494/action-release@master
+    #   env:
+    #     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+    #     SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+    #     SENTRY_PROJECT: hanji
+    #     VERSION_CODE: ${{ steps.get_version.outputs.VERSION_CODE }}
+    #     VERSION_NAME: ${{ steps.get_version.outputs.VERSION_NAME }}
+    #   with:
+    #     environment: production
+    #     version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
+    #     url_prefix: app:///
+    #     dist: ${{ env.VERSION_CODE }}
+    #     sourcemaps: android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
