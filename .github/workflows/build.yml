@@ -45,25 +45,10 @@ jobs:
           files com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }} \
           upload-sourcemaps \
           --dist ${{ env.VERSION_CODE }} \
-          -- url_prefix app:/// \
           android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
       env:
         VERSION_CODE: ${{ steps.get_version.outputs.VERSION_CODE }}
         VERSION_NAME: ${{ steps.get_version.outputs.VERSION_NAME }}
-    # - name: Create Sentry release
-    #   uses: Ninjaman494/action-release@master
-    #   env:
-    #     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-    #     SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-    #     SENTRY_PROJECT: hanji
-    #     VERSION_CODE: ${{ steps.get_version.outputs.VERSION_CODE }}
-    #     VERSION_NAME: ${{ steps.get_version.outputs.VERSION_NAME }}
-    #   with:
-    #     environment: production
-    #     version: com.a494studios.koreanconjugator@${{ env.VERSION_NAME }}+${{ env.VERSION_CODE }}
-    #     url_prefix: app:///
-    #     dist: ${{ env.VERSION_CODE }}
-    #     sourcemaps: android/app/build/generated/assets/react/release/index.android.bundle android/app/build/generated/sourcemaps/react/release/index.android.bundle.map
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
