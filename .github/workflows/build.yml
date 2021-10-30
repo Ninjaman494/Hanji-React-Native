@@ -34,7 +34,7 @@ jobs:
         echo "::set-output name=VERSION_CODE::$(grep -o "versionCode\s\+.*" android/app/build.gradle | awk '{print $2}')" &&
         echo "::set-output name=VERSION_NAME::$(grep "versionName" android/app/build.gradle | awk '{print $2}' | tr -d \''"\')"
     - name: Create Sentry release
-      uses: Ninjaman494/action-release@dist
+      uses: Ninjaman494/action-release@master
       env:
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
