@@ -40,6 +40,14 @@ const client = new ApolloClient({
 
 init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
+  beforeBreadcrumb(breadcrumb, hint) {
+    if (breadcrumb.category === "xhr") {
+      const xhr = hint?.xhr as XMLHttpRequest & { _method: string };
+      breadcrumb.message = `${xhr._method} ${xhr.responseURL}`;
+      breadcrumb.data = JSON.parse(hint?.input);
+    }
+    return breadcrumb;
+  },
   // enableInExpoDevelopment: true,
   // debug: true, // log debug info in dev mode
 });
