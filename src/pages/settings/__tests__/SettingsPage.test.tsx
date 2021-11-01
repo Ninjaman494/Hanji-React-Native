@@ -14,6 +14,12 @@ import SettingsPage from "../SettingsPage";
 
 jest.spyOn(StoreReview, "storeUrl").mockReturnValue("store-url");
 
+const version = "1.0.0";
+jest.mock("expo-constants", () => ({
+  ...jest.requireActual("expo-constants"),
+  nativeAppVersion: version,
+}));
+
 const pushHistory = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({
   push: pushHistory,
@@ -77,7 +83,7 @@ describe("SettingsPage", () => {
       const result = render(<SettingsPage />);
 
       expect(result.getByText("Version")).toBeTruthy();
-      expect(result.getByText("0.0.1")).toBeTruthy();
+      expect(result.getByText(version)).toBeTruthy();
     });
 
     it("redirects to Acknowledgements", async () => {
