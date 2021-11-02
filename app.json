@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Korean-Conjugator",
+    "name": "Hanji",
     "slug": "Korean-Conjugator",
     "version": "3.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#3F51B5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
