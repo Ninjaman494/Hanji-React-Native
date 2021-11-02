@@ -11,7 +11,9 @@
     "build-release": "react-native run-android --variant=release",
     "web": "expo start --web",
     "eject": "expo eject",
-    "postinstall": "npx npm-license-crawler -onlyDirectDependencies -json src/pages/settings/licenses.json"
+    "postinstall": "npx npm-license-crawler -onlyDirectDependencies -json src/pages/settings/licenses.json",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
   },
   "dependencies": {
     "@apollo/client": "^3.2.3",
@@ -33,7 +35,7 @@
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-store-review": "~4.1.0",
-    "expo-updates": "~0.8.2",
+    "expo-updates": "~0.8.1",
     "formik": "^2.2.9",
     "graphql": "^15.3.0",
     "npm-license-crawler": "^0.2.1",
