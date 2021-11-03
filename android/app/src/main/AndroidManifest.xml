@@ -28,6 +28,16 @@
         <data android:scheme="exp+korean-conjugator"/>
         <data android:scheme="exp+korean-conjugator"/>
         <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
+        <data android:scheme="exp+korean-conjugator"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
