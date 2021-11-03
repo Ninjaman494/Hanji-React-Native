@@ -19,7 +19,11 @@
     },
     "android": {
       "googleServicesFile": "./google-services.json",
-      "package": "com.a494studios.koreanconjugator"
+      "package": "com.a494studios.koreanconjugator",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptiveIcon.png",
+        "backgroundColor": "#3856FE"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
