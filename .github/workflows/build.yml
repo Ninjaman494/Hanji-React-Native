@@ -28,7 +28,7 @@ jobs:
       run:  |
         cd android && 
         chmod +x gradlew && 
-        ./gradlew assembleRelease
+        ./gradlew bundleRelease
     - id: get_version
       run: |
         echo "::set-output name=VERSION_CODE::$(grep -o "versionCode\s\+.*" android/app/build.gradle | awk '{print $2}')" &&
@@ -52,5 +52,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
-        name: app-release.apk
-        path: android/app/build/outputs/apk/release/
+        name: app-release.aab
+        path: android/app/build/outputs/bundle/release/
