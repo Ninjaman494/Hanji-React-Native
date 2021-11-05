@@ -1,11 +1,11 @@
 import { AppBar } from "components";
+import Constants from "expo-constants";
+import * as StoreReview from "expo-store-review";
 import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
-import { View, StyleSheet, Linking } from "react-native";
+import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import { useHistory } from "react-router";
-import * as StoreReview from "expo-store-review";
-import { version } from "../../../package.json";
 
 const SettingsPage: React.FC = () => {
   const { colors } = useTheme();
@@ -61,7 +61,7 @@ const SettingsPage: React.FC = () => {
             title="Acknowledgements"
             onPress={() => history.push("/acknowledgements")}
           />
-          <List.Item title="Version" description={version} />
+          <List.Item title="Version" description={Constants.nativeAppVersion} />
         </List.Section>
       </View>
     </View>
