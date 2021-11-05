@@ -40,6 +40,12 @@ const client = new ApolloClient({
 
 init({
   dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
+  beforeBreadcrumb(breadcrumb, hint) {
+    if (breadcrumb.category === "xhr") {
+      breadcrumb.data = JSON.parse(hint?.input);
+    }
+    return breadcrumb;
+  },
   // enableInExpoDevelopment: true,
   // debug: true, // log debug info in dev mode
 });
@@ -63,7 +69,7 @@ setJSExceptionHandler((error, isFatal) => {
       },
     ]
   );
-}, true);
+}, false);
 setNativeExceptionHandler(
   (errStr) => Native.captureException(errStr, { level: Fatal }),
   false,

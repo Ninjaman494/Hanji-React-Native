@@ -8,6 +8,8 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import io.sentry.react.RNSentryPackage;
+import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -92,6 +94,9 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     DevLauncherController.initialize(this, getReactNativeHost());
+    if (BuildConfig.DEBUG) {
+      DevLauncherController.getInstance().setUpdatesInterface(UpdatesDevLauncherController.initialize(this));
+    }
     if (BuildConfig.DEBUG) {
       DevLauncherController.getInstance().setUpdatesInterface(UpdatesDevLauncherController.initialize(this));
     }
