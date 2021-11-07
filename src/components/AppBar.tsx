@@ -46,7 +46,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
       )}
       {searching ? (
         <NativeInput
-          testID="appBarSearch"
+          accessibilityLabel="search input"
           value={searchQuery}
           onChangeText={setSearchQuery}
           onSubmitEditing={doSearch}
@@ -61,7 +61,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
       )}
       {!hideSearch && (
         <Appbar.Action
-          testID="appBarSearchBtn"
+          accessibilityLabel="search button"
           icon={searching ? "window-close" : "magnify"}
           onPress={() => setSearching(!searching)}
         />
