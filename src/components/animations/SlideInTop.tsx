@@ -17,10 +17,10 @@ const SlideInTop: FC<SlideInTopProps> = ({
   scrollY,
   shouldAnimate,
   showOnScroll,
+  extendedHeight = 150,
   ...rest
 }) => {
   const { colors } = useTheme();
-  const extendedHeight = 150;
 
   const appBarHeight = (
     showOnScroll ? Animated.diffClamp(scrollY, 0, 40) : scrollY
