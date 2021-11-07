@@ -9,8 +9,10 @@ import { useHistory } from "react-router";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 
 const pushHistory = jest.fn();
+const goBack = jest.fn();
 (useHistory as jest.Mock).mockReturnValue({
   push: pushHistory,
+  goBack,
 });
 
 const screenshotUri = "uri";
@@ -25,8 +27,22 @@ describe("AppBar component", () => {
 
   it("has a title", () => {
     const component = render(<AppBar {...props} />);
-
     expect(component.getByText(props.title)).toBeTruthy();
+  });
+  it("can hide search button", () => {
+    const component = render(<AppBar {...props} hideSearch />);
+    expect(component.queryByTestId("appBarSearchBtn")).toBeNull();
+  });
+
+  it("can hide back button", () => {
+    const component = render(<AppBar {...props} hideBack />);
+    expect(component.queryByLabelText("back button")).toBeNull();
+  });
+
+  it("can go back", () => {
+    const component = render(<AppBar {...props} />);
+    fireEvent.press(component.getByLabelText("back button"));
+    expect(goBack).toHaveBeenCalled();
   });
 
   it("shows search bar when clicked", () => {
@@ -46,41 +62,43 @@ describe("AppBar component", () => {
     expect(component.getByTestId("appBarSearch").props.value).toBe("query");
   });
 
-  it("redirects to the search page", () => {
-    const component = render(<AppBar {...props} />);
+  describe("overflow menu", () => {
+    it("redirects to the search page", () => {
+      const component = render(<AppBar {...props} />);
 
-    fireEvent.press(component.getByTestId("appBarSearchBtn"));
-    fireEvent.changeText(component.getByTestId("appBarSearch"), "query");
-    fireEvent(component.getByTestId("appBarSearch"), "onSubmitEditing");
+      fireEvent.press(component.getByTestId("appBarSearchBtn"));
+      fireEvent.changeText(component.getByTestId("appBarSearch"), "query");
+      fireEvent(component.getByTestId("appBarSearch"), "onSubmitEditing");
 
-    expect(pushHistory).toHaveBeenCalledWith("/search?query=query");
-  });
+      expect(pushHistory).toHaveBeenCalledWith("/search?query=query");
+    });
 
-  it("redirects to settings page", async () => {
-    const component = render(<AppBar {...props} />);
+    it("redirects to settings page", async () => {
+      const component = render(<AppBar {...props} />);
 
-    fireEvent.press(component.getByLabelText("overflow menu button"));
+      fireEvent.press(component.getByLabelText("overflow menu button"));
 
-    await waitFor(() => expect(component.getByText("Settings")).toBeTruthy());
-    fireEvent.press(component.getByText("Settings"));
+      await waitFor(() => expect(component.getByText("Settings")).toBeTruthy());
+      fireEvent.press(component.getByText("Settings"));
 
-    expect(pushHistory).toHaveBeenCalledWith("/settings");
-  });
+      expect(pushHistory).toHaveBeenCalledWith("/settings");
+    });
 
-  it("redirects to bug report page", async () => {
-    const component = render(<AppBar {...props} />);
+    it("redirects to bug report page", async () => {
+      const component = render(<AppBar {...props} />);
 
-    fireEvent.press(component.getByLabelText("overflow menu button"));
+      fireEvent.press(component.getByLabelText("overflow menu button"));
 
-    await waitFor(() =>
-      expect(component.getByText("Report a Bug")).toBeTruthy()
-    );
-    fireEvent.press(component.getByText("Report a Bug"));
+      await waitFor(() =>
+        expect(component.getByText("Report a Bug")).toBeTruthy()
+      );
+      fireEvent.press(component.getByText("Report a Bug"));
 
-    await waitFor(() =>
-      expect(pushHistory).toHaveBeenCalledWith("/bugReport", {
-        screenshot: screenshotUri,
-      })
-    );
+      await waitFor(() =>
+        expect(pushHistory).toHaveBeenCalledWith("/bugReport", {
+          screenshot: screenshotUri,
+        })
+      );
+    });
   });
 });
