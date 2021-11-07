@@ -75,7 +75,7 @@ const MainPage: React.FC = () => {
   ) : (
     <View style={styles.container}>
       <SlideInTop shouldAnimate scrollY={scrollY} extendedHeight={200}>
-        <AppBar />
+        <AppBar hideBack hideSearch />
         <Text style={styles.titleContainer}>
           <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
             한지

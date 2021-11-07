@@ -10,10 +10,12 @@ export const APP_BAR_HEIGHT = 84;
 
 export interface AppBarProps {
   title?: string;
+  hideSearch?: boolean;
+  hideBack?: boolean;
 }
 
-const AppBar: React.FC<AppBarProps> = ({ title }) => {
-  const [showSearch, setShowSearch] = useState(false);
+const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
+  const [searching, setSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
 
@@ -36,8 +38,8 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
 
   return (
     <Appbar.Header style={{ elevation: 0, zIndex: 100 }}>
-      <Appbar.BackAction onPress={() => history.goBack()} />
-      {showSearch ? (
+      {!hideBack && <Appbar.BackAction onPress={() => history.goBack()} />}
+      {searching ? (
         <NativeInput
           testID="appBarSearch"
           value={searchQuery}
@@ -52,11 +54,13 @@ const AppBar: React.FC<AppBarProps> = ({ title }) => {
       ) : (
         <Appbar.Content title={title} />
       )}
-      <Appbar.Action
-        testID="appBarSearchBtn"
-        icon={showSearch ? "window-close" : "magnify"}
-        onPress={() => setShowSearch(!showSearch)}
-      />
+      {!hideSearch && (
+        <Appbar.Action
+          testID="appBarSearchBtn"
+          icon={searching ? "window-close" : "magnify"}
+          onPress={() => setSearching(!searching)}
+        />
+      )}
       <Menu
         visible={showMenu}
         onDismiss={() => setShowMenu(false)}
