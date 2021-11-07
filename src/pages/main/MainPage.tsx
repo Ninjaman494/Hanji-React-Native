@@ -1,9 +1,10 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
+import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import AppLoading from "expo-app-loading";
 import React, { useMemo, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
-import { Searchbar, Text, useTheme } from "react-native-paper";
+import { Searchbar, Text } from "react-native-paper";
 import { useHistory } from "react-router";
 import {
   ConjugationName,
@@ -36,7 +37,6 @@ export const DEFAULT_FAVORITES = [
 const MainPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const history = useHistory();
-  const { colors } = useTheme();
 
   const [fontLoaded] = useFonts({
     Laila_500Medium,
@@ -46,20 +46,10 @@ const MainPage: React.FC = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: "center",
-    },
-    appBar: {
-      backgroundColor: colors.primary,
-      justifyContent: "center",
     },
     card: {
       marginVertical: 8,
       marginHorizontal: 16,
-    },
-    scrollView: {
-      marginTop: -32,
-      flexGrow: 1,
-      paddingBottom: 8,
     },
     titleContainer: {
       fontSize: 48,
@@ -84,7 +74,8 @@ const MainPage: React.FC = () => {
     <AppLoading />
   ) : (
     <View style={styles.container}>
-      <SlideInTop shouldAnimate style={styles.appBar} scrollY={scrollY}>
+      <SlideInTop shouldAnimate scrollY={scrollY} extendedHeight={200}>
+        <AppBar />
         <Text style={styles.titleContainer}>
           <Text style={[styles.title, { fontFamily: "Hangang-Bold" }]}>
             한지
@@ -92,24 +83,26 @@ const MainPage: React.FC = () => {
           <Text style={styles.title}> |Hanji</Text>
         </Text>
       </SlideInTop>
-      <SlideInBody
-        style={styles.scrollView}
-        scrollY={scrollY}
-        containerY={containerY}
-        flatlist={false}
-        shouldAnimate
-      >
-        <Searchbar
-          placeholder="Search in Korean or English..."
-          onChangeText={(query: string) => setSearchQuery(query)}
-          value={searchQuery}
-          onSubmitEditing={doSearch}
-          onIconPress={doSearch}
-          searchAccessibilityLabel="search button"
-          style={styles.card}
-        />
-        <WODCard style={styles.card} />
-      </SlideInBody>
+      <AppLayout>
+        <SlideInBody
+          scrollY={scrollY}
+          containerY={containerY}
+          flatlist={false}
+          minimumHeight={80}
+          shouldAnimate
+        >
+          <Searchbar
+            placeholder="Search in Korean or English..."
+            onChangeText={(query: string) => setSearchQuery(query)}
+            value={searchQuery}
+            onSubmitEditing={doSearch}
+            onIconPress={doSearch}
+            searchAccessibilityLabel="search button"
+            style={styles.card}
+          />
+          <WODCard style={styles.card} />
+        </SlideInBody>
+      </AppLayout>
     </View>
   );
 };
