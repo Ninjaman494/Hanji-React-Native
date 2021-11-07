@@ -31,7 +31,7 @@ describe("AppBar component", () => {
   });
   it("can hide search button", () => {
     const component = render(<AppBar {...props} hideSearch />);
-    expect(component.queryByTestId("appBarSearchBtn")).toBeNull();
+    expect(component.queryByLabelText("search button")).toBeNull();
   });
 
   it("can hide back button", () => {
@@ -48,27 +48,31 @@ describe("AppBar component", () => {
   it("shows search bar when clicked", () => {
     const component = render(<AppBar {...props} />);
 
-    expect(component.queryByTestId("appBarSearch")).toBeNull();
+    expect(component.queryByLabelText("search input")).toBeNull();
 
-    fireEvent(component.getByTestId("appBarSearchBtn"), "onPress");
+    fireEvent(component.getByLabelText("search button"), "onPress");
 
-    expect(component.queryByTestId("appBarSearch")).not.toBeNull();
-    expect(component.getByTestId("appBarSearch").props.placeholder).toBe(
+    expect(component.queryByLabelText("search input")).not.toBeNull();
+    expect(component.getByLabelText("search input").props.placeholder).toBe(
       "Search in Korean or English..."
     );
 
-    fireEvent(component.getByTestId("appBarSearch"), "onChangeText", "query");
+    fireEvent(
+      component.getByLabelText("search input"),
+      "onChangeText",
+      "query"
+    );
 
-    expect(component.getByTestId("appBarSearch").props.value).toBe("query");
+    expect(component.getByLabelText("search input").props.value).toBe("query");
   });
 
   describe("overflow menu", () => {
     it("redirects to the search page", () => {
       const component = render(<AppBar {...props} />);
 
-      fireEvent.press(component.getByTestId("appBarSearchBtn"));
-      fireEvent.changeText(component.getByTestId("appBarSearch"), "query");
-      fireEvent(component.getByTestId("appBarSearch"), "onSubmitEditing");
+      fireEvent.press(component.getByLabelText("search button"));
+      fireEvent.changeText(component.getByLabelText("search input"), "query");
+      fireEvent(component.getByLabelText("search input"), "onSubmitEditing");
 
       expect(pushHistory).toHaveBeenCalledWith("/search?query=query");
     });
