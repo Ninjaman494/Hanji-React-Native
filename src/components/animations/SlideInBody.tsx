@@ -9,28 +9,27 @@ import {
 
 interface SlideInScrollView extends Animated.ComponentProps<ScrollView> {
   flatlist: false;
-  scrollY: Animated.Value;
-  containerY: Animated.Value;
-  shouldAnimate: boolean;
 }
 
 interface SlideInFlatList extends Animated.ComponentProps<FlatList> {
   flatlist: true;
+}
+
+export type SlideInBodyProps = (SlideInScrollView | SlideInFlatList) & {
   scrollY: Animated.Value;
   containerY: Animated.Value;
   shouldAnimate: boolean;
-}
-
-export type SlideInBodyProps = SlideInScrollView | SlideInFlatList;
+  minimumHeight?: number;
+};
 
 export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 
 const SlideInBody: FC<SlideInBodyProps> = (props) => {
-  const { containerY, scrollY, shouldAnimate } = props;
+  const { containerY, scrollY, shouldAnimate, minimumHeight = 0 } = props;
 
   const containerTranslate = containerY.interpolate({
     inputRange: [0, 100],
-    outputRange: [Dimensions.get("window").height, 0],
+    outputRange: [Dimensions.get("window").height, minimumHeight],
   });
 
   useEffect(() => {
