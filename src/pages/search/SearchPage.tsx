@@ -16,7 +16,7 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
 
     useEffect(() => {
       if (results?.length === 1) {
-        navigation.push("Display", { entryId: results[0].id });
+        navigation.replace("Display", { entryId: results[0].id });
       }
     }, [results]);
 
@@ -38,7 +38,7 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
           query={query}
           onDismiss={navigation.goBack}
           onConjugatorPress={() =>
-            navigation.push("Conjugator", { term: query })
+            navigation.replace("Conjugator", { term: query })
           }
         />
       </>
