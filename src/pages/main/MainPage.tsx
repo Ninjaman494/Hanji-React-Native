@@ -1,5 +1,5 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import AppLoading from "expo-app-loading";
@@ -14,7 +14,7 @@ import {
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
 
-type MainPageProps = NativeStackScreenProps<StackParamList, "Main">;
+type MainPageProps = StackScreenProps<StackParamList, "Main">;
 
 export const DEFAULT_FAVORITES = [
   {

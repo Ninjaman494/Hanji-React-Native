@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
@@ -12,7 +12,7 @@ import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
 
-type DisplayPageProps = NativeStackScreenProps<StackParamList, "Display">;
+type DisplayPageProps = StackScreenProps<StackParamList, "Display">;
 
 const DisplayPage: React.FC<DisplayPageProps> = ({ route, navigation }) => {
   const id = route.params.entryId;

@@ -1,4 +1,4 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Conjugation } from "hooks/useConjugations";
 
 export type StackParamList = {
@@ -14,4 +14,4 @@ export type StackParamList = {
   Conjugator: { term: string };
 };
 
-export type StackNavigationProp = NativeStackNavigationProp<StackParamList>;
+export type NavigationProp = StackNavigationProp<StackParamList>;

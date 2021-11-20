@@ -5,7 +5,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { StackNavigationProp } from "typings/navigation";
+import { NavigationProp } from "typings/navigation";
 import { Formality } from "utils/conjugationTypes";
 
 export type ConjugationCardProps = BaseCardProps & {
@@ -19,7 +19,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
   ...rest
 }) => {
   const { colors, padding, textSizes } = useTheme();
-  const navigation = useNavigation<StackNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
 
   const style = StyleSheet.create({
     conjView: {

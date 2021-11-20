@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
@@ -8,7 +8,7 @@ import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import { StackParamList } from "typings/navigation";
 
-type SettingsPageProps = NativeStackScreenProps<StackParamList, "Settings">;
+type SettingsPageProps = StackScreenProps<StackParamList, "Settings">;
 
 const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
   const { colors } = useTheme();

@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { LoadingScreen } from "components";
 import ErrorDialog from "components/ErrorDialog";
 import useSearch from "hooks/useSearch";
@@ -8,7 +8,7 @@ import { Text } from "react-native-paper";
 import { StackParamList } from "typings/navigation";
 import NoResultsModal from "./NoResultsModal";
 
-type SearchPageProps = NativeStackScreenProps<StackParamList, "Search">;
+type SearchPageProps = StackScreenProps<StackParamList, "Search">;
 
 const SearchPage: React.FC<SearchPageProps> = ({ route, navigation }) => {
   const { query } = route.params;

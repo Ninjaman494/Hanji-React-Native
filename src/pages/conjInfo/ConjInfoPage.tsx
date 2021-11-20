@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import React, { useMemo } from "react";
@@ -6,7 +6,7 @@ import { Animated, View } from "react-native";
 import { StackParamList } from "typings/navigation";
 import ConjInfoCard from "./ConjInfoCard";
 
-type ConjInfoPageProps = NativeStackScreenProps<StackParamList, "ConjInfo">;
+type ConjInfoPageProps = StackScreenProps<StackParamList, "ConjInfo">;
 
 const ConjInfoPage: React.FC<ConjInfoPageProps> = ({ route }) => {
   const { conjugation } = route.params;

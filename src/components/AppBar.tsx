@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react";
 import { TextInput as NativeInput } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
-import { StackNavigationProp } from "typings/navigation";
+import { NavigationProp } from "typings/navigation";
 import { useViewShot } from "./ViewShotProvider";
 
 export const APP_BAR_HEIGHT = 84;
@@ -20,7 +20,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
 
-  const navigation = useNavigation<StackNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   const takeScreenshot = useViewShot();
   const { colors, padding } = useTheme();
 
