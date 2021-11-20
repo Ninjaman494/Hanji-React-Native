@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
 import ErrorDialog from "components/ErrorDialog";
@@ -9,10 +9,7 @@ import { useTheme } from "react-native-paper";
 import { StackParamList } from "typings/navigation";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
-type ConjugationsPageProps = NativeStackScreenProps<
-  StackParamList,
-  "Conjugations"
->;
+type ConjugationsPageProps = StackScreenProps<StackParamList, "Conjugations">;
 
 const ConjugationsPage: React.FC<ConjugationsPageProps> = ({
   route,

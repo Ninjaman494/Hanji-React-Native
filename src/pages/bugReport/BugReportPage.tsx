@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { ReactNativeFile } from "apollo-upload-client";
 import { AppBar, FormikForm, FormikTextField } from "components";
 import FormikCheckbox from "components/formikBindings/FormikCheckbox";
@@ -28,7 +28,7 @@ const validationSchema = yup.object().shape({
   type: yup.string().label("Feedback Type").required(),
 });
 
-type BugReportPageProps = NativeStackScreenProps<StackParamList, "BugReport">;
+type BugReportPageProps = StackScreenProps<StackParamList, "BugReport">;
 
 const BugReportPage: FC<BugReportPageProps> = ({ route, navigation }) => {
   const { padding, colors } = useTheme();

@@ -1,5 +1,5 @@
 import { ApolloError } from "@apollo/client";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import ErrorDialog from "components/ErrorDialog";
 import Select from "components/Select";
@@ -35,7 +35,7 @@ interface FormValues {
   honorific: boolean;
 }
 
-type ConjugatorPageProps = NativeStackScreenProps<StackParamList, "Conjugator">;
+type ConjugatorPageProps = StackScreenProps<StackParamList, "Conjugator">;
 
 const ConjugatorPage: FC<ConjugatorPageProps> = ({ route, navigation }) => {
   // Styling

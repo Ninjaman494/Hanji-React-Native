@@ -4,7 +4,7 @@ import { AppBarProps, APP_BAR_HEIGHT } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
 import React from "react";
 import { View } from "react-native";
-import { StackNavigationProp } from "typings/navigation";
+import { NavigationProp } from "typings/navigation";
 import ErrorDialog from "./ErrorDialog";
 
 export interface AppLayoutProps extends AppBarProps {
@@ -13,7 +13,7 @@ export interface AppLayoutProps extends AppBarProps {
 }
 
 const AppLayout: React.FC<AppLayoutProps> = ({ loading, error, children }) => {
-  const navigation = useNavigation<StackNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
 
   return (
     <View style={{ flex: 1, height: 500 }}>

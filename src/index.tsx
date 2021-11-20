@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
@@ -32,7 +32,7 @@ import { init, Native } from "sentry-expo";
 import theme from "theme";
 import { StackParamList } from "typings/navigation";
 
-const { Navigator, Screen } = createNativeStackNavigator<StackParamList>();
+const { Navigator, Screen } = createStackNavigator<StackParamList>();
 
 const client = new ApolloClient({
   link: createUploadLink({
