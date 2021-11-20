@@ -1,4 +1,4 @@
-import { StackNavigationProp } from "@react-navigation/stack";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { Conjugation } from "hooks/useConjugations";
 
 export type StackParamList = {
@@ -14,4 +14,7 @@ export type StackParamList = {
   Conjugator: { term: string };
 };
 
-export type NavigationProp = StackNavigationProp<StackParamList>;
+export type NavigationProps = StackNavigationProp<StackParamList>;
+
+export type ScreenProps<RouteName extends keyof StackParamList> =
+  StackScreenProps<StackParamList, RouteName>;

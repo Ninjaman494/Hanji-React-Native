@@ -10,7 +10,7 @@ import {
   TouchableRipple,
   useTheme,
 } from "react-native-paper";
-import { NavigationProp } from "typings/navigation";
+import { NavigationProps } from "typings/navigation";
 
 export interface SearchResultsCardProps {
   entry: Entry;
@@ -21,7 +21,7 @@ const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
   entry,
   style,
 }) => {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<NavigationProps>();
 
   const { padding } = useTheme();
   const styles = StyleSheet.create({

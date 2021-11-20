@@ -1,5 +1,4 @@
 import { ApolloError } from "@apollo/client";
-import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import ErrorDialog from "components/ErrorDialog";
 import Select from "components/Select";
@@ -15,7 +14,7 @@ import {
   View,
 } from "react-native";
 import { Portal, ProgressBar, useTheme } from "react-native-paper";
-import { StackParamList } from "typings/navigation";
+import { ScreenProps } from "typings/navigation";
 import ConjugationsList from "./ConjugationsList";
 
 const pos = [
@@ -35,9 +34,10 @@ interface FormValues {
   honorific: boolean;
 }
 
-type ConjugatorPageProps = StackScreenProps<StackParamList, "Conjugator">;
-
-const ConjugatorPage: FC<ConjugatorPageProps> = ({ route, navigation }) => {
+const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
+  route,
+  navigation,
+}) => {
   // Styling
   const { padding, colors } = useTheme();
   const styles = StyleSheet.create({

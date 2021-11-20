@@ -1,4 +1,3 @@
-import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
@@ -6,11 +5,9 @@ import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import { StackParamList } from "typings/navigation";
+import { ScreenProps } from "typings/navigation";
 
-type SettingsPageProps = StackScreenProps<StackParamList, "Settings">;
-
-const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
+const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
   const { favorites, loading } = useGetFavorites();
 
