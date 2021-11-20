@@ -2,11 +2,13 @@ import BaseCard, { BaseCardProps } from "components/BaseCard";
 import useGetWOD from "hooks/useGetWOD";
 import React, { FC } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Card, Text, useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
+import { Text, useTheme } from "react-native-paper";
 
-const WODCard: FC<BaseCardProps> = (props) => {
-  const history = useHistory();
+interface WODCardProps extends Omit<BaseCardProps, "onBtnPress"> {
+  onSeeEntry: (entryId: string) => void;
+}
+
+const WODCard: FC<WODCardProps> = ({ onSeeEntry, ...rest }) => {
   const { colors } = useTheme();
 
   const { data, loading, error } = useGetWOD();
@@ -21,22 +23,18 @@ const WODCard: FC<BaseCardProps> = (props) => {
   }
 
   return (
-    <BaseCard title="Word of the Day" {...props}>
+    <BaseCard
+      title="Word of the Day"
+      btnText="See entry"
+      onBtnPress={() => onSeeEntry(wod?.id as string)}
+      {...rest}
+    >
       <Text
         style={[styles.text, { color: loading ? colors.grey : colors.text }]}
         selectable
       >
         {text}
       </Text>
-      <Card.Actions style={styles.actions}>
-        <Button
-          onPress={() => history.push(`/display?id=${wod?.id}`)}
-          disabled={loading || !!error}
-          color={colors?.accent}
-        >
-          See entry
-        </Button>
-      </Card.Actions>
     </BaseCard>
   );
 };

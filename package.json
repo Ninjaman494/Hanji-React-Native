@@ -23,6 +23,8 @@
     "@react-native-firebase/analytics": "^12.8.0",
     "@react-native-firebase/app": "^12.8.0",
     "@react-native-firebase/perf": "^12.8.0",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
     "@sentry/react-native": "^3.1.1",
     "apollo-upload-client": "^16.0.0",
     "expo": "^42.0.0",
@@ -50,7 +52,6 @@
     "react-native-paper": "^4.2.0",
     "react-native-paper-dropdown": "^1.0.3",
     "react-native-reanimated": "~2.2.0",
-    "react-native-screens": "~3.4.0",
     "react-native-unimodules": "0.14.10",
     "react-native-url-polyfill": "^1.2.0",
     "react-native-uuid": "^2.0.1",
@@ -61,7 +62,9 @@
     "react-router-native": "^5.2.0",
     "recompose": "^0.30.0",
     "sentry-expo": "^4.0.0",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "react-native-screens": "~3.4.0",
+    "react-native-safe-area-context": "3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

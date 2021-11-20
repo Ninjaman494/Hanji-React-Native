@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ReactNativeFile } from "apollo-upload-client";
 import { AppBar, FormikForm, FormikTextField } from "components";
 import FormikCheckbox from "components/formikBindings/FormikCheckbox";
@@ -10,8 +11,8 @@ import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
-import { useHistory, useLocation } from "react-router-native";
 import { Native } from "sentry-expo";
+import { StackParamList } from "typings/navigation";
 import getUser from "utils/getUser";
 import * as yup from "yup";
 
@@ -27,10 +28,12 @@ const validationSchema = yup.object().shape({
   type: yup.string().label("Feedback Type").required(),
 });
 
-const BugReportPage: FC = () => {
+type BugReportPageProps = NativeStackScreenProps<StackParamList, "BugReport">;
+
+const BugReportPage: FC<BugReportPageProps> = ({ route, navigation }) => {
   const { padding, colors } = useTheme();
-  const uri = useLocation<{ screenshot: string }>().state.screenshot;
-  const { goBack } = useHistory();
+  const { screenshot: uri } = route.params;
+  const { goBack } = navigation;
 
   const [sendBugReport] = useSendBugReport();
   const { showSnackbar } = useSnackbar();

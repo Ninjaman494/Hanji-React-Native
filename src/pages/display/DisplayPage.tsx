@@ -1,20 +1,21 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
-import useGetURLParams from "hooks/useGetURLParams";
 import React, { useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackParamList } from "typings/navigation";
 import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
 
-const DisplayPage: React.FC = () => {
-  const history = useHistory();
-  const id = useGetURLParams().get("id");
+type DisplayPageProps = NativeStackScreenProps<StackParamList, "Display">;
+
+const DisplayPage: React.FC<DisplayPageProps> = ({ route, navigation }) => {
+  const id = route.params.entryId;
 
   // Get favorites from storage, use defaults if none are written
   const { favorites } = useGetFavorites();
@@ -79,9 +80,11 @@ const DisplayPage: React.FC = () => {
               title="Conjugations"
               style={styles.card}
               onPress={() =>
-                history.push(
-                  `/conjugation?stem=${stem}&isAdj=${isAdj}&honorific=${honorific}`
-                )
+                navigation.push("Conjugations", {
+                  stem: stem as string,
+                  isAdj,
+                  honorific,
+                })
               }
             />
           )}

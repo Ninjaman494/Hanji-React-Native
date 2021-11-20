@@ -1,9 +1,10 @@
 import { ApolloError } from "@apollo/client";
+import { useNavigation } from "@react-navigation/native";
 import { AppBarProps, APP_BAR_HEIGHT } from "components/AppBar";
 import LoadingScreen from "components/LoadingScreen";
 import React from "react";
 import { View } from "react-native";
-import { useHistory } from "react-router";
+import { StackNavigationProp } from "typings/navigation";
 import ErrorDialog from "./ErrorDialog";
 
 export interface AppLayoutProps extends AppBarProps {
@@ -12,14 +13,14 @@ export interface AppLayoutProps extends AppBarProps {
 }
 
 const AppLayout: React.FC<AppLayoutProps> = ({ loading, error, children }) => {
-  const history = useHistory();
+  const navigation = useNavigation<StackNavigationProp>();
 
   return (
     <View style={{ flex: 1, height: 500 }}>
       {loading ? (
         <LoadingScreen />
       ) : error ? (
-        <ErrorDialog error={error} onDismiss={history.goBack} visible />
+        <ErrorDialog error={error} onDismiss={navigation.goBack} visible />
       ) : (
         <View
           style={{

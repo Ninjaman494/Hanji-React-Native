@@ -1,14 +1,15 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
-import { Conjugation } from "hooks/useConjugations";
 import React, { useMemo } from "react";
 import { Animated, View } from "react-native";
-import { useLocation } from "react-router-native";
+import { StackParamList } from "typings/navigation";
 import ConjInfoCard from "./ConjInfoCard";
 
-const ConjInfoPage: React.FC = () => {
-  const conjugation =
-    useLocation<{ conjugation: Conjugation }>().state.conjugation;
+type ConjInfoPageProps = NativeStackScreenProps<StackParamList, "ConjInfo">;
+
+const ConjInfoPage: React.FC<ConjInfoPageProps> = ({ route }) => {
+  const { conjugation } = route.params;
 
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);

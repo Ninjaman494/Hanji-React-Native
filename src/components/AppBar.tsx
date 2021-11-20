@@ -1,9 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import * as React from "react";
 import { useState } from "react";
 import { TextInput as NativeInput } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackNavigationProp } from "typings/navigation";
 import { useViewShot } from "./ViewShotProvider";
 
 export const APP_BAR_HEIGHT = 84;
@@ -19,7 +20,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
 
-  const history = useHistory();
+  const navigation = useNavigation<StackNavigationProp>();
   const takeScreenshot = useViewShot();
   const { colors, padding } = useTheme();
 
@@ -32,7 +33,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
 
   const doSearch = () => {
     if (searchQuery) {
-      history.push(`/search?query=${searchQuery}`);
+      navigation.push("Search", { query: searchQuery });
     }
   };
 
@@ -41,7 +42,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
       {!hideBack && (
         <Appbar.BackAction
           accessibilityLabel="back button"
-          onPress={() => history.goBack()}
+          onPress={() => navigation.goBack()}
         />
       )}
       {searching ? (
@@ -79,11 +80,14 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
           />
         }
       >
-        <Menu.Item onPress={() => history.push("/settings")} title="Settings" />
+        <Menu.Item
+          onPress={() => navigation.push("Settings")}
+          title="Settings"
+        />
         <Menu.Item
           onPress={async () => {
             const uri = await takeScreenshot?.();
-            history.push("/bugReport", { screenshot: uri });
+            navigation.push("BugReport", { screenshot: uri as string });
           }}
           title="Report a Bug"
         />
