@@ -1,20 +1,17 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
-import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import AppLoading from "expo-app-loading";
 import React, { useMemo, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Searchbar, Text } from "react-native-paper";
-import { StackParamList } from "typings/navigation";
+import { ScreenProps } from "typings/navigation";
 import {
   ConjugationName,
   ConjugationType,
   Formality,
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
-
-type MainPageProps = StackScreenProps<StackParamList, "Main">;
 
 export const DEFAULT_FAVORITES = [
   {
@@ -37,7 +34,7 @@ export const DEFAULT_FAVORITES = [
   },
 ];
 
-const MainPage: React.FC<MainPageProps> = ({ navigation }) => {
+const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const [fontLoaded] = useFonts({

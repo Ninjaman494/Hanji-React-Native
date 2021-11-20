@@ -6,7 +6,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { NavigationProp } from "typings/navigation";
+import { NavigationProps } from "typings/navigation";
 
 export type FavoritesCardProps = BaseCardProps & {
   favorites: Favorite[];
@@ -21,7 +21,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
   ...rest
 }) => {
   const { colors, padding, textSizes } = useTheme();
-  const history = useNavigation<NavigationProp>();
+  const history = useNavigation<NavigationProps>();
 
   const style = StyleSheet.create({
     conjView: {

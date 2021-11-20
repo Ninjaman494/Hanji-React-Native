@@ -1,4 +1,3 @@
-import { StackScreenProps } from "@react-navigation/stack";
 import { AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
@@ -7,14 +6,15 @@ import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import React, { useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import { StackParamList } from "typings/navigation";
+import { ScreenProps } from "typings/navigation";
 import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
 
-type DisplayPageProps = StackScreenProps<StackParamList, "Display">;
-
-const DisplayPage: React.FC<DisplayPageProps> = ({ route, navigation }) => {
+const DisplayPage: React.FC<ScreenProps<"Display">> = ({
+  route,
+  navigation,
+}) => {
   const id = route.params.entryId;
 
   // Get favorites from storage, use defaults if none are written
