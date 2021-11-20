@@ -129,11 +129,31 @@ export default function Index(): JSX.Element {
                   initialRouteName="Main"
                   screenOptions={{ headerShown: false }}
                 >
-                  <Screen name="Main" component={MainPage} />
-                  <Screen name="Search" component={SearchPage} />
-                  <Screen name="Display" component={DisplayPage} />
-                  <Screen name="Conjugations" component={ConjugationsPage} />
-                  <Screen name="ConjInfo" component={ConjInfoPage} />
+                  <Screen
+                    name="Main"
+                    component={MainPage}
+                    options={{ animationEnabled: false }}
+                  />
+                  <Screen
+                    name="Search"
+                    component={SearchPage}
+                    options={{ animationEnabled: false }}
+                  />
+                  <Screen
+                    name="Display"
+                    component={DisplayPage}
+                    options={{ animationEnabled: false }}
+                  />
+                  <Screen
+                    name="Conjugations"
+                    component={ConjugationsPage}
+                    options={{ animationEnabled: false }}
+                  />
+                  <Screen
+                    name="ConjInfo"
+                    component={ConjInfoPage}
+                    options={{ animationEnabled: false }}
+                  />
                   <Screen name="Settings" component={SettingsPage} />
                   <Screen name="Favorites" component={FavoritesPage} />
                   <Screen
