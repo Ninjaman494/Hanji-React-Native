@@ -1,16 +1,17 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { LoadingScreen } from "components";
 import ErrorDialog from "components/ErrorDialog";
-import useGetURLParams from "hooks/useGetURLParams";
 import useSearch from "hooks/useSearch";
 import SearchResultsPage from "pages/searchResults/SearchResultsPage";
 import React, { useEffect } from "react";
 import { Text } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackParamList } from "typings/navigation";
 import NoResultsModal from "./NoResultsModal";
 
-const SearchPage: React.FC = () => {
-  const query = useGetURLParams().get("query");
-  const history = useHistory();
+type SearchPageProps = NativeStackScreenProps<StackParamList, "Search">;
+
+const SearchPage: React.FC<SearchPageProps> = ({ route, navigation }) => {
+  const { query } = route.params;
 
   if (query) {
     const { loading, data, error } = useSearch(query as string, null);
@@ -18,7 +19,7 @@ const SearchPage: React.FC = () => {
 
     useEffect(() => {
       if (results?.length === 1) {
-        history.replace(`/display?id=${results[0].id}`);
+        navigation.push("Display", { entryId: results[0].id });
       }
     }, [results]);
 
@@ -26,7 +27,7 @@ const SearchPage: React.FC = () => {
       <>
         {loading && <LoadingScreen text="Searching..." />}
         {error && (
-          <ErrorDialog error={error} onDismiss={history.goBack} visible />
+          <ErrorDialog error={error} onDismiss={navigation.goBack} visible />
         )}
         {results && results.length > 1 && (
           <SearchResultsPage
@@ -38,7 +39,10 @@ const SearchPage: React.FC = () => {
         <NoResultsModal
           visible={results?.length === 0}
           query={query}
-          onDismiss={history.goBack}
+          onDismiss={navigation.goBack}
+          onConjugatorPress={() =>
+            navigation.push("Conjugator", { term: query })
+          }
         />
       </>
     );

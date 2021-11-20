@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
@@ -27,9 +28,11 @@ import {
 } from "react-native-exception-handler";
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
-import { BackButton, Route, Switch, useLocation } from "react-router-native";
 import { init, Native } from "sentry-expo";
 import theme from "theme";
+import { StackParamList } from "typings/navigation";
+
+const { Navigator, Screen } = createNativeStackNavigator<StackParamList>();
 
 const client = new ApolloClient({
   link: createUploadLink({
@@ -77,7 +80,7 @@ setNativeExceptionHandler(
 );
 
 export default function Index(): JSX.Element {
-  const location = useLocation();
+  // const location = useLocation();
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
 
@@ -92,14 +95,14 @@ export default function Index(): JSX.Element {
     })();
   }, []);
 
-  useEffect(() => {
-    Native.addBreadcrumb({
-      category: "navigation",
-      message: `Route changed to ${location.pathname}`,
-      level: Native.Severity.Info,
-      data: location,
-    });
-  }, [location]);
+  // useEffect(() => {
+  //   Native.addBreadcrumb({
+  //     category: "navigation",
+  //     message: `Route changed to ${location.pathname}`,
+  //     level: Native.Severity.Info,
+  //     data: location,
+  //   });
+  // }, [location]);
 
   useEffect(() => {
     if (favorites === null && !loading && !error) {
@@ -122,27 +125,24 @@ export default function Index(): JSX.Element {
             <SnackbarProvider>
               <RatingHandler numSessions={5} />
               <View style={styles.container}>
-                <BackButton />
-                <Switch>
-                  <Route exact path="/" component={MainPage} />
-                  <Route path="/search" component={SearchPage} />
-                  <Route exact path="/display" component={DisplayPage} />
-                  <Route
-                    exact
-                    path="/conjugation"
-                    component={ConjugationsPage}
-                  />
-                  <Route exact path="/conjinfo" component={ConjInfoPage} />
-                  <Route exact path="/settings" component={SettingsPage} />
-                  <Route exact path="/favorites" component={FavoritesPage} />
-                  <Route
-                    exact
-                    path="/acknowledgements"
+                <Navigator
+                  initialRouteName="Main"
+                  screenOptions={{ headerShown: false }}
+                >
+                  <Screen name="Main" component={MainPage} />
+                  <Screen name="Search" component={SearchPage} />
+                  <Screen name="Display" component={DisplayPage} />
+                  <Screen name="Conjugations" component={ConjugationsPage} />
+                  <Screen name="ConjInfo" component={ConjInfoPage} />
+                  <Screen name="Settings" component={SettingsPage} />
+                  <Screen name="Favorites" component={FavoritesPage} />
+                  <Screen
+                    name="Acknowledgements"
                     component={AcknowledgementsPage}
                   />
-                  <Route exact path="/bugReport" component={BugReportPage} />
-                  <Route exact path="/conjugator" component={ConjugatorPage} />
-                </Switch>
+                  <Screen name="BugReport" component={BugReportPage} />
+                  <Screen name="Conjugator" component={ConjugatorPage} />
+                </Navigator>
               </View>
             </SnackbarProvider>
           </View>

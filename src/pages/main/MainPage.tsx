@@ -1,17 +1,20 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import AppLoading from "expo-app-loading";
 import React, { useMemo, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Searchbar, Text } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackParamList } from "typings/navigation";
 import {
   ConjugationName,
   ConjugationType,
   Formality,
 } from "utils/conjugationTypes";
 import WODCard from "./WODCard";
+
+type MainPageProps = NativeStackScreenProps<StackParamList, "Main">;
 
 export const DEFAULT_FAVORITES = [
   {
@@ -34,9 +37,8 @@ export const DEFAULT_FAVORITES = [
   },
 ];
 
-const MainPage: React.FC = () => {
+const MainPage: React.FC<MainPageProps> = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const history = useHistory();
 
   const [fontLoaded] = useFonts({
     Laila_500Medium,
@@ -63,7 +65,7 @@ const MainPage: React.FC = () => {
 
   const doSearch = () => {
     if (searchQuery) {
-      history.push(`/search?query=${searchQuery}`);
+      navigation.push("Search", { query: searchQuery });
     }
   };
 
@@ -100,7 +102,10 @@ const MainPage: React.FC = () => {
             searchAccessibilityLabel="search button"
             style={styles.card}
           />
-          <WODCard style={styles.card} />
+          <WODCard
+            style={styles.card}
+            onSeeEntry={(entryId) => navigation.push("Display", { entryId })}
+          />
         </SlideInBody>
       </AppLayout>
     </View>

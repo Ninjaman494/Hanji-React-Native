@@ -1,10 +1,10 @@
 import { ApolloError } from "@apollo/client";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import ErrorDialog from "components/ErrorDialog";
 import Select from "components/Select";
 import useConjugations from "hooks/useConjugations";
 import useGetStems from "hooks/useGetStems";
-import useGetURLParams from "hooks/useGetURLParams";
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -15,7 +15,7 @@ import {
   View,
 } from "react-native";
 import { Portal, ProgressBar, useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackParamList } from "typings/navigation";
 import ConjugationsList from "./ConjugationsList";
 
 const pos = [
@@ -35,7 +35,9 @@ interface FormValues {
   honorific: boolean;
 }
 
-const ConjugatorPage: FC = () => {
+type ConjugatorPageProps = NativeStackScreenProps<StackParamList, "Conjugator">;
+
+const ConjugatorPage: FC<ConjugatorPageProps> = ({ route, navigation }) => {
   // Styling
   const { padding, colors } = useTheme();
   const styles = StyleSheet.create({
@@ -50,9 +52,7 @@ const ConjugatorPage: FC = () => {
     },
   });
 
-  const history = useHistory();
-
-  const term = useGetURLParams().get("term");
+  const { term } = route.params;
   const { data: stems, error: stemsError } = useGetStems(term as string, {
     skip: !term,
   });
@@ -117,7 +117,7 @@ const ConjugatorPage: FC = () => {
         <ErrorDialog
           visible={!!(conjError || stemsError)}
           error={conjError ?? (stemsError as ApolloError)}
-          onDismiss={history.goBack}
+          onDismiss={navigation.goBack}
         />
       </Portal>
       {stems?.stems ? (

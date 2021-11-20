@@ -1,16 +1,25 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
 import ErrorDialog from "components/ErrorDialog";
 import useConjugations from "hooks/useConjugations";
-import useGetURLParams from "hooks/useGetURLParams";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackParamList } from "typings/navigation";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
-const ConjugationsPage: React.FC = () => {
-  const history = useHistory();
+type ConjugationsPageProps = NativeStackScreenProps<
+  StackParamList,
+  "Conjugations"
+>;
+
+const ConjugationsPage: React.FC<ConjugationsPageProps> = ({
+  route,
+  navigation,
+}) => {
+  const { stem, isAdj, honorific: initialHonorific } = route.params;
+  const [honorific, setHonorific] = useState(initialHonorific);
 
   const { padding, colors, textSizes } = useTheme();
   const styles = StyleSheet.create({
@@ -30,20 +39,8 @@ const ConjugationsPage: React.FC = () => {
     },
   });
 
-  const params = useGetURLParams();
-  const stem = params.get("stem") as string;
-  const isAdj = params.get("isAdj") === "true";
-
-  const [honorific, setHonorific] = useState(
-    params.get("honorific") === "true"
-  );
-
   const { loading, error, data } = useConjugations(
-    {
-      stem: stem,
-      isAdj: isAdj,
-      honorific: honorific,
-    },
+    { stem, isAdj, honorific },
     { notifyOnNetworkStatusChange: true, fetchPolicy: "cache-and-network" }
   );
   const conjugations = data?.conjugations;
@@ -77,7 +74,7 @@ const ConjugationsPage: React.FC = () => {
         }}
       />
       {error ? (
-        <ErrorDialog visible error={error} onDismiss={history.goBack} />
+        <ErrorDialog visible error={error} onDismiss={navigation.goBack} />
       ) : loading ? (
         <LoadingScreen />
       ) : (

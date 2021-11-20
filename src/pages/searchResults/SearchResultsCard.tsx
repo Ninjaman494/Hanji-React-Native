@@ -1,20 +1,20 @@
-import React from "react";
-import { Headline, List, Subheading, useTheme } from "react-native-paper";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
-import { Entry } from "hooks/useGetEntry";
 import { BaseCard, ListItem } from "components";
-import { useHistory } from "react-router";
+import { Entry } from "hooks/useGetEntry";
+import React from "react";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Headline, List, Subheading, useTheme } from "react-native-paper";
 
 export interface SearchResultsCardProps {
   entry: Entry;
   style?: StyleProp<ViewStyle>;
+  onPress: () => void;
 }
 
 const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
   entry,
   style,
+  onPress,
 }) => {
-  const history = useHistory();
   const { padding } = useTheme();
   const styles = StyleSheet.create({
     text: { paddingLeft: padding?.horizontal },
@@ -26,11 +26,7 @@ const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
   }
 
   return (
-    <BaseCard
-      style={style}
-      btnText="See Entry"
-      onBtnPress={() => history.push(`/display?id=${entry.id}`)}
-    >
+    <BaseCard style={style} btnText="See Entry" onBtnPress={onPress}>
       <Headline style={styles.text}>{entry.term}</Headline>
       <Subheading style={styles.text}>{entry.pos}</Subheading>
       <List.Section>

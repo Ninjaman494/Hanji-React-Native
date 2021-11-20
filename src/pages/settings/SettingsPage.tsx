@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
@@ -5,12 +6,13 @@ import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
+import { StackParamList } from "typings/navigation";
 
-const SettingsPage: React.FC = () => {
+type SettingsPageProps = NativeStackScreenProps<StackParamList, "Settings">;
+
+const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
   const { colors } = useTheme();
   const { favorites, loading } = useGetFavorites();
-  const history = useHistory();
 
   const styles = StyleSheet.create({
     parent: {
@@ -31,7 +33,7 @@ const SettingsPage: React.FC = () => {
         <List.Section>
           <List.Item
             title="Favorites"
-            onPress={() => history.push("/favorites")}
+            onPress={() => navigation.push("Favorites")}
             description={
               loading ? "Loading..." : `You have ${favorites?.length} favorites`
             }
@@ -59,7 +61,7 @@ const SettingsPage: React.FC = () => {
           />
           <List.Item
             title="Acknowledgements"
-            onPress={() => history.push("/acknowledgements")}
+            onPress={() => navigation.push("Acknowledgements")}
           />
           <List.Item title="Version" description={Constants.nativeAppVersion} />
         </List.Section>
