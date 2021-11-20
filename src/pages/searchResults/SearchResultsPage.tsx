@@ -1,11 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import { Entry } from "hooks/useGetEntry";
 import React, { useMemo } from "react";
 import { Animated, View } from "react-native";
-import { TouchableRipple } from "react-native-paper";
-import { StackNavigationProp } from "typings/navigation";
 import SearchResultsCard from "./SearchResultsCard";
 
 export interface SearchResultsPageProps {
@@ -24,17 +21,6 @@ const styles = {
   },
 };
 
-const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
-  const navigation = useNavigation<StackNavigationProp>();
-  const onPress = () => navigation.navigate("Display", { entryId: result.id });
-
-  return (
-    <TouchableRipple onPress={onPress} rippleColor="rgba(0, 0, 0, .32)">
-      <SearchResultsCard entry={result} style={styles.card} onPress={onPress} />
-    </TouchableRipple>
-  );
-};
-
 const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   results,
@@ -50,7 +36,9 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
       <AppLayout>
         <SlideInBody
           data={results}
-          renderItem={({ item }) => <ResultCard result={item} />}
+          renderItem={({ item }) => (
+            <SearchResultsCard entry={item} style={styles.card} />
+          )}
           keyExtractor={(item) => item.id}
           scrollY={scrollY}
           containerY={containerY}
