@@ -1,24 +1,21 @@
-import React from "react";
-import { Button, Card, useTheme } from "react-native-paper";
+import React, { ComponentProps, FC } from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Button, Card, useTheme } from "react-native-paper";
 
-export type BaseCardProps = Omit<
-  React.ComponentProps<typeof Card>,
-  "children"
-> & {
+export type BaseCardProps = Omit<ComponentProps<typeof Card>, "children"> & {
   title?: string;
   style?: StyleProp<ViewStyle>;
   rightIcon?: (props: { size: number }) => React.ReactNode;
-  btnText?: string;
-  onBtnPress?: () => void;
+  btnProps?: Omit<ComponentProps<typeof Button>, "children"> & {
+    text: string;
+  };
 };
 
-const BaseCard: React.FC<BaseCardProps> = ({
+const BaseCard: FC<BaseCardProps> = ({
   title,
   children,
   rightIcon,
-  btnText,
-  onBtnPress,
+  btnProps,
   ...rest
 }) => {
   const { colors, textSizes, padding } = useTheme();
@@ -45,10 +42,10 @@ const BaseCard: React.FC<BaseCardProps> = ({
         />
       )}
       <Card.Content style={styles.content}>{children}</Card.Content>
-      {btnText && (
+      {btnProps && (
         <Card.Actions style={styles.action}>
-          <Button color={colors.accent} onPress={onBtnPress}>
-            {btnText}
+          <Button color={colors.accent} {...btnProps}>
+            {btnProps.text}
           </Button>
         </Card.Actions>
       )}

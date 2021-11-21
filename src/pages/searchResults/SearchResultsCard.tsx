@@ -40,7 +40,7 @@ const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
 
   return (
     <TouchableRipple onPress={onPress} rippleColor="rgba(0, 0, 0, .32)">
-      <BaseCard style={style} btnText="See Entry" onBtnPress={onPress}>
+      <BaseCard style={style} btnProps={{ text: "See Entry", onPress }}>
         <Headline style={styles.text}>{entry.term}</Headline>
         <Subheading style={styles.text}>{entry.pos}</Subheading>
         <List.Section>
