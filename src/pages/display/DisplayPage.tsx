@@ -52,15 +52,14 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
 
+  const isLoading = entryLoading || conjLoading;
+  const error = entryError || conjError;
   return (
     <View style={{ flex: 1 }}>
-      <SlideInTop scrollY={scrollY} shouldAnimate={!!entry}>
+      <SlideInTop scrollY={scrollY} shouldAnimate={!isLoading && !error}>
         <AppBar />
       </SlideInTop>
-      <AppLayout
-        loading={entryLoading || conjLoading}
-        error={entryError || conjError}
-      >
+      <AppLayout loading={isLoading} error={error}>
         <SlideInBody
           shouldAnimate
           scrollY={scrollY}
