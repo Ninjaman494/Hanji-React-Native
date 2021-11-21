@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { FC, useCallback } from "react";
 import { Animated, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { easeOutExpo } from "./SlideInBody";
@@ -30,18 +31,20 @@ const SlideInTop: FC<SlideInTopProps> = ({
     extrapolate: "clamp",
   });
 
-  useEffect(() => {
-    if (shouldAnimate) {
-      Animated.timing(scrollY, {
-        toValue: 0,
-        duration: 500,
-        easing: easeOutExpo,
-        useNativeDriver: false,
-      }).start();
-    }
+  useFocusEffect(
+    useCallback(() => {
+      if (shouldAnimate) {
+        Animated.timing(scrollY, {
+          toValue: 0,
+          duration: 500,
+          easing: easeOutExpo,
+          useNativeDriver: false,
+        }).start();
+      }
 
-    return () => scrollY.setValue(150);
-  }, [shouldAnimate]);
+      return () => scrollY.setValue(150);
+    }, [shouldAnimate])
+  );
 
   return (
     <Animated.View

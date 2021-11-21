@@ -127,6 +127,7 @@ export default function Index(): JSX.Element {
               <View style={styles.container}>
                 <Navigator
                   initialRouteName="Main"
+                  detachInactiveScreens={true}
                   screenOptions={{ headerShown: false }}
                 >
                   <Screen
