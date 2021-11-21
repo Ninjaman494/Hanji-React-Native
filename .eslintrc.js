@@ -11,5 +11,11 @@ module.exports = {
         "@typescript-eslint/no-empty-function": "off",
       },
     },
+    {
+      files: ["*.test.ts", "*.test.tsx"],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
   ],
 };
