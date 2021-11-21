@@ -25,8 +25,11 @@ const WODCard: FC<WODCardProps> = ({ onSeeEntry, ...rest }) => {
   return (
     <BaseCard
       title="Word of the Day"
-      btnText="See entry"
-      onBtnPress={() => onSeeEntry(wod?.id as string)}
+      btnProps={{
+        text: "See entry",
+        disabled: loading || !!error,
+        onPress: () => onSeeEntry(wod?.id as string),
+      }}
       {...rest}
     >
       <Text
