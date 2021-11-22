@@ -6,20 +6,16 @@ import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
 import { StatusBar } from "expo-status-bar";
-import { reloadAsync } from "expo-updates";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React, { useEffect } from "react";
-import { Alert, StyleSheet, View } from "react-native";
-import {
-  setJSExceptionHandler,
-  setNativeExceptionHandler,
-} from "react-native-exception-handler";
+import { StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
-import { init, Native } from "sentry-expo";
+import { Native } from "sentry-expo";
+import setupExpo from "setupExpo";
 import theme from "theme";
 
 const client = new ApolloClient({
@@ -27,50 +23,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-init({
-  dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
-  beforeBreadcrumb(breadcrumb, hint) {
-    if (breadcrumb.category === "xhr") {
-      breadcrumb.data = JSON.parse(hint?.input);
-    }
-    return breadcrumb;
-  },
-  // enableInExpoDevelopment: true,
-  // debug: true, // log debug info in dev mode
-});
-
 const USER_ID_KEY = "USER_ID";
-
-// Global error handlers
-const { Fatal, Error } = Native.Severity;
-setJSExceptionHandler((error, isFatal) => {
-  Native.captureException(error, {
-    level: isFatal ? Fatal : Error,
-  });
-
-  Alert.alert(
-    "Unexpected Error",
-    "An unexpected error occured. We will need to restart the app.",
-    [
-      {
-        text: "Restart",
-        onPress: async () => await reloadAsync(),
-      },
-    ]
-  );
-}, false);
-
-setNativeExceptionHandler(
-  (errStr) => Native.captureException(errStr, { level: Fatal }),
-  false,
-  true
-);
 
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
 
   useEffect(() => {
+    setupExpo();
+
     (async () => {
       let id = await AsyncStorage.getItem(USER_ID_KEY);
       if (!id) {

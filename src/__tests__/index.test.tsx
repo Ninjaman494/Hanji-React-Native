@@ -1,5 +1,5 @@
 jest.mock("sentry-expo");
-jest.mock("react-native-exception-handler");
+jest.mock("setupExpo");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
 jest.mock("Pages", () => ({
@@ -14,11 +14,8 @@ import Index from "index";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React from "react";
 import "react-native";
-import {
-  setJSExceptionHandler,
-  setNativeExceptionHandler,
-} from "react-native-exception-handler";
-import { init, Native } from "sentry-expo";
+import { Native } from "sentry-expo";
+import setupExpo from "setupExpo";
 
 jest.useFakeTimers();
 
@@ -46,8 +43,6 @@ describe("Index", () => {
   });
 
   it("doesn't create favorites if they already exist", async () => {
-    setFavorites.mockClear();
-
     render(<Index />);
 
     expect(useGetFavorites).toHaveBeenCalled();
@@ -57,16 +52,9 @@ describe("Index", () => {
   it("initializes Sentry", async () => {
     render(<Index />);
 
-    expect(init).toHaveBeenCalled();
+    expect(setupExpo).toHaveBeenCalled();
     expect(Native.setContext).toHaveBeenCalledWith("Favorites", {
       favorites: DEFAULT_FAVORITES,
     });
-  });
-
-  it("sets global error handlers", () => {
-    render(<Index />);
-
-    expect(setJSExceptionHandler).toHaveBeenCalled();
-    expect(setNativeExceptionHandler).toHaveBeenCalled();
   });
 });
