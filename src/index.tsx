@@ -73,6 +73,9 @@ setJSExceptionHandler((error, isFatal) => {
     ]
   );
 }, false);
+
+console.log("HANDLER", setNativeExceptionHandler);
+
 setNativeExceptionHandler(
   (errStr) => Native.captureException(errStr, { level: Fatal }),
   false,
@@ -80,7 +83,6 @@ setNativeExceptionHandler(
 );
 
 export default function Index(): JSX.Element {
-  // const location = useLocation();
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
 

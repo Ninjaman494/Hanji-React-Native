@@ -1,10 +1,8 @@
 jest.mock("hooks/useConjugations");
-jest.mock("react-router-native");
 
 import useConjugations from "hooks/useConjugations";
 import React from "react";
 import "react-native";
-import { useLocation } from "react-router-native";
 import { Formality, Tense } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import ConjugationsPage from "../ConjugationsPage";
@@ -32,13 +30,20 @@ const conjugations = [conjugation, conjugation, conjugation];
   data: { conjugations },
 });
 
-(useLocation as jest.Mock).mockReturnValue({
-  search: "stem=stem&isAdj=true",
-});
+const props = {
+  navigation: { goBack: jest.fn() },
+  route: {
+    params: {
+      stem: "stem",
+      isAdj: true,
+      honorific: false,
+    },
+  },
+};
 
 describe("ConjugationsPage", () => {
   it("fetches conjugations", async () => {
-    render(<ConjugationsPage />);
+    render(<ConjugationsPage {...(props as any)} />);
 
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
@@ -53,7 +58,7 @@ describe("ConjugationsPage", () => {
   });
 
   it("refetches on honorific toggle", async () => {
-    const result = render(<ConjugationsPage />);
+    const result = render(<ConjugationsPage {...(props as any)} />);
 
     fireEvent(result.getByRole("switch"), "valueChange", true);
 

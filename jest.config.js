@@ -1,6 +1,7 @@
 module.exports = {
   preset: "react-native",
-  setupFiles: ["./src/jestSetup.ts"],
+  clearMocks: true,
+  setupFiles: ["./src/jestSetup.tsx"],
   transformIgnorePatterns: [],
   collectCoverageFrom: ["src/**/*.ts", "src/**/*.tsx"],
   moduleNameMapper: {

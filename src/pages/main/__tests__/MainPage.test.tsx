@@ -1,19 +1,12 @@
 jest.mock("@expo-google-fonts/laila");
-jest.mock("react-router");
 jest.mock("hooks/useGetWOD");
 
 import { useFonts } from "@expo-google-fonts/laila";
 import useGetWOD from "hooks/useGetWOD";
 import React from "react";
 import "react-native";
-import { useHistory } from "react-router";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import MainPage from "../MainPage";
-
-const pushHistory = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({
-  push: pushHistory,
-});
 
 (useFonts as jest.Mock).mockReturnValue([true]);
 
@@ -28,9 +21,11 @@ const pushHistory = jest.fn();
   },
 });
 
+const navigation = { push: jest.fn() };
+
 describe("MainPage", () => {
   it("can perform a search", async () => {
-    const result = render(<MainPage />);
+    const result = render(<MainPage {...({ navigation } as any)} />);
 
     fireEvent.changeText(
       result.getByPlaceholderText("Search in Korean or English..."),
@@ -39,7 +34,9 @@ describe("MainPage", () => {
     fireEvent.press(result.getByLabelText("search button"));
 
     await waitFor(() =>
-      expect(pushHistory).toHaveBeenCalledWith("/search?query=foobar")
+      expect(navigation.push).toHaveBeenCalledWith("Search", {
+        query: "foobar",
+      })
     );
   });
 });
