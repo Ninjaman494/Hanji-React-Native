@@ -2,20 +2,25 @@ jest.mock("sentry-expo");
 jest.mock("react-native-exception-handler");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
+jest.mock("Pages", () => ({
+  __esModule: true,
+  default: () => <div>Pages</div>,
+}));
 
-import { render, waitFor } from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Index from "index";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React from "react";
 import "react-native";
-import { setNativeExceptionHandler } from "react-native-exception-handler";
+import {
+  setJSExceptionHandler,
+  setNativeExceptionHandler,
+} from "react-native-exception-handler";
 import { init, Native } from "sentry-expo";
 
 jest.useFakeTimers();
-
-const pathname = "path";
 
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
@@ -56,20 +61,12 @@ describe("Index", () => {
     expect(Native.setContext).toHaveBeenCalledWith("Favorites", {
       favorites: DEFAULT_FAVORITES,
     });
-    expect(Native.addBreadcrumb).toHaveBeenCalledWith({
-      category: "navigation",
-      message: `Route changed to ${pathname}`,
-      level: Native.Severity.Info,
-      data: { pathname },
-    });
   });
 
-  it("sets global error handlers", async () => {
+  it("sets global error handlers", () => {
     render(<Index />);
 
-    await waitFor(() => {
-      // expect(setJSExceptionHandler).toHaveBeenCalled();
-      expect(setNativeExceptionHandler).toHaveBeenCalled();
-    });
+    expect(setJSExceptionHandler).toHaveBeenCalled();
+    expect(setNativeExceptionHandler).toHaveBeenCalled();
   });
 });

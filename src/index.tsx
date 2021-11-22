@@ -1,7 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
@@ -10,16 +9,8 @@ import { StatusBar } from "expo-status-bar";
 import { reloadAsync } from "expo-updates";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
-import BugReportPage from "pages/bugReport/BugReportPage";
-import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
-import ConjugationsPage from "pages/conjugations/ConjugationsPage";
-import ConjugatorPage from "pages/conjugator/ConjugatorPage";
-import DisplayPage from "pages/display/DisplayPage";
-import FavoritesPage from "pages/favorites/FavoritesPage";
-import MainPage, { DEFAULT_FAVORITES } from "pages/main/MainPage";
-import SearchPage from "pages/search/SearchPage";
-import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
-import SettingsPage from "pages/settings/SettingsPage";
+import Pages from "Pages";
+import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React, { useEffect } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import {
@@ -30,14 +21,9 @@ import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
 import { init, Native } from "sentry-expo";
 import theme from "theme";
-import { StackParamList } from "typings/navigation";
-
-const { Navigator, Screen } = createStackNavigator<StackParamList>();
 
 const client = new ApolloClient({
-  link: createUploadLink({
-    uri: SERVER_URL,
-  }),
+  link: createUploadLink({ uri: SERVER_URL }),
   cache: new InMemoryCache(),
 });
 
@@ -74,8 +60,6 @@ setJSExceptionHandler((error, isFatal) => {
   );
 }, false);
 
-console.log("HANDLER", setNativeExceptionHandler);
-
 setNativeExceptionHandler(
   (errStr) => Native.captureException(errStr, { level: Fatal }),
   false,
@@ -96,15 +80,6 @@ export default function Index(): JSX.Element {
       Native.setUser({ id });
     })();
   }, []);
-
-  // useEffect(() => {
-  //   Native.addBreadcrumb({
-  //     category: "navigation",
-  //     message: `Route changed to ${location.pathname}`,
-  //     level: Native.Severity.Info,
-  //     data: location,
-  //   });
-  // }, [location]);
 
   useEffect(() => {
     if (favorites === null && !loading && !error) {
@@ -127,29 +102,7 @@ export default function Index(): JSX.Element {
             <SnackbarProvider>
               <RatingHandler numSessions={5} />
               <View style={styles.container}>
-                <Navigator
-                  initialRouteName="Main"
-                  detachInactiveScreens={true}
-                  screenOptions={{ headerShown: false }}
-                >
-                  <Screen name="Main" component={MainPage} />
-                  <Screen
-                    name="Search"
-                    component={SearchPage}
-                    options={{ animationEnabled: false }}
-                  />
-                  <Screen name="Display" component={DisplayPage} />
-                  <Screen name="Conjugations" component={ConjugationsPage} />
-                  <Screen name="ConjInfo" component={ConjInfoPage} />
-                  <Screen name="Settings" component={SettingsPage} />
-                  <Screen name="Favorites" component={FavoritesPage} />
-                  <Screen
-                    name="Acknowledgements"
-                    component={AcknowledgementsPage}
-                  />
-                  <Screen name="BugReport" component={BugReportPage} />
-                  <Screen name="Conjugator" component={ConjugatorPage} />
-                </Navigator>
+                <Pages />
               </View>
             </SnackbarProvider>
           </View>
