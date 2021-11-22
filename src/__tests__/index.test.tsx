@@ -1,27 +1,21 @@
 jest.mock("sentry-expo");
 jest.mock("react-native-exception-handler");
-jest.mock("react-router");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
 
-import { render } from "@testing-library/react-native";
+import { render, waitFor } from "@testing-library/react-native";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Index from "index";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React from "react";
 import "react-native";
-import {
-  setJSExceptionHandler,
-  setNativeExceptionHandler,
-} from "react-native-exception-handler";
-import { useLocation } from "react-router";
+import { setNativeExceptionHandler } from "react-native-exception-handler";
 import { init, Native } from "sentry-expo";
 
 jest.useFakeTimers();
 
 const pathname = "path";
-(useLocation as jest.Mock).mockReturnValue({ pathname });
 
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
@@ -70,10 +64,12 @@ describe("Index", () => {
     });
   });
 
-  it("sets global error handlers", () => {
+  it("sets global error handlers", async () => {
     render(<Index />);
 
-    expect(setJSExceptionHandler).toHaveBeenCalled();
-    expect(setNativeExceptionHandler).toHaveBeenCalled();
+    await waitFor(() => {
+      // expect(setJSExceptionHandler).toHaveBeenCalled();
+      expect(setNativeExceptionHandler).toHaveBeenCalled();
+    });
   });
 });
