@@ -1,5 +1,6 @@
 // @ts-ignore
 import mockAsyncStorage from "@react-native-async-storage/async-storage/jest/async-storage-mock";
+import { EffectCallback } from "react";
 
 jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
 
@@ -10,7 +11,7 @@ const mock = {
 };
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
-  useFocusEffect: jest.fn(),
+  useFocusEffect: (func: EffectCallback) => func(),
   useNavigationContainerRef: () => ({
     getCurrentRoute: () => ({
       name: "MainPage",
