@@ -21,18 +21,23 @@ const DefPosCard: React.FC<DefPosCardProps> = ({ entry, style }) => {
     definitions = definitions.slice(0, 3); // show first 3 only
   }
 
+  const btnText =
+    entry.definitions.length > 3
+      ? !showingMore
+        ? "Show More"
+        : "Collapse"
+      : undefined;
+
   return (
     <BaseCard
       style={style}
       // Used to show/hide button
-      btnText={
-        entry.definitions.length > 3
-          ? !showingMore
-            ? "Show More"
-            : "Collapse"
-          : undefined
+      btnProps={
+        btnText && {
+          text: btnText,
+          onPress: () => setShowMore(!showingMore),
+        }
       }
-      onBtnPress={() => setShowMore(!showingMore)}
     >
       <Headline style={styles.text} selectable>
         {entry.term}

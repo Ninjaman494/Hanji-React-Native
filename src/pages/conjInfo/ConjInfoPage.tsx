@@ -1,14 +1,12 @@
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
-import { Conjugation } from "hooks/useConjugations";
 import React, { useMemo } from "react";
 import { Animated, View } from "react-native";
-import { useLocation } from "react-router-native";
+import { ScreenProps } from "typings/navigation";
 import ConjInfoCard from "./ConjInfoCard";
 
-const ConjInfoPage: React.FC = () => {
-  const conjugation =
-    useLocation<{ conjugation: Conjugation }>().state.conjugation;
+const ConjInfoPage: React.FC<ScreenProps<"ConjInfo">> = ({ route }) => {
+  const { conjugation } = route.params;
 
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);

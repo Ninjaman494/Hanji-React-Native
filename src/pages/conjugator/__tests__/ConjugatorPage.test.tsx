@@ -1,4 +1,3 @@
-jest.mock("react-router");
 jest.mock("hooks/useGetStems");
 jest.mock("hooks/useConjugations");
 
@@ -6,7 +5,6 @@ import useConjugations from "hooks/useConjugations";
 import useGetStems from "hooks/useGetStems";
 import React from "react";
 import "react-native";
-import { useHistory, useLocation } from "react-router";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import ConjugatorPage from "../ConjugatorPage";
@@ -40,16 +38,16 @@ const hookOptions = {
   data: { conjugations },
 });
 
-(useLocation as jest.Mock).mockReturnValue({
-  search: "term=term",
-});
-
-const goBack = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({ goBack });
+const props = {
+  navigation: { goBack: jest.fn() },
+  route: {
+    params: { term: "term" },
+  },
+};
 
 describe("Conjugator Page", () => {
   it("fetches conjugations", async () => {
-    render(<ConjugatorPage />);
+    render(<ConjugatorPage {...(props as any)} />);
 
     await waitFor(() => {
       expect(useGetStems).toHaveBeenCalled();
@@ -66,7 +64,7 @@ describe("Conjugator Page", () => {
   });
 
   it("refetches on form change", async () => {
-    const result = render(<ConjugatorPage />);
+    const result = render(<ConjugatorPage {...(props as any)} />);
 
     // Select second stem
     fireEvent.press(result.getByLabelText("Possible Stems"));
@@ -124,7 +122,7 @@ describe("Conjugator Page", () => {
   });
 
   it("refetches on honorific toggle", async () => {
-    const result = render(<ConjugatorPage />);
+    const result = render(<ConjugatorPage {...(props as any)} />);
 
     fireEvent(result.getByRole("switch"), "valueChange", true);
 
