@@ -1,13 +1,21 @@
-jest.mock("@react-navigation/native");
-
 // @ts-ignore
 import mockAsyncStorage from "@react-native-async-storage/async-storage/jest/async-storage-mock";
-import { useNavigation } from "@react-navigation/native";
 
 jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
 
-(useNavigation as jest.Mock).mockReturnValue({
+const mock = {
   push: jest.fn(),
   goBack: jest.fn(),
   addListener: jest.fn(),
-});
+};
+jest.mock("@react-navigation/native", () => ({
+  ...jest.requireActual("@react-navigation/native"),
+  useFocusEffect: jest.fn(),
+  useNavigationContainerRef: () => ({
+    getCurrentRoute: () => ({
+      name: "MainPage",
+      params: { foo: "bar" },
+    }),
+  }),
+  useNavigation: () => mock,
+}));
