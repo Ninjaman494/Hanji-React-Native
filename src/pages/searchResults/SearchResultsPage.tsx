@@ -3,8 +3,6 @@ import { SlideInBody, SlideInTop } from "components/animations";
 import { Entry } from "hooks/useGetEntry";
 import React, { useMemo } from "react";
 import { Animated, View } from "react-native";
-import { TouchableRipple } from "react-native-paper";
-import { Link } from "react-router-native";
 import SearchResultsCard from "./SearchResultsCard";
 
 export interface SearchResultsPageProps {
@@ -23,16 +21,6 @@ const styles = {
   },
 };
 
-const ResultCard: React.FC<{ result: Entry }> = ({ result }) => {
-  return (
-    <TouchableRipple onPress={() => null} rippleColor="rgba(0, 0, 0, .32)">
-      <Link to={`/display?id=${result.id}`} style={styles.link}>
-        <SearchResultsCard entry={result} style={styles.card} />
-      </Link>
-    </TouchableRipple>
-  );
-};
-
 const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   results,
@@ -48,7 +36,9 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
       <AppLayout>
         <SlideInBody
           data={results}
-          renderItem={({ item }) => <ResultCard result={item} />}
+          renderItem={({ item }) => (
+            <SearchResultsCard entry={item} style={styles.card} />
+          )}
           keyExtractor={(item) => item.id}
           scrollY={scrollY}
           containerY={containerY}

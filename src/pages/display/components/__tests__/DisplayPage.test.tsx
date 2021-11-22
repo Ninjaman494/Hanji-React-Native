@@ -1,4 +1,3 @@
-jest.mock("react-router");
 jest.mock("hooks/useGetEntry");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useGetFavoritesConjugations");
@@ -9,18 +8,8 @@ import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import DisplayPage from "pages/display/DisplayPage";
 import React from "react";
 import "react-native";
-import { useHistory, useLocation } from "react-router";
 import { Formality, Tense } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
-
-(useLocation as jest.Mock).mockReturnValue({
-  search: "id=id",
-});
-
-const pushHistory = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({
-  push: pushHistory,
-});
 
 (useGetFavorites as jest.Mock).mockReturnValue({
   loading: false,
@@ -72,6 +61,13 @@ const conjBase = {
   },
 });
 
+const props = {
+  navigation: { push: jest.fn() },
+  route: {
+    params: { entryId: "id" },
+  },
+};
+
 describe("DisplayPage", () => {
   it("hides cards correctly", async () => {
     (useGetEntry as jest.Mock).mockReturnValue({
@@ -79,7 +75,7 @@ describe("DisplayPage", () => {
       data: { entry: { ...entry, pos: "Noun" } },
     });
 
-    const result = render(<DisplayPage />);
+    const result = render(<DisplayPage {...(props as any)} />);
 
     await waitFor(() => {
       expect(result.getByText(entry.term)).toBeTruthy();
@@ -110,7 +106,7 @@ describe("DisplayPage", () => {
       },
     });
 
-    const result = render(<DisplayPage />);
+    const result = render(<DisplayPage {...(props as any)} />);
 
     await waitFor(() => {
       expect(result.getByText(entry.term)).toBeTruthy();
@@ -123,9 +119,11 @@ describe("DisplayPage", () => {
 
     fireEvent.press(result.getByText("See all"));
     await waitFor(() =>
-      expect(pushHistory).toHaveBeenCalledWith(
-        `/conjugation?stem=${entry.term}&isAdj=${false}&honorific=${false}`
-      )
+      expect(props.navigation.push).toHaveBeenCalledWith("Conjugations", {
+        stem: entry.term,
+        isAdj: false,
+        honorific: false,
+      })
     );
   });
 });

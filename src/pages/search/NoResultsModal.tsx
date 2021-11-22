@@ -1,16 +1,18 @@
 import React, { ComponentProps, FC } from "react";
 import { Button, Dialog, Text, useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
 
 export interface NoResultsModalProps
   extends Omit<ComponentProps<typeof Dialog>, "children"> {
   query: string;
+  onConjugatorPress: () => void;
 }
 
-const NoResultsModal: FC<NoResultsModalProps> = ({ query, ...rest }) => {
+const NoResultsModal: FC<NoResultsModalProps> = ({
+  query,
+  onConjugatorPress,
+  ...rest
+}) => {
   const { textSizes } = useTheme();
-  const history = useHistory();
-
   const isAdjVerb = query.includes("다");
 
   return (
@@ -24,9 +26,7 @@ const NoResultsModal: FC<NoResultsModalProps> = ({ query, ...rest }) => {
       <Dialog.Actions>
         <Button onPress={rest.onDismiss}>OK</Button>
         {isAdjVerb && (
-          <Button onPress={() => history.push(`/conjugator?term=${query}`)}>
-            Use Conjugator
-          </Button>
+          <Button onPress={onConjugatorPress}>Use Conjugator</Button>
         )}
       </Dialog.Actions>
     </Dialog>

@@ -1,9 +1,16 @@
-import React from "react";
-import { Headline, List, Subheading, useTheme } from "react-native-paper";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
-import { Entry } from "hooks/useGetEntry";
+import { useNavigation } from "@react-navigation/native";
 import { BaseCard, ListItem } from "components";
-import { useHistory } from "react-router";
+import { Entry } from "hooks/useGetEntry";
+import React, { useCallback } from "react";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import {
+  Headline,
+  List,
+  Subheading,
+  TouchableRipple,
+  useTheme,
+} from "react-native-paper";
+import { NavigationProps } from "typings/navigation";
 
 export interface SearchResultsCardProps {
   entry: Entry;
@@ -14,7 +21,8 @@ const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
   entry,
   style,
 }) => {
-  const history = useHistory();
+  const navigation = useNavigation<NavigationProps>();
+
   const { padding } = useTheme();
   const styles = StyleSheet.create({
     text: { paddingLeft: padding?.horizontal },
@@ -25,20 +33,23 @@ const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
     definitions.push(`+${entry.definitions.length - 2} More`);
   }
 
+  const onPress = useCallback(
+    () => navigation.push("Display", { entryId: entry.id }),
+    [navigation, entry.id]
+  );
+
   return (
-    <BaseCard
-      style={style}
-      btnText="See Entry"
-      onBtnPress={() => history.push(`/display?id=${entry.id}`)}
-    >
-      <Headline style={styles.text}>{entry.term}</Headline>
-      <Subheading style={styles.text}>{entry.pos}</Subheading>
-      <List.Section>
-        {definitions.map((definition, index) => (
-          <ListItem title={definition} key={index} />
-        ))}
-      </List.Section>
-    </BaseCard>
+    <TouchableRipple onPress={onPress} rippleColor="rgba(0, 0, 0, .32)">
+      <BaseCard style={style} btnProps={{ text: "See Entry", onPress }}>
+        <Headline style={styles.text}>{entry.term}</Headline>
+        <Subheading style={styles.text}>{entry.pos}</Subheading>
+        <List.Section>
+          {definitions.map((definition, index) => (
+            <ListItem title={definition} key={index} />
+          ))}
+        </List.Section>
+      </BaseCard>
+    </TouchableRipple>
   );
 };
 

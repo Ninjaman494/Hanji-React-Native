@@ -1,10 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
 import { BaseCard, BaseCardProps } from "components";
 import { Conjugation } from "hooks/useConjugations";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { useHistory } from "react-router";
+import { NavigationProps } from "typings/navigation";
 import { Formality } from "utils/conjugationTypes";
 
 export type ConjugationCardProps = BaseCardProps & {
@@ -18,7 +19,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
   ...rest
 }) => {
   const { colors, padding, textSizes } = useTheme();
-  const history = useHistory();
+  const navigation = useNavigation<NavigationProps>();
 
   const style = StyleSheet.create({
     conjView: {
@@ -47,9 +48,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
           <Row
             style={style.rowView}
             key={index}
-            onPress={() =>
-              history.push("/conjinfo", { conjugation: conjugation })
-            }
+            onPress={() => navigation.push("ConjInfo", { conjugation })}
           >
             <Col size={5}>
               <Text style={style.text}>

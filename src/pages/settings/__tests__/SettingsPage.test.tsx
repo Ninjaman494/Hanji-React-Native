@@ -1,5 +1,4 @@
 jest.mock("hooks/useGetFavorites");
-jest.mock("react-router");
 jest.mock("react-native/Libraries/Linking/Linking");
 jest.mock("expo-store-review");
 
@@ -7,7 +6,6 @@ import * as StoreReview from "expo-store-review";
 import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { Linking } from "react-native";
-import { useHistory } from "react-router";
 import { ConjugationType, Formality } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import SettingsPage from "../SettingsPage";
@@ -19,11 +17,6 @@ jest.mock("expo-constants", () => ({
   ...jest.requireActual("expo-constants"),
   nativeAppVersion: version,
 }));
-
-const pushHistory = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({
-  push: pushHistory,
-});
 
 (useGetFavorites as jest.Mock).mockReturnValue({
   favorites: [
@@ -41,23 +34,30 @@ const pushHistory = jest.fn();
   loading: false,
 });
 
+const props = {
+  navigation: {
+    push: jest.fn(),
+    addListener: jest.fn(),
+    goBack: jest.fn(),
+  },
+};
+
 describe("SettingsPage", () => {
   it("goes to the favorites page", async () => {
-    const result = render(<SettingsPage />);
+    const result = render(<SettingsPage {...(props as any)} />);
 
     expect(result.queryByText("you have 2 favorites")).toBeDefined();
 
     fireEvent.press(result.getByText("Favorites"));
 
     await waitFor(() => {
-      expect(pushHistory).toHaveBeenCalledWith("/favorites");
+      expect(props.navigation.push).toHaveBeenCalledWith("Favorites");
     });
   });
 
   it("goes to the Privacy Polcy webpage", async () => {
-    const result = render(<SettingsPage />);
-
     const openURL = jest.spyOn(Linking, "openURL");
+    const result = render(<SettingsPage {...(props as any)} />);
 
     fireEvent.press(result.getByText("Privacy Policy"));
 
@@ -67,9 +67,8 @@ describe("SettingsPage", () => {
   });
 
   it("goes to the TCU webpage", async () => {
-    const result = render(<SettingsPage />);
-
     const openURL = jest.spyOn(Linking, "openURL");
+    const result = render(<SettingsPage {...(props as any)} />);
 
     fireEvent.press(result.getByText("Terms & Conditions of Use"));
 
@@ -80,25 +79,25 @@ describe("SettingsPage", () => {
 
   describe("About section", () => {
     it("displays the app version", () => {
-      const result = render(<SettingsPage />);
+      const result = render(<SettingsPage {...(props as any)} />);
 
       expect(result.getByText("Version")).toBeTruthy();
       expect(result.getByText(version)).toBeTruthy();
     });
 
     it("redirects to Acknowledgements", async () => {
-      const result = render(<SettingsPage />);
+      const result = render(<SettingsPage {...(props as any)} />);
 
       fireEvent.press(result.getByText("Acknowledgements"));
 
       await waitFor(() => {
-        expect(pushHistory).toHaveBeenCalledWith("/acknowledgements");
+        expect(props.navigation.push).toHaveBeenCalledWith("Acknowledgements");
       });
     });
 
     it("lets user leave a review", async () => {
       const openURL = jest.spyOn(Linking, "openURL");
-      const result = render(<SettingsPage />);
+      const result = render(<SettingsPage {...(props as any)} />);
 
       fireEvent.press(result.getByText("Leave a Review"));
 

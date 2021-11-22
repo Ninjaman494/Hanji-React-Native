@@ -1,17 +1,13 @@
-jest.mock("react-router");
-
+import { useNavigation } from "@react-navigation/native";
 import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
 import "react-native";
-import { useHistory } from "react-router";
+import { NavigationProps } from "typings/navigation";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import FavoritesCard from "../../components/FavoritesCard";
 
-const pushHistory = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({
-  push: pushHistory,
-});
+const { push } = useNavigation<NavigationProps>();
 
 const favorites: Favorite[] = [
   {
@@ -92,7 +88,7 @@ describe("FavoritesCard component", () => {
     fireEvent.press(component.getByText("Favorite 1"));
 
     await waitFor(() =>
-      expect(pushHistory).toHaveBeenCalledWith("/conjinfo", {
+      expect(push).toHaveBeenCalledWith("ConjInfo", {
         conjugation: props.conjugations[0],
       })
     );

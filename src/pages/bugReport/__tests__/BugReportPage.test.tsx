@@ -1,7 +1,6 @@
 jest.mock("hooks/useSendBugReport");
 jest.mock("components/SnackbarProvider");
 jest.mock("utils/getUser");
-jest.mock("react-router");
 jest.mock("sentry-expo");
 
 import { useSnackbar } from "components/SnackbarProvider";
@@ -9,7 +8,6 @@ import { ReactNativeFile } from "extract-files";
 import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React from "react";
 import "react-native";
-import { useHistory, useLocation } from "react-router";
 import getUser from "utils/getUser";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import BugReportPage from "../BugReportPage";
@@ -36,28 +34,22 @@ jest.mock("expo-device", () => ({
 const sendBugReport = jest.fn();
 (useSendBugReport as jest.Mock).mockReturnValue([sendBugReport]);
 
-(useLocation as jest.Mock).mockReturnValue({
-  state: {
-    screenshot: "screenshot",
-  },
-});
-
-const goBack = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({
-  goBack,
-});
-
 const showSnackbar = jest.fn();
 (useSnackbar as jest.Mock).mockReturnValue({ showSnackbar });
 
 const userId = "user-id";
 (getUser as jest.Mock).mockReturnValue({ id: userId });
 
-describe("BugReportPage", () => {
-  beforeEach(() => jest.clearAllMocks());
+const props = {
+  navigation: { goBack: jest.fn() },
+  route: {
+    params: { screenshot: "screenshot" },
+  },
+};
 
+describe("BugReportPage", () => {
   it("submits feedback with photo", async () => {
-    const result = render(<BugReportPage />);
+    const result = render(<BugReportPage {...(props as any)} />);
 
     fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
     fireEvent.press(result.getByText("Submit"));
@@ -79,12 +71,12 @@ describe("BugReportPage", () => {
       expect(showSnackbar).toHaveBeenCalledWith(
         "Report sent. Thanks for the feedback!"
       );
-      expect(goBack).toHaveBeenCalled();
+      expect(props.navigation.goBack).toHaveBeenCalled();
     });
   });
 
   it("submits feedback without photo", async () => {
-    const result = render(<BugReportPage />);
+    const result = render(<BugReportPage {...(props as any)} />);
 
     fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
     fireEvent.press(result.getByLabelText("Include screenshot?"));
@@ -102,7 +94,7 @@ describe("BugReportPage", () => {
       expect(showSnackbar).toHaveBeenCalledWith(
         "Report sent. Thanks for the feedback!"
       );
-      expect(goBack).toHaveBeenCalled();
+      expect(props.navigation.goBack).toHaveBeenCalled();
     });
   });
 
@@ -110,7 +102,7 @@ describe("BugReportPage", () => {
     const sendBugReport = jest.fn().mockRejectedValue("Error");
     (useSendBugReport as jest.Mock).mockReturnValue([sendBugReport]);
 
-    const result = render(<BugReportPage />);
+    const result = render(<BugReportPage {...(props as any)} />);
 
     fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
     fireEvent.press(result.getByText("Submit"));
@@ -132,7 +124,7 @@ describe("BugReportPage", () => {
       expect(showSnackbar).toHaveBeenCalledWith(
         "An error occurred. Please try again later"
       );
-      expect(goBack).not.toHaveBeenCalled();
+      expect(props.navigation.goBack).not.toHaveBeenCalled();
     });
   });
 });

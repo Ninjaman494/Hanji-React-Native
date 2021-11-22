@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { FC, useCallback } from "react";
 import {
   Animated,
   Dimensions,
@@ -32,18 +33,20 @@ const SlideInBody: FC<SlideInBodyProps> = (props) => {
     outputRange: [Dimensions.get("window").height, minimumHeight],
   });
 
-  useEffect(() => {
-    if (shouldAnimate) {
-      Animated.timing(containerY, {
-        toValue: 100,
-        duration: 500,
-        easing: easeOutExpo,
-        useNativeDriver: false,
-      }).start();
-    }
+  useFocusEffect(
+    useCallback(() => {
+      if (shouldAnimate) {
+        Animated.timing(containerY, {
+          toValue: 100,
+          duration: 500,
+          easing: easeOutExpo,
+          useNativeDriver: false,
+        }).start();
+      }
 
-    return () => containerY.setValue(0);
-  }, [shouldAnimate]);
+      return () => containerY.setValue(0);
+    }, [shouldAnimate])
+  );
 
   const sharedProps = {
     style: [props.style, { transform: [{ translateY: containerTranslate }] }],

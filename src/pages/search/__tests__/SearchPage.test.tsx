@@ -1,24 +1,23 @@
-jest.mock("react-router");
 jest.mock("hooks/useSearch");
 
 import { Entry } from "hooks/useGetEntry";
 import useSearch from "hooks/useSearch";
 import React from "react";
 import "react-native";
-import { useHistory, useLocation } from "react-router";
 import { fireEvent, render } from "utils/testUtils";
 import SearchPage from "../SearchPage";
 
-const replace = jest.fn();
-const goBack = jest.fn();
-(useHistory as jest.Mock).mockReturnValue({
-  replace,
-  goBack,
-});
-
-(useLocation as jest.Mock).mockReturnValue({
-  search: "query=query",
-});
+const props = {
+  route: {
+    params: {
+      query: "query",
+    },
+  },
+  navigation: {
+    replace: jest.fn(),
+    goBack: jest.fn(),
+  },
+};
 
 const searchResults: Entry[] = [
   {
@@ -43,6 +42,8 @@ const searchResults: Entry[] = [
   },
 ];
 
+const { replace, goBack } = props.navigation;
+
 describe("SearchPage", () => {
   it("redirects to display if only one result", async () => {
     (useSearch as jest.Mock).mockReturnValue({
@@ -54,9 +55,11 @@ describe("SearchPage", () => {
       },
     });
 
-    render(<SearchPage />);
+    render(<SearchPage {...(props as any)} />);
 
-    expect(replace).toHaveBeenCalledWith(`/display?id=${searchResults[0].id}`);
+    expect(replace).toHaveBeenCalledWith("Display", {
+      entryId: searchResults[0].id,
+    });
   });
 
   it("redirects to search results if multiple results", () => {
@@ -69,7 +72,7 @@ describe("SearchPage", () => {
       },
     });
 
-    const result = render(<SearchPage />);
+    const result = render(<SearchPage {...(props as any)} />);
 
     expect(result.getByText("term 1")).toBeTruthy();
     expect(result.getByText("term 2")).toBeTruthy();
@@ -86,7 +89,7 @@ describe("SearchPage", () => {
       },
     });
 
-    const result = render(<SearchPage />);
+    const result = render(<SearchPage {...(props as any)} />);
 
     fireEvent.press(result.getByText("OK"));
 
