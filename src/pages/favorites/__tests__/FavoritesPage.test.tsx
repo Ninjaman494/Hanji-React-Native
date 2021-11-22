@@ -57,15 +57,12 @@ describe("FavoritesPage", () => {
   it("opens add favorite modal", async () => {
     const result = render(<FavoritesPage />);
 
+    expect(result.queryByText("Create Favorite")).toBeNull();
+
     fireEvent.press(result.getByLabelText("add favorite button"));
 
-    await waitFor(() => expect(result.getByText("Cancel")).toBeTruthy());
-    fireEvent.press(result.getByText("Cancel"));
-
     await waitFor(() =>
-      expect(
-        result.getByText("Create Favorite").parent?.props.visible
-      ).toBeFalsy()
+      expect(result.getByText("Create Favorite")).toBeTruthy()
     );
   });
 });
