@@ -16,7 +16,7 @@ export type FormikTextFieldProps = ComponentProps<typeof TextInput> & {
 const FormikTextField: FC<FormikTextFieldProps & withFormikControlProps> =
   forwardRef(({ style, hint, ...rest }, ref) => {
     return (
-      <View style={[style, { marginBottom: 8 }]}>
+      <View style={style}>
         <TextInput
           mode="outlined"
           ref={ref}
