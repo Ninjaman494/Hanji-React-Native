@@ -1,57 +1,59 @@
-import React, { ComponentProps, FC, forwardRef } from "react";
+import { useFormikContext } from "formik";
+import { get } from "lodash";
+import React, { ComponentProps, FC } from "react";
 import { TextInput as NativeTextInput, View } from "react-native";
-import {
-  handleTextInput,
-  withFormikControlProps,
-  withNextInputAutoFocusInput,
-} from "react-native-formik";
 import { HelperText, TextInput } from "react-native-paper";
-import { compose } from "recompose";
 
 export type FormikTextFieldProps = ComponentProps<typeof TextInput> & {
   name: string;
   hint?: string;
+  hideError?: boolean;
 };
 
-const FormikTextField: FC<FormikTextFieldProps & withFormikControlProps> =
-  forwardRef(({ style, hint, ...rest }, ref) => {
-    return (
-      <View style={style}>
-        <TextInput
-          mode="outlined"
-          ref={ref}
-          accessibilityLabel={rest.label}
-          {...rest}
-          render={(innerProps) => (
-            <NativeTextInput
-              {...innerProps}
-              style={[
-                innerProps.style,
-                rest.multiline
-                  ? {
-                      paddingTop: 8,
-                      paddingBottom: 8,
-                      height: 100,
-                    }
-                  : null,
-              ]}
-            />
-          )}
-        />
-        <HelperText
-          type={rest.error ? "error" : "info"}
-          visible={!!rest.error || !!hint}
-        >
-          {rest.error ?? hint}
-        </HelperText>
-      </View>
-    );
-  });
+const FormikTextField: FC<FormikTextFieldProps> = ({
+  style,
+  hint,
+  name,
+  hideError,
+  ...rest
+}) => {
+  const { handleChange, handleBlur, values, errors } = useFormikContext();
+  const error = get(errors, name);
 
-export default compose<
-  FormikTextFieldProps & withFormikControlProps,
-  FormikTextFieldProps
->(
-  handleTextInput,
-  withNextInputAutoFocusInput
-)(FormikTextField);
+  return (
+    <View style={style}>
+      <TextInput
+        mode="outlined"
+        accessibilityLabel={rest.label}
+        value={get(values, name)}
+        error={!!error && !hideError}
+        onChangeText={handleChange(name)}
+        onBlur={handleBlur(name)}
+        {...rest}
+        render={(innerProps) => (
+          <NativeTextInput
+            {...innerProps}
+            style={[
+              innerProps.style,
+              rest.multiline
+                ? {
+                    paddingTop: 8,
+                    paddingBottom: 8,
+                    height: 100,
+                  }
+                : null,
+            ]}
+          />
+        )}
+      />
+      <HelperText
+        type={error ? "error" : "info"}
+        visible={(!!error || !!hint) && !hideError}
+      >
+        {error ?? hint}
+      </HelperText>
+    </View>
+  );
+};
+
+export default FormikTextField;
