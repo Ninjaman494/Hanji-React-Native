@@ -13,9 +13,15 @@ export interface AppBarProps {
   title?: string;
   hideSearch?: boolean;
   hideBack?: boolean;
+  onAdd?: () => void;
 }
 
-const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
+const AppBar: React.FC<AppBarProps> = ({
+  title,
+  hideSearch,
+  hideBack,
+  onAdd,
+}) => {
   const [searching, setSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
@@ -77,6 +83,13 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
           accessibilityLabel="search button"
           icon={searching ? "window-close" : "magnify"}
           onPress={() => setSearching(!searching)}
+        />
+      )}
+      {onAdd && (
+        <Appbar.Action
+          accessibilityLabel="add button"
+          icon="plus"
+          onPress={onAdd}
         />
       )}
       <Menu

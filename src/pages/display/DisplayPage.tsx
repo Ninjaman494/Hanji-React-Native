@@ -57,7 +57,9 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
   return (
     <View style={{ flex: 1 }}>
       <SlideInTop scrollY={scrollY} shouldAnimate={!isLoading && !error}>
-        <AppBar />
+        <AppBar
+          onAdd={() => navigation.push("Suggestion", { entryId: id as string })}
+        />
       </SlideInTop>
       <AppLayout loading={isLoading} error={error}>
         <SlideInBody
