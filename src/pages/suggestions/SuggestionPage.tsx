@@ -16,6 +16,8 @@ type Example = {
   translation: string;
 };
 
+const AT_LEAST_ONE = "At least one addition is required";
+
 const validationSchema = yup.object().shape(
   {
     antonym: yup
@@ -24,7 +26,7 @@ const validationSchema = yup.object().shape(
       .when(["synonym", "example"], {
         is: (synonym: string, example: Example) =>
           !synonym && !example.sentence && !example.translation,
-        then: yup.string().required("At least one addition is required"),
+        then: yup.string().required(AT_LEAST_ONE),
         otherwise: yup.string().notRequired(),
       }),
     synonym: yup
@@ -33,7 +35,7 @@ const validationSchema = yup.object().shape(
       .when(["antonym", "example"], {
         is: (antonym: string, example: Example) =>
           !antonym && !example.sentence && !example.translation,
-        then: yup.string().required("At least one addition is required"),
+        then: yup.string().required(AT_LEAST_ONE),
         otherwise: yup.string().notRequired(),
       }),
     example: yup.object().shape(
@@ -45,7 +47,7 @@ const validationSchema = yup.object().shape(
             is: (translation: string) => translation?.length > 0,
             then: yup.string().required("Sentence is required for example"),
           })
-          .matches(/^[^A-Za-z0-9]*$/, "Sentence must be in Korean"),
+          .matches(/^[^A-Za-z]*$/, "Sentence must be in Korean"),
         translation: yup
           .string()
           .label("Translation")
@@ -53,7 +55,7 @@ const validationSchema = yup.object().shape(
             is: (sentence: string) => sentence?.length > 0,
             then: yup.string().required("Translation is required for example"),
           })
-          .matches(/^[A-Za-z0-9]*$/, "Translation must be in English"),
+          .matches(/^[A-Za-z0-9\s,]*$/, "Translation must be in English"),
       },
       [["sentence", "translation"]]
     ),
@@ -91,15 +93,22 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = () => {
               translation: "",
             },
           }}
-          validateOnChange
           validationSchema={validationSchema}
           onSubmit={() => {}}
         >
-          {({ handleSubmit, isValid, isSubmitting, dirty }) => (
+          {({ handleSubmit, isValid, isSubmitting, dirty, errors }) => (
             <>
               <FormikForm>
-                <FormikTextField name="antonym" label="Antonym" />
-                <FormikTextField name="synonym" label="Synonym" />
+                <FormikTextField
+                  name="antonym"
+                  label="Antonym"
+                  hideError={errors.antonym == AT_LEAST_ONE}
+                />
+                <FormikTextField
+                  name="synonym"
+                  label="Synonym"
+                  hideError={errors.synonym == AT_LEAST_ONE}
+                />
                 <Subheading>Example</Subheading>
                 <FormikTextField
                   name="example.sentence"
