@@ -48,6 +48,15 @@ describe("AppBar component", () => {
     expect(push).toHaveBeenCalledWith("Search", { query: "query" });
   });
 
+  it("can click add button", () => {
+    const onAdd = jest.fn();
+    const component = render(<AppBar {...props} onAdd={onAdd} />);
+
+    fireEvent.press(component.getByLabelText("add button"));
+
+    expect(onAdd).toHaveBeenCalled();
+  });
+
   describe("overflow menu", () => {
     it("redirects to settings page", async () => {
       const component = render(<AppBar {...props} />);
