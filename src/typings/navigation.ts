@@ -12,6 +12,7 @@ export type StackParamList = {
   Acknowledgements: undefined;
   BugReport: { screenshot: string };
   Conjugator: { term: string };
+  Suggestion: { entryId: string };
 };
 
 export type NavigationProps = StackNavigationProp<StackParamList>;
