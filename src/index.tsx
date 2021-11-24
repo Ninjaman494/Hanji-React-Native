@@ -11,7 +11,7 @@ import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
 import { Native } from "sentry-expo";
@@ -30,7 +30,9 @@ export default function Index(): JSX.Element {
   const { setFavorites } = useSetFavorites();
 
   useEffect(() => {
-    setupExpo();
+    if (Platform.OS === "android" || Platform.OS === "ios") {
+      setupExpo();
+    }
 
     (async () => {
       let id = await AsyncStorage.getItem(USER_ID_KEY);
@@ -38,16 +40,16 @@ export default function Index(): JSX.Element {
         id = uuid.v4().toString();
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
-      Native.setUser({ id });
+      Native?.setUser({ id });
     })();
   }, []);
 
   useEffect(() => {
     if (favorites === null && !loading && !error) {
       setFavorites(DEFAULT_FAVORITES);
-      Native.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
+      Native?.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
     } else if (favorites) {
-      Native.setContext("Favorites", { favorites });
+      Native?.setContext("Favorites", { favorites });
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
