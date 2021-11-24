@@ -2,6 +2,7 @@ import { AppBar, FormikForm, FormikTextField } from "components";
 import { Formik } from "formik";
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button, Subheading, Text, useTheme } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
 import * as yup from "yup";
@@ -79,60 +80,62 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = () => {
   return (
     <View style={{ flex: 1 }}>
       <AppBar title="Add to Entry" />
-      <View style={styles.formContainer}>
-        <Text style={{ fontSize: textSizes.regular, marginBottom: 24 }}>
-          Enter at lease one addition. We'll review your suggestion and add it
-          to this entry if it's a good fit.
-        </Text>
-        <Formik<SuggestionForm>
-          initialValues={{
-            antonym: "",
-            synonym: "",
-            example: {
-              sentence: "",
-              translation: "",
-            },
-          }}
-          validationSchema={validationSchema}
-          onSubmit={() => {}}
-        >
-          {({ handleSubmit, isValid, isSubmitting, dirty, errors }) => (
-            <>
-              <FormikForm>
-                <FormikTextField
-                  name="antonym"
-                  label="Antonym"
-                  hideError={errors.antonym == AT_LEAST_ONE}
-                />
-                <FormikTextField
-                  name="synonym"
-                  label="Synonym"
-                  hideError={errors.synonym == AT_LEAST_ONE}
-                />
-                <Subheading>Example</Subheading>
-                <FormikTextField
-                  name="example.sentence"
-                  label="Korean Sentence"
-                />
-                <FormikTextField
-                  name="example.translation"
-                  label="English Translation"
-                />
-              </FormikForm>
-              <Button
-                disabled={!isValid || !dirty}
-                loading={isSubmitting}
-                mode="contained"
-                color={colors.accent}
-                style={{ marginTop: 32 }}
-                onPress={handleSubmit}
-              >
-                Submit
-              </Button>
-            </>
-          )}
-        </Formik>
-      </View>
+      <KeyboardAwareScrollView>
+        <View style={styles.formContainer}>
+          <Text style={{ fontSize: textSizes.regular, marginBottom: 24 }}>
+            Enter at lease one addition. We'll review your suggestion and add it
+            to this entry if it's a good fit.
+          </Text>
+          <Formik<SuggestionForm>
+            initialValues={{
+              antonym: "",
+              synonym: "",
+              example: {
+                sentence: "",
+                translation: "",
+              },
+            }}
+            validationSchema={validationSchema}
+            onSubmit={() => {}}
+          >
+            {({ handleSubmit, isValid, isSubmitting, dirty, errors }) => (
+              <>
+                <FormikForm>
+                  <FormikTextField
+                    name="antonym"
+                    label="Antonym"
+                    hideError={errors.antonym == AT_LEAST_ONE}
+                  />
+                  <FormikTextField
+                    name="synonym"
+                    label="Synonym"
+                    hideError={errors.synonym == AT_LEAST_ONE}
+                  />
+                  <Subheading>Example</Subheading>
+                  <FormikTextField
+                    name="example.sentence"
+                    label="Korean Sentence"
+                  />
+                  <FormikTextField
+                    name="example.translation"
+                    label="English Translation"
+                  />
+                </FormikForm>
+                <Button
+                  disabled={!isValid || !dirty}
+                  loading={isSubmitting}
+                  mode="contained"
+                  color={colors.accent}
+                  style={{ marginTop: 32 }}
+                  onPress={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </>
+            )}
+          </Formik>
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
