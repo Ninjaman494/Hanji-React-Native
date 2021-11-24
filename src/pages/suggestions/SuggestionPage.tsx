@@ -1,16 +1,18 @@
-import { AppBar, FormikForm, FormikTextField } from "components";
+import { AppBar, FormikForm, FormikTextField, useSnackbar } from "components";
 import { Formik } from "formik";
+import useCreateSuggestion from "hooks/useCreateSuggestion";
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button, Subheading, Text, useTheme } from "react-native-paper";
+import { Native } from "sentry-expo";
 import { ScreenProps } from "typings/navigation";
 import * as yup from "yup";
 
 type SuggestionForm = {
   antonym?: string;
   synonym?: string;
-  example: Example;
+  example?: Example;
 };
 type Example = {
   sentence: string;
@@ -68,35 +70,62 @@ const validationSchema = yup.object().shape(
   ]
 );
 
-const SuggestionPage: FC<ScreenProps<"Suggestion">> = () => {
+const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
+  route,
+  navigation,
+}) => {
+  const { entryId } = route.params;
+  const [createSuggestion] = useCreateSuggestion();
+  const { showSnackbar } = useSnackbar();
+
   const { padding, colors, textSizes } = useTheme();
   const styles = StyleSheet.create({
     formContainer: {
       marginHorizontal: padding.horizontal,
       marginTop: padding.vertical,
     },
+    instructionText: {
+      fontSize: textSizes.regular,
+      marginBottom: 24,
+    },
   });
+
+  const onSubmit = async ({ antonym, synonym, example }: SuggestionForm) => {
+    try {
+      await createSuggestion({
+        variables: {
+          suggestion: {
+            entryID: entryId,
+            antonyms: antonym ? [antonym] : undefined,
+            synonyms: synonym ? [synonym] : undefined,
+            examples: example ? [example] : undefined,
+          },
+        },
+      });
+
+      showSnackbar("Thanks! Your suggestion has been sent for review.");
+      navigation.goBack();
+    } catch (error) {
+      Native?.captureException(error);
+      showSnackbar(
+        "An error occurred. Please try again later or contact support"
+      );
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
       <AppBar title="Add to Entry" />
       <KeyboardAwareScrollView>
         <View style={styles.formContainer}>
-          <Text style={{ fontSize: textSizes.regular, marginBottom: 24 }}>
+          <Text style={styles.instructionText}>
             Enter at lease one addition. We'll review your suggestion and add it
             to this entry if it's a good fit.
           </Text>
           <Formik<SuggestionForm>
-            initialValues={{
-              antonym: "",
-              synonym: "",
-              example: {
-                sentence: "",
-                translation: "",
-              },
-            }}
+            initialValues={{}}
             validationSchema={validationSchema}
-            onSubmit={() => {}}
+            onSubmit={onSubmit}
           >
             {({ handleSubmit, isValid, isSubmitting, dirty, errors }) => (
               <>
@@ -104,12 +133,12 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = () => {
                   <FormikTextField
                     name="antonym"
                     label="Antonym"
-                    hideError={errors.antonym == AT_LEAST_ONE}
+                    hideError={errors.antonym === AT_LEAST_ONE}
                   />
                   <FormikTextField
                     name="synonym"
                     label="Synonym"
-                    hideError={errors.synonym == AT_LEAST_ONE}
+                    hideError={errors.synonym === AT_LEAST_ONE}
                   />
                   <Subheading>Example</Subheading>
                   <FormikTextField
