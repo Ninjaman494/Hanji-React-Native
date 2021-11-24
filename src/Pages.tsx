@@ -33,7 +33,7 @@ const Pages = (): JSX.Element => {
         screenListeners={{
           focus: () => {
             const route = navRef.getCurrentRoute();
-            Native.addBreadcrumb({
+            Native?.addBreadcrumb({
               category: "navigation",
               message: `Route changed to ${route?.name}`,
               level: Native.Severity.Info,
