@@ -1,6 +1,7 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
 import { AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
+import { AdMobBanner } from "expo-ads-admob";
 import AppLoading from "expo-app-loading";
 import React, { useMemo, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
@@ -102,6 +103,12 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
           <WODCard
             style={styles.card}
             onSeeEntry={(entryId) => navigation.push("Display", { entryId })}
+          />
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+            servePersonalizedAds // true or false
+            onDidFailToReceiveAdWithError={(e) => console.log(e)}
           />
         </SlideInBody>
       </AppLayout>

@@ -2,7 +2,7 @@
 <resources>
   <color name="splashscreen_background">#3F51B5</color>
   <color name="iconBackground">#3856FE</color>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorPrimary">#023c69</color>
+  <color name="colorPrimaryDark">#3F51B5</color>
   <color name="colorAccent">#F44336</color>
 </resources>
