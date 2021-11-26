@@ -1,4 +1,5 @@
-import { AppBar, AppLayout } from "components";
+import { SEARCH_RESULTS_AD_ID } from "@env";
+import { AdCard, AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import { Entry } from "hooks/useGetEntry";
 import React, { useMemo } from "react";
@@ -28,6 +29,11 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
 
+  const resultsWithAd =
+    results.length < 3
+      ? [...results, "ad"]
+      : [...results.slice(0, 2), "ad", ...results.slice(2)];
+
   return (
     <View style={{ flex: 1 }}>
       <SlideInTop scrollY={scrollY} shouldAnimate>
@@ -35,11 +41,15 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
       </SlideInTop>
       <AppLayout>
         <SlideInBody
-          data={results}
-          renderItem={({ item }) => (
-            <SearchResultsCard entry={item} style={styles.card} />
-          )}
-          keyExtractor={(item) => item.id}
+          data={resultsWithAd}
+          renderItem={({ item }) =>
+            item === "ad" ? (
+              <AdCard adUnitID={SEARCH_RESULTS_AD_ID} style={styles.card} />
+            ) : (
+              <SearchResultsCard entry={item} style={styles.card} />
+            )
+          }
+          keyExtractor={(item) => item.id ?? item}
           scrollY={scrollY}
           containerY={containerY}
           flatlist
