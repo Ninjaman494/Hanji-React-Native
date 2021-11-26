@@ -24,6 +24,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#3856FE"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-7378286993062620~3014364162"
       }
     },
     "web": {
@@ -33,7 +36,8 @@
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
       "sentry-expo",
-      "expo-updates"
+      "expo-updates",
+      "expo-ads-admob"
     ],
     "hooks": {
       "postPublish": [
