@@ -1,15 +1,18 @@
-import { BaseCard, HonorificBadge } from "components";
+import { BaseCard, BaseCardProps, HonorificBadge } from "components";
 import { Conjugation } from "hooks/useConjugations";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Title, useTheme } from "react-native-paper";
 import toTitleCase from "utils/toTitleCase";
 
-export type ConjInfoCardProps = {
+export type ConjInfoCardProps = BaseCardProps & {
   conjugation: Conjugation;
 };
 
-const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
+const ConjInfoCard: React.FC<ConjInfoCardProps> = ({
+  conjugation,
+  ...rest
+}) => {
   const { colors, padding, textSizes } = useTheme();
 
   const styles = StyleSheet.create({
@@ -48,8 +51,8 @@ const ConjInfoCard: React.FC<ConjInfoCardProps> = ({ conjugation }) => {
   return (
     <BaseCard
       title={toTitleCase(conjugation?.name)}
-      style={styles.card}
       rightIcon={() => <HonorificBadge visible={conjugation?.honorific} />}
+      {...rest}
     >
       <View style={{ paddingHorizontal: padding.horizontal }}>
         <Text style={styles.conjugation} selectable>
