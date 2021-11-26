@@ -1,4 +1,5 @@
-import { AppBar, AppLayout, BaseCard } from "components";
+import { DISPLAY_AD_ID } from "@env";
+import { AdCard, AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
@@ -89,6 +90,7 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
               }
             />
           )}
+          <AdCard adUnitID={DISPLAY_AD_ID} style={styles.card} />
           {entry?.examples && (
             <ExamplesCard examples={entry.examples} style={styles.card} />
           )}

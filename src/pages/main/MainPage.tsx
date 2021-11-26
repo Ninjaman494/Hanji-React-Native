@@ -104,7 +104,10 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
             style={styles.card}
             onSeeEntry={(entryId) => navigation.push("Display", { entryId })}
           />
-          <AdCard style={styles.card} adUnitID={MAIN_AD_ID} />
+          <AdCard
+            style={[styles.card, { marginBottom: 16 }]}
+            adUnitID={MAIN_AD_ID}
+          />
         </SlideInBody>
       </AppLayout>
     </View>
