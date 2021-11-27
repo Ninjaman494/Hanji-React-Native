@@ -1,5 +1,6 @@
+import { MAIN_AD_ID } from "@env";
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
-import { AppBar, AppLayout } from "components";
+import { AdCard, AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import AppLoading from "expo-app-loading";
 import React, { useMemo, useState } from "react";
@@ -102,6 +103,10 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
           <WODCard
             style={styles.card}
             onSeeEntry={(entryId) => navigation.push("Display", { entryId })}
+          />
+          <AdCard
+            style={[styles.card, { marginBottom: 16 }]}
+            adUnitID={MAIN_AD_ID}
           />
         </SlideInBody>
       </AppLayout>

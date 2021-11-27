@@ -17,8 +17,6 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
         "borderColor": "rgba(0, 0, 0, 0.12)",
         "borderRadius": 10,
         "elevation": 5,
-        "marginBottom": 8,
-        "marginHorizontal": 16,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 4,
@@ -491,8 +489,6 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
         "borderColor": "rgba(0, 0, 0, 0.12)",
         "borderRadius": 10,
         "elevation": 5,
-        "marginBottom": 8,
-        "marginHorizontal": 16,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 4,
