@@ -5,8 +5,8 @@ import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import Purchases from "react-native-purchases";
 import { ScreenProps } from "typings/navigation";
+import buyAdFree from "utils/buyAdFree";
 
 const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
@@ -38,16 +38,8 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
           />
           <List.Item
             title="Ad Free Upgrade"
-            onPress={async () => {
-              try {
-                const offerings = await Purchases.getOfferings();
-                if (offerings.current !== null) {
-                  console.log(offerings.current.lifetime);
-                }
-              } catch (e) {
-                console.log(e);
-              }
-            }}
+            description="Removes all ads from Hanji"
+            onPress={buyAdFree}
           />
         </List.Section>
         <List.Subheader style={styles.header}>Legal Information</List.Subheader>
