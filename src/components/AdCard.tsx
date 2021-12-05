@@ -1,7 +1,7 @@
 import { AdMobBanner } from "expo-ads-admob";
-import React, { useEffect, useState } from "react";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import React from "react";
 import "react-native";
-import Purchases from "react-native-purchases";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 export interface AdCardProps extends BaseCardProps {
@@ -9,17 +9,9 @@ export interface AdCardProps extends BaseCardProps {
 }
 
 const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
-  // Hide ad until we know user isn't ad-free
-  const [showAd, setShowAd] = useState(false);
+  const isAdFree = useGetAdFreeStatus();
 
-  useEffect(() => {
-    (async () => {
-      const { entitlements } = await Purchases.getPurchaserInfo();
-      setShowAd(!entitlements.active.ad_free_entitlement);
-    })();
-  }, [setShowAd]);
-
-  return showAd ? (
+  return isAdFree ? null : (
     <BaseCard title="Ad" {...rest}>
       <AdMobBanner
         bannerSize="mediumRectangle"
@@ -28,7 +20,7 @@ const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
         style={{ alignSelf: "center" }}
       />
     </BaseCard>
-  ) : null;
+  );
 };
 
 export default AdCard;
