@@ -140,7 +140,7 @@ android {
         applicationId 'com.a494studios.koreanconjugator'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 31
+        versionCode 32
         versionName "3.0.0-dev2"
     }
     splits {
