@@ -1,11 +1,16 @@
+jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
 jest.mock("components/ViewShotProvider");
+jest.mock("hooks/useGetAdFreeStatus");
+jest.mock("utils/buyAdFree");
 
 import { useNavigation } from "@react-navigation/native";
 import AppBar from "components/AppBar";
 import { useViewShot } from "components/ViewShotProvider";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import React from "react";
 import "react-native";
 import { NavigationProps } from "typings/navigation";
+import buyAdFree from "utils/buyAdFree";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 
 const { push, goBack } = useNavigation<NavigationProps>();
@@ -84,6 +89,35 @@ describe("AppBar component", () => {
           screenshot: screenshotUri,
         })
       );
+    });
+
+    it("can handle ad free upgrades", async () => {
+      (useGetAdFreeStatus as jest.Mock).mockReturnValue(false);
+
+      const component = render(<AppBar {...props} />);
+
+      fireEvent.press(component.getByLabelText("overflow menu button"));
+
+      await waitFor(() =>
+        expect(component.getByText("Remove Ads")).toBeTruthy()
+      );
+      fireEvent.press(component.getByText("Remove Ads"));
+
+      await waitFor(() => expect(buyAdFree).toHaveBeenCalled());
+    });
+
+    it("hides upgrade if already upgraded", async () => {
+      (useGetAdFreeStatus as jest.Mock).mockReturnValue(true);
+
+      const component = render(<AppBar {...props} />);
+
+      fireEvent.press(component.getByLabelText("overflow menu button"));
+
+      await waitFor(() => {
+        // Checks that menu is open
+        expect(component.getByText("Report a Bug")).toBeTruthy();
+        expect(component.queryByLabelText("Remove Ads")).toBeNull();
+      });
     });
   });
 });
