@@ -1,4 +1,3 @@
-jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
 jest.mock("components/ViewShotProvider");
 jest.mock("hooks/useGetAdFreeStatus");
 jest.mock("utils/buyAdFree");

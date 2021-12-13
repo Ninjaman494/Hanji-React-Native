@@ -1,4 +1,3 @@
-jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
 jest.mock("react-native-purchases");
 
 import Purchases, { PURCHASES_ERROR_CODE } from "react-native-purchases";
