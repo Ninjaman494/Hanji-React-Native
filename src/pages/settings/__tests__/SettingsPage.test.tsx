@@ -1,11 +1,17 @@
+jest.mock("components/SnackbarProvider");
 jest.mock("hooks/useGetFavorites");
+jest.mock("hooks/useGetAdFreeStatus");
 jest.mock("react-native/Libraries/Linking/Linking");
 jest.mock("expo-store-review");
+jest.mock("react-native-purchases");
 
+import { useSnackbar } from "components/SnackbarProvider";
 import * as StoreReview from "expo-store-review";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import useGetFavorites from "hooks/useGetFavorites";
 import React from "react";
 import { Linking } from "react-native";
+import Purchases from "react-native-purchases";
 import { ConjugationType, Formality } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import SettingsPage from "../SettingsPage";
@@ -33,6 +39,11 @@ jest.mock("expo-constants", () => ({
   ],
   loading: false,
 });
+
+(useGetAdFreeStatus as jest.Mock).mockReturnValue(false);
+
+const showSnackbar = jest.fn();
+(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar });
 
 const props = {
   navigation: {
@@ -103,6 +114,54 @@ describe("SettingsPage", () => {
 
       await waitFor(() => {
         expect(openURL).toHaveBeenCalledWith(StoreReview.storeUrl());
+      });
+    });
+  });
+
+  describe("Ad free status check", () => {
+    it("handles upgraded status", async () => {
+      (Purchases.restoreTransactions as jest.Mock).mockResolvedValue({
+        entitlements: { active: { ad_free_entitlement: true } },
+      });
+
+      const result = render(<SettingsPage {...(props as any)} />);
+
+      fireEvent.press(result.getByText("Check Ad-free Status"));
+
+      await waitFor(() => {
+        expect(showSnackbar).toHaveBeenCalledWith(
+          "Ad-free purchase activated, thank you for supporting Hanji!"
+        );
+      });
+    });
+
+    it("handles not upgraded status", async () => {
+      (Purchases.restoreTransactions as jest.Mock).mockResolvedValue({
+        entitlements: { active: { ad_free_entitlement: false } },
+      });
+
+      const result = render(<SettingsPage {...(props as any)} />);
+
+      fireEvent.press(result.getByText("Check Ad-free Status"));
+
+      await waitFor(() => {
+        expect(showSnackbar).toHaveBeenCalledWith("Ad-free purchase not found");
+      });
+    });
+
+    it("handles an error", async () => {
+      (Purchases.restoreTransactions as jest.Mock).mockRejectedValue(
+        new Error()
+      );
+
+      const result = render(<SettingsPage {...(props as any)} />);
+
+      fireEvent.press(result.getByText("Check Ad-free Status"));
+
+      await waitFor(() => {
+        expect(showSnackbar).toHaveBeenCalledWith(
+          "TODO - Better error handling"
+        );
       });
     });
   });
