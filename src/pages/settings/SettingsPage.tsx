@@ -13,7 +13,7 @@ const CHECK_AD_FREE_DESC = "Click here to check your ad-free status";
 const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
   const { favorites, loading } = useGetFavorites();
-  const { showSnackbar, handleError } = useSnackbar();
+  const { showSnackbar, showError } = useSnackbar();
   const [checkDesc, setCheckDesc] = useState(CHECK_AD_FREE_DESC);
 
   const styles = StyleSheet.create({
@@ -38,7 +38,7 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
           : "Ad-free purchase not found"
       );
     } catch (e) {
-      handleError(e);
+      showError(e);
     }
 
     setCheckDesc(CHECK_AD_FREE_DESC);

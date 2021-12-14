@@ -13,7 +13,7 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
 }) => {
   const { entryId } = route.params;
   const [createSuggestion] = useCreateSuggestion();
-  const { showSnackbar, handleError } = useSnackbar();
+  const { showSnackbar, showError } = useSnackbar();
 
   const { padding, textSizes } = useTheme();
   const styles = StyleSheet.create({
@@ -47,7 +47,7 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
       showSnackbar("Thanks! Your suggestion has been sent for review.");
       navigation.goBack();
     } catch (error) {
-      handleError(error);
+      showError(error);
     }
   };
 

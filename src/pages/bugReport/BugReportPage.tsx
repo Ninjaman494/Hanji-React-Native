@@ -32,7 +32,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
   const { goBack } = navigation;
 
   const [sendBugReport] = useSendBugReport();
-  const { showSnackbar, handleError } = useSnackbar();
+  const { showSnackbar, showError } = useSnackbar();
 
   const styles = StyleSheet.create({
     form: {
@@ -109,7 +109,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
       showSnackbar("Report sent. Thanks for the feedback!");
       goBack();
     } catch (error) {
-      handleError(error);
+      showError(error);
     }
   };
 

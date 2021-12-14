@@ -12,13 +12,13 @@ import { Native } from "sentry-expo";
 interface SnackbarProviderValue {
   showSnackbar: (text: string) => void;
   hideSnackbar: () => void;
-  handleError: (err: Error) => void;
+  showError: (err: Error) => void;
 }
 
 const SnackbarContext = createContext<SnackbarProviderValue>({
   showSnackbar: () => {},
   hideSnackbar: () => {},
-  handleError: () => {},
+  showError: () => {},
 });
 
 const SnackbarProvider: FC = ({ children }) => {
@@ -31,7 +31,7 @@ const SnackbarProvider: FC = ({ children }) => {
     [setSnackbarText]
   );
 
-  const handleError = useCallback(
+  const showError = useCallback(
     (err: Error) => {
       Native.captureException(err);
       setSnackbarText("An error occurred. Please try again later");
@@ -48,9 +48,9 @@ const SnackbarProvider: FC = ({ children }) => {
     () => ({
       showSnackbar,
       hideSnackbar,
-      handleError,
+      showError,
     }),
-    [showSnackbar, hideSnackbar, handleError]
+    [showSnackbar, hideSnackbar, showError]
   );
 
   return (
