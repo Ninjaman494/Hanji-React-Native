@@ -4,7 +4,6 @@ import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, useTheme } from "react-native-paper";
-import { Native } from "sentry-expo";
 import { ScreenProps } from "typings/navigation";
 import SuggestionForm, { SuggestionFormValues } from "./SuggestionForm";
 
@@ -14,7 +13,7 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
 }) => {
   const { entryId } = route.params;
   const [createSuggestion] = useCreateSuggestion();
-  const { showSnackbar } = useSnackbar();
+  const { showSnackbar, handleError } = useSnackbar();
 
   const { padding, textSizes } = useTheme();
   const styles = StyleSheet.create({
@@ -48,10 +47,7 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
       showSnackbar("Thanks! Your suggestion has been sent for review.");
       navigation.goBack();
     } catch (error) {
-      Native?.captureException(error);
-      showSnackbar(
-        "An error occurred. Please try again later or contact support"
-      );
+      handleError(error);
     }
   };
 

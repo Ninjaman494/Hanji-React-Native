@@ -7,15 +7,18 @@ import React, {
   useState,
 } from "react";
 import { Snackbar } from "react-native-paper";
+import { Native } from "sentry-expo";
 
 interface SnackbarProviderValue {
   showSnackbar: (text: string) => void;
   hideSnackbar: () => void;
+  handleError: (err: Error) => void;
 }
 
 const SnackbarContext = createContext<SnackbarProviderValue>({
   showSnackbar: () => {},
   hideSnackbar: () => {},
+  handleError: () => {},
 });
 
 const SnackbarProvider: FC = ({ children }) => {
@@ -24,6 +27,14 @@ const SnackbarProvider: FC = ({ children }) => {
   const showSnackbar = useCallback(
     (text: string) => {
       setSnackbarText(text);
+    },
+    [setSnackbarText]
+  );
+
+  const handleError = useCallback(
+    (err: Error) => {
+      Native.captureException(err);
+      setSnackbarText("An error occurred. Please try again later");
     },
     [setSnackbarText]
   );
@@ -37,8 +48,9 @@ const SnackbarProvider: FC = ({ children }) => {
     () => ({
       showSnackbar,
       hideSnackbar,
+      handleError,
     }),
-    [showSnackbar, hideSnackbar]
+    [showSnackbar, hideSnackbar, handleError]
   );
 
   return (

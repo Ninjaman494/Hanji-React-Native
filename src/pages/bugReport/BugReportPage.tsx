@@ -10,7 +10,6 @@ import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
-import { Native } from "sentry-expo";
 import { ScreenProps } from "typings/navigation";
 import getUser from "utils/getUser";
 import * as yup from "yup";
@@ -33,7 +32,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
   const { goBack } = navigation;
 
   const [sendBugReport] = useSendBugReport();
-  const { showSnackbar } = useSnackbar();
+  const { showSnackbar, handleError } = useSnackbar();
 
   const styles = StyleSheet.create({
     form: {
@@ -110,8 +109,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
       showSnackbar("Report sent. Thanks for the feedback!");
       goBack();
     } catch (error) {
-      Native.captureException(error);
-      showSnackbar("An error occurred. Please try again later");
+      handleError(error);
     }
   };
 
