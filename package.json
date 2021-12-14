@@ -28,6 +28,7 @@
     "@sentry/react-native": "^3.1.1",
     "apollo-upload-client": "^16.0.0",
     "expo": "^42.0.0",
+    "expo-ads-admob": "~10.1.2",
     "expo-app-loading": "^1.1.2",
     "expo-application": "~3.2.0",
     "expo-constants": "~11.0.1",
@@ -53,6 +54,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-paper": "^4.2.0",
     "react-native-paper-dropdown": "^1.0.3",
+    "react-native-purchases": "^4.4.1",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
@@ -66,8 +68,7 @@
     "react-router-native": "^5.2.0",
     "recompose": "^0.30.0",
     "sentry-expo": "^4.0.0",
-    "yup": "^0.32.9",
-    "expo-ads-admob": "~10.1.2"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

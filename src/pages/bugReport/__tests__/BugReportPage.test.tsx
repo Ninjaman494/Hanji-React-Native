@@ -35,7 +35,8 @@ const sendBugReport = jest.fn();
 (useSendBugReport as jest.Mock).mockReturnValue([sendBugReport]);
 
 const showSnackbar = jest.fn();
-(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar });
+const showError = jest.fn();
+(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar, showError });
 
 const userId = "user-id";
 (getUser as jest.Mock).mockReturnValue({ id: userId });
@@ -99,7 +100,8 @@ describe("BugReportPage", () => {
   });
 
   it("handles a submission error", async () => {
-    const sendBugReport = jest.fn().mockRejectedValue("Error");
+    const error = new Error();
+    const sendBugReport = jest.fn().mockRejectedValue(error);
     (useSendBugReport as jest.Mock).mockReturnValue([sendBugReport]);
 
     const result = render(<BugReportPage {...(props as any)} />);
@@ -121,9 +123,7 @@ describe("BugReportPage", () => {
           deviceInfo,
         },
       });
-      expect(showSnackbar).toHaveBeenCalledWith(
-        "An error occurred. Please try again later"
-      );
+      expect(showError).toHaveBeenCalledWith(error);
       expect(props.navigation.goBack).not.toHaveBeenCalled();
     });
   });

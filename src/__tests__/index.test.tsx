@@ -1,5 +1,6 @@
 jest.mock("sentry-expo");
 jest.mock("setupExpo");
+jest.mock("setupPurchases");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
 jest.mock("Pages", () => ({
@@ -16,6 +17,7 @@ import React from "react";
 import "react-native";
 import { Native } from "sentry-expo";
 import setupExpo from "setupExpo";
+import setupPurchases from "setupPurchases";
 
 jest.useFakeTimers();
 
@@ -49,12 +51,18 @@ describe("Index", () => {
     expect(setFavorites).not.toHaveBeenCalled();
   });
 
-  it("initializes Sentry", async () => {
+  it("initializes Sentry", () => {
     render(<Index />);
 
     expect(setupExpo).toHaveBeenCalled();
     expect(Native.setContext).toHaveBeenCalledWith("Favorites", {
       favorites: DEFAULT_FAVORITES,
     });
+  });
+
+  it("initalized Purchases", () => {
+    render(<Index />);
+
+    expect(setupPurchases).toHaveBeenCalled();
   });
 });

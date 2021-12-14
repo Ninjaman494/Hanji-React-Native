@@ -1,5 +1,7 @@
 import { EffectCallback } from "react";
 
+jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
+
 const mock = {
   push: jest.fn(),
   goBack: jest.fn(),

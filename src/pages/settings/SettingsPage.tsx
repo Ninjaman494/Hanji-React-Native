@@ -1,15 +1,20 @@
-import { AppBar } from "components";
+import { AppBar, useSnackbar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
 import useGetFavorites from "hooks/useGetFavorites";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
+import Purchases from "react-native-purchases";
 import { ScreenProps } from "typings/navigation";
+
+const CHECK_AD_FREE_DESC = "Click here to check your ad-free status";
 
 const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
   const { favorites, loading } = useGetFavorites();
+  const { showSnackbar, showError } = useSnackbar();
+  const [checkDesc, setCheckDesc] = useState(CHECK_AD_FREE_DESC);
 
   const styles = StyleSheet.create({
     parent: {
@@ -21,6 +26,23 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
       paddingBottom: 0,
     },
   });
+
+  const checkAdFree = useCallback(async () => {
+    setCheckDesc("Checking ad-free status...");
+
+    try {
+      const { entitlements } = await Purchases.restoreTransactions();
+      showSnackbar(
+        entitlements.active.ad_free_entitlement
+          ? "Ad-free purchase activated, thank you for supporting Hanji!"
+          : "Ad-free purchase not found"
+      );
+    } catch (e) {
+      showError(e);
+    }
+
+    setCheckDesc(CHECK_AD_FREE_DESC);
+  }, [setCheckDesc, showSnackbar]);
 
   return (
     <View style={styles.parent}>
@@ -34,6 +56,11 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
             description={
               loading ? "Loading..." : `You have ${favorites?.length} favorites`
             }
+          />
+          <List.Item
+            title="Check Ad-free Status"
+            description={checkDesc}
+            onPress={checkAdFree}
           />
         </List.Section>
         <List.Subheader style={styles.header}>Legal Information</List.Subheader>

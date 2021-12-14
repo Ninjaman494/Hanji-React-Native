@@ -13,7 +13,8 @@ import { fireEvent, render, waitFor } from "utils/testUtils";
 import SuggestionPage from "../SuggestionPage";
 
 const showSnackbar = jest.fn();
-(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar });
+const showError = jest.fn();
+(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar, showError });
 
 const createSuggestion = jest.fn();
 (useCreateSuggestion as jest.Mock).mockReturnValue([createSuggestion]);
@@ -58,7 +59,8 @@ describe("SuggestionPage", () => {
   });
 
   it("can handle an error", async () => {
-    const createSuggestion = jest.fn().mockRejectedValue("Error");
+    const error = new Error();
+    const createSuggestion = jest.fn().mockRejectedValue(error);
     (useCreateSuggestion as jest.Mock).mockReturnValue([createSuggestion]);
 
     const result = render(<SuggestionPage {...(props as any)} />);
@@ -75,9 +77,7 @@ describe("SuggestionPage", () => {
           },
         },
       });
-      expect(showSnackbar).toHaveBeenCalledWith(
-        "An error occurred. Please try again later or contact support"
-      );
+      expect(showError).toHaveBeenCalledWith(error);
       expect(props.navigation.goBack).not.toHaveBeenCalled();
     });
   });

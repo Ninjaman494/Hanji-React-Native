@@ -1,10 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { TextInput as NativeInput } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
 import { NavigationProps } from "typings/navigation";
+import buyAdFree from "utils/buyAdFree";
+import { useSnackbar } from "./SnackbarProvider";
 import { useViewShot } from "./ViewShotProvider";
 
 export const APP_BAR_HEIGHT = 84;
@@ -26,8 +29,10 @@ const AppBar: React.FC<AppBarProps> = ({
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
 
+  const isAdFree = useGetAdFreeStatus();
   const navigation = useNavigation<NavigationProps>();
   const takeScreenshot = useViewShot();
+  const { showSnackbar } = useSnackbar();
   const { colors, padding } = useTheme();
 
   const inputStyle = {
@@ -116,6 +121,12 @@ const AppBar: React.FC<AppBarProps> = ({
           }}
           title="Report a Bug"
         />
+        {!isAdFree && (
+          <Menu.Item
+            onPress={() => buyAdFree(showSnackbar)}
+            title="Remove Ads"
+          />
+        )}
       </Menu>
     </Appbar.Header>
   );
