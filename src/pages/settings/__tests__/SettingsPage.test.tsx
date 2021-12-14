@@ -43,7 +43,8 @@ jest.mock("expo-constants", () => ({
 (useGetAdFreeStatus as jest.Mock).mockReturnValue(false);
 
 const showSnackbar = jest.fn();
-(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar });
+const showError = jest.fn();
+(useSnackbar as jest.Mock).mockReturnValue({ showSnackbar, showError });
 
 const props = {
   navigation: {
@@ -150,19 +151,14 @@ describe("SettingsPage", () => {
     });
 
     it("handles an error", async () => {
-      (Purchases.restoreTransactions as jest.Mock).mockRejectedValue(
-        new Error()
-      );
+      const error = new Error();
+      (Purchases.restoreTransactions as jest.Mock).mockRejectedValue(error);
 
       const result = render(<SettingsPage {...(props as any)} />);
 
       fireEvent.press(result.getByText("Check Ad-free Status"));
 
-      await waitFor(() => {
-        expect(showSnackbar).toHaveBeenCalledWith(
-          "TODO - Better error handling"
-        );
-      });
+      await waitFor(() => expect(showError).toHaveBeenCalledWith(error));
     });
   });
 });
