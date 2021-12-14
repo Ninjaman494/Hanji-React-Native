@@ -2,6 +2,7 @@ import Purchases, {
   PurchasesError,
   PURCHASES_ERROR_CODE,
 } from "react-native-purchases";
+import { Native } from "sentry-expo";
 
 const buyAdFree = async (onError: (e: string) => void): Promise<void> => {
   try {
@@ -46,7 +47,7 @@ const buyAdFree = async (onError: (e: string) => void): Promise<void> => {
         // Do nothing
         break;
       default:
-        console.log(JSON.stringify(e));
+        Native.captureException(e);
         onError(
           "Failed to make purchase. Please try again later or contact support"
         );

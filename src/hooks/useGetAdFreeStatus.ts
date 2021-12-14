@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Purchases from "react-native-purchases";
+import { Native } from "sentry-expo";
 
 const useGetAdFreeStatus = (): boolean => {
   const [isAdFree, setAdFree] = useState(true);
@@ -10,7 +11,7 @@ const useGetAdFreeStatus = (): boolean => {
         const { entitlements } = await Purchases.getPurchaserInfo();
         setAdFree(!!entitlements.active.ad_free_entitlement);
       } catch (e) {
-        console.error(e);
+        Native.captureException(e);
       }
     })();
   }, [setAdFree]);
