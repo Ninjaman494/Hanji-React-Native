@@ -1,6 +1,6 @@
 import messaging from "@react-native-firebase/messaging";
 
-const setupMessaging = () => {
+const setupMessaging = (): (() => void) => {
   // Required for iOS, no-op for Android
   messaging()
     .requestPermission()
