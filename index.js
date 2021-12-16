@@ -1,8 +1,15 @@
+import "expo-dev-client";
+import messaging from "@react-native-firebase/messaging";
 import { registerRootComponent } from "expo";
 import "expo-dev-client";
 import "react-native-gesture-handler";
 import { enableScreens } from "react-native-screens";
 import App from "./App";
+
+messaging().setBackgroundMessageHandler(async (msg) => {
+  // eslint-disable-next-line no-undef
+  console.log("BACKGROUND MSG", JSON.stringify(msg, null, 2));
+});
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
