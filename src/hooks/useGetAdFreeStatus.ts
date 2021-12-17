@@ -1,6 +1,9 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import Purchases from "react-native-purchases";
+import Purchases, { PurchaserInfo } from "react-native-purchases";
 import { Native } from "sentry-expo";
+
+export const RESTORED_KEY = "RESTORED_PURCHASES";
 
 const useGetAdFreeStatus = (): boolean => {
   const [isAdFree, setAdFree] = useState(true);
@@ -8,10 +11,21 @@ const useGetAdFreeStatus = (): boolean => {
   useEffect(() => {
     (async () => {
       try {
-        const { entitlements } = await Purchases.getPurchaserInfo();
-        setAdFree(!!entitlements.active.ad_free_entitlement);
+        const restoredPurchases = await AsyncStorage.getItem(RESTORED_KEY);
+
+        let info: PurchaserInfo;
+        if (restoredPurchases) {
+          info = await Purchases.getPurchaserInfo();
+        } else {
+          // Make a network call to restore purchases via Google Play/App store
+          info = await Purchases.restoreTransactions();
+          await AsyncStorage.setItem(RESTORED_KEY, "true");
+        }
+
+        setAdFree(!!info.entitlements.active.ad_free_entitlement);
       } catch (e) {
-        Native.captureException(e);
+        Native.captureException(e, { extra: { error: e } });
+        setAdFree(false);
       }
     })();
   }, [setAdFree]);

@@ -15,9 +15,9 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
 import { Native } from "sentry-expo";
-import setupExpo from "setupExpo";
 import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
+import setupSentry from "setupSentry";
 import theme from "theme";
 
 const client = new ApolloClient({
@@ -33,7 +33,7 @@ export default function Index(): JSX.Element {
 
   useEffect(() => {
     if (Platform.OS === "android" || Platform.OS === "ios") {
-      setupExpo();
+      setupSentry();
       setupPurchases();
     }
 
