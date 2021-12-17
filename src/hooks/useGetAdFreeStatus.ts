@@ -24,8 +24,8 @@ const useGetAdFreeStatus = (): boolean => {
 
         setAdFree(!!info.entitlements.active.ad_free_entitlement);
       } catch (e) {
-        setAdFree(false);
         Native.captureException(e, { extra: { error: e } });
+        setAdFree(false);
       }
     })();
   }, [setAdFree]);
