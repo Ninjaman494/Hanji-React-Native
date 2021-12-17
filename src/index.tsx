@@ -16,6 +16,7 @@ import { Provider as PaperProvider } from "react-native-paper";
 import uuid from "react-native-uuid";
 import { Native } from "sentry-expo";
 import setupExpo from "setupExpo";
+import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import theme from "theme";
 
@@ -44,6 +45,8 @@ export default function Index(): JSX.Element {
       }
       Native?.setUser({ id });
     })();
+
+    return setupMessaging();
   }, []);
 
   useEffect(() => {

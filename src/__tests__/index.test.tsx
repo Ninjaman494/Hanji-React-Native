@@ -1,5 +1,6 @@
 jest.mock("sentry-expo");
 jest.mock("setupExpo");
+jest.mock("setupMessaging");
 jest.mock("setupPurchases");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
@@ -17,6 +18,7 @@ import React from "react";
 import "react-native";
 import { Native } from "sentry-expo";
 import setupExpo from "setupExpo";
+import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 
 jest.useFakeTimers();
@@ -60,9 +62,15 @@ describe("Index", () => {
     });
   });
 
-  it("initalized Purchases", () => {
+  it("initializes Purchases", () => {
     render(<Index />);
 
     expect(setupPurchases).toHaveBeenCalled();
+  });
+
+  it("initializes Cloud Messaging", () => {
+    render(<Index />);
+
+    expect(setupMessaging).toHaveBeenCalled();
   });
 });
