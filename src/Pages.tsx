@@ -1,3 +1,4 @@
+import analytics from "@react-native-firebase/analytics";
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -38,6 +39,11 @@ const Pages = (): JSX.Element => {
               message: `Route changed to ${route?.name}`,
               level: Native.Severity.Info,
               data: route?.params,
+            });
+
+            analytics().logScreenView({
+              screen_name: route?.name,
+              screen_class: route?.name,
             });
           },
         }}
