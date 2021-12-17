@@ -16,7 +16,8 @@ const setupExpo = (): void => {
       return breadcrumb;
     },
     // enableInExpoDevelopment: true,
-    // debug: true, // log debug info in dev mode
+    environment:
+      process.env.NODE_ENV === "development" ? "development" : "production",
   });
 
   // Global error handlers
