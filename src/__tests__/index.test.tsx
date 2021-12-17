@@ -1,5 +1,5 @@
 jest.mock("sentry-expo");
-jest.mock("setupExpo");
+jest.mock("setupSentry");
 jest.mock("setupMessaging");
 jest.mock("setupPurchases");
 jest.mock("hooks/useGetFavorites");
