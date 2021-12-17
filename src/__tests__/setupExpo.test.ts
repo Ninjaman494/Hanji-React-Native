@@ -6,17 +6,17 @@ import {
   setNativeExceptionHandler,
 } from "react-native-exception-handler";
 import { init } from "sentry-expo";
-import setupExpo from "setupExpo";
+import setupSentry from "setupSentry";
 
 describe("setupExpo", () => {
   it("initializes Sentry", () => {
-    setupExpo();
+    setupSentry();
 
     expect(init).toHaveBeenCalled();
   });
 
   it("sets global error handlers", () => {
-    setupExpo();
+    setupSentry();
 
     expect(setJSExceptionHandler).toHaveBeenCalled();
     expect(setNativeExceptionHandler).toHaveBeenCalled();
