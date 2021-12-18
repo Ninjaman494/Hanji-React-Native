@@ -1,3 +1,5 @@
+jest.useFakeTimers();
+
 jest.mock("@expo-google-fonts/laila");
 jest.mock("hooks/useGetWOD");
 
