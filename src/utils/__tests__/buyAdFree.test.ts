@@ -1,5 +1,4 @@
 jest.mock("react-native-purchases");
-jest.mock("utils/logEvent");
 
 import Purchases, { PURCHASES_ERROR_CODE } from "react-native-purchases";
 import buyAdFree from "utils/buyAdFree";

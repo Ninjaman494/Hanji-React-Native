@@ -1,6 +1,5 @@
 jest.mock("hooks/useSetFavorites");
 jest.mock("hooks/useGetFavorites");
-jest.mock("utils/logEvent");
 
 import { Favorite } from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";

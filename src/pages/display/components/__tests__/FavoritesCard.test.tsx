@@ -1,5 +1,3 @@
-jest.mock("utils/logEvent");
-
 import { useNavigation } from "@react-navigation/native";
 import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
