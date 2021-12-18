@@ -1,6 +1,7 @@
 import { EffectCallback } from "react";
 
 jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
+jest.mock("hooks/useGetAdFreeStatus");
 jest.mock("utils/logEvent");
 
 const mock = {

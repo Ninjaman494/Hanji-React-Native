@@ -69,8 +69,6 @@ const props = {
   },
 };
 
-jest.useFakeTimers();
-
 describe("DisplayPage", () => {
   it("hides cards correctly", async () => {
     (useGetEntry as jest.Mock).mockReturnValue({

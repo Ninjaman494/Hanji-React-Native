@@ -240,7 +240,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
                     ]
                   }
                 >
-                  informal low
+                  informal high
                 </Text>
               </View>
               <View
@@ -358,7 +358,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
                     ]
                   }
                 >
-                  informal low
+                  formal low
                 </Text>
               </View>
               <View

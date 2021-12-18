@@ -9,8 +9,6 @@ import { Native } from "sentry-expo";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { render } from "utils/testUtils";
 
-jest.useFakeTimers();
-
 describe("Pages component", () => {
   it("sets navigation breadcrumbs", () => {
     render(<Pages />);

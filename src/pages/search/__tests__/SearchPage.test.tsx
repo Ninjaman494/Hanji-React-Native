@@ -45,8 +45,6 @@ const searchResults: Entry[] = [
 
 const { replace, goBack } = props.navigation;
 
-jest.useFakeTimers();
-
 describe("SearchPage", () => {
   it("redirects to display if only one result", () => {
     (useSearch as jest.Mock).mockReturnValue({
