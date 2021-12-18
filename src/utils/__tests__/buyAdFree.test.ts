@@ -1,10 +1,18 @@
 jest.mock("react-native-purchases");
+jest.mock("utils/logEvent");
 
 import Purchases, { PURCHASES_ERROR_CODE } from "react-native-purchases";
 import buyAdFree from "utils/buyAdFree";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 
+const product = {
+  identifier: "id",
+  title: "foobar",
+  price: "1.99",
+  currency_code: "USD",
+};
 (Purchases.getOfferings as jest.Mock).mockResolvedValue({
-  current: { lifetime: "lifetime" },
+  current: { lifetime: { product } },
 });
 
 const onError = jest.fn();
@@ -30,10 +38,34 @@ describe("buyAdFree function", () => {
 
     await buyAdFree(onError);
 
-    expect(Purchases.purchasePackage).toHaveBeenCalledWith("lifetime");
+    const logItem = {
+      item_id: product.identifier,
+      item_name: product.title,
+      price: product.price,
+      quantity: 1,
+    };
+
+    expect(Purchases.purchasePackage).toHaveBeenCalledWith({ product });
     expect(onError).toHaveBeenCalledWith(
       "Ad-free upgrade activated, thank you for supporting Hanji!"
     );
+    expect(logEvent).toHaveBeenCalledWith({
+      type: LOG_EVENT.SELECT_ITEM,
+      params: {
+        item_list_id: "overflow_menu",
+        item_list_name: "Overflow Menu",
+        content_type: "non-subscription purchase",
+        items: [logItem],
+      },
+    });
+    expect(logEvent).toHaveBeenCalledWith({
+      type: LOG_EVENT.PURCHASE,
+      params: {
+        currency: product.currency_code,
+        value: logItem.price,
+        items: [logItem],
+      },
+    });
   });
 
   describe("errors", () => {
@@ -53,7 +85,7 @@ describe("buyAdFree function", () => {
 
       await buyAdFree(onError);
 
-      expect(Purchases.purchasePackage).toHaveBeenCalledWith("lifetime");
+      expect(Purchases.purchasePackage).toHaveBeenCalledWith({ product });
       expect(onError).toHaveBeenCalledWith(message);
     });
   });
@@ -65,7 +97,7 @@ describe("buyAdFree function", () => {
 
     await buyAdFree(onError);
 
-    expect(Purchases.purchasePackage).toHaveBeenCalledWith("lifetime");
+    expect(Purchases.purchasePackage).toHaveBeenCalledWith({ product });
     expect(onError).not.toHaveBeenCalled();
   });
 });
