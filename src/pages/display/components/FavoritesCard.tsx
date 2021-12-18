@@ -69,8 +69,9 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                   type: LOG_EVENT.SELECT_FAV,
                   params: {
                     name,
-                    conjugation: conjugation?.name,
+                    conjugation_name: conjugation?.name,
                     conjugated: conjugation?.conjugation,
+                    honorific: conjugation?.honorific,
                   },
                 });
                 history.push("ConjInfo", {
