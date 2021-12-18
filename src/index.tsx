@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import analytics from "@react-native-firebase/analytics";
 import { createUploadLink } from "apollo-upload-client";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
@@ -44,6 +45,7 @@ export default function Index(): JSX.Element {
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
       Native?.setUser({ id });
+      await analytics().setUserId(id);
     })();
 
     return setupMessaging();
