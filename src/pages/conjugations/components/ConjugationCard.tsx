@@ -7,6 +7,7 @@ import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
 import { NavigationProps } from "typings/navigation";
 import { Formality } from "utils/conjugationTypes";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 export type ConjugationCardProps = BaseCardProps & {
   conjugations: Conjugation[];
@@ -48,7 +49,17 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
           <Row
             style={style.rowView}
             key={index}
-            onPress={() => navigation.push("ConjInfo", { conjugation })}
+            onPress={async () => {
+              await logEvent({
+                type: LOG_EVENT.SELECT_CONJUGATION,
+                params: {
+                  name: conjugation.name,
+                  conjugation: conjugation.conjugation,
+                  honorific: conjugation.honorific,
+                },
+              });
+              navigation.push("ConjInfo", { conjugation });
+            }}
           >
             <Col size={5}>
               <Text style={style.text}>

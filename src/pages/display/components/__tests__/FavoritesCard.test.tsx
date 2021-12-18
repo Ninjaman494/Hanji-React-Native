@@ -4,6 +4,7 @@ import React from "react";
 import "react-native";
 import { NavigationProps } from "typings/navigation";
 import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import FavoritesCard from "../../components/FavoritesCard";
 
@@ -87,10 +88,18 @@ describe("FavoritesCard component", () => {
 
     fireEvent.press(component.getByText("Favorite 1"));
 
-    await waitFor(() =>
-      expect(push).toHaveBeenCalledWith("ConjInfo", {
-        conjugation: props.conjugations[0],
-      })
-    );
+    const conjugation = props.conjugations[0];
+    await waitFor(() => {
+      expect(logEvent).toHaveBeenCalledWith({
+        type: LOG_EVENT.SELECT_FAV,
+        params: {
+          name: props.favorites[0].name,
+          conjugation_name: conjugation?.name,
+          conjugated: conjugation?.conjugation,
+          honorific: conjugation?.honorific,
+        },
+      });
+      expect(push).toHaveBeenCalledWith("ConjInfo", { conjugation });
+    });
   });
 });

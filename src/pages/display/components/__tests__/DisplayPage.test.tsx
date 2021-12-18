@@ -9,6 +9,7 @@ import DisplayPage from "pages/display/DisplayPage";
 import React from "react";
 import "react-native";
 import { Formality, Tense } from "utils/conjugationTypes";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 
 (useGetFavorites as jest.Mock).mockReturnValue({
@@ -141,6 +142,20 @@ describe("DisplayPage", () => {
       expect(props.navigation.push).toHaveBeenCalledWith("Suggestion", {
         entryId: "id",
       });
+    });
+  });
+
+  it("logs select content events", () => {
+    (useGetEntry as jest.Mock).mockReturnValue({
+      loading: false,
+      data: { entry },
+    });
+
+    render(<DisplayPage {...(props as any)} />);
+
+    expect(logEvent).toHaveBeenCalledWith({
+      type: LOG_EVENT.SELECT_CONTENT,
+      params: { item_id: entry.term, content_type: entry.pos },
     });
   });
 });

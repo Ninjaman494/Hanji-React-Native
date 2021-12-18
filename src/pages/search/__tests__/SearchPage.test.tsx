@@ -4,6 +4,7 @@ import { Entry } from "hooks/useGetEntry";
 import useSearch from "hooks/useSearch";
 import React from "react";
 import "react-native";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render } from "utils/testUtils";
 import SearchPage from "../SearchPage";
 
@@ -45,7 +46,7 @@ const searchResults: Entry[] = [
 const { replace, goBack } = props.navigation;
 
 describe("SearchPage", () => {
-  it("redirects to display if only one result", async () => {
+  it("redirects to display if only one result", () => {
     (useSearch as jest.Mock).mockReturnValue({
       loading: false,
       data: {
@@ -79,7 +80,7 @@ describe("SearchPage", () => {
     expect(result.getByText("term 3")).toBeTruthy();
   });
 
-  it("shows a modal if no results", async () => {
+  it("shows a modal if no results", () => {
     (useSearch as jest.Mock).mockReturnValue({
       loading: false,
       data: {
@@ -94,5 +95,23 @@ describe("SearchPage", () => {
     fireEvent.press(result.getByText("OK"));
 
     expect(goBack).toHaveBeenCalled();
+  });
+
+  it("logs search events", () => {
+    (useSearch as jest.Mock).mockReturnValue({
+      loading: false,
+      data: {
+        search: {
+          results: searchResults,
+        },
+      },
+    });
+
+    render(<SearchPage {...(props as any)} />);
+
+    expect(logEvent).toHaveBeenCalledWith({
+      type: LOG_EVENT.SEARCH,
+      params: { search_term: props.route.params.query },
+    });
   });
 });

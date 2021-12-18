@@ -7,6 +7,7 @@ import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
 import { NavigationProps } from "typings/navigation";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 export type FavoritesCardProps = BaseCardProps & {
   favorites: Favorite[];
@@ -62,11 +63,21 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
             <Row
               style={style.rowView}
               key={index}
-              onPress={() =>
+              onPress={async () => {
+                const { conjugation, name } = favorite;
+                await logEvent({
+                  type: LOG_EVENT.SELECT_FAV,
+                  params: {
+                    name,
+                    conjugation_name: conjugation?.name,
+                    conjugated: conjugation?.conjugation,
+                    honorific: conjugation?.honorific,
+                  },
+                });
                 history.push("ConjInfo", {
-                  conjugation: favorite.conjugation as Conjugation,
-                })
-              }
+                  conjugation: conjugation as Conjugation,
+                });
+              }}
             >
               <Col size={5}>
                 <Text style={style.text}>{favorite.name}</Text>

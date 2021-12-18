@@ -1,3 +1,4 @@
+import analytics from "@react-native-firebase/analytics";
 import messaging from "@react-native-firebase/messaging";
 import { registerRootComponent } from "expo";
 import "expo-dev-client";
@@ -9,6 +10,11 @@ messaging().setBackgroundMessageHandler(async (msg) => {
   // eslint-disable-next-line no-undef
   console.log("BACKGROUND MSG", JSON.stringify(msg, null, 2));
 });
+
+analytics().setAnalyticsCollectionEnabled(
+  // eslint-disable-next-line no-undef
+  process.env.NODE_ENV !== "development"
+);
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,

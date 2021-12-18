@@ -18,6 +18,7 @@ import React from "react";
 import "react-native";
 import { Native } from "sentry-expo";
 import { StackParamList } from "typings/navigation";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 const { Navigator, Screen } = createStackNavigator<StackParamList>();
 
@@ -38,6 +39,14 @@ const Pages = (): JSX.Element => {
               message: `Route changed to ${route?.name}`,
               level: Native.Severity.Info,
               data: route?.params,
+            });
+
+            logEvent({
+              type: LOG_EVENT.SCREEN_VIEW,
+              params: {
+                screen_name: route?.name,
+                screen_class: route?.name,
+              },
             });
           },
         }}

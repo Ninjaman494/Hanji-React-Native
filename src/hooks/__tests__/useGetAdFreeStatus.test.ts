@@ -2,6 +2,11 @@ jest.mock("@react-native-async-storage/async-storage");
 jest.mock("react-native-purchases");
 jest.mock("sentry-expo");
 
+// Override mock in jestSetup
+jest.mock("hooks/useGetAdFreeStatus", () =>
+  jest.requireActual("hooks/useGetAdFreeStatus")
+);
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { renderHook } from "@testing-library/react-hooks";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";

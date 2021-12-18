@@ -21,8 +21,6 @@ import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
 
-jest.useFakeTimers();
-
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
 

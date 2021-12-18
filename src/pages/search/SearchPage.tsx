@@ -5,6 +5,7 @@ import SearchResultsPage from "pages/searchResults/SearchResultsPage";
 import React, { useEffect } from "react";
 import { Text } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import NoResultsModal from "./NoResultsModal";
 
 const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
@@ -13,6 +14,10 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
   if (query) {
     const { loading, data, error } = useSearch(query as string, null);
     const results = data?.search?.results;
+
+    useEffect(() => {
+      logEvent({ type: LOG_EVENT.SEARCH, params: { search_term: query } });
+    }, []);
 
     useEffect(() => {
       if (results?.length === 1) {

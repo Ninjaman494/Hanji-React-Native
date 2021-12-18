@@ -4,10 +4,11 @@ import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
@@ -33,6 +34,15 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
   const honorific = false;
 
   const isAdjVerb = isAdj || entry?.pos === "Verb";
+
+  useEffect(() => {
+    if (entry) {
+      logEvent({
+        type: LOG_EVENT.SELECT_CONTENT,
+        params: { item_id: entry.term, content_type: entry.pos },
+      });
+    }
+  }, [entry]);
 
   const {
     loading: conjLoading,
