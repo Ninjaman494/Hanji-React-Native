@@ -1,19 +1,20 @@
 import {
   FormikForm,
-  FormikTextField,
   FormikSelect,
   FormikSwitch,
+  FormikTextField,
 } from "components";
 import { Formik } from "formik";
+import { Favorite } from "hooks/useGetFavorites";
+import useSetFavorites from "hooks/useSetFavorites";
+import React, { ComponentProps, FC } from "react";
+import { Button, Dialog } from "react-native-paper";
 import {
   ConjugationName,
   ConjugationType,
   Formality,
 } from "utils/conjugationTypes";
-import { Favorite } from "hooks/useGetFavorites";
-import useSetFavorites from "hooks/useSetFavorites";
-import React, { FC, ComponentProps } from "react";
-import { Dialog, Button } from "react-native-paper";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import toTitleCase from "utils/toTitleCase";
 import * as yup from "yup";
 
@@ -63,15 +64,23 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
           formality: "",
           honorific: false,
         }}
-        onSubmit={async ({ conjugation, formality, ...rest }) => {
+        onSubmit={async ({ conjugation, formality, name, honorific }) => {
+          const conjugationName = (
+            formality ? `${conjugation} ${formality}` : conjugation
+          ) as ConjugationName;
+
+          await logEvent({
+            type: LOG_EVENT.ADD_FAVORITE,
+            params: {
+              conjugation_name: conjugationName,
+              name,
+              honorific,
+            },
+          });
+
           await setFavorites([
             ...favorites,
-            {
-              conjugationName: (formality
-                ? `${conjugation} ${formality}`
-                : conjugation) as ConjugationName,
-              ...rest,
-            },
+            { conjugationName, name, honorific },
           ]);
           onSubmit();
         }}
