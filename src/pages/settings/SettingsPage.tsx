@@ -1,7 +1,8 @@
-import { AppBar, useSnackbar } from "components";
+import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
 import useGetFavorites from "hooks/useGetFavorites";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React, { useCallback, useState } from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";

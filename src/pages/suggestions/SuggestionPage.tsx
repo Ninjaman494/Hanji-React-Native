@@ -1,5 +1,6 @@
-import { AppBar, useSnackbar } from "components";
+import { AppBar } from "components";
 import useCreateSuggestion from "hooks/useCreateSuggestion";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";

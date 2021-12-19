@@ -1,12 +1,12 @@
-jest.mock("components/SnackbarProvider");
+jest.mock("providers/SnackbarProvider");
 jest.mock("hooks/useCreateSuggestion");
 jest.mock("sentry-expo");
 jest.mock("react-native-keyboard-aware-scroll-view", () => ({
   KeyboardAwareScrollView: ({ children }: { children: ReactNode }) => children,
 }));
 
-import { useSnackbar } from "components/SnackbarProvider";
 import useCreateSuggestion from "hooks/useCreateSuggestion";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React, { ReactNode } from "react";
 import "react-native";
 import { fireEvent, render, waitFor } from "utils/testUtils";

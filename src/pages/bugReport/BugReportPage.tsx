@@ -1,12 +1,16 @@
 import { ReactNativeFile } from "apollo-upload-client";
-import { AppBar, FormikForm, FormikTextField } from "components";
-import FormikCheckbox from "components/formikBindings/FormikCheckbox";
-import FormikRadioGroup from "components/formikBindings/FormikRadioGroup";
-import { useSnackbar } from "components/SnackbarProvider";
+import {
+  AppBar,
+  FormikCheckbox,
+  FormikForm,
+  FormikRadioGroup,
+  FormikTextField,
+} from "components";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import { Formik } from "formik";
 import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";

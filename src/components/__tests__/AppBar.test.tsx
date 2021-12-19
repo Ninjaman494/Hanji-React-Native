@@ -1,11 +1,11 @@
-jest.mock("components/ViewShotProvider");
+jest.mock("providers/ViewShotProvider");
 jest.mock("hooks/useGetAdFreeStatus");
 jest.mock("utils/buyAdFree");
 
 import { useNavigation } from "@react-navigation/native";
 import AppBar from "components/AppBar";
-import { useViewShot } from "components/ViewShotProvider";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import { useViewShot } from "providers/ViewShotProvider";
 import React from "react";
 import "react-native";
 import { NavigationProps } from "typings/navigation";

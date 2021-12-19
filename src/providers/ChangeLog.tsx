@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import changelog, { ChangelogUpdate } from "changelog";
 import * as Application from "expo-application";
 import React, {
   ComponentProps,
@@ -9,6 +8,13 @@ import React, {
   useState,
 } from "react";
 import { Button, Dialog, Portal, Subheading, Text } from "react-native-paper";
+import changelogRaw from "./change-log.json";
+
+export interface ChangelogUpdate {
+  name: string;
+  date: string;
+  features: string[];
+}
 
 export type ChangeLogProps = Omit<
   ComponentProps<typeof Dialog>,
@@ -16,6 +22,8 @@ export type ChangeLogProps = Omit<
 >;
 
 const LAST_VERSION_KEY = "LAST_VERSION";
+
+const changelog = changelogRaw as Record<string, ChangelogUpdate | null>;
 
 const ChangeLog: FC<ChangeLogProps> = (props) => {
   const [update, setUpdate] = useState<ChangelogUpdate | null>(null);

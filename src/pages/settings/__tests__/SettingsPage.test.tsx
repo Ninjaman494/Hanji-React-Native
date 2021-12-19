@@ -1,14 +1,14 @@
-jest.mock("components/SnackbarProvider");
+jest.mock("providers/SnackbarProvider");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useGetAdFreeStatus");
 jest.mock("react-native/Libraries/Linking/Linking");
 jest.mock("expo-store-review");
 jest.mock("react-native-purchases");
 
-import { useSnackbar } from "components/SnackbarProvider";
 import * as StoreReview from "expo-store-review";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import useGetFavorites from "hooks/useGetFavorites";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React from "react";
 import { Linking } from "react-native";
 import Purchases from "react-native-purchases";
