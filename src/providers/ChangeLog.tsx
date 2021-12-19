@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Application from "expo-application";
 import React, {
   ComponentProps,
   FC,
@@ -16,23 +15,22 @@ export interface ChangelogUpdate {
   features: string[];
 }
 
-export type ChangeLogProps = Omit<
-  ComponentProps<typeof Dialog>,
-  "children" | "visible"
->;
+export interface ChangeLogProps
+  extends Omit<ComponentProps<typeof Dialog>, "children" | "visible"> {
+  currentVersion: string;
+}
 
 const LAST_VERSION_KEY = "LAST_VERSION";
 
 const changelog = changelogRaw as Record<string, ChangelogUpdate | null>;
 
-const ChangeLog: FC<ChangeLogProps> = (props) => {
+const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
   const [update, setUpdate] = useState<ChangelogUpdate | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
       const lastVersion = await AsyncStorage.getItem(LAST_VERSION_KEY);
-      const currentVersion = Application.nativeBuildVersion;
 
       if (!!lastVersion && lastVersion !== currentVersion) {
         setVisible(true);
@@ -46,7 +44,7 @@ const ChangeLog: FC<ChangeLogProps> = (props) => {
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={onDismiss} {...props}>
+      <Dialog visible={visible} onDismiss={onDismiss} {...rest}>
         <Dialog.Title>What's New</Dialog.Title>
         <Dialog.Content>
           <Subheading>

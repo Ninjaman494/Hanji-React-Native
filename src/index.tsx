@@ -3,6 +3,7 @@ import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import analytics from "@react-native-firebase/analytics";
 import { createUploadLink } from "apollo-upload-client";
+import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
@@ -72,7 +73,7 @@ export default function Index(): JSX.Element {
             />
             <SnackbarProvider>
               <RatingHandler numSessions={5} />
-              <ChangeLog />
+              <ChangeLog currentVersion={nativeBuildVersion as string} />
               <View style={styles.container}>
                 <Pages />
               </View>
