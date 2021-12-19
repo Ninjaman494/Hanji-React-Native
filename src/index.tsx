@@ -3,6 +3,7 @@ import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import analytics from "@react-native-firebase/analytics";
 import { createUploadLink } from "apollo-upload-client";
+import ChangeLog from "components/ChangeLog";
 import RatingHandler from "components/RatingHandler";
 import SnackbarProvider from "components/SnackbarProvider";
 import ViewShotProvider from "components/ViewShotProvider";
@@ -71,6 +72,7 @@ export default function Index(): JSX.Element {
             />
             <SnackbarProvider>
               <RatingHandler numSessions={5} />
+              <ChangeLog />
               <View style={styles.container}>
                 <Pages />
               </View>
