@@ -2,8 +2,8 @@ jest.mock("expo-store-review");
 jest.mock("@react-native-async-storage/async-storage");
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import RatingHandler from "components/RatingHandler";
 import * as StoreReview from "expo-store-review";
+import RatingHandler from "providers/RatingHandler";
 import React from "react";
 import { render, waitFor } from "utils/testUtils";
 

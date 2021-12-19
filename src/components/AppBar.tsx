@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import { useSnackbar } from "providers/SnackbarProvider";
+import { useViewShot } from "providers/ViewShotProvider";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { TextInput as NativeInput } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
 import { NavigationProps } from "typings/navigation";
 import buyAdFree from "utils/buyAdFree";
-import { useSnackbar } from "./SnackbarProvider";
-import { useViewShot } from "./ViewShotProvider";
 
 export const APP_BAR_HEIGHT = 84;
 

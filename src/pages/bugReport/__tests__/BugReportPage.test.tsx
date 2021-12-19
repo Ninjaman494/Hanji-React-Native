@@ -1,11 +1,11 @@
 jest.mock("hooks/useSendBugReport");
-jest.mock("components/SnackbarProvider");
+jest.mock("providers/SnackbarProvider");
 jest.mock("utils/getUser");
 jest.mock("sentry-expo");
 
-import { useSnackbar } from "components/SnackbarProvider";
 import { ReactNativeFile } from "extract-files";
 import useSendBugReport, { ReportType } from "hooks/useSendBugReport";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React from "react";
 import "react-native";
 import getUser from "utils/getUser";

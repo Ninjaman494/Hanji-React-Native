@@ -3,14 +3,16 @@ import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import analytics from "@react-native-firebase/analytics";
 import { createUploadLink } from "apollo-upload-client";
-import RatingHandler from "components/RatingHandler";
-import SnackbarProvider from "components/SnackbarProvider";
-import ViewShotProvider from "components/ViewShotProvider";
+import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
+import ChangeLog from "providers/ChangeLog";
+import RatingHandler from "providers/RatingHandler";
+import SnackbarProvider from "providers/SnackbarProvider";
+import ViewShotProvider from "providers/ViewShotProvider";
 import React, { useEffect } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -71,6 +73,7 @@ export default function Index(): JSX.Element {
             />
             <SnackbarProvider>
               <RatingHandler numSessions={5} />
+              <ChangeLog currentVersion={nativeBuildVersion as string} />
               <View style={styles.container}>
                 <Pages />
               </View>
