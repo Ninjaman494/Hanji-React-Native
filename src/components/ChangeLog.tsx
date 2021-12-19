@@ -26,7 +26,7 @@ const ChangeLog: FC<ChangeLogProps> = (props) => {
       const lastVersion = await AsyncStorage.getItem(LAST_VERSION_KEY);
       const currentVersion = Application.nativeBuildVersion;
 
-      if (!!lastVersion && lastVersion === currentVersion) {
+      if (!!lastVersion && lastVersion !== currentVersion) {
         setVisible(true);
         setUpdate(changelog[currentVersion as string]);
       }
