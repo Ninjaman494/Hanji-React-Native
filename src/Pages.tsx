@@ -52,12 +52,23 @@ const Pages = (): JSX.Element => {
         }}
       >
         <Screen name="Main" component={MainPage} />
+        <Screen name="Search" component={SearchPage} />
         <Screen
-          name="Search"
-          component={SearchPage}
-          options={{ animationEnabled: false }}
+          name="Display"
+          component={DisplayPage}
+          options={({ route: { params } }) => ({
+            transitionSpec: {
+              open: {
+                animation: "timing",
+                config: { duration: params.noAnimate ? 0 : 250 },
+              },
+              close: {
+                animation: "timing",
+                config: { duration: 250 },
+              },
+            },
+          })}
         />
-        <Screen name="Display" component={DisplayPage} />
         <Screen name="Conjugations" component={ConjugationsPage} />
         <Screen name="ConjInfo" component={ConjInfoPage} />
         <Screen name="Settings" component={SettingsPage} />

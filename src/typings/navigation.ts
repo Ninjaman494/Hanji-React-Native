@@ -4,7 +4,7 @@ import { Conjugation } from "hooks/useConjugations";
 export type StackParamList = {
   Main: undefined;
   Search: { query: string };
-  Display: { entryId: string };
+  Display: { entryId: string; noAnimate?: boolean };
   Conjugations: { stem: string; isAdj: boolean; honorific: boolean };
   ConjInfo: { conjugation: Conjugation };
   Settings: undefined;
