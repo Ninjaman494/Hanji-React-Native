@@ -10,7 +10,7 @@ import { Appbar, Menu, useTheme } from "react-native-paper";
 import { NavigationProps } from "typings/navigation";
 import buyAdFree from "utils/buyAdFree";
 
-export const APP_BAR_HEIGHT = 84;
+export const APP_BAR_HEIGHT = 56 + Constants.statusBarHeight;
 
 export interface AppBarProps {
   title?: string;
