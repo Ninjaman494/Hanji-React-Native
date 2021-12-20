@@ -9,6 +9,7 @@ import { useSnackbar } from "providers/SnackbarProvider";
 import React from "react";
 import "react-native";
 import getUser from "utils/getUser";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import BugReportPage from "../BugReportPage";
 
@@ -52,13 +53,14 @@ describe("BugReportPage", () => {
   it("submits feedback with photo", async () => {
     const result = render(<BugReportPage {...(props as any)} />);
 
-    fireEvent.changeText(result.getByLabelText("Feedback"), "foobar");
+    const feedback = "foobar";
+    fireEvent.changeText(result.getByLabelText("Feedback"), feedback);
     fireEvent.press(result.getByText("Submit"));
 
     await waitFor(() => {
       expect(sendBugReport).toHaveBeenCalledWith({
         variables: {
-          feedback: "foobar",
+          feedback: feedback,
           type: ReportType.BUG,
           email: userId,
           image: new ReactNativeFile({
@@ -67,6 +69,14 @@ describe("BugReportPage", () => {
             uri: "screenshot",
           }),
           deviceInfo,
+        },
+      });
+      expect(logEvent).toHaveBeenCalledWith({
+        type: LOG_EVENT.REPORT_BUG,
+        params: {
+          type: ReportType.BUG,
+          includeImage: true,
+          feedback,
         },
       });
       expect(showSnackbar).toHaveBeenCalledWith(
