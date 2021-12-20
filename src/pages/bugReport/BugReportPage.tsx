@@ -16,6 +16,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
 import getUser from "utils/getUser";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import * as yup from "yup";
 
 interface BugReportForm {
@@ -100,6 +101,8 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
 
     const user = getUser();
     try {
+      await logEvent({ type: LOG_EVENT.REPORT_BUG, params: values });
+
       await sendBugReport({
         variables: {
           feedback: values.feedback,

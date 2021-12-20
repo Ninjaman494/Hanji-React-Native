@@ -9,6 +9,7 @@ import useCreateSuggestion from "hooks/useCreateSuggestion";
 import { useSnackbar } from "providers/SnackbarProvider";
 import React, { ReactNode } from "react";
 import "react-native";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import SuggestionPage from "../SuggestionPage";
 
@@ -49,6 +50,15 @@ describe("SuggestionPage", () => {
               },
             ],
           },
+        },
+      });
+      expect(logEvent).toHaveBeenCalledWith({
+        type: LOG_EVENT.MAKE_SUGGESTION,
+        params: {
+          antonym: "가다",
+          synonym: undefined,
+          sentence: "저는 가요",
+          translation: "I go",
         },
       });
       expect(showSnackbar).toHaveBeenCalledWith(

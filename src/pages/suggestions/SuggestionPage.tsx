@@ -6,6 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, useTheme } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import SuggestionForm, { SuggestionFormValues } from "./SuggestionForm";
 
 const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
@@ -42,6 +43,16 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
             synonyms: synonym ? [synonym] : undefined,
             examples: example ? [example] : undefined,
           },
+        },
+      });
+
+      await logEvent({
+        type: LOG_EVENT.MAKE_SUGGESTION,
+        params: {
+          antonym,
+          synonym,
+          sentence: example?.sentence,
+          translation: example?.translation,
         },
       });
 

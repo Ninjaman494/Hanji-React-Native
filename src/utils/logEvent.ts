@@ -13,6 +13,8 @@ export enum LOG_EVENT {
   SELECT_CONJUGATION = "select_conjugation",
   ADD_FAVORITE = "add_favorite",
   SELECT_FAV = "select_fav",
+  REPORT_BUG = "report_bug",
+  MAKE_SUGGESTION = "make_suggestion",
 }
 
 type LogEventVars =
@@ -40,8 +42,11 @@ type LogEventVars =
       type:
         | LOG_EVENT.SELECT_CONJUGATION
         | LOG_EVENT.ADD_FAVORITE
-        | LOG_EVENT.SELECT_FAV;
-      params: Record<string, unknown>;
+        | LOG_EVENT.SELECT_FAV
+        | LOG_EVENT.REPORT_BUG
+        | LOG_EVENT.MAKE_SUGGESTION;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      params: Record<string, any>;
     };
 
 const logEvent = async (vars: LogEventVars): Promise<void> => {
