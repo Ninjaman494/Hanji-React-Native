@@ -60,7 +60,6 @@ describe("BugReportPage", () => {
     await waitFor(() => {
       expect(sendBugReport).toHaveBeenCalledWith({
         variables: {
-          feedback: feedback,
           type: ReportType.BUG,
           email: userId,
           image: new ReactNativeFile({
@@ -69,6 +68,7 @@ describe("BugReportPage", () => {
             uri: "screenshot",
           }),
           deviceInfo,
+          feedback,
         },
       });
       expect(logEvent).toHaveBeenCalledWith({
