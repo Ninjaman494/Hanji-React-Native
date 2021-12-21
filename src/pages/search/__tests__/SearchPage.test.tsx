@@ -60,6 +60,7 @@ describe("SearchPage", () => {
 
     expect(replace).toHaveBeenCalledWith("Display", {
       entryId: searchResults[0].id,
+      noAnimate: true,
     });
   });
 
