@@ -25,7 +25,7 @@ const FAVORITES = gql`
 `;
 
 interface FavoritesResponse {
-  favorites: Conjugation[];
+  favorites: (Conjugation | null)[];
 }
 
 interface FavoritesConjugationsVars {
@@ -48,17 +48,23 @@ const useGetFavoritesConjugations = (
   );
 
   useEffect(() => {
-    if (data) {
-      setFavorites(
-        data.favorites.map((c) => ({
-          ...c,
-          speechLevel: c.speechLevel
-            .toLowerCase()
-            .split("_")
-            .join(" ") as Formality,
-        }))
-      );
+    if (!data) {
+      return;
     }
+
+    const conjugations = data.favorites?.reduce<Conjugation[]>(
+      (prev, curr) =>
+        curr
+          ? prev.concat({
+              ...curr,
+              speechLevel: curr.speechLevel
+                .replace(/_/g, " ")
+                .toLowerCase() as Formality,
+            })
+          : prev,
+      []
+    );
+    setFavorites(conjugations);
   }, [data, setFavorites]);
 
   return { data: favorites && { favorites }, ...rest };
