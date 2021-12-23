@@ -1,4 +1,12 @@
 {
+  "34": {
+    "name": "3.0.1",
+    "date": "Dec. 23th 2021",
+    "summary": "Fixed a bug with favorites",
+    "features": [
+      "Fixed a bug where having determiner past favorited causes a crash"
+    ]
+  },
   "33": {
     "name": "3.0.0-dev3",
     "date": "Dec. 19th 2021",

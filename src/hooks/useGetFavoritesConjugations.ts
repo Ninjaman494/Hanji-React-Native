@@ -48,17 +48,24 @@ const useGetFavoritesConjugations = (
   );
 
   useEffect(() => {
-    if (data) {
-      setFavorites(
-        data.favorites.map((c) => ({
-          ...c,
-          speechLevel: c.speechLevel
-            .toLowerCase()
-            .split("_")
-            .join(" ") as Formality,
-        }))
-      );
+    if (!data) {
+      return;
     }
+
+    // Favorite can be null if conjugation doesn't exist for word (ex: determiner past)
+    const conjugations = data.favorites?.reduce<Conjugation[]>(
+      (prev, curr) =>
+        curr
+          ? prev.concat({
+              ...curr,
+              speechLevel: curr.speechLevel
+                .replace(/_/g, " ")
+                .toLowerCase() as Formality,
+            })
+          : prev,
+      []
+    );
+    setFavorites(conjugations);
   }, [data, setFavorites]);
 
   return { data: favorites && { favorites }, ...rest };

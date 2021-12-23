@@ -45,14 +45,18 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
   });
 
   const favoritesMap = conjugations?.length
-    ? favorites.map((favorite) => {
-        const conjugation = conjugations?.find(
-          ({ name, honorific }) =>
-            name === favorite.conjugationName &&
-            honorific === favorite.honorific
-        );
-        return { name: favorite.name, conjugation: conjugation };
-      })
+    ? favorites.reduce<{ name: string; conjugation: Conjugation }[]>(
+        (prev, curr) => {
+          const conjugation = conjugations?.find(
+            ({ name, honorific }) =>
+              name === curr.conjugationName && honorific === curr.honorific
+          );
+          return conjugation
+            ? [...prev, { name: curr.name, conjugation }]
+            : prev;
+        },
+        []
+      )
     : [];
 
   return (
