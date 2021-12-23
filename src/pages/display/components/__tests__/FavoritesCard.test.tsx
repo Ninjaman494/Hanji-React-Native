@@ -3,7 +3,12 @@ import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
 import "react-native";
 import { NavigationProps } from "typings/navigation";
-import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
+import {
+  ConjugationName,
+  ConjugationType,
+  Formality,
+  Tense,
+} from "utils/conjugationTypes";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import FavoritesCard from "../../components/FavoritesCard";
@@ -101,5 +106,27 @@ describe("FavoritesCard component", () => {
       });
       expect(push).toHaveBeenCalledWith("ConjInfo", { conjugation });
     });
+  });
+
+  it("hides favorites with no conjugations", async () => {
+    const customFavorites = [
+      favorites[0],
+      {
+        name: "Favorite 2",
+        conjugationName: ConjugationType.DETERMINER_PAST as ConjugationName,
+        honorific: false,
+      },
+    ];
+
+    const component = render(
+      <FavoritesCard
+        favorites={customFavorites}
+        conjugations={[props.conjugations[0]]}
+        onPress={jest.fn()}
+      />
+    );
+
+    expect(component.getByText("Favorite 1")).toBeTruthy();
+    expect(component.queryByText("Favorite 2")).toBeNull();
   });
 });

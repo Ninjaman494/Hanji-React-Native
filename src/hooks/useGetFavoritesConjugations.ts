@@ -25,7 +25,7 @@ const FAVORITES = gql`
 `;
 
 interface FavoritesResponse {
-  favorites: (Conjugation | null)[];
+  favorites: Conjugation[];
 }
 
 interface FavoritesConjugationsVars {
@@ -52,6 +52,7 @@ const useGetFavoritesConjugations = (
       return;
     }
 
+    // Favorite can be null if conjugation doesn't exist for word (ex: determiner past)
     const conjugations = data.favorites?.reduce<Conjugation[]>(
       (prev, curr) =>
         curr
