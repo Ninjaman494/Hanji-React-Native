@@ -29,6 +29,8 @@
     {
       "groupName": "React Native Dependencies",
       "matchPackageNames": [
+        "react",
+        "react-dom",
         "react-native",
         "@react-native-async-storage/async-storage",
         "react-native-dotenv",
