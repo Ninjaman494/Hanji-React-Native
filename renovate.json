@@ -14,11 +14,11 @@
     },
     {
       "groupName": "Firebase Dependencies",
-      "matchPackagePrefix": ["@react-native-firebase"]
+      "matchPackagePatterns": ["react-native-firebase"]
     },
     {
       "groupName": "React Navigation Dependencies",
-      "matchPackagePrefix": ["@react-navigation"]
+      "matchPackagePatterns": ["@react-navigation"]
     },
     {
       "groupName": "React Native Dependencies",
