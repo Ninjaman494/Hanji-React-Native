@@ -1,7 +1,7 @@
 {
   "extends": ["config:base", "group:jsTest"],
   "rangeStrategy": "replace",
-  "ignorePaths": ["/android/**", "/ios/**", ".github/**"],
+  "ignorePaths": ["android/**", "ios/**", ".github/**"],
   "packageRules": [
     {
       "groupName": "Dev Dependencies (non-major)",
