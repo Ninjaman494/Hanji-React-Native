@@ -1,4 +1,3 @@
-jest.mock("react-router");
 jest.mock("react-native/Libraries/Linking/Linking");
 
 import React from "react";
