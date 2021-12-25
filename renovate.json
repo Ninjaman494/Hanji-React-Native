@@ -1,6 +1,12 @@
 {
   "extends": ["config:base", "group:jsTest"],
   "rangeStrategy": "replace",
+  "gradle": {
+    "enabled": false
+  },
+  "github-actions": {
+    "enabled": false
+  },
   "packageRules": [
     {
       "groupName": "Dev Dependencies (non-major)",
