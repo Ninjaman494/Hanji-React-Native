@@ -41,11 +41,11 @@
     },
     {
       "groupName": "Expo Dependencies",
-      "matchPackagePatterns": ["*expo*"]
+      "matchPackagePatterns": ["expo*"]
     },
     {
       "groupName": "Formik Dependencies",
-      "matchPackagePatterns": ["*formik*", "*yup*"]
+      "matchPackagePatterns": ["formik*", "yup*"]
     },
     {
       "groupName": "GraphQL Dependencies",
