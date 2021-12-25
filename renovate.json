@@ -1,5 +1,56 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base", "group:jsTest"],
+  "packageRules": [
+    {
+      "groupName": "Dev Dependencies (non-major)",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"]
+    },
+    {
+      "groupName": "Dependencies (non-major)",
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["patch", "minor"]
+    },
+    {
+      "groupName": "Firebase Dependencies",
+      "matchPackagePrefix": ["react-native-firebase"]
+    },
+    {
+      "groupName": "React Navigation Dependencies",
+      "matchPackagePrefix": ["react-navigation"]
+    },
+    {
+      "groupName": "React Native Dependencies",
+      "matchPackageNames": [
+        "react-native",
+        "@react-native-async-storage/async-storage",
+        "react-native-dotenv",
+        "react-native-exception-handler",
+        "react-native-gesture-handler",
+        "react-native-keyboard-aware-scroll-view",
+        "react-native-safe-area-context",
+        "react-native-screens",
+        "react-native-unimodules",
+        "react-native-url-polyfill",
+        "react-native-web",
+        "@types/react",
+        "@types/react-dom",
+        "@types/react-native",
+        "@types/react-native-dotenv"
+      ]
+    },
+    {
+      "groupName": "Expo Dependencies",
+      "matchPackagePatterns": ["*expo*"]
+    },
+    {
+      "groupName": "Formik Dependencies",
+      "matchPackagePatterns": ["*formik*", "*yup*"]
+    },
+    {
+      "groupName": "GraphQL Dependencies",
+      "matchPackagePatterns": ["apollo*", "graphql*"]
+    }
+  ],
+  "schedule": ["every weekend"]
 }
