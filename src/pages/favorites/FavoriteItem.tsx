@@ -1,9 +1,8 @@
-import { HonorificBadge, ListItem } from "components";
+import { HonorificBadge } from "components";
 import { Favorite } from "hooks/useGetFavorites";
-import React from "react";
-import { useState } from "react";
-import { FC } from "react";
-import { Divider, Menu } from "react-native-paper";
+import React, { FC, useState } from "react";
+import { StyleSheet } from "react-native";
+import { Divider, List, Menu, useTheme } from "react-native-paper";
 
 export interface FavoriteItemProps {
   favorite: Favorite;
@@ -13,23 +12,33 @@ export interface FavoriteItemProps {
 const FavoriteItem: FC<FavoriteItemProps> = ({ favorite, onDelete }) => {
   const [showMenu, setShowMenu] = useState(false);
 
+  const { textSizes } = useTheme();
+  const styles = StyleSheet.create({
+    title: { fontSize: textSizes.regular, marginBottom: 4 },
+    description: {
+      fontSize: textSizes.secondary,
+      textTransform: "capitalize",
+    },
+    badge: { alignSelf: "center" },
+  });
+
   return (
     <Menu
       visible={showMenu}
       onDismiss={() => setShowMenu(false)}
       anchor={
         <>
-          <ListItem
+          <List.Item
             onPress={() => {}}
             onLongPress={() => setShowMenu(true)}
             title={favorite.name}
             description={favorite.conjugationName}
-            titleStyle={{ marginBottom: 4 }}
-            descriptionStyle={{ textTransform: "capitalize" }}
+            titleStyle={styles.title}
+            descriptionStyle={styles.description}
             right={() => (
               <HonorificBadge
                 visible={favorite.honorific}
-                style={{ alignSelf: "center" }}
+                style={styles.badge}
               />
             )}
           />
