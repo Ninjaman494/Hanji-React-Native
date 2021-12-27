@@ -1,5 +1,9 @@
 /* eslint-disable */
 // Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require("expo/metro-config");
+const { getDefaultConfig } = require("@expo/metro-config");
 
-module.exports = getDefaultConfig(__dirname);
+// Add cjs for @apollo/client
+const defaultConfig = getDefaultConfig(__dirname);
+defaultConfig.resolver.sourceExts.push("cjs");
+
+module.exports = defaultConfig;
