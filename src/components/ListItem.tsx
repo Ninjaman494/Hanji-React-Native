@@ -1,38 +1,56 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { List, useTheme } from "react-native-paper";
+import { StyleProp, StyleSheet, TextStyle, View } from "react-native";
+import { Text, useTheme } from "react-native-paper";
 
-type ListItemProps = React.ComponentProps<typeof List.Item>;
+type ListItemProps = {
+  title: string;
+  description?: string;
+  titleStyle?: StyleProp<TextStyle>;
+  descriptionStyle?: StyleProp<TextStyle>;
+  selectable?: boolean;
+};
 
 const ListItem: React.FC<ListItemProps> = ({
-  style,
+  title,
+  description,
   titleStyle,
   descriptionStyle,
-  ...rest
+  selectable = true,
 }) => {
-  const { textSizes } = useTheme();
-
+  const { textSizes, colors } = useTheme();
   const styles = StyleSheet.create({
-    item: {
-      paddingVertical: 0,
-    },
     title: {
       fontSize: textSizes?.regular,
     },
     description: {
       fontSize: textSizes?.secondary,
+      color: colors.grey,
+    },
+    row: {
+      paddingHorizontal: 16,
+      paddingVertical: 4,
     },
   });
 
   return (
-    <List.Item
-      {...rest}
-      style={[styles.item, style]}
-      titleStyle={[styles.title, titleStyle]}
-      titleNumberOfLines={5}
-      descriptionStyle={[styles.description, descriptionStyle]}
-      descriptionNumberOfLines={10}
-    />
+    <View style={styles.row}>
+      <Text
+        selectable={selectable}
+        numberOfLines={5}
+        style={[styles.title, titleStyle]}
+      >
+        {title}
+      </Text>
+      {description && (
+        <Text
+          selectable={selectable}
+          numberOfLines={10}
+          style={[styles.description, descriptionStyle]}
+        >
+          {description}
+        </Text>
+      )}
+    </View>
   );
 };
 
