@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   synAnt: {
-    paddingLeft: 16,
+    paddingHorizontal: 16,
     fontSize: 20,
   },
 });
