@@ -23,15 +23,15 @@
     },
     {
       "groupName": "React Native Dependencies",
+      "enabled": false,
       "matchPackageNames": [
         "react",
         "react-dom",
         "react-native",
         "@react-native-async-storage/async-storage",
-        "react-native-dotenv",
-        "react-native-exception-handler",
         "react-native-gesture-handler",
         "react-native-keyboard-aware-scroll-view",
+        "react-native-reanimated",
         "react-native-safe-area-context",
         "react-native-screens",
         "react-native-unimodules",
@@ -45,6 +45,7 @@
     },
     {
       "groupName": "Expo Dependencies",
+      "enabled": false,
       "matchPackagePatterns": ["expo*"]
     },
     {
