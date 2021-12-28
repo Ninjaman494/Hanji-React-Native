@@ -1,5 +1,3 @@
-import 'expo-dev-client';
-
 import analytics from "@react-native-firebase/analytics";
 import messaging from "@react-native-firebase/messaging";
 import { registerRootComponent } from "expo";
