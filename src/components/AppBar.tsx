@@ -29,7 +29,7 @@ const AppBar: React.FC<AppBarProps> = ({
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
 
-  const isAdFree = useGetAdFreeStatus();
+  const { isAdFree } = useGetAdFreeStatus();
   const navigation = useNavigation<NavigationProps>();
   const takeScreenshot = useViewShot();
   const { showSnackbar } = useSnackbar();

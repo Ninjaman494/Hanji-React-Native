@@ -9,7 +9,7 @@ export interface AdCardProps extends BaseCardProps {
 }
 
 const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
-  const isAdFree = useGetAdFreeStatus();
+  const { isAdFree } = useGetAdFreeStatus();
 
   return isAdFree ? null : (
     <BaseCard title="Ad" {...rest}>

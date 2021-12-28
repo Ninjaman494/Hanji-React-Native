@@ -1,12 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import Purchases, { PurchaserInfo } from "react-native-purchases";
-import { Native } from "sentry-expo";
+import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 export const RESTORED_KEY = "RESTORED_PURCHASES";
 
-const useGetAdFreeStatus = (): boolean => {
+const useGetAdFreeStatus = (): { isAdFree: boolean; error?: string } => {
   const [isAdFree, setAdFree] = useState(true);
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
     (async () => {
@@ -24,13 +25,14 @@ const useGetAdFreeStatus = (): boolean => {
 
         setAdFree(!!info.entitlements.active.ad_free_entitlement);
       } catch (e) {
-        Native.captureException(e, { extra: { error: e } });
+        const errorMsg = getPurchaseErrorMessage(e);
+        setError(errorMsg);
         setAdFree(false);
       }
     })();
   }, [setAdFree]);
 
-  return isAdFree;
+  return { isAdFree, error };
 };
 
 export default useGetAdFreeStatus;
