@@ -31,7 +31,8 @@ describe("useGetAdFreeStatus hook", () => {
     await waitFor(() => {
       expect(Purchases.getPurchaserInfo).toHaveBeenCalled();
       expect(Purchases.restoreTransactions).not.toHaveBeenCalled();
-      expect(result.current).toBeTruthy();
+      expect(result.current.isAdFree).toBeTruthy();
+      expect(result.current.error).toBeUndefined();
     });
   });
 
@@ -42,7 +43,8 @@ describe("useGetAdFreeStatus hook", () => {
     await waitFor(() => {
       expect(Purchases.getPurchaserInfo).not.toHaveBeenCalled();
       expect(Purchases.restoreTransactions).toHaveBeenCalled();
-      expect(result.current).toBeTruthy();
+      expect(result.current.isAdFree).toBeTruthy();
+      expect(result.current.error).toBeUndefined();
     });
   });
 
