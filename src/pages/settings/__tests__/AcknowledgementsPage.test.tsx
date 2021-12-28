@@ -13,7 +13,7 @@ describe("AcknowledgementsPage", () => {
     expect(result.getByText(`Version: 3.5.6`)).toBeTruthy();
 
     expect(result.getByText("expo-status-bar")).toBeTruthy();
-    expect(result.getByText("Version: 1.0.4")).toBeTruthy();
+    expect(result.getByText("Version: 1.1.0")).toBeTruthy();
 
     expect(result.getByText("formik")).toBeTruthy();
     expect(result.getByText("Version: 2.2.9")).toBeTruthy();
