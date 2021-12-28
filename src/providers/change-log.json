@@ -1,8 +1,16 @@
 {
+  "35": {
+    "name": "3.0.2",
+    "date": "Dec. 29th 2021",
+    "features": [
+      "Fixed a bug where some text wasn't selectable",
+      "Improved error reporting",
+      "Updated dependencies"
+    ]
+  },
   "34": {
     "name": "3.0.1",
     "date": "Dec. 23th 2021",
-    "summary": "Fixed a bug with favorites",
     "features": [
       "Fixed a bug where having determiner past favorited causes a crash"
     ]
@@ -10,13 +18,11 @@
   "33": {
     "name": "3.0.0-dev3",
     "date": "Dec. 19th 2021",
-    "summary": "this is a test release",
     "features": ["add suggestion", "fixed a bug (maybe)", "Sentry support"]
   },
   "32": {
     "name": "3.0.0-dev2",
     "date": "Dec. 18th 2021",
-    "summary": "this is the first test release",
     "features": [
       "now in react native!",
       "added this changelog",
