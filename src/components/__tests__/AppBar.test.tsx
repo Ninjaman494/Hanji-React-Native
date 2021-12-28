@@ -91,7 +91,7 @@ describe("AppBar component", () => {
     });
 
     it("can handle ad free upgrades", async () => {
-      (useGetAdFreeStatus as jest.Mock).mockReturnValue(false);
+      (useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false });
 
       const component = render(<AppBar {...props} />);
 
@@ -106,8 +106,6 @@ describe("AppBar component", () => {
     });
 
     it("hides upgrade if already upgraded", async () => {
-      (useGetAdFreeStatus as jest.Mock).mockReturnValue(true);
-
       const component = render(<AppBar {...props} />);
 
       fireEvent.press(component.getByLabelText("overflow menu button"));
