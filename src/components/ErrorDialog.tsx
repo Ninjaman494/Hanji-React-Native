@@ -11,7 +11,9 @@ export interface ErrorDialog
 const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
   useEffect(() => {
     if (error) {
-      Native.captureException(error);
+      Native.captureException(error, {
+        extra: { error: JSON.stringify(error, null, 2) },
+      });
     }
   }, [error]);
 
