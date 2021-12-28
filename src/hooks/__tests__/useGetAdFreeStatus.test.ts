@@ -57,7 +57,9 @@ describe("useGetAdFreeStatus hook", () => {
       expect(Native.captureException).toHaveBeenCalledWith(error, {
         extra: { error },
       });
-      expect(result.current).toBeFalsy();
+      expect(result.current.error).toEqual(
+        "Failed to make purchase. Please try again later or contact support"
+      );
     });
   });
 });
