@@ -15,7 +15,8 @@ describe("ChangeLog component", () => {
     const { name, date, features } = changelogJSON[33];
     await waitFor(() => {
       expect(result.getByText("What's New")).toBeTruthy();
-      expect(result.getByText(`${name} (${date})`)).toBeTruthy();
+      expect(result.getByText(name)).toBeTruthy();
+      expect(result.getByText(`(${date})`)).toBeTruthy();
       features.forEach((f) =>
         expect(result.getByText(`\u2022 ${f}`)).toBeTruthy()
       );
