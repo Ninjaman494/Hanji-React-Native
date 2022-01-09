@@ -116,7 +116,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
       showSnackbar("Report sent. Thanks for the feedback!");
       goBack();
     } catch (error) {
-      showError(error);
+      showError(error as Error);
     }
   };
 

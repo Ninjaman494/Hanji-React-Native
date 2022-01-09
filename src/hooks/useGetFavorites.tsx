@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useCallback, useEffect, useState } from "react";
 import { ConjugationName } from "utils/conjugationTypes";
 
 export type Favorite = {
@@ -31,7 +31,7 @@ const useGetFavorites = (): GetFavoritesResponse => {
         setFavorites(null);
       }
     } catch (e) {
-      setError(e);
+      setError(e as Error);
     } finally {
       setLoading(false);
     }
