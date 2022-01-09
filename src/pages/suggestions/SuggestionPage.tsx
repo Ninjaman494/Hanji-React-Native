@@ -59,7 +59,7 @@ const SuggestionPage: FC<ScreenProps<"Suggestion">> = ({
       showSnackbar("Thanks! Your suggestion has been sent for review.");
       navigation.goBack();
     } catch (error) {
-      showError(error);
+      showError(error as Error);
     }
   };
 

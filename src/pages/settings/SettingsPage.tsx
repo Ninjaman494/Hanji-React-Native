@@ -39,7 +39,7 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
           : "Ad-free purchase not found"
       );
     } catch (e) {
-      showError(e);
+      showError(e as Error);
     }
 
     setCheckDesc(CHECK_AD_FREE_DESC);

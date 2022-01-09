@@ -1,4 +1,4 @@
-import Purchases from "react-native-purchases";
+import Purchases, { PurchasesError } from "react-native-purchases";
 import getPurchaseErrorMessage from "./getPurchaseErrorMessage";
 import logEvent, { LOG_EVENT } from "./logEvent";
 
@@ -42,7 +42,7 @@ const buyAdFree = async (onError: (e: string) => void): Promise<void> => {
       }
     }
   } catch (e) {
-    const errorMsg = getPurchaseErrorMessage(e);
+    const errorMsg = getPurchaseErrorMessage(e as PurchasesError);
     errorMsg && onError(errorMsg);
   }
 };

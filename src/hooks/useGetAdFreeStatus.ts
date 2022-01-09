@@ -1,6 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import Purchases, { PurchaserInfo } from "react-native-purchases";
+import Purchases, {
+  PurchaserInfo,
+  PurchasesError,
+} from "react-native-purchases";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 export const RESTORED_KEY = "RESTORED_PURCHASES";
@@ -25,7 +28,7 @@ const useGetAdFreeStatus = (): { isAdFree: boolean; error?: string } => {
 
         setAdFree(!!info.entitlements.active.ad_free_entitlement);
       } catch (e) {
-        const errorMsg = getPurchaseErrorMessage(e);
+        const errorMsg = getPurchaseErrorMessage(e as PurchasesError);
         setError(errorMsg);
         setAdFree(false);
       }
