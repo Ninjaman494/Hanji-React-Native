@@ -12,6 +12,7 @@ import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import ChangeLog from "providers/ChangeLog";
 import RatingHandler from "providers/RatingHandler";
 import SnackbarProvider from "providers/SnackbarProvider";
+import UserProvider from "providers/UserProvider";
 import ViewShotProvider from "providers/ViewShotProvider";
 import React, { useEffect } from "react";
 import { Platform, StyleSheet, View } from "react-native";
@@ -66,19 +67,21 @@ export default function Index(): JSX.Element {
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
         <ViewShotProvider>
-          <View style={styles.parent}>
-            <StatusBar
-              backgroundColor={theme.colors.primaryDark}
-              style="light"
-            />
-            <SnackbarProvider>
-              <RatingHandler numSessions={5} />
-              <ChangeLog currentVersion={nativeBuildVersion as string} />
-              <View style={styles.container}>
-                <Pages />
-              </View>
-            </SnackbarProvider>
-          </View>
+          <UserProvider>
+            <View style={styles.parent}>
+              <StatusBar
+                backgroundColor={theme.colors.primaryDark}
+                style="light"
+              />
+              <SnackbarProvider>
+                <RatingHandler numSessions={5} />
+                <ChangeLog currentVersion={nativeBuildVersion as string} />
+                <View style={styles.container}>
+                  <Pages />
+                </View>
+              </SnackbarProvider>
+            </View>
+          </UserProvider>
         </ViewShotProvider>
       </PaperProvider>
     </ApolloProvider>

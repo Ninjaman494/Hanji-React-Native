@@ -40,7 +40,7 @@ jest.mock("expo-constants", () => ({
   loading: false,
 });
 
-(useGetAdFreeStatus as jest.Mock).mockReturnValue(false);
+(useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false });
 
 const showSnackbar = jest.fn();
 const showError = jest.fn();
