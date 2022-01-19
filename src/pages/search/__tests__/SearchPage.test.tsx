@@ -98,6 +98,27 @@ describe("SearchPage", () => {
     expect(goBack).toHaveBeenCalled();
   });
 
+  it("shows conjugator option if query is in dictionary form", () => {
+    (useSearch as jest.Mock).mockReturnValue({
+      loading: false,
+      data: {
+        search: {
+          results: [],
+        },
+      },
+    });
+
+    const newProps = props;
+    newProps.route.params.query = "있다";
+    const result = render(<SearchPage {...(newProps as any)} />);
+
+    fireEvent.press(result.getByText("Use Conjugator"));
+
+    expect(replace).toHaveBeenCalledWith("Conjugator", {
+      term: newProps.route.params.query,
+    });
+  });
+
   it("logs search events", () => {
     (useSearch as jest.Mock).mockReturnValue({
       loading: false,
