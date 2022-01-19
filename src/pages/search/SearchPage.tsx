@@ -13,11 +13,15 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
   const { query } = route.params;
 
   if (query) {
-    const { data, error } = useSearch(query as string, null);
+    const trimmedQuery = query.trim();
+    const { data, error } = useSearch(trimmedQuery, null);
     const results = data?.search?.results;
 
     useEffect(() => {
-      logEvent({ type: LOG_EVENT.SEARCH, params: { search_term: query } });
+      logEvent({
+        type: LOG_EVENT.SEARCH,
+        params: { search_term: trimmedQuery },
+      });
     }, []);
 
     useEffect(() => {
@@ -33,7 +37,7 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
       <>
         {results && results.length > 1 ? (
           <SearchResultsPage
-            query={query}
+            query={trimmedQuery}
             results={results}
             cursor={data?.search?.cursor}
           />
@@ -48,10 +52,10 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
         )}
         <NoResultsModal
           visible={results?.length === 0}
-          query={query}
+          query={trimmedQuery}
           onDismiss={navigation.goBack}
           onConjugatorPress={() =>
-            navigation.replace("Conjugator", { term: query })
+            navigation.replace("Conjugator", { term: trimmedQuery })
           }
         />
       </>
