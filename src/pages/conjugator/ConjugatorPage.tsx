@@ -53,9 +53,10 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
   });
 
   const { term } = route.params;
-  const { data: stems, error: stemsError } = useGetStems(term as string, {
+  const { data, error: stemsError } = useGetStems(term as string, {
     skip: !term,
   });
+  const stems = data?.stems;
 
   const [formValues, setFormValues] = useState<FormValues>({
     stem: "",
@@ -69,7 +70,7 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
     loading: conjLoading,
     error: conjError,
   } = useConjugations(formValues, {
-    skip: !stems,
+    skip: stems?.length === 0,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: "cache-and-network",
   });
@@ -93,8 +94,8 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
   }, [conjLoading]);
 
   useEffect(() => {
-    if (stems?.stems) {
-      setFormValues({ ...formValues, stem: stems.stems[0] });
+    if (stems && stems?.length > 0) {
+      setFormValues({ ...formValues, stem: stems[0] });
     }
   }, [stems, setFormValues]);
 
@@ -120,12 +121,12 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
           onDismiss={navigation.goBack}
         />
       </Portal>
-      {stems?.stems ? (
+      {stems ? (
         <ScrollView>
           <View style={styles.formContainer}>
             <Select
               label="Possible Stems"
-              list={stems.stems.map((stem) => ({
+              list={stems.map((stem) => ({
                 label: stem,
                 value: stem,
               }))}

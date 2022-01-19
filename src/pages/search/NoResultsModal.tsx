@@ -13,7 +13,7 @@ const NoResultsModal: FC<NoResultsModalProps> = ({
   ...rest
 }) => {
   const { textSizes } = useTheme();
-  const isAdjVerb = query.includes("다");
+  const isAdjVerb = query.endsWith("다");
 
   return (
     <Dialog {...rest}>
