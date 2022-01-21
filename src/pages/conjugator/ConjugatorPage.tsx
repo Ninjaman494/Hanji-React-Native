@@ -1,4 +1,3 @@
-import { ApolloError } from "@apollo/client";
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import ErrorDialog from "components/ErrorDialog";
 import Select from "components/Select";
@@ -117,7 +116,7 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
       <Portal>
         <ErrorDialog
           visible={!!(conjError || stemsError)}
-          error={conjError ?? (stemsError as ApolloError)}
+          error={conjError ?? stemsError}
           onDismiss={navigation.goBack}
         />
       </Portal>

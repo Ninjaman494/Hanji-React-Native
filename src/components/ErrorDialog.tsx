@@ -5,15 +5,13 @@ import { Native } from "sentry-expo";
 
 export interface ErrorDialog
   extends Omit<ComponentProps<typeof Dialog>, "children"> {
-  error: ApolloError;
+  error?: ApolloError;
 }
 
 const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
   useEffect(() => {
-    if (error) {
-      Native.captureException(error, {
-        extra: { error: JSON.stringify(error, null, 2) },
-      });
+    if (error && error.networkError?.message !== "Network request failed") {
+      Native.captureException(error, { extra: { error } });
     }
   }, [error]);
 
@@ -22,7 +20,8 @@ const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
       <Dialog.Title>Error Occurred</Dialog.Title>
       <Dialog.Content>
         <Text>
-          An error occurred. Please try again later or contact support.
+          {error?.message ?? "An error occurred"}. Please try again later or
+          contact support.
         </Text>
       </Dialog.Content>
       <Dialog.Actions>
