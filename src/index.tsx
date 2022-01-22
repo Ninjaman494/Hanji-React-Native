@@ -17,6 +17,7 @@ import ViewShotProvider from "providers/ViewShotProvider";
 import React, { useEffect } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
+import Purchases from "react-native-purchases";
 import uuid from "react-native-uuid";
 import { Native } from "sentry-expo";
 import setupMessaging from "setupMessaging";
@@ -48,6 +49,7 @@ export default function Index(): JSX.Element {
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
       Native?.setUser({ id });
+      await Purchases.logIn(id);
       await analytics().setUserId(id);
     })();
 
