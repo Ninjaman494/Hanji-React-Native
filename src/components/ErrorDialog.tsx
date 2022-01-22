@@ -20,7 +20,7 @@ const ErrorDialog: FC<ErrorDialog> = ({ error, ...rest }) => {
       <Dialog.Title>Error Occurred</Dialog.Title>
       <Dialog.Content>
         <Text>
-          {error?.message ?? "An error occurred"}. Please try again later or
+          {error?.message || "An error occurred"}. Please try again later or
           contact support.
         </Text>
       </Dialog.Content>
