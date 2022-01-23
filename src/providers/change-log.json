@@ -1,4 +1,14 @@
 {
+  "36": {
+    "name": "3.0.3",
+    "date": "Jab. 24th 2022",
+    "features": [
+      "Improved error messages",
+      "Fixed a bug where app incorrectly redirected to Conjugator",
+      "Fixed a bug with ads not working",
+      "Updated dependencies"
+    ]
+  },
   "35": {
     "name": "3.0.2",
     "date": "Dec. 29th 2021",
