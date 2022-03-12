@@ -2,7 +2,7 @@ import { AdMobBanner } from "expo-ads-admob";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import React from "react";
 import "react-native";
-import { Native } from "sentry-expo";
+import handleAdError from "utils/handleAdError";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 export interface AdCardProps extends BaseCardProps {
@@ -25,9 +25,7 @@ const AdCard = ({
       <AdMobBanner
         bannerSize="mediumRectangle"
         adUnitID={adUnitID}
-        onDidFailToReceiveAdWithError={(error) =>
-          Native.captureException(error, { extra: { error } })
-        }
+        onDidFailToReceiveAdWithError={handleAdError}
         style={{ alignSelf: "center" }}
       />
     </BaseCard>
