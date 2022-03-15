@@ -18,6 +18,11 @@ const FavoriteItem: FC<FavoriteItemProps> = ({ favorite, onDelete }) => {
       textTransform: "capitalize",
     },
     badge: { alignSelf: "center" },
+    rightContainer: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+    },
   });
 
   return (
@@ -28,13 +33,7 @@ const FavoriteItem: FC<FavoriteItemProps> = ({ favorite, onDelete }) => {
         titleStyle={styles.title}
         descriptionStyle={styles.description}
         right={() => (
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.rightContainer}>
             <HonorificBadge visible={favorite.honorific} style={styles.badge} />
             <IconButton
               icon="trash-can"

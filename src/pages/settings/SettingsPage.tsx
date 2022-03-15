@@ -1,3 +1,4 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
@@ -13,7 +14,7 @@ const CHECK_AD_FREE_DESC = "Click here to check your ad-free status";
 
 const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
-  const { favorites, loading } = useGetFavorites();
+  const { favorites, loading, refetch } = useGetFavorites();
   const { showSnackbar, showError } = useSnackbar();
   const [checkDesc, setCheckDesc] = useState(CHECK_AD_FREE_DESC);
 
@@ -44,6 +45,13 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
 
     setCheckDesc(CHECK_AD_FREE_DESC);
   }, [setCheckDesc, showSnackbar]);
+
+  // Refresh count when returning to page in case fav was deleted
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
 
   return (
     <View style={styles.parent}>
