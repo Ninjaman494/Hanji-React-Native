@@ -37,6 +37,7 @@ const FavoriteItem: FC<FavoriteItemProps> = ({ favorite, onDelete }) => {
             <HonorificBadge visible={favorite.honorific} style={styles.badge} />
             <IconButton
               icon="trash-can"
+              accessibilityLabel="delete button"
               size={24}
               onPress={() => onDelete(favorite)}
             />
