@@ -38,6 +38,7 @@ jest.mock("expo-constants", () => ({
     },
   ],
   loading: false,
+  refetch: jest.fn(),
 });
 
 (useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false });
