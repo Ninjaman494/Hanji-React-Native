@@ -46,10 +46,12 @@ describe("FavoritesPage", () => {
   it("can delete a favorite", async () => {
     const result = render(<FavoritesPage />);
 
-    fireEvent(result.getByText("favorite 1"), "onLongPress");
+    fireEvent.press(result.getAllByLabelText("delete button")[0]);
 
-    await waitFor(() => expect(result.getByText("Delete")).toBeTruthy());
-    fireEvent.press(result.getByText("Delete"));
+    await waitFor(() =>
+      expect(result.getByText("Delete Favorite?")).toBeTruthy()
+    );
+    fireEvent.press(result.getByText("Confirm"));
 
     expect(setFavorites).toHaveBeenCalledWith(favorites.slice(1));
   });
