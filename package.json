@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
-    "@babel/core": "~7.16.0",
+    "@babel/core": "~7.17.0",
     "@expo-google-fonts/laila": "^0.2.0",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-firebase/analytics": "^14.0.1",
