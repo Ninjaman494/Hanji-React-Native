@@ -7,15 +7,16 @@ import { useSnackbar } from "providers/SnackbarProvider";
 import React, { useCallback, useState } from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import Purchases from "react-native-purchases";
+import Purchases, { PurchasesError } from "react-native-purchases";
 import { ScreenProps } from "typings/navigation";
+import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 const CHECK_AD_FREE_DESC = "Click here to check your ad-free status";
 
 const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
   const { favorites, loading, refetch } = useGetFavorites();
-  const { showSnackbar, showError } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
   const [checkDesc, setCheckDesc] = useState(CHECK_AD_FREE_DESC);
 
   const styles = StyleSheet.create({
@@ -40,7 +41,8 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
           : "Ad-free purchase not found"
       );
     } catch (e) {
-      showError(e as Error);
+      const errMsg = getPurchaseErrorMessage(e as PurchasesError);
+      errMsg && showSnackbar(errMsg);
     }
 
     setCheckDesc(CHECK_AD_FREE_DESC);

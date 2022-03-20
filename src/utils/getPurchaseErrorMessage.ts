@@ -1,7 +1,10 @@
 import { PurchasesError, PURCHASES_ERROR_CODE } from "react-native-purchases";
 import { Native } from "sentry-expo";
 
-const getPurchaseErrorMessage = (error: PurchasesError): string | undefined => {
+const getPurchaseErrorMessage = (
+  error: PurchasesError,
+  defaultMsg?: string
+): string | undefined => {
   switch (error.code) {
     case PURCHASES_ERROR_CODE.NETWORK_ERROR:
       return "Couldn't connect to the internet. Check your connection and try again";
@@ -23,7 +26,10 @@ const getPurchaseErrorMessage = (error: PurchasesError): string | undefined => {
       return;
     default:
       Native.captureException(error, { extra: { error } });
-      return "Failed to make purchase. Please try again later or contact support";
+      return (
+        defaultMsg ??
+        "An error occurred. Please try again later or contact support"
+      );
   }
 };
 

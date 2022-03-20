@@ -159,7 +159,13 @@ describe("SettingsPage", () => {
 
       fireEvent.press(result.getByText("Check Ad-free Status"));
 
-      await waitFor(() => expect(showError).toHaveBeenCalledWith(error));
+      await waitFor(() => {
+        expect(showSnackbar).toHaveBeenCalledWith(
+          "An error occurred. Please try again later or contact support"
+        );
+        // Prevent extraneous Sentry reports
+        expect(showError).not.toHaveBeenCalled();
+      });
     });
   });
 });

@@ -42,7 +42,10 @@ const buyAdFree = async (onError: (e: string) => void): Promise<void> => {
       }
     }
   } catch (e) {
-    const errorMsg = getPurchaseErrorMessage(e as PurchasesError);
+    const errorMsg = getPurchaseErrorMessage(
+      e as PurchasesError,
+      "Failed to make purchase. Please try again later or contact support"
+    );
     errorMsg && onError(errorMsg);
   }
 };
