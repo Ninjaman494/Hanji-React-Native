@@ -77,6 +77,7 @@ describe("buyAdFree function", () => {
       ${"Purchase not Allowed"}               | ${PURCHASE_NOT_ALLOWED_ERROR}               | ${"You're device or account doesn't support this purchase"}
       ${"Payment Pending"}                    | ${PAYMENT_PENDING_ERROR}                    | ${"Payment is pending. Check your ad-free status once it's complete"}
       ${"Already Purchased"}                  | ${PRODUCT_ALREADY_PURCHASED_ERROR}          | ${"You've already purchased an ad-free upgrade"}
+      ${"Unexpected"}                         | ${"foobar"}                                 | ${"Failed to make purchase. Please try again later or contact support"}
     `("handles $name error", async ({ error, message }) => {
       (Purchases.purchasePackage as jest.Mock).mockRejectedValue({
         code: error,
