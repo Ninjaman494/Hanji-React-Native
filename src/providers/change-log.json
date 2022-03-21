@@ -1,4 +1,13 @@
 {
+  "37": {
+    "name": "3.0.4",
+    "date": "Mar. 21st 2022",
+    "features": [
+      "Added delete favorite button",
+      "Improved error reporting",
+      "Updated dependencies"
+    ]
+  },
   "36": {
     "name": "3.0.3",
     "date": "Jab. 24th 2022",
