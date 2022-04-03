@@ -2,10 +2,10 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "29.0.3"
+        buildToolsVersion = "31.0.0"
         minSdkVersion = 21
-        compileSdkVersion = 30
-        targetSdkVersion = 30
+        compileSdkVersion = 31
+        targetSdkVersion = 31
     }
     repositories {
         google()
@@ -39,5 +39,6 @@ allprojects {
         mavenCentral()
         jcenter()
         maven { url 'https://www.jitpack.io' }
+        maven { url "https://artifactory.appodeal.com/appodeal" }
     }
 }

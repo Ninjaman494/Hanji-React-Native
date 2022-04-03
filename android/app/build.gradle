@@ -142,6 +142,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 38
         versionName "3.0.5"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -206,6 +207,12 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.appodeal.ads:sdk:2.11.0.+"
+    implementation "com.android.support:multidex:1.0.3"
+
+    // compile "com.google.android.gms:play-services-base:+"
+    // compile 'com.google.android.gms:play-services-location:+'
+    // compile 'com.google.android.gms:play-services-maps:+'
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";

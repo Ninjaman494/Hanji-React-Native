@@ -24,6 +24,7 @@ import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
 import theme from "theme";
+import setupAds from "utils/setupAds";
 
 const client = new ApolloClient({
   link: createUploadLink({ uri: SERVER_URL }),
@@ -40,6 +41,7 @@ export default function Index(): JSX.Element {
     if (Platform.OS === "android" || Platform.OS === "ios") {
       setupSentry();
       setupPurchases();
+      setupAds();
     }
 
     (async () => {

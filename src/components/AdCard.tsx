@@ -1,8 +1,7 @@
-import { AdMobBanner } from "expo-ads-admob";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import React from "react";
 import "react-native";
-import { Native } from "sentry-expo";
+import { AppodealBanner } from "react-native-appodeal";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 export interface AdCardProps extends BaseCardProps {
@@ -12,15 +11,19 @@ export interface AdCardProps extends BaseCardProps {
 const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
   const { isAdFree } = useGetAdFreeStatus();
 
-  return isAdFree ? null : (
-    <BaseCard title="Ad" {...rest}>
-      <AdMobBanner
-        bannerSize="mediumRectangle"
-        adUnitID={adUnitID}
-        onDidFailToReceiveAdWithError={(error) =>
-          Native.captureException(error, { extra: { error } })
-        }
-        style={{ alignSelf: "center" }}
+  return (
+    <BaseCard title="Ad" testID="adCardBase" {...rest}>
+      <AppodealBanner
+        style={{
+          height: 250,
+          width: "100%",
+          backgroundColor: "hsl(0, 0%, 97%)",
+          alignContent: "stretch",
+          alignSelf: "center",
+        }}
+        adSize="mrec"
+        usesSmartSizing // (iOS specific) on Android smart banners are enabled by default.
+        onAdFailedToLoad={(e: any) => console.log("APPODEAL ERROR", e)}
       />
     </BaseCard>
   );

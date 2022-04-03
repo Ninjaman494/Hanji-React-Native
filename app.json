@@ -36,8 +36,7 @@
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
       "sentry-expo",
-      "expo-updates",
-      "expo-ads-admob"
+      "expo-updates"
     ],
     "hooks": {
       "postPublish": [
