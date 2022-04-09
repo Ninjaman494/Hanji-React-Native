@@ -17,13 +17,15 @@ const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
         style={{
           height: 250,
           width: "100%",
-          backgroundColor: "hsl(0, 0%, 97%)",
           alignContent: "stretch",
           alignSelf: "center",
         }}
         adSize="mrec"
         usesSmartSizing // (iOS specific) on Android smart banners are enabled by default.
-        onAdFailedToLoad={(e: any) => console.log("APPODEAL ERROR", e)}
+        onAdLoaded={() => console.log("Banner view did load")}
+        onAdExpired={() => console.log("Banner view expired")}
+        onAdClicked={() => console.log("Banner view is clicked")}
+        onAdFailedToLoad={() => console.log("Banner view is failed to load")}
       />
     </BaseCard>
   );
