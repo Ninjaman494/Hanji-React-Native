@@ -4,6 +4,7 @@ import React from "react";
 import "react-native";
 import { View } from "react-native";
 import { AppodealBanner } from "react-native-appodeal";
+import { Native } from "sentry-expo";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 export interface AdCardProps extends BaseCardProps {
@@ -29,7 +30,9 @@ const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
           onAdLoaded={() => console.log("Banner view did load")}
           onAdExpired={() => console.log("Banner view expired")}
           onAdClicked={() => console.log("Banner view is clicked")}
-          onAdFailedToLoad={() => console.log("Banner view is failed to load")}
+          onAdFailedToLoad={(error: any) =>
+            Native.captureException(error, { extra: { error } })
+          }
         />
       ) : (
         <View style={{ height: 250 }} />
