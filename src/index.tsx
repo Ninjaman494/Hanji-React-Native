@@ -9,6 +9,7 @@ import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
+import AnimationProvider from "providers/AnimationProvider";
 import ChangeLog from "providers/ChangeLog";
 import RatingHandler from "providers/RatingHandler";
 import SnackbarProvider from "providers/SnackbarProvider";
@@ -78,11 +79,13 @@ export default function Index(): JSX.Element {
                 style="light"
               />
               <SnackbarProvider>
-                <RatingHandler numSessions={5} />
-                <ChangeLog currentVersion={nativeBuildVersion as string} />
-                <View style={styles.container}>
-                  <Pages />
-                </View>
+                <AnimationProvider>
+                  <RatingHandler numSessions={5} />
+                  <ChangeLog currentVersion={nativeBuildVersion as string} />
+                  <View style={styles.container}>
+                    <Pages />
+                  </View>
+                </AnimationProvider>
               </SnackbarProvider>
             </View>
           </UserProvider>

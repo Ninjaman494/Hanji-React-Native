@@ -4,7 +4,7 @@ import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
 import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
@@ -18,8 +18,6 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
   navigation,
 }) => {
   const id = route.params.entryId;
-
-  const [showAd, setShowAd] = useState(false);
 
   // Get favorites from storage, use defaults if none are written
   const { favorites } = useGetFavorites();
@@ -80,8 +78,6 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
           scrollY={scrollY}
           containerY={containerY}
           flatlist={false}
-          onAnimationStart={() => setShowAd(false)}
-          onAnimationEnd={() => setShowAd(true)}
         >
           <DefPosCard entry={entry as Entry} style={styles.card} />
           {entry?.note && (
@@ -104,7 +100,7 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
               }
             />
           )}
-          {showAd && <AdCard adUnitID={DISPLAY_AD_ID} style={styles.card} />}
+          <AdCard adUnitID={DISPLAY_AD_ID} style={styles.card} />
           {entry?.examples && (
             <ExamplesCard examples={entry.examples} style={styles.card} />
           )}

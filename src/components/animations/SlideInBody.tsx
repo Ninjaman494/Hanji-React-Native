@@ -1,4 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
+import useGetAnimating from "hooks/useGetAnimating";
 import React, { FC, useCallback } from "react";
 import {
   Animated,
@@ -21,38 +22,31 @@ export type SlideInBodyProps = (SlideInScrollView | SlideInFlatList) & {
   containerY: Animated.Value;
   shouldAnimate: boolean;
   minimumHeight?: number;
-  onAnimationStart?: () => void;
-  onAnimationEnd?: () => void;
 };
 
 export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 
 const SlideInBody: FC<SlideInBodyProps> = (props) => {
-  const {
-    containerY,
-    scrollY,
-    shouldAnimate,
-    minimumHeight = 0,
-    onAnimationStart,
-    onAnimationEnd,
-  } = props;
+  const { containerY, scrollY, shouldAnimate, minimumHeight = 0 } = props;
 
   const containerTranslate = containerY.interpolate({
     inputRange: [0, 100],
     outputRange: [Dimensions.get("window").height, minimumHeight],
   });
 
+  const { startingAnimation, finishedAnimation } = useGetAnimating();
+
   useFocusEffect(
     useCallback(() => {
       if (shouldAnimate) {
-        onAnimationStart?.();
+        startingAnimation();
 
         Animated.timing(containerY, {
           toValue: 100,
           duration: 500,
           easing: easeOutExpo,
           useNativeDriver: false,
-        }).start(onAnimationEnd);
+        }).start(finishedAnimation);
       }
 
       return () => containerY.setValue(0);
