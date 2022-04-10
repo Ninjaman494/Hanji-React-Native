@@ -14,7 +14,7 @@ const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
   const { isAdFree } = useGetAdFreeStatus();
   const { isAnimating } = useGetAnimating();
 
-  return (
+  return isAdFree ? null : (
     <BaseCard title="Ad" testID="adCardBase" {...rest}>
       {!isAnimating ? (
         <AppodealBanner
