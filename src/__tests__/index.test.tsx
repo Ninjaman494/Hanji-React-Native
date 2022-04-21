@@ -2,6 +2,7 @@ jest.mock("sentry-expo");
 jest.mock("setupSentry");
 jest.mock("setupMessaging");
 jest.mock("setupPurchases");
+jest.mock("utils/setupAds");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
 jest.mock("Pages", () => ({
@@ -20,6 +21,7 @@ import { Native } from "sentry-expo";
 import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
+import setupAds from "utils/setupAds";
 
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
@@ -70,5 +72,11 @@ describe("Index", () => {
     render(<Index />);
 
     expect(setupMessaging).toHaveBeenCalled();
+  });
+
+  it("initializes Appodeal", () => {
+    render(<Index />);
+
+    expect(setupAds).toHaveBeenCalled();
   });
 });

@@ -1,4 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
+import useGetAnimating from "hooks/useGetAnimating";
 import React, { FC, useCallback } from "react";
 import {
   Animated,
@@ -33,15 +34,19 @@ const SlideInBody: FC<SlideInBodyProps> = (props) => {
     outputRange: [Dimensions.get("window").height, minimumHeight],
   });
 
+  const { startingAnimation, finishedAnimation } = useGetAnimating();
+
   useFocusEffect(
     useCallback(() => {
       if (shouldAnimate) {
+        startingAnimation();
+
         Animated.timing(containerY, {
           toValue: 100,
           duration: 500,
           easing: easeOutExpo,
           useNativeDriver: false,
-        }).start();
+        }).start(finishedAnimation);
       }
 
       return () => containerY.setValue(0);
