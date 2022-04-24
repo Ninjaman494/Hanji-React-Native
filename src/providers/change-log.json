@@ -1,4 +1,9 @@
 {
+  "40": {
+    "name": "3.0.7",
+    "date": "Apr. 24th 2022",
+    "features": ["Fixed an issue with ads not displaying"]
+  },
   "39": {
     "name": "3.0.6",
     "date": "Apr. 23rd 2022",
