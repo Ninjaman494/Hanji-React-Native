@@ -29,6 +29,7 @@ jobs:
           DISPLAY_AD_ID: ${{ secrets.DISPLAY_AD_ID }}
           CONJ_INFO_AD_ID: ${{ secrets.CONJ_INFO_AD_ID }}
           SEARCH_RESULTS_AD_ID: ${{ secrets.SEARCH_RESULTS_AD_ID }}
+          APPODEAL_KEY: ${{ secrets.APPODEAL_KEY }}
       run:  |
         cd android && 
         chmod +x gradlew && 
