@@ -26,9 +26,28 @@ export type AddFavoriteModalProps = Omit<
   onSubmit: () => void;
 };
 
+/**
+ * Check if the given conjugation requires a formality.
+ * All conjugations require a formality except for
+ * nominal ing, determiner past/preset/future, and
+ * connective if/and/but
+ */
+const requiresFormality = (conjugation: string) =>
+  !conjugation.includes("determiner") &&
+  !conjugation.includes("connective") &&
+  conjugation !== ConjugationType.NOMINAL_ING;
+
 const validationSchema = yup.object().shape({
   name: yup.string().label("Name").required(),
   conjugation: yup.string().label("Conjugation").required(),
+  formality: yup
+    .string()
+    .label("Formality")
+    .when("conjugation", {
+      is: (conjugation: string) =>
+        conjugation && requiresFormality(conjugation),
+      then: yup.string().required(),
+    }),
 });
 
 const conjugationValues = Object.values(ConjugationType).map((val) => ({
@@ -66,7 +85,9 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
         }}
         onSubmit={async ({ conjugation, formality, name, honorific }) => {
           const conjugationName = (
-            formality ? `${conjugation} ${formality}` : conjugation
+            requiresFormality(conjugation)
+              ? `${conjugation} ${formality}`
+              : conjugation
           ) as ConjugationName;
 
           await logEvent({
@@ -85,7 +106,7 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
           onSubmit();
         }}
       >
-        {({ handleSubmit, values }) => (
+        {({ handleSubmit, values, isValid, isSubmitting, dirty }) => (
           <>
             <Dialog.Content>
               <FormikForm>
@@ -96,9 +117,7 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
                   list={conjugationValues}
                 />
                 {!!values.conjugation &&
-                  !values.conjugation.includes("determiner") &&
-                  !values.conjugation.includes("connective") &&
-                  values.conjugation !== ConjugationType.NOMINAL_ING && (
+                  requiresFormality(values.conjugation) && (
                     <FormikSelect
                       name="formality"
                       label="Formality"
@@ -110,7 +129,13 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
             </Dialog.Content>
             <Dialog.Actions>
               <Button onPress={onDismiss}>Cancel</Button>
-              <Button onPress={handleSubmit}>Submit</Button>
+              <Button
+                onPress={handleSubmit}
+                disabled={!isValid || !dirty}
+                loading={isSubmitting}
+              >
+                Submit
+              </Button>
             </Dialog.Actions>
           </>
         )}

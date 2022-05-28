@@ -2,6 +2,7 @@ module.exports = {
   preset: "react-native",
   clearMocks: true,
   setupFiles: ["./src/jestSetup.tsx"],
+  setupFilesAfterEnv: ["./src/jestPostSetup.ts"],
   transformIgnorePatterns: [
     "node_modules/(?!(@react-native|@react-native-firebase|react-native.*|expo.*|@expo.*|@sentry|static-container)/)",
   ],

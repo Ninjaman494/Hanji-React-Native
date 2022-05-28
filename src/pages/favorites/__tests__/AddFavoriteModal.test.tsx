@@ -55,6 +55,9 @@ describe("AddFavoritesModal", () => {
     });
     fireEvent.press(component.getByText("Interrogative Present"));
 
+    // Validate formality required
+    expect(component.getByText("Submit")).toBeDisabled();
+
     // Select formality
     fireEvent.press(component.getByLabelText("Formality"));
     await waitFor(() => {
@@ -65,6 +68,8 @@ describe("AddFavoritesModal", () => {
     // Toggle honorific
     fireEvent(component.getByLabelText("Honorific"), "onValueChange", true);
 
+    // Submit favorite
+    await waitFor(() => expect(component.getByText("Submit")).toBeEnabled());
     fireEvent.press(component.getByText("Submit"));
 
     const favorite = {
@@ -86,90 +91,38 @@ describe("AddFavoritesModal", () => {
     });
   });
 
-  it("hides formality field for determiners", async () => {
-    const component = render(<AddFavoriteModal {...props} />);
+  it.each(["Determiner Future", "Connective If", "Nominal Ing"])(
+    "hides formality field for %s",
+    async (conjugation) => {
+      const component = render(<AddFavoriteModal {...props} />);
 
-    fireEvent.changeText(component.getByLabelText("Name"), "name");
+      fireEvent.changeText(component.getByLabelText("Name"), "name");
 
-    // Select conjugation
-    fireEvent.press(component.getByLabelText("Conjugation"));
-    await waitFor(() => {
-      expect(component.getByText("Determiner Future")).toBeDefined();
-    });
-    fireEvent.press(component.getByText("Determiner Future"));
+      // Select conjugation
+      fireEvent.press(component.getByLabelText("Conjugation"));
+      await waitFor(() => {
+        expect(component.getByText(conjugation)).toBeDefined();
+      });
+      fireEvent.press(component.getByText(conjugation));
 
-    expect(component.queryByLabelText("Formality")).toBeNull();
+      // Validate Formality field is hidden
+      expect(component.queryByLabelText("Formality")).toBeNull();
 
-    fireEvent.press(component.getByText("Submit"));
+      // Submit without required formality
+      await waitFor(() => expect(component.getByText("Submit")).toBeEnabled());
+      fireEvent.press(component.getByText("Submit"));
 
-    await waitFor(() => {
-      expect(props.onSubmit).toHaveBeenCalled();
-      expect(setFavorites).toHaveBeenCalledWith([
-        ...favorites,
-        {
-          name: "name",
-          conjugationName: `${ConjugationType.DETERMINER_FUTURE}`,
-          honorific: false,
-        },
-      ]);
-    });
-  });
-
-  it("hides formality field for connectives", async () => {
-    const component = render(<AddFavoriteModal {...props} />);
-
-    fireEvent.changeText(component.getByLabelText("Name"), "name");
-
-    // Select conjugation
-    fireEvent.press(component.getByLabelText("Conjugation"));
-    await waitFor(() => {
-      expect(component.getByText("Connective If")).toBeDefined();
-    });
-    fireEvent.press(component.getByText("Connective If"));
-
-    expect(component.queryByLabelText("Formality")).toBeNull();
-
-    fireEvent.press(component.getByText("Submit"));
-
-    await waitFor(() => {
-      expect(props.onSubmit).toHaveBeenCalled();
-      expect(setFavorites).toHaveBeenCalledWith([
-        ...favorites,
-        {
-          name: "name",
-          conjugationName: `${ConjugationType.CONNECTIVE_IF}`,
-          honorific: false,
-        },
-      ]);
-    });
-  });
-
-  it("hides formality field for nominal ing", async () => {
-    const component = render(<AddFavoriteModal {...props} />);
-
-    fireEvent.changeText(component.getByLabelText("Name"), "name");
-
-    // Select conjugation
-    fireEvent.press(component.getByLabelText("Conjugation"));
-    await waitFor(() => {
-      expect(component.getByText("Nominal Ing")).toBeDefined();
-    });
-    fireEvent.press(component.getByText("Nominal Ing"));
-
-    expect(component.queryByLabelText("Formality")).toBeNull();
-
-    fireEvent.press(component.getByText("Submit"));
-
-    await waitFor(() => {
-      expect(props.onSubmit).toHaveBeenCalled();
-      expect(setFavorites).toHaveBeenCalledWith([
-        ...favorites,
-        {
-          name: "name",
-          conjugationName: ConjugationType.NOMINAL_ING,
-          honorific: false,
-        },
-      ]);
-    });
-  });
+      await waitFor(() => {
+        expect(props.onSubmit).toHaveBeenCalled();
+        expect(setFavorites).toHaveBeenCalledWith([
+          ...favorites,
+          {
+            name: "name",
+            conjugationName: conjugation.toLowerCase(),
+            honorific: false,
+          },
+        ]);
+      });
+    }
+  );
 });
