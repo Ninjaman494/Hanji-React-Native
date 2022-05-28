@@ -55,6 +55,9 @@ describe("AddFavoritesModal", () => {
     });
     fireEvent.press(component.getByText("Interrogative Present"));
 
+    // Validate formality required
+    expect(component.getByText("Submit")).toBeDisabled();
+
     // Select formality
     fireEvent.press(component.getByLabelText("Formality"));
     await waitFor(() => {
@@ -65,6 +68,8 @@ describe("AddFavoritesModal", () => {
     // Toggle honorific
     fireEvent(component.getByLabelText("Honorific"), "onValueChange", true);
 
+    // Submit favorite
+    await waitFor(() => expect(component.getByText("Submit")).toBeEnabled());
     fireEvent.press(component.getByText("Submit"));
 
     const favorite = {
@@ -100,6 +105,8 @@ describe("AddFavoritesModal", () => {
 
     expect(component.queryByLabelText("Formality")).toBeNull();
 
+    // Submit without required formality
+    await waitFor(() => expect(component.getByText("Submit")).toBeEnabled());
     fireEvent.press(component.getByText("Submit"));
 
     await waitFor(() => {
@@ -129,6 +136,8 @@ describe("AddFavoritesModal", () => {
 
     expect(component.queryByLabelText("Formality")).toBeNull();
 
+    // Submit without requiring formality
+    await waitFor(() => expect(component.getByText("Submit")).toBeEnabled());
     fireEvent.press(component.getByText("Submit"));
 
     await waitFor(() => {
@@ -158,6 +167,8 @@ describe("AddFavoritesModal", () => {
 
     expect(component.queryByLabelText("Formality")).toBeNull();
 
+    // Submit without requiring formality
+    await waitFor(() => expect(component.getByText("Submit")).toBeEnabled());
     fireEvent.press(component.getByText("Submit"));
 
     await waitFor(() => {
