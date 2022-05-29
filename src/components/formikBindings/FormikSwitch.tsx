@@ -1,12 +1,11 @@
-import React from "react";
-import { FC } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { forwardRef } from "react";
+import { StyleSheet, Switch as ReactNativeSwitch, View } from "react-native";
 import {
   withFormikControl,
   withFormikControlProps,
   withNextInputAutoFocusInput,
 } from "react-native-formik";
-import { Text, Switch } from "react-native-paper";
+import { Switch, Text } from "react-native-paper";
 import { compose } from "recompose";
 
 export type FormikSwitchProps = {
@@ -14,14 +13,12 @@ export type FormikSwitchProps = {
   label: string;
 };
 
-const FormikSwitch: FC<FormikSwitchProps & withFormikControlProps> = ({
-  value,
-  setFieldTouched,
-  setFieldValue,
-  ...rest
-}) => {
+const FormikSwitch = forwardRef<
+  ReactNativeSwitch,
+  FormikSwitchProps & withFormikControlProps
+>(({ value, setFieldTouched, setFieldValue, ...rest }, ref) => {
   return (
-    <View style={styles.root}>
+    <View style={styles.root} ref={ref}>
       <Text style={styles.text}>{rest.label}</Text>
       <Switch
         accessibilityLabel={rest.label}
@@ -34,7 +31,7 @@ const FormikSwitch: FC<FormikSwitchProps & withFormikControlProps> = ({
       />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   root: {
