@@ -36,10 +36,12 @@
         "react-native-unimodules",
         "react-native-url-polyfill",
         "react-native-web",
+        "react-test-renderer",
         "@types/react",
         "@types/react-dom",
         "@types/react-native",
-        "@types/react-native-dotenv"
+        "@types/react-native-dotenv",
+        "@types/react-test-renderer"
       ]
     },
     {
