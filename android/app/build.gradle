@@ -140,8 +140,8 @@ android {
         applicationId 'com.a494studios.koreanconjugator'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 40
-        versionName "3.0.7"
+        versionCode 41
+        versionName "3.0.8"
         multiDexEnabled true
     }
     splits {
