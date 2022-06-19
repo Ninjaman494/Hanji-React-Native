@@ -13,6 +13,7 @@ export type StackParamList = {
   BugReport: { screenshot: string };
   Conjugator: { term: string };
   Suggestion: { entryId: string };
+  Survey: undefined;
 };
 
 export type NavigationProps = StackNavigationProp<StackParamList>;
