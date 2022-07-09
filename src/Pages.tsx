@@ -9,10 +9,10 @@ import ConjugationsPage from "pages/conjugations/ConjugationsPage";
 import ConjugatorPage from "pages/conjugator/ConjugatorPage";
 import DisplayPage from "pages/display/DisplayPage";
 import FavoritesPage from "pages/favorites/FavoritesPage";
-import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
+import SurveyPage from "pages/sruvey/SurveyPage";
 import SuggestionPage from "pages/suggestions/SuggestionPage";
 import React from "react";
 import "react-native";
@@ -51,7 +51,7 @@ const Pages = (): JSX.Element => {
           },
         }}
       >
-        <Screen name="Main" component={MainPage} />
+        <Screen name="Main" component={SurveyPage} />
         <Screen name="Search" component={SearchPage} />
         <Screen
           name="Display"

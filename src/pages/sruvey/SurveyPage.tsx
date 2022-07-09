@@ -1,81 +1,81 @@
-import { AppBar, FormikForm, FormikTextField } from "components";
-import FormikCheckboxGroup from "components/formikBindings/FormikCheckboxGroup";
-import { Formik } from "formik";
-import React, { FC } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { Button, useTheme } from "react-native-paper";
+import { AppBar } from "components";
+import React, { FC, useState } from "react";
+import { ScrollView } from "react-native";
 import { ScreenProps } from "typings/navigation";
+import SurveySlide from "./slides/SurveySlide";
+import { Slide } from "./slides/types";
 
-interface SurveyForm {
-  featureChoices: Set<string>;
-  comments?: string;
-}
+const slides: Slide[] = [
+  {
+    type: "intro",
+    header: "Hello World!",
+    description: "Thanks for filling out our survey",
+  },
+  {
+    type: "radio",
+    question: "What's your Korean language skill level?",
+    required: true,
+    options: [
+      {
+        label: "Beginner",
+        value: "beginner",
+      },
+      {
+        label: "Intermediate",
+        value: "intermediate",
+      },
+      {
+        label: "Expert",
+        value: "expert",
+      },
+      {
+        label: "Native Speaker",
+        value: "native",
+      },
+    ],
+  },
+  {
+    type: "radio",
+    question: "What feature would you most like to see?",
+    required: true,
+    options: [
+      { value: "offline", label: "Offline dictionary lookup" },
+      {
+        value: "flashcards",
+        label: "Flashcards with conjugations",
+      },
+      {
+        value: "stories",
+        label: "Korean stories with English translations",
+      },
+      {
+        value: "saved",
+        label: "Saved words with conjugations for offline use",
+      },
+      {
+        value: "explanations",
+        label: "Explanations of how each conjugation is used",
+      },
+    ],
+  },
+  {
+    type: "input",
+    question: "Are there any other features you'd like to see in Hanji?",
+  },
+];
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
-  const { padding, colors } = useTheme();
-
-  const styles = StyleSheet.create({
-    form: {
-      paddingHorizontal: padding?.horizontal,
-      paddingVertical: padding?.vertical,
-    },
-    button: {
-      marginHorizontal: padding?.horizontal,
-      marginTop: 32,
-      marginBottom: 16,
-    },
-  });
+  const [sIndex, setIndex] = useState(0);
 
   return (
     <>
       <AppBar title="Survey" />
       <ScrollView>
-        <Formik<SurveyForm>
-          initialValues={{ featureChoices: new Set(), comments: undefined }}
-          onSubmit={(values) => console.log("SUBMIT", values)}
-        >
-          {({ handleSubmit, isSubmitting, isValid, dirty }) => (
-            <>
-              <FormikForm style={styles.form}>
-                <FormikCheckboxGroup
-                  name="featureChoices"
-                  options={[
-                    { value: "offline", label: "Offline dictionary lookup" },
-                    {
-                      value: "flashcards",
-                      label: "Flashcards with conjugations",
-                    },
-                    {
-                      value: "stories",
-                      label: "Korean stories with English translations",
-                    },
-                    {
-                      value: "saved",
-                      label: "Saved words with conjugations for offline use",
-                    },
-                    {
-                      value: "explanations",
-                      label: "Explanations of how each conjugation is used",
-                    },
-                  ]}
-                />
-                <FormikTextField
-                  name="comments"
-                  label="Anything else?"
-                  multiline
-                />
-              </FormikForm>
-              <Button
-                onPress={handleSubmit}
-                mode="contained"
-                color={colors.accent}
-                style={styles.button}
-              >
-                Submit
-              </Button>
-            </>
-          )}
-        </Formik>
+        <SurveySlide
+          slide={slides[sIndex]}
+          onBack={() => sIndex > 0 && setIndex(sIndex - 1)}
+          onSubmit={() => sIndex < slides.length && setIndex(sIndex + 1)}
+        />
       </ScrollView>
     </>
   );
