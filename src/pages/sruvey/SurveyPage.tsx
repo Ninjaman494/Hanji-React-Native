@@ -1,7 +1,7 @@
 import { AppBar, FormikForm } from "components";
 import { Formik } from "formik";
 import React, { FC, useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
 import SurveySlide from "./slides/SurveySlide";
@@ -73,31 +73,21 @@ const slides: Slide[] = [
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const [sIndex, setIndex] = useState(0);
   const isLastSlide = sIndex === slides.length - 1;
+  const slide = slides[sIndex];
 
   return (
     <View style={{ flex: 1 }}>
       <AppBar title="Survey" />
       <Formik
-        initialValues={{}}
-        onSubmit={(values) => {
-          if (!isLastSlide) {
-            setIndex(sIndex + 1);
-          } else {
-            console.log(values);
-          }
-        }}
+        initialValues={{} as Record<string, any>}
+        onSubmit={(values) =>
+          isLastSlide ? console.log(values) : setIndex(sIndex + 1)
+        }
       >
-        {({ dirty, isValid, handleSubmit }) => (
+        {({ values, handleSubmit }) => (
           <FormikForm style={{ flex: 1 }}>
             <SurveySlide slide={slides[sIndex]} />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "flex-start",
-              }}
-            >
+            <View style={styles.buttonGroup}>
               <Button
                 mode="outlined"
                 style={{ marginRight: 16 }}
@@ -108,7 +98,9 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
               <Button
                 mode="contained"
                 disabled={
-                  (!dirty || !isValid) && slides[sIndex].type !== "intro"
+                  slide.type !== "intro" &&
+                  slide.required &&
+                  !values[slide.name]
                 }
                 onPress={handleSubmit}
               >
@@ -121,5 +113,14 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonGroup: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+});
 
 export default SurveyPage;
