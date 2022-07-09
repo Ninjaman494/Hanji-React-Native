@@ -1,6 +1,8 @@
-import { AppBar } from "components";
+import { AppBar, FormikForm } from "components";
+import { Formik } from "formik";
 import React, { FC, useState } from "react";
 import { ScrollView } from "react-native";
+import { Button } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
 import SurveySlide from "./slides/SurveySlide";
 import { Slide } from "./slides/types";
@@ -13,6 +15,7 @@ const slides: Slide[] = [
   },
   {
     type: "radio",
+    name: "skillLevel",
     question: "What's your Korean language skill level?",
     required: true,
     options: [
@@ -36,6 +39,7 @@ const slides: Slide[] = [
   },
   {
     type: "radio",
+    name: "requestedFeature",
     question: "What feature would you most like to see?",
     required: true,
     options: [
@@ -60,6 +64,7 @@ const slides: Slide[] = [
   },
   {
     type: "input",
+    name: "otherFeedback",
     question: "Are there any other features you'd like to see in Hanji?",
   },
 ];
@@ -71,11 +76,33 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
     <>
       <AppBar title="Survey" />
       <ScrollView>
-        <SurveySlide
-          slide={slides[sIndex]}
-          onBack={() => sIndex > 0 && setIndex(sIndex - 1)}
-          onSubmit={() => sIndex < slides.length && setIndex(sIndex + 1)}
-        />
+        <Formik
+          initialValues={{}}
+          onSubmit={(values) => {
+            if (sIndex < slides.length - 1) {
+              setIndex(sIndex + 1);
+            } else {
+              console.log(values);
+            }
+          }}
+        >
+          {({ dirty, isValid, handleSubmit }) => (
+            <FormikForm>
+              <SurveySlide slide={slides[sIndex]} />
+              <Button onPress={() => sIndex > 0 && setIndex(sIndex - 1)}>
+                Back
+              </Button>
+              <Button
+                disabled={
+                  (!dirty || !isValid) && slides[sIndex].type !== "intro"
+                }
+                onPress={handleSubmit}
+              >
+                Submit
+              </Button>
+            </FormikForm>
+          )}
+        </Formik>
       </ScrollView>
     </>
   );

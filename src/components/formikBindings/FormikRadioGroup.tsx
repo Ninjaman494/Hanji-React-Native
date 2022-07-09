@@ -6,7 +6,7 @@ import { compose } from "recompose";
 
 export type FormikRadioGroup = ViewProps & {
   name: string;
-  label: string;
+  label?: string;
   options: {
     label: string;
     value: string;
@@ -43,7 +43,7 @@ const FormikRadioGroup: FC<FormikRadioGroup & withFormikControlProps> = ({
 
   return (
     <View style={[styles.root, rest.style]}>
-      <Text style={styles.label}>{rest.label}</Text>
+      {rest.label && <Text style={styles.label}>{rest.label}</Text>}
       <RadioButton.Group
         onValueChange={(newValue) => {
           setFieldValue(newValue);
