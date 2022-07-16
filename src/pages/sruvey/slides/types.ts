@@ -1,3 +1,9 @@
+export interface RadioOption {
+  title: string;
+  description: string;
+  value: string;
+}
+
 interface TextInputSlide {
   type: "input";
   name: string;
@@ -5,19 +11,11 @@ interface TextInputSlide {
   required?: boolean;
 }
 
-interface CheckBoxSlide {
-  type: "checkbox";
-  name: string;
-  question: string;
-  options: { label: string; value: string }[];
-  required?: boolean;
-}
-
 interface RadioBtnSlide {
   type: "radio";
   name: string;
   question: string;
-  options: { label: string; value: string }[];
+  options: RadioOption[];
   required?: boolean;
 }
 
@@ -27,4 +25,4 @@ interface IntroSlide {
   description: string;
 }
 
-export type Slide = TextInputSlide | CheckBoxSlide | RadioBtnSlide | IntroSlide;
+export type Slide = TextInputSlide | RadioBtnSlide | IntroSlide;

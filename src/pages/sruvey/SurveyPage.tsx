@@ -1,8 +1,6 @@
-import { AppBar, FormikForm } from "components";
-import { Formik } from "formik";
+import { AppBar } from "components";
 import React, { FC, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
 import SurveySlide from "./slides/SurveySlide";
 import { Slide } from "./slides/types";
@@ -21,19 +19,24 @@ const slides: Slide[] = [
     required: true,
     options: [
       {
-        label: "Beginner",
+        title: "Beginner",
+        description: "~0-1 years",
         value: "beginner",
       },
       {
-        label: "Intermediate",
+        title: "Intermediate",
+        description: "~0-1 years",
         value: "intermediate",
       },
       {
-        label: "Expert",
+        title: "Expert",
+        description: "~0-1 years",
+
         value: "expert",
       },
       {
-        label: "Native Speaker",
+        title: "Native Speaker",
+        description: "~0-1 years",
         value: "native",
       },
     ],
@@ -44,22 +47,28 @@ const slides: Slide[] = [
     question: "What feature would you most like to see?",
     required: true,
     options: [
-      { value: "offline", label: "Offline dictionary lookup" },
       {
+        title: "Flashcards",
+        description:
+          "Create flashcards of words and study them in different conjugations",
         value: "flashcards",
-        label: "Flashcards with conjugations",
       },
       {
+        title: "Stories",
+        description:
+          "Korean stories with English translations for reading practice",
         value: "stories",
-        label: "Korean stories with English translations",
       },
       {
+        title: "Saved Words",
+        description: "Save words and their conjugations for offline use",
         value: "saved",
-        label: "Saved words with conjugations for offline use",
       },
       {
+        title: "Explanations",
+        description:
+          "Detailed explanations of each conjugation and how they should be used",
         value: "explanations",
-        label: "Explanations of how each conjugation is used",
       },
     ],
   },
@@ -75,41 +84,20 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const isLastSlide = sIndex === slides.length - 1;
   const slide = slides[sIndex];
 
+  const [data, setData] = useState({});
+  console.log(data);
+
   return (
     <View style={{ flex: 1 }}>
       <AppBar title="Survey" />
-      <Formik
-        initialValues={{} as Record<string, any>}
-        onSubmit={(values) =>
-          isLastSlide ? console.log(values) : setIndex(sIndex + 1)
-        }
-      >
-        {({ values, handleSubmit }) => (
-          <FormikForm style={{ flex: 1 }}>
-            <SurveySlide slide={slides[sIndex]} />
-            <View style={styles.buttonGroup}>
-              <Button
-                mode="outlined"
-                style={{ marginRight: 16 }}
-                onPress={() => sIndex > 0 && setIndex(sIndex - 1)}
-              >
-                Back
-              </Button>
-              <Button
-                mode="contained"
-                disabled={
-                  slide.type !== "intro" &&
-                  slide.required &&
-                  !values[slide.name]
-                }
-                onPress={handleSubmit}
-              >
-                {isLastSlide ? "Submit" : "Next"}
-              </Button>
-            </View>
-          </FormikForm>
-        )}
-      </Formik>
+      <SurveySlide
+        slide={slide}
+        btnText={isLastSlide ? "Submit" : "Next"}
+        onPress={(val) => {
+          slide.type !== "intro" && setData({ ...data, [slide.name]: val });
+          !isLastSlide && setIndex(sIndex + 1);
+        }}
+      />
     </View>
   );
 };
