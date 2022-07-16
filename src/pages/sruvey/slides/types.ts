@@ -8,7 +8,6 @@ export interface TextInputSlide {
   type: "input";
   name: string;
   question: string;
-  required?: boolean;
 }
 
 export interface RadioBtnSlide {
@@ -16,7 +15,6 @@ export interface RadioBtnSlide {
   name: string;
   question: string;
   options: RadioOption[];
-  required?: boolean;
 }
 
 export interface IntroSlide {

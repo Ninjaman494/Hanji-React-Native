@@ -2,10 +2,7 @@ import { AppBar } from "components";
 import React, { FC, useState } from "react";
 import { View } from "react-native";
 import { ScreenProps } from "typings/navigation";
-import InputSlide from "./slides/InputSlide";
-import IntroSlide from "./slides/IntroSlide";
-import RadioSlide from "./slides/RadioSlide";
-import { Slide } from "./slides/types";
+import { InputSlide, IntroSlide, RadioSlide, Slide } from "./slides";
 
 const slides: Slide[] = [
   {
@@ -18,7 +15,6 @@ const slides: Slide[] = [
     type: "radio",
     name: "skillLevel",
     question: "What's your Korean language skill level?",
-    required: true,
     options: [
       {
         title: "Beginner",
@@ -47,7 +43,6 @@ const slides: Slide[] = [
     type: "radio",
     name: "requestedFeature",
     question: "What feature would you most like to see?",
-    required: true,
     options: [
       {
         title: "Flashcards",
@@ -82,16 +77,13 @@ const slides: Slide[] = [
 ];
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
-  const [sIndex, setIndex] = useState(0);
-  const isLastSlide = sIndex === slides.length - 1;
-  const slide = slides[sIndex];
-
+  const [index, setIndex] = useState(0);
   const [data, setData] = useState({});
-  console.log(data);
 
-  const incrementSlide = () => {
-    !isLastSlide && setIndex(sIndex + 1);
-  };
+  const incrementSlide = () => index < slides.length - 1 && setIndex(index + 1);
+
+  const slide = slides[index];
+  console.log(data);
 
   return (
     <View style={{ flex: 1 }}>
@@ -101,7 +93,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
           <InputSlide
             slide={slide}
             onPress={(val) => {
-              setData({ ...data, [slide.name]: val });
+              val && setData({ ...data, [slide.name]: val });
               incrementSlide();
             }}
           />
