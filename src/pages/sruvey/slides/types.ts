@@ -4,14 +4,14 @@ export interface RadioOption {
   value: string;
 }
 
-interface TextInputSlide {
+export interface TextInputSlide {
   type: "input";
   name: string;
   question: string;
   required?: boolean;
 }
 
-interface RadioBtnSlide {
+export interface RadioBtnSlide {
   type: "radio";
   name: string;
   question: string;
@@ -19,7 +19,7 @@ interface RadioBtnSlide {
   required?: boolean;
 }
 
-interface IntroSlide {
+export interface IntroSlide {
   type: "intro";
   header: string;
   description: string;

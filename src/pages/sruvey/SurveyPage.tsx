@@ -1,8 +1,10 @@
 import { AppBar } from "components";
 import React, { FC, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { ScreenProps } from "typings/navigation";
-import SurveySlide from "./slides/SurveySlide";
+import InputSlide from "./slides/InputSlide";
+import IntroSlide from "./slides/IntroSlide";
+import RadioSlide from "./slides/RadioSlide";
 import { Slide } from "./slides/types";
 
 const slides: Slide[] = [
@@ -87,28 +89,38 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const [data, setData] = useState({});
   console.log(data);
 
+  const incrementSlide = () => {
+    !isLastSlide && setIndex(sIndex + 1);
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <AppBar title="Survey" />
-      <SurveySlide
-        slide={slide}
-        btnText={isLastSlide ? "Submit" : "Next"}
-        onPress={(val) => {
-          slide.type !== "intro" && setData({ ...data, [slide.name]: val });
-          !isLastSlide && setIndex(sIndex + 1);
-        }}
-      />
+      <View style={{ flex: 1, margin: 32 }}>
+        {slide.type === "input" && (
+          <InputSlide
+            slide={slide}
+            onPress={(val) => {
+              setData({ ...data, [slide.name]: val });
+              incrementSlide();
+            }}
+          />
+        )}
+        {slide.type == "radio" && (
+          <RadioSlide
+            slide={slide}
+            onPress={(val) => {
+              setData({ ...data, [slide.name]: val });
+              incrementSlide();
+            }}
+          />
+        )}
+        {slide.type === "intro" && (
+          <IntroSlide slide={slide} onPress={incrementSlide} />
+        )}
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonGroup: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
-});
 
 export default SurveyPage;
