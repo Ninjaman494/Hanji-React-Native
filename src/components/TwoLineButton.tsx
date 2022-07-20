@@ -38,7 +38,7 @@ const TwoLineButton: FC<TwoLineButtonProps> = ({
       <TouchableRipple
         borderless
         onPress={onPress}
-        rippleColor="rgba(0, 0, 0, .32)"
+        rippleColor="rgba(0, 0, 0, .12)"
         style={{ padding: 16, borderRadius: 10 }}
       >
         <>

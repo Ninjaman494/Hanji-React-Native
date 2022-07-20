@@ -92,6 +92,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
         {slide.type === "input" && (
           <InputSlide
             slide={slide}
+            btnText={index < slides.length - 1 ? "Next" : "Submit"}
             onPress={(val) => {
               val && setData({ ...data, [slide.name]: val });
               incrementSlide();
