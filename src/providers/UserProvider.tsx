@@ -8,20 +8,29 @@ import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 interface UserProviderValue {
   isAdFree: boolean;
+  sessionCount: number;
 }
 
 const RESTORED_KEY = "RESTORED_PURCHASES";
+const SESSIONS_KEY = "NUM_SESSIONS";
 
 export const UserContext = createContext<UserProviderValue>({
   isAdFree: false,
+  sessionCount: -1,
 });
 
 const UserProvider: FC = ({ children }) => {
   const [isAdFree, setAdFree] = useState(false);
+  const [numSessions, setNumSessions] = useState(-1);
 
   useEffect(() => {
     (async () => {
       try {
+        // Get and increment sessions count
+        const sessionString = await AsyncStorage.getItem(SESSIONS_KEY);
+        setNumSessions(sessionString ? parseInt(sessionString) + 1 : 1);
+
+        // Get ad free status
         const restoredPurchases = await AsyncStorage.getItem(RESTORED_KEY);
 
         let info: PurchaserInfo;
@@ -40,10 +49,12 @@ const UserProvider: FC = ({ children }) => {
         setAdFree(false);
       }
     })();
-  }, [setAdFree]);
+  }, [setAdFree, setNumSessions]);
 
   return (
-    <UserContext.Provider value={{ isAdFree }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ isAdFree, sessionCount: numSessions }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 
