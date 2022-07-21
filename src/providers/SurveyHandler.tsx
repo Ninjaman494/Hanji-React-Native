@@ -3,34 +3,47 @@ import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import React, { ComponentProps, FC, useEffect, useState } from "react";
 import "react-native";
 import { Button, Dialog, Portal, Text } from "react-native-paper";
-import { SurveyState, SURVEYS_KEY } from "./UserProvider";
 
 export interface SurveyHandlerProps
   extends Omit<ComponentProps<typeof Dialog>, "children" | "visible"> {
   numSessions: number;
 }
 
-const { NOT_ASKED, ASK_AGAIN, DONT_ASK_AGAIN } = SurveyState;
+const FILLED_OUT_KEY = "FILLED_OUT";
+const LAST_ASKED_KEY = "LAST_ASKED";
 
 const SurveyHandler: FC<SurveyHandlerProps> = ({ numSessions, ...rest }) => {
-  const { sessionCount, surveyState } = useGetAdFreeStatus();
+  const { sessionCount } = useGetAdFreeStatus();
   const [visible, setVisible] = useState(false);
 
-  const notAsked = surveyState === NOT_ASKED;
+  useEffect(() => {
+    (async () => {
+      // Wait till sessionCount is fetched or we have enough sessions
+      if (sessionCount < numSessions) return;
 
-  useEffect(
-    () =>
-      setVisible(sessionCount >= numSessions && surveyState !== DONT_ASK_AGAIN),
-    [sessionCount, surveyState, setVisible]
-  );
+      const shownSurveyStr = await AsyncStorage.getItem(FILLED_OUT_KEY);
+      const shownSurvey = shownSurveyStr === "true";
 
-  const updateSurveyState = async (state: SurveyState) => {
-    await AsyncStorage.setItem(SURVEYS_KEY, state);
+      const lastAskedStr = await AsyncStorage.getItem(LAST_ASKED_KEY);
+      const lastAsked = lastAskedStr ? new Date(parseInt(lastAskedStr)) : null;
+
+      // 432000000 == 5 days in milliseconds
+      setVisible(
+        !shownSurvey &&
+          (!lastAsked || Date.now() - lastAsked.getTime() >= 432000000)
+      );
+    })();
+  }, [sessionCount, setVisible]);
+
+  const updateSurveyState = async (isFilled: boolean) => {
+    await AsyncStorage.setItem(FILLED_OUT_KEY, isFilled ? "true" : "false");
     setVisible(false);
   };
 
-  const onDismiss = async () =>
-    updateSurveyState(notAsked ? ASK_AGAIN : DONT_ASK_AGAIN);
+  const onDismiss = async () => {
+    updateSurveyState(false);
+    await AsyncStorage.setItem(LAST_ASKED_KEY, Date.now().toString());
+  };
 
   return (
     <Portal>
@@ -40,10 +53,8 @@ const SurveyHandler: FC<SurveyHandlerProps> = ({ numSessions, ...rest }) => {
           <Text>Would you fill out our survey please?</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={() => updateSurveyState(DONT_ASK_AGAIN)}>Ok</Button>
-          <Button onPress={onDismiss}>
-            {notAsked ? "Ask again later" : "Don't ask again"}
-          </Button>
+          <Button onPress={() => updateSurveyState(true)}>Ok</Button>
+          <Button onPress={onDismiss}>Ask again later</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
