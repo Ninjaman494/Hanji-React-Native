@@ -4,22 +4,29 @@ import React, { ComponentProps, FC, useEffect, useState } from "react";
 import "react-native";
 import { Button, Dialog, Portal, Text } from "react-native-paper";
 
-export interface SurveyHandlerProps
-  extends Omit<ComponentProps<typeof Dialog>, "children" | "visible"> {
-  numSessions: number;
-}
+export type SurveyHandlerProps = Omit<
+  ComponentProps<typeof Dialog>,
+  "children" | "visible"
+>;
 
+const NUM_SESSIONS = 5;
 const FILLED_OUT_KEY = "FILLED_OUT";
 const LAST_ASKED_KEY = "LAST_ASKED";
 
-const SurveyHandler: FC<SurveyHandlerProps> = ({ numSessions, ...rest }) => {
+/**
+ * Ask the user to fill out a survey after NUM_SESSIONS. If
+ * they say yes, don't ask again. If they say no, wait 5
+ * days and ask again. Keep asking until they say yes
+ *
+ */
+const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
   const { sessionCount } = useGetAdFreeStatus();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
       // Wait till sessionCount is fetched or we have enough sessions
-      if (sessionCount < numSessions) return;
+      if (sessionCount < NUM_SESSIONS) return;
 
       const shownSurveyStr = await AsyncStorage.getItem(FILLED_OUT_KEY);
       const shownSurvey = shownSurveyStr === "true";
@@ -47,7 +54,7 @@ const SurveyHandler: FC<SurveyHandlerProps> = ({ numSessions, ...rest }) => {
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={onDismiss} {...rest}>
+      <Dialog visible={visible} onDismiss={onDismiss} {...props}>
         <Dialog.Title>Survey Request</Dialog.Title>
         <Dialog.Content>
           <Text>Would you fill out our survey please?</Text>

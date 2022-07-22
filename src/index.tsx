@@ -84,7 +84,7 @@ export default function Index(): JSX.Element {
                   <RatingHandler numSessions={5} />
                   <ChangeLog currentVersion={nativeBuildVersion as string} />
                   <View style={styles.container}>
-                    <SurveyHandler numSessions={5} />
+                    <SurveyHandler />
                     <Pages />
                   </View>
                 </AnimationProvider>
