@@ -70,6 +70,36 @@ const slides: Slide[] = [
     ],
   },
   {
+    type: "radio",
+    name: "secondFeature",
+    question: "What other feature would you most like to see?",
+    options: [
+      {
+        title: "Flashcards",
+        description:
+          "Create flashcards of words and study them in different conjugations",
+        value: "flashcards",
+      },
+      {
+        title: "Stories",
+        description:
+          "Korean stories with English translations for reading practice",
+        value: "stories",
+      },
+      {
+        title: "Saved Words",
+        description: "Save words and their conjugations for offline use",
+        value: "saved",
+      },
+      {
+        title: "Explanations",
+        description:
+          "Detailed explanations of each conjugation and how they should be used",
+        value: "explanations",
+      },
+    ],
+  },
+  {
     type: "input",
     name: "otherFeedback",
     question: "Are there any other features you'd like to see in Hanji?",
@@ -78,12 +108,18 @@ const slides: Slide[] = [
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const [index, setIndex] = useState(0);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<Record<string, string>>({});
 
   const incrementSlide = () => index < slides.length - 1 && setIndex(index + 1);
 
   const slide = slides[index];
-  console.log(data);
+
+  // Options for second request feature are dynamic
+  if (index === 3 && slide.type === "radio") {
+    slide.options = slide.options.filter(
+      (o) => o.value !== data["requestedFeature"]
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
