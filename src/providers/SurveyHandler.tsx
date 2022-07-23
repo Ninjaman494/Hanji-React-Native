@@ -1,8 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import React, { ComponentProps, FC, useEffect, useState } from "react";
 import "react-native";
 import { Button, Dialog, Portal, Text } from "react-native-paper";
+import { NavigationProps } from "typings/navigation";
 
 export type SurveyHandlerProps = Omit<
   ComponentProps<typeof Dialog>,
@@ -10,6 +12,7 @@ export type SurveyHandlerProps = Omit<
 >;
 
 const NUM_SESSIONS = 5;
+const LAST_ASKED_TIME = 432000000; // 5 days in milliseconds
 const FILLED_OUT_KEY = "FILLED_OUT";
 const LAST_ASKED_KEY = "LAST_ASKED";
 
@@ -20,6 +23,8 @@ const LAST_ASKED_KEY = "LAST_ASKED";
  *
  */
 const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
+  const navigation = useNavigation<NavigationProps>();
+
   const { sessionCount } = useGetAdFreeStatus();
   const [visible, setVisible] = useState(false);
 
@@ -34,10 +39,9 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
       const lastAskedStr = await AsyncStorage.getItem(LAST_ASKED_KEY);
       const lastAsked = lastAskedStr ? new Date(parseInt(lastAskedStr)) : null;
 
-      // 432000000 == 5 days in milliseconds
       setVisible(
         !shownSurvey &&
-          (!lastAsked || Date.now() - lastAsked.getTime() >= 432000000)
+          (!lastAsked || Date.now() - lastAsked.getTime() >= LAST_ASKED_TIME)
       );
     })();
   }, [sessionCount, setVisible]);
@@ -60,7 +64,15 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
           <Text>Would you fill out our survey please?</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={() => updateSurveyState(true)}>Ok</Button>
+          <Button
+            onPress={() => {
+              updateSurveyState(true);
+              // push won't work b/c we're outside StackNavigator
+              navigation.navigate("Survey");
+            }}
+          >
+            Ok
+          </Button>
           <Button onPress={onDismiss}>Ask again later</Button>
         </Dialog.Actions>
       </Dialog>

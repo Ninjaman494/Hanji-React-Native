@@ -2,6 +2,10 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import analytics from "@react-native-firebase/analytics";
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from "@react-navigation/native";
 import { createUploadLink } from "apollo-upload-client";
 import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
@@ -69,27 +73,31 @@ export default function Index(): JSX.Element {
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 
+  const navRef = useNavigationContainerRef();
+
   return (
     <ApolloProvider client={client}>
       <PaperProvider theme={theme}>
         <ViewShotProvider>
           <UserProvider>
-            <View style={styles.parent}>
-              <StatusBar
-                backgroundColor={theme.colors.primaryDark}
-                style="light"
-              />
-              <SnackbarProvider>
-                <AnimationProvider>
-                  <RatingHandler numSessions={5} />
-                  <ChangeLog currentVersion={nativeBuildVersion as string} />
-                  <View style={styles.container}>
-                    <SurveyHandler />
-                    <Pages />
-                  </View>
-                </AnimationProvider>
-              </SnackbarProvider>
-            </View>
+            <NavigationContainer ref={navRef}>
+              <View style={styles.parent}>
+                <StatusBar
+                  backgroundColor={theme.colors.primaryDark}
+                  style="light"
+                />
+                <SnackbarProvider>
+                  <AnimationProvider>
+                    <RatingHandler numSessions={5} />
+                    <ChangeLog currentVersion={nativeBuildVersion as string} />
+                    <View style={styles.container}>
+                      <SurveyHandler />
+                      <Pages navRef={navRef} />
+                    </View>
+                  </AnimationProvider>
+                </SnackbarProvider>
+              </View>
+            </NavigationContainer>
           </UserProvider>
         </ViewShotProvider>
       </PaperProvider>
