@@ -23,4 +23,8 @@ export interface IntroSlide {
   description: string;
 }
 
-export type Slide = TextInputSlide | RadioBtnSlide | IntroSlide;
+export interface FinalSlide {
+  type: "final";
+}
+
+export type Slide = TextInputSlide | RadioBtnSlide | IntroSlide | FinalSlide;

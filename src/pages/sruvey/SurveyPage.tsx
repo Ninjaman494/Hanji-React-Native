@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import { View } from "react-native";
 import { ScreenProps } from "typings/navigation";
 import { InputSlide, IntroSlide, RadioSlide, Slide } from "./slides";
+import FinalSlide from "./slides/FinalSlide";
 
 const slides: Slide[] = [
   {
@@ -104,6 +105,7 @@ const slides: Slide[] = [
     name: "otherFeedback",
     question: "Are there any other features you'd like to see in Hanji?",
   },
+  { type: "final" },
 ];
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
@@ -111,6 +113,9 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const [data, setData] = useState<Record<string, string>>({});
 
   const incrementSlide = () => index < slides.length - 1 && setIndex(index + 1);
+
+  const addData = (name: string, val?: string) =>
+    val && setData({ ...data, [name]: val });
 
   const slide = slides[index];
 
@@ -121,16 +126,18 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
     );
   }
 
+  console.log("DATA", data);
+
   return (
     <View style={{ flex: 1 }}>
-      <AppBar title="Survey" />
+      <AppBar title="Survey" hideBack />
       <View style={{ flex: 1, margin: 32 }}>
         {slide.type === "input" && (
           <InputSlide
             slide={slide}
             btnText={index < slides.length - 1 ? "Next" : "Submit"}
             onPress={(val) => {
-              val && setData({ ...data, [slide.name]: val });
+              addData(slide.name, val);
               incrementSlide();
             }}
           />
@@ -139,13 +146,21 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
           <RadioSlide
             slide={slide}
             onPress={(val) => {
-              setData({ ...data, [slide.name]: val });
+              addData(slide.name, val);
               incrementSlide();
             }}
           />
         )}
         {slide.type === "intro" && (
           <IntroSlide slide={slide} onPress={incrementSlide} />
+        )}
+        {slide.type === "final" && (
+          <FinalSlide
+            onPress={(val) => {
+              addData("email", val);
+              incrementSlide();
+            }}
+          />
         )}
       </View>
     </View>
