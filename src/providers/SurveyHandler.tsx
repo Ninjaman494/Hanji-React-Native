@@ -39,10 +39,7 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
       const lastAskedStr = await AsyncStorage.getItem(LAST_ASKED_KEY);
       const lastAsked = lastAskedStr ? new Date(parseInt(lastAskedStr)) : null;
 
-      setVisible(
-        !shownSurvey &&
-          (!lastAsked || Date.now() - lastAsked.getTime() >= LAST_ASKED_TIME)
-      );
+      setVisible(true);
     })();
   }, [sessionCount, setVisible]);
 
@@ -64,6 +61,7 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
           <Text>Would you fill out our survey please?</Text>
         </Dialog.Content>
         <Dialog.Actions>
+          <Button onPress={onDismiss}>Later</Button>
           <Button
             onPress={() => {
               updateSurveyState(true);
@@ -73,7 +71,6 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
           >
             Ok
           </Button>
-          <Button onPress={onDismiss}>Ask again later</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

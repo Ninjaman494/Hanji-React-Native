@@ -1,7 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import { AppBar } from "components";
+import { useSnackbar } from "providers/SnackbarProvider";
 import React, { FC, useState } from "react";
 import { View } from "react-native";
-import { ScreenProps } from "typings/navigation";
+import { NavigationProps, ScreenProps } from "typings/navigation";
 import { InputSlide, IntroSlide, RadioSlide, Slide } from "./slides";
 import FinalSlide from "./slides/FinalSlide";
 
@@ -109,10 +111,19 @@ const slides: Slide[] = [
 ];
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
+  const navigation = useNavigation<NavigationProps>();
+  const { showSnackbar } = useSnackbar();
   const [index, setIndex] = useState(0);
   const [data, setData] = useState<Record<string, string>>({});
 
-  const incrementSlide = () => index < slides.length - 1 && setIndex(index + 1);
+  const incrementSlide = () => {
+    if (index < slides.length - 1) {
+      setIndex(index + 1);
+    } else {
+      showSnackbar("Thank you for your feedback!");
+      navigation.goBack();
+    }
+  };
 
   const addData = (name: string, val?: string) =>
     val && setData({ ...data, [name]: val });
