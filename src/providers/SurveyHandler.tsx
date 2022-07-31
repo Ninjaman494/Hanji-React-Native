@@ -56,9 +56,12 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onDismiss} {...props}>
-        <Dialog.Title>Survey Request</Dialog.Title>
+        <Dialog.Title>We need your feedback!</Dialog.Title>
         <Dialog.Content>
-          <Text>Would you fill out our survey please?</Text>
+          <Text>
+            Would you mind filling out a short 4 question survey? Your feedback
+            helps us make Hanji even better for users like you.
+          </Text>
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={onDismiss}>Later</Button>

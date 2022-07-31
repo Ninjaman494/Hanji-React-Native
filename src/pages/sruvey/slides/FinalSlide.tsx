@@ -18,14 +18,15 @@ const FinalSlide: FC<FinalSlideProps> = ({ onPress }) => {
           One last thing...
         </Headline>
         <Text style={{ fontSize: 16, lineHeight: 24, marginBottom: 32 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Would you like to join the User Feedback Group by providing your email
+          address? As part of the group, you'd help us improve Hanji by
+          providing feedback on new features before they're released to the
+          public. We will never send you spam and your data will never be sold
+          to a third party.
         </Text>
         <CustomTextInput
           mode="outlined"
-          label="Email Address"
+          label="Email Address (optional)"
           autoCompleteType="email"
           textContentType="emailAddress"
           keyboardType="email-address"

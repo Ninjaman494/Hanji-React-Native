@@ -13,7 +13,7 @@ const slides: Slide[] = [
     type: "intro",
     header: "Welcome",
     description:
-      'Thank you for agreeing to fill out our survey! This short, 3 question survey should only take a minute or two to complete and helps us make Hanji even better for users like you. Hit "Next" to get started',
+      'Thank you for agreeing to fill out our survey! This short 4 question survey should only take a minute or two to complete and helps us make Hanji even better for users like you. Hit "Next" to get started',
   },
   {
     type: "radio",
@@ -27,25 +27,25 @@ const slides: Slide[] = [
       },
       {
         title: "Intermediate",
-        description: "~0-1 years",
+        description: "~1-2 years",
         value: "intermediate",
       },
       {
         title: "Expert",
-        description: "~0-1 years",
+        description: "~3-5 years",
 
         value: "expert",
       },
       {
         title: "Native Speaker",
-        description: "~0-1 years",
+        description: "5+ years",
         value: "native",
       },
     ],
   },
   {
     type: "radio",
-    name: "requestedFeature",
+    name: "firstFeature",
     question: "What feature would you most like to see?",
     options: [
       {
@@ -63,7 +63,7 @@ const slides: Slide[] = [
       {
         title: "Saved Words",
         description: "Save words and their conjugations for offline use",
-        value: "saved",
+        value: "savedWords",
       },
       {
         title: "Explanations",
@@ -93,7 +93,7 @@ const slides: Slide[] = [
       {
         title: "Saved Words",
         description: "Save words and their conjugations for offline use",
-        value: "saved",
+        value: "savedWords",
       },
       {
         title: "Explanations",
@@ -150,7 +150,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   // Options for second request feature are dynamic
   if (index === 3 && slide.type === "radio") {
     slide.options = slide.options.filter(
-      (o) => o.value !== data["requestedFeature"]
+      (o) => o.value !== data["firstFeature"]
     );
   }
 
@@ -183,6 +183,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
         {slide.type === "final" && (
           <FinalSlide
             onPress={(val) => {
+              // race condition
               addData("email", val);
               incrementSlide();
             }}
