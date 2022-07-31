@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { AppBar } from "components";
 import useCreateSurveySubmission from "hooks/useCreateSurveySubmission";
 import { useSnackbar } from "providers/SnackbarProvider";
-import React, { FC, useState } from "react";
-import { View } from "react-native";
+import React, { FC, useEffect, useState } from "react";
+import { BackHandler, View } from "react-native";
 import { NavigationProps, ScreenProps } from "typings/navigation";
 import { InputSlide, IntroSlide, RadioSlide, Slide } from "./slides";
 import FinalSlide from "./slides/FinalSlide";
@@ -119,6 +119,15 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const [index, setIndex] = useState(0);
   const [data, setData] = useState<Record<string, string>>({});
   const slide = slides[index];
+
+  // Diable back button
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => true
+    );
+    return () => backHandler.remove();
+  }, []);
 
   const incrementSlide = () => index < slides.length - 1 && setIndex(index + 1);
 
