@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { AppBar } from "components";
+import useCreateSurveySubmission from "hooks/useCreateSurveySubmission";
 import { useSnackbar } from "providers/SnackbarProvider";
 import React, { FC, useState } from "react";
 import { View } from "react-native";
@@ -111,17 +112,33 @@ const slides: Slide[] = [
 ];
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
+  const [submitSurvey] = useCreateSurveySubmission();
+
   const navigation = useNavigation<NavigationProps>();
-  const { showSnackbar } = useSnackbar();
+  const { showSnackbar, showError } = useSnackbar();
+
   const [index, setIndex] = useState(0);
   const [data, setData] = useState<Record<string, string>>({});
 
-  const incrementSlide = () => {
+  const incrementSlide = async () => {
     if (index < slides.length - 1) {
       setIndex(index + 1);
-    } else {
+      return;
+    }
+
+    try {
+      const submission = Object.keys(data).map((k) => ({
+        question: k,
+        response: data[k],
+      }));
+
+      console.log("Submission", JSON.stringify(submission, null, 2));
+
+      await submitSurvey({ variables: { submission } });
       showSnackbar("Thank you for your feedback!");
       navigation.goBack();
+    } catch (err) {
+      showError(err as Error);
     }
   };
 
@@ -136,8 +153,6 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
       (o) => o.value !== data["requestedFeature"]
     );
   }
-
-  console.log("DATA", data);
 
   return (
     <View style={{ flex: 1 }}>

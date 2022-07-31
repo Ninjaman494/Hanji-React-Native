@@ -32,11 +32,11 @@ const SnackbarProvider: FC = ({ children }) => {
   );
 
   const showError = useCallback(
-    (err: Error) => {
-      console.log(err);
-      Native.captureException(err);
+    (error: Error) => {
+      console.log(error);
+      Native.captureException(error, { extra: { error } });
       setSnackbarText(
-        err.message ?? "An error occurred. Please try again later"
+        error.message ?? "An error occurred. Please try again later"
       );
     },
     [setSnackbarText]
