@@ -1,7 +1,9 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { AppBar } from "components";
 import useCreateSurveySubmission from "hooks/useCreateSurveySubmission";
 import { useSnackbar } from "providers/SnackbarProvider";
+import { FILLED_OUT_KEY } from "providers/SurveyHandler";
 import React, { FC, useEffect, useState } from "react";
 import { BackHandler, View } from "react-native";
 import { NavigationProps, ScreenProps } from "typings/navigation";
@@ -147,6 +149,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
       console.log("Submission", JSON.stringify(submission, null, 2));
 
       await submitSurvey({ variables: { submission } });
+      await AsyncStorage.setItem(FILLED_OUT_KEY, "true");
       showSnackbar("Thank you for your feedback!");
       navigation.goBack();
     } catch (err) {

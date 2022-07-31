@@ -12,9 +12,9 @@ export type SurveyHandlerProps = Omit<
 >;
 
 const NUM_SESSIONS = 5;
-const LAST_ASKED_TIME = 432000000; // 5 days in milliseconds
-const FILLED_OUT_KEY = "FILLED_OUT";
-const LAST_ASKED_KEY = "LAST_ASKED";
+const ASK_AGAIN_WAIT_TIME = 432000000; // 5 days in milliseconds
+export const FILLED_OUT_KEY = "FILLED_OUT";
+export const LAST_ASKED_KEY = "LAST_ASKED";
 
 /**
  * Ask the user to fill out a survey after NUM_SESSIONS. If
@@ -33,24 +33,24 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
       // Wait till sessionCount is fetched or we have enough sessions
       if (sessionCount < NUM_SESSIONS) return;
 
-      const shownSurveyStr = await AsyncStorage.getItem(FILLED_OUT_KEY);
-      const shownSurvey = shownSurveyStr === "true";
+      const filledOutStr = await AsyncStorage.getItem(FILLED_OUT_KEY);
+      const filledOut = filledOutStr === "true";
 
       const lastAskedStr = await AsyncStorage.getItem(LAST_ASKED_KEY);
       const lastAsked = lastAskedStr ? new Date(parseInt(lastAskedStr)) : null;
 
-      setVisible(true);
+      setVisible(
+        !filledOut &&
+          (!lastAsked ||
+            Date.now() - lastAsked.getTime() >= ASK_AGAIN_WAIT_TIME)
+      );
     })();
   }, [sessionCount, setVisible]);
 
-  const updateSurveyState = async (isFilled: boolean) => {
-    await AsyncStorage.setItem(FILLED_OUT_KEY, isFilled ? "true" : "false");
-    setVisible(false);
-  };
-
   const onDismiss = async () => {
-    updateSurveyState(false);
+    await AsyncStorage.setItem(FILLED_OUT_KEY, "false");
     await AsyncStorage.setItem(LAST_ASKED_KEY, Date.now().toString());
+    setVisible(false);
   };
 
   return (
@@ -67,9 +67,9 @@ const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
           <Button onPress={onDismiss}>Later</Button>
           <Button
             onPress={() => {
-              updateSurveyState(true);
               // push won't work b/c we're outside StackNavigator
               navigation.navigate("Survey");
+              setVisible(false);
             }}
           >
             Ok
