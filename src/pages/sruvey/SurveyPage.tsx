@@ -113,23 +113,26 @@ const slides: Slide[] = [
 
 const SurveyPage: FC<ScreenProps<"Survey">> = () => {
   const [submitSurvey] = useCreateSurveySubmission();
-
   const navigation = useNavigation<NavigationProps>();
   const { showSnackbar, showError } = useSnackbar();
 
   const [index, setIndex] = useState(0);
   const [data, setData] = useState<Record<string, string>>({});
+  const slide = slides[index];
 
-  const incrementSlide = async () => {
-    if (index < slides.length - 1) {
-      setIndex(index + 1);
-      return;
-    }
+  const incrementSlide = () => index < slides.length - 1 && setIndex(index + 1);
 
+  const addData = (name: string, val?: string) => {
+    const updatedData = val ? { ...data, [name]: val } : data;
+    setData(updatedData);
+    return updatedData;
+  };
+
+  const submitForm = async (formData: Record<string, string>) => {
     try {
-      const submission = Object.keys(data).map((k) => ({
+      const submission = Object.keys(formData).map((k) => ({
         question: k,
-        response: data[k],
+        response: formData[k],
       }));
 
       console.log("Submission", JSON.stringify(submission, null, 2));
@@ -141,11 +144,6 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
       showError(err as Error);
     }
   };
-
-  const addData = (name: string, val?: string) =>
-    val && setData({ ...data, [name]: val });
-
-  const slide = slides[index];
 
   // Options for second request feature are dynamic
   if (index === 3 && slide.type === "radio") {
@@ -161,7 +159,6 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
         {slide.type === "input" && (
           <InputSlide
             slide={slide}
-            btnText={index < slides.length - 1 ? "Next" : "Submit"}
             onPress={(val) => {
               addData(slide.name, val);
               incrementSlide();
@@ -183,9 +180,8 @@ const SurveyPage: FC<ScreenProps<"Survey">> = () => {
         {slide.type === "final" && (
           <FinalSlide
             onPress={(val) => {
-              // race condition
-              addData("email", val);
-              incrementSlide();
+              const d = addData("email", val);
+              submitForm(d);
             }}
           />
         )}
