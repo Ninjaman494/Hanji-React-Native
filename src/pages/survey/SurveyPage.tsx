@@ -1,12 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
 import { AppBar } from "components";
 import useCreateSurveySubmission from "hooks/useCreateSurveySubmission";
 import { useSnackbar } from "providers/SnackbarProvider";
 import { FILLED_OUT_KEY } from "providers/SurveyHandler";
 import React, { FC, useEffect, useState } from "react";
 import { BackHandler, View } from "react-native";
-import { NavigationProps, ScreenProps } from "typings/navigation";
+import { ScreenProps } from "typings/navigation";
 import { InputSlide, IntroSlide, RadioSlide, Slide } from "./slides";
 import FinalSlide from "./slides/FinalSlide";
 
@@ -113,9 +112,8 @@ const slides: Slide[] = [
   { type: "final" },
 ];
 
-const SurveyPage: FC<ScreenProps<"Survey">> = () => {
+const SurveyPage: FC<ScreenProps<"Survey">> = ({ navigation }) => {
   const [submitSurvey] = useCreateSurveySubmission();
-  const navigation = useNavigation<NavigationProps>();
   const { showSnackbar, showError } = useSnackbar();
 
   const [index, setIndex] = useState(0);

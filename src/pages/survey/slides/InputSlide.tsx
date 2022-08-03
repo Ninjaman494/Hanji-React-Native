@@ -27,6 +27,7 @@ const InputSlide: FC<InputSlideProps> = ({
         <CustomTextInput
           mode="outlined"
           value={text}
+          accessibilityLabel={slide.name}
           onChangeText={setText}
           multiline
         />
