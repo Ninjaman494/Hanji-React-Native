@@ -34,6 +34,7 @@ const TwoLineButton: FC<TwoLineButtonProps> = ({
   });
 
   return (
+    // @ts-ignore elevation not in prop type
     <Surface style={[style, styles.surface]} elevation={4} {...rest}>
       <TouchableRipple
         borderless

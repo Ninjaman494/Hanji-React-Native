@@ -1,6 +1,10 @@
 jest.mock("sentry-expo");
 jest.mock("react-native-gesture-handler");
 
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from "@react-navigation/native";
 import Pages from "Pages";
 import React from "react";
 import "react-native";
@@ -11,9 +15,16 @@ import { render } from "utils/testUtils";
 
 jest.useFakeTimers();
 
+// Mocked in jestSetup.tsx
+const navRef = useNavigationContainerRef();
+
 describe("Pages component", () => {
   it("sets navigation breadcrumbs", () => {
-    render(<Pages />);
+    render(
+      <NavigationContainer>
+        <Pages navRef={navRef as any} />
+      </NavigationContainer>
+    );
 
     expect(Native.addBreadcrumb).toHaveBeenCalledWith({
       category: "navigation",
@@ -24,7 +35,11 @@ describe("Pages component", () => {
   });
 
   it("logs select view events", () => {
-    render(<Pages />);
+    render(
+      <NavigationContainer>
+        <Pages navRef={navRef as any} />
+      </NavigationContainer>
+    );
 
     expect(logEvent).toHaveBeenCalledWith({
       type: LOG_EVENT.SCREEN_VIEW,
