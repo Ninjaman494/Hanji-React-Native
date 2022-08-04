@@ -6,6 +6,7 @@ import { FILLED_OUT_KEY } from "providers/SurveyHandler";
 import React, { FC, useEffect, useState } from "react";
 import { BackHandler, View } from "react-native";
 import { ScreenProps } from "typings/navigation";
+import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { InputSlide, IntroSlide, RadioSlide, Slide } from "./slides";
 import FinalSlide from "./slides/FinalSlide";
 
@@ -148,6 +149,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = ({ navigation }) => {
 
       await submitSurvey({ variables: { submission } });
       await AsyncStorage.setItem(FILLED_OUT_KEY, "true");
+      await logEvent({ type: LOG_EVENT.SUBMIT_SURVEY, params: formData });
       showSnackbar("Thank you for your feedback!");
       navigation.goBack();
     } catch (err) {
