@@ -1,7 +1,6 @@
 export interface RadioOption {
   title: string;
   description: string;
-  value: string;
 }
 
 export interface TextInputSlide {

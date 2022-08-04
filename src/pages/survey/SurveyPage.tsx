@@ -25,23 +25,18 @@ const slides: Slide[] = [
       {
         title: "Beginner",
         description: "~0-1 years",
-        value: "beginner",
       },
       {
         title: "Intermediate",
         description: "~1-2 years",
-        value: "intermediate",
       },
       {
         title: "Expert",
         description: "~3-5 years",
-
-        value: "expert",
       },
       {
         title: "Native Speaker",
         description: "5+ years",
-        value: "native",
       },
     ],
   },
@@ -54,24 +49,20 @@ const slides: Slide[] = [
         title: "Flashcards",
         description:
           "Create flashcards of words and study them in different conjugations",
-        value: "flashcards",
       },
       {
         title: "Stories",
         description:
           "Korean stories with English translations for reading practice",
-        value: "stories",
       },
       {
         title: "Saved Words",
         description: "Save words and their conjugations for offline use",
-        value: "savedWords",
       },
       {
         title: "Explanations",
         description:
           "Detailed explanations of each conjugation and how they should be used",
-        value: "explanations",
       },
     ],
   },
@@ -84,24 +75,20 @@ const slides: Slide[] = [
         title: "Flashcards",
         description:
           "Create flashcards of words and study them in different conjugations",
-        value: "flashcards",
       },
       {
         title: "Stories",
         description:
           "Korean stories with English translations for reading practice",
-        value: "stories",
       },
       {
         title: "Saved Words",
         description: "Save words and their conjugations for offline use",
-        value: "savedWords",
       },
       {
         title: "Explanations",
         description:
           "Detailed explanations of each conjugation and how they should be used",
-        value: "explanations",
       },
     ],
   },
@@ -158,7 +145,7 @@ const SurveyPage: FC<ScreenProps<"Survey">> = ({ navigation }) => {
   // Options for second request feature are dynamic
   if (index === 3 && slide.type === "radio") {
     slide.options = slide.options.filter(
-      (o) => o.value !== data["firstFeature"]
+      (o) => o.title !== data["firstFeature"]
     );
   }
 

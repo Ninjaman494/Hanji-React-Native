@@ -54,113 +54,88 @@ const fillOutSurvey = async (
   fireEvent.press(result.getByText("Submit"));
 };
 
+const checkSubmission = async (formData: Submission) => {
+  const submission = Object.keys(formData).map((key) => ({
+    question: key,
+    response: formData[key as keyof Submission],
+  }));
+
+  await waitFor(() =>
+    expect(submitSurvey).toHaveBeenCalledWith({ variables: { submission } })
+  );
+};
+
 describe("SurveyPage", () => {
   it("can submit a survey", async () => {
-    const result = render(<SurveyPage {...(props as any)} />);
-
-    await fillOutSurvey(result, {
+    const submission: Submission = {
       skillLevel: "Intermediate",
       firstFeature: "Explanations",
       secondFeature: "Flashcards",
       otherFeedback: "foobar",
       email: "user@email.com",
-    });
+    };
 
-    await waitFor(() => {
-      expect(submitSurvey).toHaveBeenCalledWith({
-        variables: {
-          submission: [
-            { question: "skillLevel", response: "intermediate" },
-            { question: "firstFeature", response: "explanations" },
-            { question: "secondFeature", response: "flashcards" },
-            { question: "otherFeedback", response: "foobar" },
-            { question: "email", response: "user@email.com" },
-          ],
-        },
-      });
-      expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
-      expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
-      expect(goBack).toHaveBeenCalled();
-    });
+    const result = render(<SurveyPage {...(props as any)} />);
+
+    await fillOutSurvey(result, submission);
+
+    await checkSubmission(submission);
+    expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
+    expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
+    expect(goBack).toHaveBeenCalled();
   });
 
   it("can submit without email", async () => {
-    const result = render(<SurveyPage {...(props as any)} />);
-
-    await fillOutSurvey(result, {
+    const submission: Submission = {
       skillLevel: "Intermediate",
       firstFeature: "Explanations",
       secondFeature: "Flashcards",
       otherFeedback: "foobar",
-    });
+    };
 
-    await waitFor(() => {
-      expect(submitSurvey).toHaveBeenCalledWith({
-        variables: {
-          submission: [
-            { question: "skillLevel", response: "intermediate" },
-            { question: "firstFeature", response: "explanations" },
-            { question: "secondFeature", response: "flashcards" },
-            { question: "otherFeedback", response: "foobar" },
-          ],
-        },
-      });
-      expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
-      expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
-      expect(goBack).toHaveBeenCalled();
-    });
+    const result = render(<SurveyPage {...(props as any)} />);
+
+    await fillOutSurvey(result, submission);
+
+    await checkSubmission(submission);
+    expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
+    expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
+    expect(goBack).toHaveBeenCalled();
   });
 
   it("can submit without additional feedback", async () => {
-    const result = render(<SurveyPage {...(props as any)} />);
-
-    await fillOutSurvey(result, {
+    const submission: Submission = {
       skillLevel: "Intermediate",
       firstFeature: "Explanations",
       secondFeature: "Flashcards",
-    });
+    };
 
-    await waitFor(() => {
-      expect(submitSurvey).toHaveBeenCalledWith({
-        variables: {
-          submission: [
-            { question: "skillLevel", response: "intermediate" },
-            { question: "firstFeature", response: "explanations" },
-            { question: "secondFeature", response: "flashcards" },
-          ],
-        },
-      });
-      expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
-      expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
-      expect(goBack).toHaveBeenCalled();
-    });
+    const result = render(<SurveyPage {...(props as any)} />);
+
+    await fillOutSurvey(result, submission);
+
+    await checkSubmission(submission);
+    expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
+    expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
+    expect(goBack).toHaveBeenCalled();
   });
 
   it("can handle errors", async () => {
+    const submission: Submission = {
+      skillLevel: "Intermediate",
+      firstFeature: "Explanations",
+      secondFeature: "Flashcards",
+    };
     const error = new Error("ruh roh");
     submitSurvey.mockRejectedValueOnce(error);
 
     const result = render(<SurveyPage {...(props as any)} />);
 
-    await fillOutSurvey(result, {
-      skillLevel: "Intermediate",
-      firstFeature: "Explanations",
-      secondFeature: "Flashcards",
-    });
+    await fillOutSurvey(result, submission);
 
-    await waitFor(() => {
-      expect(submitSurvey).toHaveBeenCalledWith({
-        variables: {
-          submission: [
-            { question: "skillLevel", response: "intermediate" },
-            { question: "firstFeature", response: "explanations" },
-            { question: "secondFeature", response: "flashcards" },
-          ],
-        },
-      });
-      expect(AsyncStorage.setItem).not.toHaveBeenCalled();
-      expect(showError).toHaveBeenCalledWith(error);
-      expect(goBack).not.toHaveBeenCalled();
-    });
+    await checkSubmission(submission);
+    expect(AsyncStorage.setItem).not.toHaveBeenCalled();
+    expect(showError).toHaveBeenCalledWith(error);
+    expect(goBack).not.toHaveBeenCalled();
   });
 });

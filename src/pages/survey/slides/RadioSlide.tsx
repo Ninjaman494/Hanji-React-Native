@@ -15,12 +15,12 @@ const RadioSlide: FC<RadioSlideProps> = ({ slide, onPress }) => {
       <Headline style={{ textAlign: "center", marginBottom: 32 }}>
         {slide.question}
       </Headline>
-      {slide.options.map(({ title, description, value }) => (
+      {slide.options.map(({ title, description }) => (
         <TwoLineButton
           key={title}
           title={title}
           description={description}
-          onPress={() => onPress(value)}
+          onPress={() => onPress(title)}
           style={{ marginBottom: 8 }}
         />
       ))}
