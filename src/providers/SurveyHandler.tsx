@@ -16,12 +16,6 @@ const ASK_AGAIN_WAIT_TIME = 432000000; // 5 days in milliseconds
 export const FILLED_OUT_KEY = "FILLED_OUT";
 export const LAST_ASKED_KEY = "LAST_ASKED";
 
-/**
- * Ask the user to fill out a survey after NUM_SESSIONS. If
- * they say yes, don't ask again. If they say no, wait 5
- * days and ask again. Keep asking until they say yes
- *
- */
 const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
   const navigation = useNavigation<NavigationProps>();
 

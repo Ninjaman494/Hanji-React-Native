@@ -145,8 +145,6 @@ const SurveyPage: FC<ScreenProps<"Survey">> = ({ navigation }) => {
         response: formData[k],
       }));
 
-      console.log("Submission", JSON.stringify(submission, null, 2));
-
       await submitSurvey({ variables: { submission } });
       await AsyncStorage.setItem(FILLED_OUT_KEY, "true");
       await logEvent({ type: LOG_EVENT.SUBMIT_SURVEY, params: formData });

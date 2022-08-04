@@ -14,10 +14,7 @@ const { navigate } = useNavigation();
 
 const mockAsyncStorage = (filledOut: boolean, lastAsked?: Date) => {
   (AsyncStorage.getItem as jest.Mock).mockImplementation((key: string) => {
-    if (key === FILLED_OUT_KEY) {
-      return filledOut ? "true" : "false";
-    }
-
+    if (key === FILLED_OUT_KEY) return filledOut ? "true" : "false";
     return lastAsked?.getTime();
   });
 };

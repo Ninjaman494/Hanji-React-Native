@@ -1,8 +1,12 @@
 jest.mock("hooks/useCreateSurveySubmission");
 jest.mock("providers/SnackbarProvider");
+jest.mock("@react-native-async-storage/async-storage");
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import useCreateSurveySubmission from "hooks/useCreateSurveySubmission";
 import { useSnackbar } from "providers/SnackbarProvider";
+import { FILLED_OUT_KEY } from "providers/SurveyHandler";
 import React from "react";
 import "react-native";
 import { fireEvent, render, RenderAPI, waitFor } from "utils/testUtils";
@@ -74,6 +78,7 @@ describe("SurveyPage", () => {
           ],
         },
       });
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
       expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
       expect(goBack).toHaveBeenCalled();
     });
@@ -100,6 +105,7 @@ describe("SurveyPage", () => {
           ],
         },
       });
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
       expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
       expect(goBack).toHaveBeenCalled();
     });
@@ -124,6 +130,7 @@ describe("SurveyPage", () => {
           ],
         },
       });
+      expect(AsyncStorage.setItem).toHaveBeenCalledWith(FILLED_OUT_KEY, "true");
       expect(showSnackbar).toHaveBeenCalledWith("Thank you for your feedback!");
       expect(goBack).toHaveBeenCalled();
     });
@@ -151,6 +158,7 @@ describe("SurveyPage", () => {
           ],
         },
       });
+      expect(AsyncStorage.setItem).not.toHaveBeenCalled();
       expect(showError).toHaveBeenCalledWith(error);
       expect(goBack).not.toHaveBeenCalled();
     });
