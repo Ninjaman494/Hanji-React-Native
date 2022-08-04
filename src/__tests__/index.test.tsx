@@ -23,6 +23,8 @@ import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
 import setupAds from "utils/setupAds";
 
+jest.useFakeTimers();
+
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
 
@@ -34,7 +36,7 @@ describe("Index", () => {
     });
   });
 
-  it("creates favorites if none exist", async () => {
+  it("creates favorites if none exist", () => {
     (useGetFavorites as jest.Mock).mockReturnValue({
       loading: false,
       error: null,
@@ -46,7 +48,7 @@ describe("Index", () => {
     expect(setFavorites).toHaveBeenCalledWith(DEFAULT_FAVORITES);
   });
 
-  it("doesn't create favorites if they already exist", async () => {
+  it("doesn't create favorites if they already exist", () => {
     render(<Index />);
 
     expect(useGetFavorites).toHaveBeenCalled();
