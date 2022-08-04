@@ -30,11 +30,12 @@ const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
 
   useEffect(() => {
     (async () => {
+      const update = changelog[currentVersion as string];
       const lastVersion = await AsyncStorage.getItem(LAST_VERSION_KEY);
 
-      if (!!lastVersion && lastVersion !== currentVersion) {
+      if (!!update && !!lastVersion && lastVersion !== currentVersion) {
         setVisible(true);
-        setUpdate(changelog[currentVersion as string]);
+        setUpdate(update);
       }
       await AsyncStorage.setItem(LAST_VERSION_KEY, currentVersion as string);
     })();
