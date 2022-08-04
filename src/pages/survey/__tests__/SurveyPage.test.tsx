@@ -78,8 +78,8 @@ describe("SurveyPage", () => {
       firstFeature: "Explanations",
       secondFeature: "Flashcards",
     };
-    if (!!other) submission.otherFeedback = other;
-    if (!!email) submission.email = email;
+    if (other) submission.otherFeedback = other;
+    if (email) submission.email = email;
 
     const result = render(<SurveyPage {...(props as any)} />);
 
