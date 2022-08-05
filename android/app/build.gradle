@@ -201,13 +201,17 @@ android {
 
         }
     }
+    
+    packagingOptions {
+       exclude("META-INF/*.kotlin_module") 
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.appodeal.ads:sdk:2.11.0.+"
+    implementation "com.appodeal.ads:sdk:3.0.0.+"
     implementation "com.android.support:multidex:1.0.3"
 
     // compile "com.google.android.gms:play-services-base:+"
