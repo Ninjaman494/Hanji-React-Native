@@ -8,7 +8,7 @@ import {
 const setupAds = () => {
   Appodeal.setTesting(false);
   Appodeal.setLogLevel(AppodealLogLevel.VERBOSE);
-  Appodeal.initialize(APPODEAL_KEY, AppodealAdType.MREC, true);
+  Appodeal.initialize(APPODEAL_KEY, AppodealAdType.MREC);
 };
 
 export default setupAds;
