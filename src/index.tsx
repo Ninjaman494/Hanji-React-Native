@@ -17,7 +17,6 @@ import AnimationProvider from "providers/AnimationProvider";
 import ChangeLog from "providers/ChangeLog";
 import RatingHandler from "providers/RatingHandler";
 import SnackbarProvider from "providers/SnackbarProvider";
-import SurveyHandler from "providers/SurveyHandler";
 import UserProvider from "providers/UserProvider";
 import ViewShotProvider from "providers/ViewShotProvider";
 import React, { useEffect } from "react";
@@ -91,7 +90,6 @@ export default function Index(): JSX.Element {
                     <RatingHandler numSessions={5} />
                     <ChangeLog currentVersion={nativeBuildVersion as string} />
                     <View style={styles.container}>
-                      <SurveyHandler />
                       <Pages navRef={navRef} />
                     </View>
                   </AnimationProvider>
