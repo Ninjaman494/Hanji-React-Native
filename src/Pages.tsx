@@ -10,7 +10,6 @@ import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
-import SuggestionPage from "pages/suggestions/SuggestionPage";
 import SurveyPage from "pages/survey/SurveyPage";
 import React, { FC } from "react";
 import "react-native";
@@ -75,7 +74,6 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
       <Screen name="Acknowledgements" component={AcknowledgementsPage} />
       <Screen name="BugReport" component={BugReportPage} />
       <Screen name="Conjugator" component={ConjugatorPage} />
-      <Screen name="Suggestion" component={SuggestionPage} />
       <Screen name="Survey" component={SurveyPage} />
     </Navigator>
   );

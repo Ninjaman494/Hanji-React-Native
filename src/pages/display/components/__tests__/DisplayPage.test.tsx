@@ -128,23 +128,6 @@ describe("DisplayPage", () => {
     );
   });
 
-  it("redirects to Suggestions Page", async () => {
-    (useGetEntry as jest.Mock).mockReturnValue({
-      loading: false,
-      data: { entry: { ...entry, pos: "Noun" } },
-    });
-
-    const result = render(<DisplayPage {...(props as any)} />);
-
-    fireEvent.press(result.getByLabelText("add button"));
-
-    await waitFor(() => {
-      expect(props.navigation.push).toHaveBeenCalledWith("Suggestion", {
-        entryId: "id",
-      });
-    });
-  });
-
   it("logs select content events", () => {
     (useGetEntry as jest.Mock).mockReturnValue({
       loading: false,
