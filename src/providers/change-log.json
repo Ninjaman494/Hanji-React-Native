@@ -1,4 +1,9 @@
 {
+  "43": {
+    "name": "3.1.1",
+    "date": "Nov. 2nd 2022",
+    "features": ["Removed survey. Thank you all for the feedback!"]
+  },
   "41": {
     "name": "3.0.8",
     "date": "June 19th 2022",
@@ -33,7 +38,7 @@
   },
   "36": {
     "name": "3.0.3",
-    "date": "Jab. 24th 2022",
+    "date": "Jan. 24th 2022",
     "features": [
       "Improved error messages",
       "Fixed a bug where app incorrectly redirected to Conjugator",
