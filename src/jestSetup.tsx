@@ -1,5 +1,6 @@
 import { EffectCallback } from "react";
 
+jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
 jest.mock("hooks/useGetAdFreeStatus", () =>
   jest.fn().mockReturnValue({ isAdFree: true })
