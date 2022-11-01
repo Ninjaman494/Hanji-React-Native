@@ -11,6 +11,8 @@ exports[`ConjugationCard displays conjugations 1`] = `
   }
 >
   <View
+    collapsable={false}
+    nativeID="animatedComponent"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -28,6 +30,11 @@ exports[`ConjugationCard displays conjugations 1`] = `
     }
   >
     <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
       accessible={true}
       focusable={false}
       onClick={[Function]}
@@ -69,7 +76,9 @@ exports[`ConjugationCard displays conjugations 1`] = `
         >
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -187,7 +196,9 @@ exports[`ConjugationCard displays conjugations 1`] = `
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -305,7 +316,9 @@ exports[`ConjugationCard displays conjugations 1`] = `
           </View>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
+            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

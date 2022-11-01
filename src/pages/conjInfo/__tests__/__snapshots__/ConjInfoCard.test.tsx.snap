@@ -11,6 +11,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
   }
 >
   <View
+    collapsable={false}
+    nativeID="animatedComponent"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -28,6 +30,11 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
     }
   >
     <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
       accessible={true}
       focusable={false}
       onClick={[Function]}
@@ -125,6 +132,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
         </View>
         <View>
           <Text
+            collapsable={false}
+            nativeID="animatedComponent"
             numberOfLines={1}
             style={
               Object {
@@ -483,6 +492,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
   }
 >
   <View
+    collapsable={false}
+    nativeID="animatedComponent"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -500,6 +511,11 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
     }
   >
     <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
       accessible={true}
       focusable={false}
       onClick={[Function]}
@@ -597,6 +613,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
         </View>
         <View>
           <Text
+            collapsable={false}
+            nativeID="animatedComponent"
             numberOfLines={1}
             style={
               Object {
