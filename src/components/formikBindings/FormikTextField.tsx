@@ -1,5 +1,4 @@
 import { useFormikContext } from "formik";
-import { get } from "lodash";
 import React, { ComponentProps, FC } from "react";
 import { TextInput as NativeTextInput, View } from "react-native";
 import { HelperText, TextInput } from "react-native-paper";
@@ -18,9 +17,9 @@ const FormikTextField: FC<FormikTextFieldProps> = ({
   hideError,
   ...rest
 }) => {
-  const { handleChange, handleBlur, values, errors } =
+  const { handleChange, handleBlur, values, errors, touched } =
     useFormikContext<FormikContext>();
-  const error = get(errors, name);
+  const error = touched[name] ? errors[name] : undefined;
 
   return (
     <View style={style}>
@@ -50,7 +49,7 @@ const FormikTextField: FC<FormikTextFieldProps> = ({
       />
       <HelperText
         type={error ? "error" : "info"}
-        visible={(!!error || !!hint) && !hideError}
+        visible={(!!error && !hideError) || !!hint}
       >
         {error ?? hint}
       </HelperText>

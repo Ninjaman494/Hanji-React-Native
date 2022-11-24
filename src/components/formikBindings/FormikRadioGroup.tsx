@@ -1,10 +1,10 @@
+import { useFormikContext } from "formik";
 import React, { FC } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
-import { withFormikControl, withFormikControlProps } from "react-native-formik";
 import { Caption, RadioButton, Text, useTheme } from "react-native-paper";
-import { compose } from "recompose";
+import { FormikContext } from "typings/utils";
 
-export type FormikRadioGroup = ViewProps & {
+export type FormikRadioGroupProps = ViewProps & {
   name: string;
   label?: string;
   options: {
@@ -13,11 +13,10 @@ export type FormikRadioGroup = ViewProps & {
   }[];
 };
 
-const FormikRadioGroup: FC<FormikRadioGroup & withFormikControlProps> = ({
-  value,
+const FormikRadioGroup: FC<FormikRadioGroupProps> = ({
+  name,
+  label,
   options,
-  setFieldTouched,
-  setFieldValue,
   ...rest
 }) => {
   const { colors } = useTheme();
@@ -41,15 +40,20 @@ const FormikRadioGroup: FC<FormikRadioGroup & withFormikControlProps> = ({
     },
   });
 
+  const { values, errors, touched, setFieldTouched, setFieldValue } =
+    useFormikContext<FormikContext>();
+  const value = values[name];
+  const error = touched[name] ? errors[name] : null;
+
   return (
     <View style={[styles.root, rest.style]}>
-      {rest.label && <Text style={styles.label}>{rest.label}</Text>}
+      {label && <Text style={styles.label}>{label}</Text>}
       <RadioButton.Group
         onValueChange={(newValue) => {
-          setFieldValue(newValue);
-          setFieldTouched();
+          setFieldValue(name, newValue);
+          setFieldTouched(name);
         }}
-        value={value}
+        value={value as string}
         {...rest}
       >
         {options.map(({ label, value }) => (
@@ -59,14 +63,9 @@ const FormikRadioGroup: FC<FormikRadioGroup & withFormikControlProps> = ({
           </View>
         ))}
       </RadioButton.Group>
-      {rest.error && (
-        <Caption style={{ color: colors.error }}>{rest.error}</Caption>
-      )}
+      {error && <Caption style={{ color: colors.error }}>{error}</Caption>}
     </View>
   );
 };
 
-export default compose<
-  FormikRadioGroup & withFormikControlProps,
-  FormikRadioGroup
->(withFormikControl)(FormikRadioGroup);
+export default FormikRadioGroup;
