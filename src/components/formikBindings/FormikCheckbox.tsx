@@ -1,31 +1,35 @@
+import { useFormikContext } from "formik";
 import React, { FC } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
-import { withFormikControl, withFormikControlProps } from "react-native-formik";
 import { Checkbox, Text } from "react-native-paper";
-import { compose } from "recompose";
+import { FormikContext } from "typings/utils";
 
 export type FormikCheckbox = ViewProps & {
   name: string;
   label: string;
 };
 
-const FormikCheckbox: FC<FormikCheckbox & withFormikControlProps> = ({
-  value,
-  setFieldTouched,
-  setFieldValue,
+const FormikCheckbox: FC<FormikCheckbox> = ({
+  name,
+  label,
+  style,
   ...rest
 }) => {
+  const { values, handleBlur, setFieldValue, setFieldTouched } = useFormikContext<FormikContext>();
+  const value = values[name];
+
   return (
-    <View style={[styles.root, rest.style]}>
+    <View style={[styles.root, style]} {...rest}>
       <Checkbox.Android
-        accessibilityLabel={rest.label}
-        status={value ? "checked" : "unchecked"}
+        accessibilityLabel={label}
+        status={!!value ? "checked" : "unchecked"}
+        onBlur={handleBlur(name)}
         onPress={() => {
-          setFieldValue(!value as unknown as string);
-          setFieldTouched();
+          setFieldValue(name, !value);
+          setFieldTouched(name);
         }}
       />
-      <Text style={styles.text}>{rest.label}</Text>
+      <Text style={styles.text}>{label}</Text>
     </View>
   );
 };
@@ -42,6 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose<FormikCheckbox & withFormikControlProps, FormikCheckbox>(
-  withFormikControl
-)(FormikCheckbox);
+export default FormikCheckbox;
