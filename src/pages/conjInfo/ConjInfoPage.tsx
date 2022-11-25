@@ -1,4 +1,3 @@
-import { CONJ_INFO_AD_ID } from "@env";
 import { AdCard, AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import React, { useMemo } from "react";
@@ -32,7 +31,7 @@ const ConjInfoPage: React.FC<ScreenProps<"ConjInfo">> = ({ route }) => {
           flatlist={false}
         >
           <ConjInfoCard conjugation={conjugation} style={cardStyle} />
-          <AdCard adUnitID={CONJ_INFO_AD_ID} style={cardStyle} />
+          <AdCard style={cardStyle} />
         </SlideInBody>
       </AppLayout>
     </View>

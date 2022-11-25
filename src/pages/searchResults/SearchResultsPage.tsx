@@ -1,4 +1,3 @@
-import { SEARCH_RESULTS_AD_ID } from "@env";
 import { AdCard, AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import { Entry } from "hooks/useGetEntry";
@@ -44,7 +43,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
           data={resultsWithAd}
           renderItem={({ item }) =>
             item === "ad" ? (
-              <AdCard adUnitID={SEARCH_RESULTS_AD_ID} style={styles.card} />
+              <AdCard style={styles.card} />
             ) : (
               <SearchResultsCard entry={item} style={styles.card} />
             )

@@ -22,14 +22,10 @@ jobs:
     - name: Build APK
       env:
           SERVER_URL: ${{ secrets.SERVER_URL }}
+          APPODEAL_KEY: ${{ secrets.APPODEAL_KEY }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          MAIN_AD_ID: ${{ secrets.MAIN_AD_ID }}
-          DISPLAY_AD_ID: ${{ secrets.DISPLAY_AD_ID }}
-          CONJ_INFO_AD_ID: ${{ secrets.CONJ_INFO_AD_ID }}
-          SEARCH_RESULTS_AD_ID: ${{ secrets.SEARCH_RESULTS_AD_ID }}
-          APPODEAL_KEY: ${{ secrets.APPODEAL_KEY }}
       run:  |
         cd android && 
         chmod +x gradlew && 

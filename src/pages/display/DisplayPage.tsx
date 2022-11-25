@@ -1,4 +1,3 @@
-import { DISPLAY_AD_ID } from "@env";
 import { AdCard, AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
@@ -98,7 +97,7 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
               }
             />
           )}
-          <AdCard adUnitID={DISPLAY_AD_ID} style={styles.card} />
+          <AdCard style={styles.card} />
           {entry?.examples && (
             <ExamplesCard examples={entry.examples} style={styles.card} />
           )}
