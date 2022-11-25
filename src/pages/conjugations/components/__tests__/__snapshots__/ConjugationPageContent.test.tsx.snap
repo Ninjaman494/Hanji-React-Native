@@ -5,7 +5,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
   collapsable={false}
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -14,7 +14,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
     bounces={false}
     collapsable={false}
     data={
-      Array [
+      [
         "declarative present",
         "declarative future",
       ]
@@ -35,9 +35,9 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
     renderItem={[Function]}
     scrollEventThrottle={0.0001}
     showsVerticalScrollIndicator={false}
-    stickyHeaderIndices={Array []}
-    style={Object {}}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    style={{}}
+    viewabilityConfigCallbackPairs={[]}
     windowSize={5}
   >
     <View>
@@ -49,7 +49,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
           collapsable={false}
           nativeID="animatedComponent"
           style={
-            Object {
+            {
               "backgroundColor": "#ffffff",
               "borderColor": "rgba(0, 0, 0, 0.12)",
               "borderRadius": 10,
@@ -57,7 +57,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
               "marginHorizontal": 16,
               "marginVertical": 8,
               "shadowColor": "#000000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 4,
                 "width": 0,
               },
@@ -68,7 +68,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
         >
           <View
             accessibilityState={
-              Object {
+              {
                 "disabled": true,
               }
             }
@@ -82,7 +82,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "flexGrow": 1,
                 "flexShrink": 1,
               }
@@ -90,24 +90,24 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "space-between",
                     "paddingLeft": 16,
                   },
-                  Object {
+                  {
                     "minHeight": 50,
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexDirection": "column",
                       "justifyContent": "center",
@@ -118,40 +118,40 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                 <Text
                   numberOfLines={1}
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(0, 0, 0, 0.87)",
                           "fontFamily": "System",
                           "fontWeight": "500",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
+                        [
+                          {
                             "fontSize": 20,
                             "letterSpacing": 0.15,
                             "lineHeight": 30,
                             "marginVertical": 2,
                           },
-                          Array [
-                            Object {
+                          [
+                            {
                               "minHeight": 30,
                             },
-                            Object {
+                            {
                               "marginBottom": 2,
                             },
-                            Object {
+                            {
                               "color": "#3F51B5",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -169,12 +169,12 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
             </View>
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "paddingHorizontal": 16,
                   },
                   undefined,
-                  Object {
+                  {
                     "paddingBottom": 8,
                     "paddingHorizontal": 0,
                   },
@@ -183,7 +183,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
             >
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "flexDirection": "column",
                     "paddingHorizontal": 16,
@@ -203,7 +203,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 1,
                       "flexDirection": "row",
                       "marginBottom": 8,
@@ -214,7 +214,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   <View
                     onPress={[Function]}
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "row",
                         "marginBottom": 8,
@@ -224,7 +224,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -232,16 +232,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -252,7 +252,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     </View>
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                           "flexDirection": "column",
                         }
@@ -260,16 +260,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                               "textAlign": "center",
                             },
@@ -282,7 +282,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -290,16 +290,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -323,7 +323,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 1,
                       "flexDirection": "row",
                       "marginBottom": 8,
@@ -334,7 +334,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   <View
                     onPress={[Function]}
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "row",
                         "marginBottom": 8,
@@ -344,7 +344,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -352,16 +352,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -372,7 +372,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     </View>
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                           "flexDirection": "column",
                         }
@@ -380,16 +380,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                               "textAlign": "center",
                             },
@@ -402,7 +402,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -410,16 +410,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -443,7 +443,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 1,
                       "flexDirection": "row",
                       "marginBottom": 8,
@@ -454,7 +454,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   <View
                     onPress={[Function]}
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "row",
                         "marginBottom": 8,
@@ -464,7 +464,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -472,16 +472,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -492,7 +492,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     </View>
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                           "flexDirection": "column",
                         }
@@ -500,16 +500,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                               "textAlign": "center",
                             },
@@ -522,7 +522,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -530,16 +530,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -563,7 +563,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
           collapsable={false}
           nativeID="animatedComponent"
           style={
-            Object {
+            {
               "backgroundColor": "#ffffff",
               "borderColor": "rgba(0, 0, 0, 0.12)",
               "borderRadius": 10,
@@ -571,7 +571,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
               "marginHorizontal": 16,
               "marginVertical": 8,
               "shadowColor": "#000000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 4,
                 "width": 0,
               },
@@ -582,7 +582,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
         >
           <View
             accessibilityState={
-              Object {
+              {
                 "disabled": true,
               }
             }
@@ -596,7 +596,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "flexGrow": 1,
                 "flexShrink": 1,
               }
@@ -604,24 +604,24 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "space-between",
                     "paddingLeft": 16,
                   },
-                  Object {
+                  {
                     "minHeight": 50,
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexDirection": "column",
                       "justifyContent": "center",
@@ -632,40 +632,40 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                 <Text
                   numberOfLines={1}
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(0, 0, 0, 0.87)",
                           "fontFamily": "System",
                           "fontWeight": "500",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
+                        [
+                          {
                             "fontSize": 20,
                             "letterSpacing": 0.15,
                             "lineHeight": 30,
                             "marginVertical": 2,
                           },
-                          Array [
-                            Object {
+                          [
+                            {
                               "minHeight": 30,
                             },
-                            Object {
+                            {
                               "marginBottom": 2,
                             },
-                            Object {
+                            {
                               "color": "#3F51B5",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -683,12 +683,12 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
             </View>
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "paddingHorizontal": 16,
                   },
                   undefined,
-                  Object {
+                  {
                     "paddingBottom": 8,
                     "paddingHorizontal": 0,
                   },
@@ -697,7 +697,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
             >
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "flexDirection": "column",
                     "paddingHorizontal": 16,
@@ -717,7 +717,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 1,
                       "flexDirection": "row",
                       "marginBottom": 8,
@@ -728,7 +728,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   <View
                     onPress={[Function]}
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "row",
                         "marginBottom": 8,
@@ -738,7 +738,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -746,16 +746,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -766,7 +766,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     </View>
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                           "flexDirection": "column",
                         }
@@ -774,16 +774,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                               "textAlign": "center",
                             },
@@ -796,7 +796,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -804,16 +804,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -837,7 +837,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 1,
                       "flexDirection": "row",
                       "marginBottom": 8,
@@ -848,7 +848,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   <View
                     onPress={[Function]}
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "row",
                         "marginBottom": 8,
@@ -858,7 +858,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -866,16 +866,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -886,7 +886,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     </View>
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                           "flexDirection": "column",
                         }
@@ -894,16 +894,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                               "textAlign": "center",
                             },
@@ -916,7 +916,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -924,16 +924,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -957,7 +957,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 1,
                       "flexDirection": "row",
                       "marginBottom": 8,
@@ -968,7 +968,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   <View
                     onPress={[Function]}
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "row",
                         "marginBottom": 8,
@@ -978,7 +978,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -986,16 +986,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
@@ -1006,7 +1006,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     </View>
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                           "flexDirection": "column",
                         }
@@ -1014,16 +1014,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                               "textAlign": "center",
                             },
@@ -1036,7 +1036,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     <View
                       size={5}
                       style={
-                        Object {
+                        {
                           "flex": 5,
                           "flexDirection": "column",
                         }
@@ -1044,16 +1044,16 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                     >
                       <Text
                         style={
-                          Array [
-                            Object {
+                          [
+                            {
                               "color": "#000000",
                               "fontFamily": "System",
                               "fontWeight": "400",
                             },
-                            Object {
+                            {
                               "textAlign": "left",
                             },
-                            Object {
+                            {
                               "fontSize": 20,
                             },
                           ]
