@@ -1,4 +1,3 @@
-import { MAIN_AD_ID } from "@env";
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
 import { AdCard, AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
@@ -104,10 +103,7 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
             style={styles.card}
             onSeeEntry={(entryId) => navigation.push("Display", { entryId })}
           />
-          <AdCard
-            style={[styles.card, { marginBottom: 16 }]}
-            adUnitID={MAIN_AD_ID}
-          />
+          <AdCard style={[styles.card, { marginBottom: 16 }]} />
         </SlideInBody>
       </AppLayout>
     </View>

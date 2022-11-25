@@ -6,16 +6,12 @@ import { View } from "react-native";
 import { AppodealBanner } from "react-native-appodeal";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
-export interface AdCardProps extends BaseCardProps {
-  adUnitID: string;
-}
-
-const AdCard = ({ adUnitID, ...rest }: AdCardProps): JSX.Element | null => {
+const AdCard = (props: BaseCardProps): JSX.Element | null => {
   const { isAdFree } = useGetAdFreeStatus();
   const { isAnimating } = useGetAnimating();
 
   return isAdFree ? null : (
-    <BaseCard title="Ad" testID="adCardBase" {...rest}>
+    <BaseCard title="Ad" testID="adCardBase" {...props}>
       {!isAnimating ? (
         <AppodealBanner
           style={{

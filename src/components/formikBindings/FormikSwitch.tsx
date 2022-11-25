@@ -1,37 +1,35 @@
+import { useFormikContext } from "formik";
 import React, { forwardRef } from "react";
 import { StyleSheet, Switch as ReactNativeSwitch, View } from "react-native";
-import {
-  withFormikControl,
-  withFormikControlProps,
-  withNextInputAutoFocusInput,
-} from "react-native-formik";
 import { Switch, Text } from "react-native-paper";
-import { compose } from "recompose";
+import { FormikContext } from "typings/utils";
 
 export type FormikSwitchProps = {
   name: string;
   label: string;
 };
 
-const FormikSwitch = forwardRef<
-  ReactNativeSwitch,
-  FormikSwitchProps & withFormikControlProps
->(({ value, setFieldTouched, setFieldValue, ...rest }, ref) => {
-  return (
-    <View style={styles.root} ref={ref}>
-      <Text style={styles.text}>{rest.label}</Text>
-      <Switch
-        accessibilityLabel={rest.label}
-        value={value as unknown as boolean}
-        onValueChange={(v) => {
-          setFieldValue(v as unknown as string);
-          setFieldTouched();
-        }}
-        {...rest}
-      />
-    </View>
-  );
-});
+const FormikSwitch = forwardRef<ReactNativeSwitch, FormikSwitchProps>(
+  ({ name, label }, ref) => {
+    const { values, setFieldTouched, setFieldValue } =
+      useFormikContext<FormikContext>();
+    const value = values[name];
+
+    return (
+      <View style={styles.root} ref={ref}>
+        <Text style={styles.text}>{label}</Text>
+        <Switch
+          accessibilityLabel={label}
+          value={!!value}
+          onValueChange={(v) => {
+            setFieldValue(name, v);
+            setFieldTouched(name);
+          }}
+        />
+      </View>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   root: {
@@ -46,10 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose<
-  FormikSwitchProps & withFormikControlProps,
-  FormikSwitchProps
->(
-  withFormikControl,
-  withNextInputAutoFocusInput
-)(FormikSwitch);
+export default FormikSwitch;

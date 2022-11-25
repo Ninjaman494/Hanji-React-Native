@@ -2,7 +2,6 @@ import { ReactNativeFile } from "apollo-upload-client";
 import {
   AppBar,
   FormikCheckbox,
-  FormikForm,
   FormikRadioGroup,
   FormikTextField,
 } from "components";
@@ -135,7 +134,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
         >
           {({ handleSubmit, isSubmitting, isValid, dirty }) => (
             <>
-              <FormikForm style={styles.form}>
+              <View style={styles.form}>
                 <FormikTextField name="feedback" label="Feedback" multiline />
                 <FormikRadioGroup
                   name="type"
@@ -147,7 +146,7 @@ const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
                   label="Include screenshot?"
                   style={{ margin: -8, marginTop: 8 }}
                 />
-              </FormikForm>
+              </View>
               <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri }} />
                 <Text style={styles.imageText}>

@@ -1,9 +1,4 @@
-import {
-  FormikForm,
-  FormikSelect,
-  FormikSwitch,
-  FormikTextField,
-} from "components";
+import { FormikSelect, FormikSwitch, FormikTextField } from "components";
 import { Formik } from "formik";
 import { Favorite } from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
@@ -109,23 +104,21 @@ const AddFavoriteModal: FC<AddFavoriteModalProps> = ({
         {({ handleSubmit, values, isValid, isSubmitting, dirty }) => (
           <>
             <Dialog.Content>
-              <FormikForm>
-                <FormikTextField name="name" label="Name" />
-                <FormikSelect
-                  name="conjugation"
-                  label="Conjugation"
-                  list={conjugationValues}
-                />
-                {!!values.conjugation &&
-                  requiresFormality(values.conjugation) && (
-                    <FormikSelect
-                      name="formality"
-                      label="Formality"
-                      list={formalityValues}
-                    />
-                  )}
-                <FormikSwitch name="honorific" label="Honorific" />
-              </FormikForm>
+              <FormikTextField name="name" label="Name" />
+              <FormikSelect
+                name="conjugation"
+                label="Conjugation"
+                list={conjugationValues}
+              />
+              {!!values.conjugation &&
+                requiresFormality(values.conjugation) && (
+                  <FormikSelect
+                    name="formality"
+                    label="Formality"
+                    list={formalityValues}
+                  />
+                )}
+              <FormikSwitch name="honorific" label="Honorific" />
             </Dialog.Content>
             <Dialog.Actions>
               <Button onPress={onDismiss}>Cancel</Button>

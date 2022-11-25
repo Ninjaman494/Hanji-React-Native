@@ -1,8 +1,8 @@
 import { useFormikContext } from "formik";
-import { get } from "lodash";
 import React, { ComponentProps, FC } from "react";
 import { TextInput as NativeTextInput, View } from "react-native";
 import { HelperText, TextInput } from "react-native-paper";
+import { FormikContext } from "typings/utils";
 
 export type FormikTextFieldProps = ComponentProps<typeof TextInput> & {
   name: string;
@@ -17,15 +17,16 @@ const FormikTextField: FC<FormikTextFieldProps> = ({
   hideError,
   ...rest
 }) => {
-  const { handleChange, handleBlur, values, errors } = useFormikContext();
-  const error = get(errors, name);
+  const { handleChange, handleBlur, values, errors, touched } =
+    useFormikContext<FormikContext>();
+  const error = touched[name] ? errors[name] : undefined;
 
   return (
     <View style={style}>
       <TextInput
         mode="outlined"
         accessibilityLabel={rest.label}
-        value={get(values, name)}
+        value={values[name] as string}
         error={!!error && !hideError}
         onChangeText={handleChange(name)}
         onBlur={handleBlur(name)}
@@ -48,7 +49,7 @@ const FormikTextField: FC<FormikTextFieldProps> = ({
       />
       <HelperText
         type={error ? "error" : "info"}
-        visible={(!!error || !!hint) && !hideError}
+        visible={(!!error && !hideError) || !!hint}
       >
         {error ?? hint}
       </HelperText>
