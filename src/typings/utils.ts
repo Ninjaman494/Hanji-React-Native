@@ -1,1 +1,4 @@
-export type FormikContext = Record<string, string | number | boolean | Object>;
+export type FormikContext = Record<
+  string,
+  string | number | boolean | Record<string, unknown>
+>;

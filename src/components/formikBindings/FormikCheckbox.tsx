@@ -15,14 +15,15 @@ const FormikCheckbox: FC<FormikCheckbox> = ({
   style,
   ...rest
 }) => {
-  const { values, handleBlur, setFieldValue, setFieldTouched } = useFormikContext<FormikContext>();
+  const { values, handleBlur, setFieldValue, setFieldTouched } =
+    useFormikContext<FormikContext>();
   const value = values[name];
 
   return (
     <View style={[styles.root, style]} {...rest}>
       <Checkbox.Android
         accessibilityLabel={label}
-        status={!!value ? "checked" : "unchecked"}
+        status={value ? "checked" : "unchecked"}
         onBlur={handleBlur(name)}
         onPress={() => {
           setFieldValue(name, !value);
