@@ -34,7 +34,7 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
     setCheckDesc("Checking ad-free status...");
 
     try {
-      const { entitlements } = await Purchases.restoreTransactions();
+      const { entitlements } = await Purchases.restorePurchases();
       showSnackbar(
         entitlements.active.ad_free_entitlement
           ? "Ad-free purchase activated, thank you for supporting Hanji!"

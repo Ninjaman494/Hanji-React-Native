@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, FC, useEffect, useState } from "react";
 import Purchases, {
-  PurchaserInfo,
+  CustomerInfo,
   PurchasesError,
 } from "react-native-purchases";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
@@ -50,12 +50,12 @@ const UserProvider: FC = ({ children }) => {
       // Get ad free status
       try {
         const restoredPurchases = await AsyncStorage.getItem(RESTORED_KEY);
-        let info: PurchaserInfo;
+        let info: CustomerInfo;
         if (restoredPurchases) {
-          info = await Purchases.getPurchaserInfo();
+          info = await Purchases.getCustomerInfo();
         } else {
           // Make a network call to restore purchases via Google Play/App store
-          info = await Purchases.restoreTransactions();
+          info = await Purchases.restorePurchases();
           await AsyncStorage.setItem(RESTORED_KEY, "true");
         }
 

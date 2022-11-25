@@ -8,7 +8,7 @@ const product = {
   identifier: "id",
   title: "foobar",
   price: "1.99",
-  currency_code: "USD",
+  currencyCode: "USD",
 };
 (Purchases.getOfferings as jest.Mock).mockResolvedValue({
   current: { lifetime: { product } },
@@ -30,7 +30,7 @@ const {
 describe("buyAdFree function", () => {
   it("handles a successful purchase", async () => {
     (Purchases.purchasePackage as jest.Mock).mockResolvedValue({
-      purchaserInfo: {
+      customerInfo: {
         entitlements: { active: { ad_free_entitlement: true } },
       },
     });
@@ -60,7 +60,7 @@ describe("buyAdFree function", () => {
     expect(logEvent).toHaveBeenCalledWith({
       type: LOG_EVENT.PURCHASE,
       params: {
-        currency: product.currency_code,
+        currency: product.currencyCode,
         value: logItem.price,
         items: [logItem],
       },
