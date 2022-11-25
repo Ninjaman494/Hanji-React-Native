@@ -5,7 +5,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
   collapsable={false}
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -14,13 +14,13 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
     collapsable={false}
     nativeID="animatedComponent"
     style={
-      Object {
+      {
         "backgroundColor": "#ffffff",
         "borderColor": "rgba(0, 0, 0, 0.12)",
         "borderRadius": 10,
         "elevation": 5,
         "shadowColor": "#000000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 4,
           "width": 0,
         },
@@ -31,7 +31,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
   >
     <View
       accessibilityState={
-        Object {
+        {
           "disabled": true,
         }
       }
@@ -45,7 +45,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flexGrow": 1,
           "flexShrink": 1,
         }
@@ -53,17 +53,17 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "space-between",
               "paddingLeft": 16,
             },
-            Object {
+            {
               "minHeight": 72,
             },
-            Object {
+            {
               "marginTop": -8,
             },
           ]
@@ -71,8 +71,8 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "flex": 1,
                 "flexDirection": "column",
                 "justifyContent": "center",
@@ -83,40 +83,40 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(0, 0, 0, 0.87)",
                     "fontFamily": "System",
                     "fontWeight": "500",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 20,
                       "letterSpacing": 0.15,
                       "lineHeight": 30,
                       "marginVertical": 2,
                     },
-                    Array [
-                      Object {
+                    [
+                      {
                         "minHeight": 30,
                       },
-                      Object {
+                      {
                         "marginBottom": 2,
                       },
-                      Object {
+                      {
                         "color": "#3F51B5",
                         "fontSize": 16,
                         "fontWeight": "400",
@@ -136,7 +136,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             nativeID="animatedComponent"
             numberOfLines={1}
             style={
-              Object {
+              {
                 "alignSelf": "flex-end",
                 "backgroundColor": "#F44336",
                 "borderRadius": 15,
@@ -162,12 +162,12 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingHorizontal": 16,
             },
             undefined,
-            Object {
+            {
               "paddingBottom": 8,
               "paddingHorizontal": 0,
             },
@@ -176,7 +176,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 16,
             }
           }
@@ -184,16 +184,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           <Text
             selectable={true}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "fontSize": 24,
                   "marginTop": -24,
                 },
@@ -204,33 +204,33 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(0, 0, 0, 0.87)",
                     "fontFamily": "System",
                     "fontWeight": "500",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 20,
                       "letterSpacing": 0.15,
                       "lineHeight": 30,
                       "marginVertical": 2,
                     },
-                    Object {
+                    {
                       "color": "#3F51B5",
                       "fontSize": 16,
                       "fontWeight": "400",
@@ -247,16 +247,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           <Text
             selectable={true}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "fontSize": 20,
                 },
               ]
@@ -267,16 +267,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           <Text
             selectable={true}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#808080",
                   "fontSize": 18,
                 },
@@ -287,33 +287,33 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(0, 0, 0, 0.87)",
                     "fontFamily": "System",
                     "fontWeight": "500",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 20,
                       "letterSpacing": 0.15,
                       "lineHeight": 30,
                       "marginVertical": 2,
                     },
-                    Object {
+                    {
                       "color": "#3F51B5",
                       "fontSize": 16,
                       "fontWeight": "400",
@@ -329,7 +329,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           </Text>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 8,
               }
             }
@@ -337,16 +337,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "fontSize": 20,
                   },
                 ]
@@ -357,16 +357,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "#808080",
                     "fontSize": 18,
                   },
@@ -378,7 +378,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 8,
               }
             }
@@ -386,16 +386,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "fontSize": 20,
                   },
                 ]
@@ -406,16 +406,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "#808080",
                     "fontSize": 18,
                   },
@@ -427,7 +427,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 8,
               }
             }
@@ -435,16 +435,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "fontSize": 20,
                   },
                 ]
@@ -455,16 +455,16 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "#808080",
                     "fontSize": 18,
                   },
@@ -486,7 +486,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
   collapsable={false}
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -495,13 +495,13 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
     collapsable={false}
     nativeID="animatedComponent"
     style={
-      Object {
+      {
         "backgroundColor": "#ffffff",
         "borderColor": "rgba(0, 0, 0, 0.12)",
         "borderRadius": 10,
         "elevation": 5,
         "shadowColor": "#000000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 4,
           "width": 0,
         },
@@ -512,7 +512,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
   >
     <View
       accessibilityState={
-        Object {
+        {
           "disabled": true,
         }
       }
@@ -526,7 +526,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flexGrow": 1,
           "flexShrink": 1,
         }
@@ -534,17 +534,17 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "space-between",
               "paddingLeft": 16,
             },
-            Object {
+            {
               "minHeight": 72,
             },
-            Object {
+            {
               "marginTop": -8,
             },
           ]
@@ -552,8 +552,8 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "flex": 1,
                 "flexDirection": "column",
                 "justifyContent": "center",
@@ -564,40 +564,40 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(0, 0, 0, 0.87)",
                     "fontFamily": "System",
                     "fontWeight": "500",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 20,
                       "letterSpacing": 0.15,
                       "lineHeight": 30,
                       "marginVertical": 2,
                     },
-                    Array [
-                      Object {
+                    [
+                      {
                         "minHeight": 30,
                       },
-                      Object {
+                      {
                         "marginBottom": 2,
                       },
-                      Object {
+                      {
                         "color": "#3F51B5",
                         "fontSize": 16,
                         "fontWeight": "400",
@@ -617,7 +617,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             nativeID="animatedComponent"
             numberOfLines={1}
             style={
-              Object {
+              {
                 "alignSelf": "flex-end",
                 "backgroundColor": "#F44336",
                 "borderRadius": 15,
@@ -643,12 +643,12 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingHorizontal": 16,
             },
             undefined,
-            Object {
+            {
               "paddingBottom": 8,
               "paddingHorizontal": 0,
             },
@@ -657,7 +657,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 16,
             }
           }
@@ -665,16 +665,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           <Text
             selectable={true}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "fontSize": 24,
                   "marginTop": -24,
                 },
@@ -685,33 +685,33 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(0, 0, 0, 0.87)",
                     "fontFamily": "System",
                     "fontWeight": "500",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 20,
                       "letterSpacing": 0.15,
                       "lineHeight": 30,
                       "marginVertical": 2,
                     },
-                    Object {
+                    {
                       "color": "#3F51B5",
                       "fontSize": 16,
                       "fontWeight": "400",
@@ -728,16 +728,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           <Text
             selectable={true}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "fontSize": 20,
                 },
               ]
@@ -748,16 +748,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           <Text
             selectable={true}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#808080",
                   "fontSize": 18,
                 },
@@ -768,33 +768,33 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
                 },
-                Object {
+                {
                   "textAlign": "left",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(0, 0, 0, 0.87)",
                     "fontFamily": "System",
                     "fontWeight": "500",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 20,
                       "letterSpacing": 0.15,
                       "lineHeight": 30,
                       "marginVertical": 2,
                     },
-                    Object {
+                    {
                       "color": "#3F51B5",
                       "fontSize": 16,
                       "fontWeight": "400",
@@ -810,7 +810,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           </Text>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 8,
               }
             }
@@ -818,16 +818,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "fontSize": 20,
                   },
                 ]
@@ -838,16 +838,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "#808080",
                     "fontSize": 18,
                   },
@@ -859,7 +859,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 8,
               }
             }
@@ -867,16 +867,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "fontSize": 20,
                   },
                 ]
@@ -887,16 +887,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "#808080",
                     "fontSize": 18,
                   },
@@ -908,7 +908,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 8,
               }
             }
@@ -916,16 +916,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "fontSize": 20,
                   },
                 ]
@@ -936,16 +936,16 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
             <Text
               selectable={true}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#000000",
                     "fontFamily": "System",
                     "fontWeight": "400",
                   },
-                  Object {
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "#808080",
                     "fontSize": 18,
                   },
