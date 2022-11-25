@@ -5,7 +5,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
   collapsable={false}
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -14,13 +14,13 @@ exports[`ConjugationCard displays conjugations 1`] = `
     collapsable={false}
     nativeID="animatedComponent"
     style={
-      Object {
+      {
         "backgroundColor": "#ffffff",
         "borderColor": "rgba(0, 0, 0, 0.12)",
         "borderRadius": 10,
         "elevation": 5,
         "shadowColor": "#000000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 4,
           "width": 0,
         },
@@ -31,7 +31,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
   >
     <View
       accessibilityState={
-        Object {
+        {
           "disabled": true,
         }
       }
@@ -45,7 +45,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flexGrow": 1,
           "flexShrink": 1,
         }
@@ -53,12 +53,12 @@ exports[`ConjugationCard displays conjugations 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingHorizontal": 16,
             },
             undefined,
-            Object {
+            {
               "paddingBottom": 8,
               "paddingHorizontal": 0,
             },
@@ -67,7 +67,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "flexDirection": "column",
               "paddingHorizontal": 16,
@@ -87,7 +87,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "flex": 1,
                 "flexDirection": "row",
                 "marginBottom": 8,
@@ -98,7 +98,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
             <View
               onPress={[Function]}
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "marginBottom": 8,
@@ -108,7 +108,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               <View
                 size={5}
                 style={
-                  Object {
+                  {
                     "flex": 5,
                     "flexDirection": "column",
                   }
@@ -116,16 +116,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                       },
                     ]
@@ -136,7 +136,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "flexDirection": "column",
                   }
@@ -144,16 +144,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                         "textAlign": "center",
                       },
@@ -166,7 +166,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               <View
                 size={5}
                 style={
-                  Object {
+                  {
                     "flex": 5,
                     "flexDirection": "column",
                   }
@@ -174,16 +174,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                       },
                     ]
@@ -207,7 +207,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "flex": 1,
                 "flexDirection": "row",
                 "marginBottom": 8,
@@ -218,7 +218,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
             <View
               onPress={[Function]}
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "marginBottom": 8,
@@ -228,7 +228,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               <View
                 size={5}
                 style={
-                  Object {
+                  {
                     "flex": 5,
                     "flexDirection": "column",
                   }
@@ -236,16 +236,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                       },
                     ]
@@ -256,7 +256,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "flexDirection": "column",
                   }
@@ -264,16 +264,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                         "textAlign": "center",
                       },
@@ -286,7 +286,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               <View
                 size={5}
                 style={
-                  Object {
+                  {
                     "flex": 5,
                     "flexDirection": "column",
                   }
@@ -294,16 +294,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                       },
                     ]
@@ -327,7 +327,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "flex": 1,
                 "flexDirection": "row",
                 "marginBottom": 8,
@@ -338,7 +338,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
             <View
               onPress={[Function]}
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "marginBottom": 8,
@@ -348,7 +348,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               <View
                 size={5}
                 style={
-                  Object {
+                  {
                     "flex": 5,
                     "flexDirection": "column",
                   }
@@ -356,16 +356,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                       },
                     ]
@@ -376,7 +376,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "flexDirection": "column",
                   }
@@ -384,16 +384,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                         "textAlign": "center",
                       },
@@ -406,7 +406,7 @@ exports[`ConjugationCard displays conjugations 1`] = `
               <View
                 size={5}
                 style={
-                  Object {
+                  {
                     "flex": 5,
                     "flexDirection": "column",
                   }
@@ -414,16 +414,16 @@ exports[`ConjugationCard displays conjugations 1`] = `
               >
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
                       },
-                      Object {
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "fontSize": 20,
                       },
                     ]
