@@ -24,15 +24,15 @@ const buyAdFree = async (onError: (e: string) => void): Promise<void> => {
         },
       });
 
-      const { purchaserInfo } = await Purchases.purchasePackage(
+      const { customerInfo } = await Purchases.purchasePackage(
         current.lifetime
       );
 
-      if (purchaserInfo.entitlements.active.ad_free_entitlement) {
+      if (customerInfo.entitlements.active.ad_free_entitlement) {
         await logEvent({
           type: LOG_EVENT.PURCHASE,
           params: {
-            currency: product.currency_code,
+            currency: product.currencyCode,
             value: logItem.price,
             items: [logItem],
           },

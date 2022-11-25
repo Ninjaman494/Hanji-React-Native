@@ -122,7 +122,7 @@ describe("SettingsPage", () => {
 
   describe("Ad free status check", () => {
     it("handles upgraded status", async () => {
-      (Purchases.restoreTransactions as jest.Mock).mockResolvedValue({
+      (Purchases.restorePurchases as jest.Mock).mockResolvedValue({
         entitlements: { active: { ad_free_entitlement: true } },
       });
 
@@ -138,7 +138,7 @@ describe("SettingsPage", () => {
     });
 
     it("handles not upgraded status", async () => {
-      (Purchases.restoreTransactions as jest.Mock).mockResolvedValue({
+      (Purchases.restorePurchases as jest.Mock).mockResolvedValue({
         entitlements: { active: { ad_free_entitlement: false } },
       });
 
@@ -153,7 +153,7 @@ describe("SettingsPage", () => {
 
     it("handles an error", async () => {
       const error = new Error();
-      (Purchases.restoreTransactions as jest.Mock).mockRejectedValue(error);
+      (Purchases.restorePurchases as jest.Mock).mockRejectedValue(error);
 
       const result = render(<SettingsPage {...(props as any)} />);
 
