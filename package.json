@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
-    "@babel/core": "~7.18.0",
+    "@babel/core": "~7.20.0",
     "@expo-google-fonts/laila": "^0.2.0",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-firebase/analytics": "^14.0.1",
@@ -60,7 +60,7 @@
     "react-native-url-polyfill": "^1.2.0",
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^9.0.0",
-    "react-native-view-shot": "3.3.0",
+    "react-native-view-shot": "3.5.0",
     "react-native-web": "0.17.1",
     "sentry-expo": "^4.0.0",
     "yup": "^0.32.9"
