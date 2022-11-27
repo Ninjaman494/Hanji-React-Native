@@ -1,10 +1,10 @@
 jest.mock("hooks/useGetEntry");
 jest.mock("hooks/useGetFavorites");
-jest.mock("hooks/useGetFavoritesConjugations");
+jest.mock("hooks/useConjugations");
 
+import useConjugations from "hooks/useConjugations";
 import useGetEntry from "hooks/useGetEntry";
 import useGetFavorites from "hooks/useGetFavorites";
-import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import DisplayPage from "pages/display/DisplayPage";
 import React from "react";
 import "react-native";
@@ -12,26 +12,23 @@ import { Formality, Tense } from "utils/conjugationTypes";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 
-(useGetFavorites as jest.Mock).mockReturnValue({
-  loading: false,
-  favorites: [
-    {
-      name: "favorite 1",
-      conjugationName: "declarative past informal high",
-      honorific: false,
-    },
-    {
-      name: "favorite 2",
-      conjugationName: "declarative present informal high",
-      honorific: false,
-    },
-    {
-      name: "favorite 3",
-      conjugationName: "declarative future informal high",
-      honorific: false,
-    },
-  ],
-});
+const favorites = [
+  {
+    name: "favorite 1",
+    conjugationName: "declarative past informal high",
+    honorific: false,
+  },
+  {
+    name: "favorite 2",
+    conjugationName: "declarative present informal high",
+    honorific: false,
+  },
+  {
+    name: "favorite 3",
+    conjugationName: "declarative future informal high",
+    honorific: false,
+  },
+];
 
 const entry = {
   id: "id",
@@ -51,10 +48,12 @@ const conjBase = {
   reasons: [],
 };
 
-(useGetFavoritesConjugations as jest.Mock).mockReturnValue({
+(useGetFavorites as jest.Mock).mockReturnValue({ loading: false, favorites });
+
+(useConjugations as jest.Mock).mockReturnValue({
   loading: false,
   data: {
-    favorites: [
+    conjuations: [
       { name: "declarative past informal high", ...conjBase },
       { name: "declarative present informal high", ...conjBase },
       { name: "declarative future informal high", ...conjBase },
@@ -85,6 +84,16 @@ describe("DisplayPage", () => {
       expect(result.queryByText("Examples")).toBeFalsy();
       expect(result.queryByText("Synonyms")).toBeFalsy();
       expect(result.queryByText("Antonyms")).toBeFalsy();
+
+      expect(useConjugations).toHaveBeenCalledWith(
+        {
+          stem: entry.term,
+          isAdj: false,
+          honorific: false,
+          conjugations: favorites,
+        },
+        { skip: true }
+      );
     });
   });
 
@@ -116,6 +125,16 @@ describe("DisplayPage", () => {
       expect(result.queryByText("Examples")).toBeTruthy();
       expect(result.queryByText("Synonyms")).toBeTruthy();
       expect(result.queryByText("Antonyms")).toBeTruthy();
+
+      expect(useConjugations).toHaveBeenCalledWith(
+        {
+          stem: entry.term,
+          isAdj: false,
+          honorific: false,
+          conjugations: favorites,
+        },
+        { skip: false }
+      );
     });
 
     fireEvent.press(result.getByText("See all"));

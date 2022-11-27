@@ -1,8 +1,8 @@
 import { AdCard, AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
+import useConjugations from "hooks/useConjugations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
-import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
@@ -47,17 +47,18 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
     loading: conjLoading,
     error: conjError,
     data: conjData,
-  } = useGetFavoritesConjugations(
+  } = useConjugations(
     {
       stem: stem as string,
       isAdj: isAdj,
-      favorites: favorites as Favorite[],
+      honorific: false, // Required in conjugations, is ignored by server
+      conjugations: favorites as Favorite[],
     },
     {
       skip: !entry || !isAdjVerb || favorites?.length === 0,
     }
   );
-  const conjugations = conjData?.favorites;
+  const conjugations = conjData?.conjugations;
 
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
