@@ -12,20 +12,17 @@ import { Formality, Tense } from "utils/conjugationTypes";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 
-const favorites = [
+const favConjugations = [
   {
-    name: "favorite 1",
-    conjugationName: "declarative past informal high",
+    name: "declarative past informal high",
     honorific: false,
   },
   {
-    name: "favorite 2",
-    conjugationName: "declarative present informal high",
+    name: "declarative present informal high",
     honorific: false,
   },
   {
-    name: "favorite 3",
-    conjugationName: "declarative future informal high",
+    name: "declarative future informal high",
     honorific: false,
   },
 ];
@@ -48,7 +45,14 @@ const conjBase = {
   reasons: [],
 };
 
-(useGetFavorites as jest.Mock).mockReturnValue({ loading: false, favorites });
+(useGetFavorites as jest.Mock).mockReturnValue({
+  loading: false,
+  favorites: favConjugations.map(({ name, honorific }, i) => ({
+    name: `Favorite ${i + 1}`,
+    conjugationName: name,
+    honorific,
+  })),
+});
 
 (useConjugations as jest.Mock).mockReturnValue({
   loading: false,
@@ -90,7 +94,7 @@ describe("DisplayPage", () => {
           stem: entry.term,
           isAdj: false,
           honorific: false,
-          conjugations: favorites,
+          conjugations: favConjugations,
         },
         { skip: true }
       );
@@ -131,7 +135,7 @@ describe("DisplayPage", () => {
           stem: entry.term,
           isAdj: false,
           honorific: false,
-          conjugations: favorites,
+          conjugations: favConjugations,
         },
         { skip: false }
       );
