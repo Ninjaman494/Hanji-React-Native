@@ -1,6 +1,5 @@
 import { gql, QueryHookOptions, QueryResult, useQuery } from "@apollo/client";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ConjugationName, Formality, Tense } from "../utils/conjugationTypes";
 
 const CONJUGATIONS = gql`
@@ -9,7 +8,7 @@ const CONJUGATIONS = gql`
     $isAdj: Boolean!
     $honorific: Boolean!
     $regular: Boolean
-    $conjugations: [String]
+    $conjugations: [ConjugationInput]
   ) {
     conjugations(
       stem: $stem
@@ -48,7 +47,7 @@ export interface UseConjugationsVars {
   isAdj: boolean;
   honorific: boolean;
   regular?: boolean;
-  conjugations?: string[];
+  conjugations?: { name: string; honorific: boolean }[];
 }
 
 type ConjugationsResponse = {
