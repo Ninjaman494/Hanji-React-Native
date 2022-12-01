@@ -22,7 +22,7 @@ const AdCard = (props: BaseCardProps): JSX.Element | null => {
 
   return (
     <BaseCard title="Ad" testID="adCardBase" {...props}>
-      {!showAd ? (
+      {showAd ? (
         <AppodealBanner
           style={{
             height: 250,
