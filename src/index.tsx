@@ -7,14 +7,12 @@ import {
   useNavigationContainerRef,
 } from "@react-navigation/native";
 import { createUploadLink } from "apollo-upload-client";
-import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import AnimationProvider from "providers/AnimationProvider";
-import ChangeLog from "providers/ChangeLog";
 import RatingHandler from "providers/RatingHandler";
 import SnackbarProvider from "providers/SnackbarProvider";
 import UserProvider from "providers/UserProvider";
@@ -88,7 +86,6 @@ export default function Index(): JSX.Element {
                 <SnackbarProvider>
                   <AnimationProvider>
                     <RatingHandler numSessions={5} />
-                    <ChangeLog currentVersion={nativeBuildVersion as string} />
                     <View style={styles.container}>
                       <Pages navRef={navRef} />
                     </View>
