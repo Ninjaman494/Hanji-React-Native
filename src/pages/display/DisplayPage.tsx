@@ -59,7 +59,11 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
       conjugations: favConjugations,
     },
     {
-      skip: !entry || !isAdjVerb || favorites?.length === 0,
+      skip:
+        !entry ||
+        !isAdjVerb ||
+        !favConjugations ||
+        favConjugations?.length === 0,
     }
   );
   const conjugations = conjData?.conjugations;
