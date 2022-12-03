@@ -14,10 +14,6 @@ const setupMessaging = (): (() => void) => {
       }
     });
 
-  messaging()
-    .getToken()
-    .then((token) => console.log("TOKEN", token));
-
   const unsubscribe = messaging().onMessage(async (msg) => {
     console.log("MESSAGE RECEIVED:", JSON.stringify(msg, null, 2));
   });
