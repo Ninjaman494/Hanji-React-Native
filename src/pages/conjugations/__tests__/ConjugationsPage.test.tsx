@@ -23,11 +23,10 @@ const conjugation = {
   romanization: "romanization",
   reasons: [],
 };
-const conjugations = [conjugation, conjugation, conjugation];
 
 (useConjugations as jest.Mock).mockReturnValue({
   loading: false,
-  data: { conjugations },
+  data: { getConjugations: [conjugation, conjugation, conjugation] },
 });
 
 const props = {
@@ -48,9 +47,11 @@ describe("ConjugationsPage", () => {
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem",
-          isAdj: true,
-          honorific: false,
+          input: {
+            stem: "stem",
+            isAdj: true,
+            honorific: false,
+          },
         },
         hookOptions
       );
@@ -65,9 +66,11 @@ describe("ConjugationsPage", () => {
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem",
-          isAdj: true,
-          honorific: true,
+          input: {
+            stem: "stem",
+            isAdj: true,
+            honorific: true,
+          },
         },
         hookOptions
       );
