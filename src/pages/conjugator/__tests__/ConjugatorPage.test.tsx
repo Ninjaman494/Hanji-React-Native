@@ -20,7 +20,6 @@ const conjugation = {
   romanization: "romanization",
   reasons: [],
 };
-const conjugations = [conjugation, conjugation, conjugation];
 
 const hookOptions = {
   skip: false,
@@ -35,7 +34,7 @@ const hookOptions = {
 
 (useConjugations as jest.Mock).mockReturnValue({
   loading: false,
-  data: { conjugations },
+  data: { getConjugations: [conjugation, conjugation, conjugation] },
 });
 
 const props = {
@@ -53,10 +52,12 @@ describe("Conjugator Page", () => {
       expect(useGetStems).toHaveBeenCalled();
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem 1",
-          isAdj: false,
-          regular: true,
-          honorific: false,
+          input: {
+            stem: "stem 1",
+            isAdj: false,
+            regular: true,
+            honorific: false,
+          },
         },
         hookOptions
       );
@@ -75,10 +76,12 @@ describe("Conjugator Page", () => {
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem 2",
-          isAdj: false,
-          regular: true,
-          honorific: false,
+          input: {
+            stem: "stem 2",
+            isAdj: false,
+            regular: true,
+            honorific: false,
+          },
         },
         hookOptions
       );
@@ -93,10 +96,12 @@ describe("Conjugator Page", () => {
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem 2",
-          isAdj: true,
-          regular: true,
-          honorific: false,
+          input: {
+            stem: "stem 2",
+            isAdj: true,
+            regular: true,
+            honorific: false,
+          },
         },
         hookOptions
       );
@@ -111,10 +116,12 @@ describe("Conjugator Page", () => {
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem 2",
-          isAdj: true,
-          regular: false,
-          honorific: false,
+          input: {
+            stem: "stem 2",
+            isAdj: true,
+            regular: false,
+            honorific: false,
+          },
         },
         hookOptions
       );
@@ -129,10 +136,12 @@ describe("Conjugator Page", () => {
     await waitFor(() => {
       expect(useConjugations).toHaveBeenCalledWith(
         {
-          stem: "stem 1",
-          isAdj: false,
-          regular: true,
-          honorific: true,
+          input: {
+            stem: "stem 1",
+            isAdj: false,
+            regular: true,
+            honorific: true,
+          },
         },
         hookOptions
       );

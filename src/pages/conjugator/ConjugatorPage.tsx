@@ -65,14 +65,17 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
   });
 
   const {
-    data: conjugations,
+    data: conjData,
     loading: conjLoading,
     error: conjError,
-  } = useConjugations(formValues, {
-    skip: stems?.length === 0,
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: "cache-and-network",
-  });
+  } = useConjugations(
+    { input: formValues },
+    {
+      skip: stems?.length === 0,
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: "cache-and-network",
+    }
+  );
 
   // Value used for transition animations on container
   const containerY = useRef(new Animated.Value(0)).current;
@@ -171,7 +174,7 @@ const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
             />
           ) : (
             <ConjugationsList
-              conjugations={conjugations?.conjugations ?? []}
+              conjugations={conjData?.getConjugations ?? []}
               style={{
                 transform: [{ translateY: containerTranslate }],
               }}

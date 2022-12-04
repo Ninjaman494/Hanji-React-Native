@@ -34,10 +34,10 @@ const ConjugationsPage: React.FC<ScreenProps<"Conjugations">> = ({
   });
 
   const { loading, error, data } = useConjugations(
-    { stem, isAdj, honorific },
+    { input: { stem, isAdj, honorific } },
     { notifyOnNetworkStatusChange: true, fetchPolicy: "cache-and-network" }
   );
-  const conjugations = data?.conjugations;
+  const conjugations = data?.getConjugations;
 
   // Value used for transition animations on container
   const containerY = useRef(new Animated.Value(0)).current;

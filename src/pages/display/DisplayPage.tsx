@@ -1,8 +1,8 @@
 import { AdCard, AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
+import useConjugations from "hooks/useConjugations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
-import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
-import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
+import useGetFavorites from "hooks/useGetFavorites";
 import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
@@ -20,6 +20,10 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
 
   // Get favorites from storage, use defaults if none are written
   const { favorites } = useGetFavorites();
+  const favConjugations = favorites?.map(({ conjugationName, honorific }) => ({
+    name: conjugationName,
+    honorific,
+  }));
 
   const {
     loading: entryLoading,
@@ -28,10 +32,8 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
   } = useGetEntry(id as string);
   const entry = entryData?.entry;
 
-  const stem = entry?.term;
+  const stem = entry?.term as string;
   const isAdj = entry?.pos === "Adjective";
-  const honorific = false;
-
   const isAdjVerb = isAdj || entry?.pos === "Verb";
 
   useEffect(() => {
@@ -47,17 +49,17 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
     loading: conjLoading,
     error: conjError,
     data: conjData,
-  } = useGetFavoritesConjugations(
+  } = useConjugations(
+    { input: { stem, isAdj, conjugations: favConjugations } },
     {
-      stem: stem as string,
-      isAdj: isAdj,
-      favorites: favorites as Favorite[],
-    },
-    {
-      skip: !entry || !isAdjVerb || !favorites || favorites?.length === 0,
+      skip:
+        !entry ||
+        !isAdjVerb ||
+        !favConjugations ||
+        favConjugations?.length === 0,
     }
   );
-  const conjugations = conjData?.favorites;
+  const conjugations = conjData?.getConjugations;
 
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
@@ -90,9 +92,9 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
               style={styles.card}
               onPress={() =>
                 navigation.push("Conjugations", {
-                  stem: stem as string,
+                  stem,
                   isAdj,
-                  honorific,
+                  honorific: false,
                 })
               }
             />
