@@ -1,8 +1,8 @@
 import { AdCard, AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
-import useConjugations from "hooks/useConjugations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
-import useGetFavorites from "hooks/useGetFavorites";
+import useGetFavorites, { Favorite } from "hooks/useGetFavorites";
+import useGetFavoritesConjugations from "hooks/useGetFavoritesConjugations";
 import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
@@ -20,10 +20,6 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
 
   // Get favorites from storage, use defaults if none are written
   const { favorites } = useGetFavorites();
-  const favConjugations = favorites?.map(({ conjugationName, honorific }) => ({
-    name: conjugationName,
-    honorific,
-  }));
 
   const {
     loading: entryLoading,
@@ -51,22 +47,17 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
     loading: conjLoading,
     error: conjError,
     data: conjData,
-  } = useConjugations(
+  } = useGetFavoritesConjugations(
     {
       stem: stem as string,
       isAdj: isAdj,
-      honorific: false, // Required in conjugations, is ignored by server
-      conjugations: favConjugations,
+      favorites: favorites as Favorite[],
     },
     {
-      skip:
-        !entry ||
-        !isAdjVerb ||
-        !favConjugations ||
-        favConjugations?.length === 0,
+      skip: !entry || !isAdjVerb || !favorites || favorites?.length === 0,
     }
   );
-  const conjugations = conjData?.conjugations;
+  const conjugations = conjData?.favorites;
 
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
