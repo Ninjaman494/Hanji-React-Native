@@ -41,7 +41,8 @@ jest.mock("expo-constants", () => ({
   refetch: jest.fn(),
 });
 
-(useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false });
+const setAdFree= jest.fn();
+(useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false, setAdFree });
 
 const showSnackbar = jest.fn();
 const showError = jest.fn();
@@ -131,6 +132,7 @@ describe("SettingsPage", () => {
       fireEvent.press(result.getByText("Check Ad-free Status"));
 
       await waitFor(() => {
+        expect(setAdFree).toHaveBeenCalledWith(true);
         expect(showSnackbar).toHaveBeenCalledWith(
           "Ad-free purchase activated, thank you for supporting Hanji!"
         );
@@ -147,6 +149,7 @@ describe("SettingsPage", () => {
       fireEvent.press(result.getByText("Check Ad-free Status"));
 
       await waitFor(() => {
+        expect(setAdFree).toHaveBeenCalledWith(false);
         expect(showSnackbar).toHaveBeenCalledWith("Ad-free purchase not found");
       });
     });
@@ -160,6 +163,7 @@ describe("SettingsPage", () => {
       fireEvent.press(result.getByText("Check Ad-free Status"));
 
       await waitFor(() => {
+        expect(setAdFree).not.toHaveBeenCalled();
         expect(showSnackbar).toHaveBeenCalledWith(
           "An error occurred. Please try again later or contact support"
         );
