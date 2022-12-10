@@ -1,18 +1,28 @@
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
-import useGetAnimating from "hooks/useGetAnimating";
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
 import "react-native";
 import { View } from "react-native";
 import { AppodealBanner } from "react-native-appodeal";
+import { NavigationProps } from "typings/navigation";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 const AdCard = (props: BaseCardProps): JSX.Element | null => {
-  const { isAdFree } = useGetAdFreeStatus();
-  const { isAnimating } = useGetAnimating();
+  const navigation = useNavigation<NavigationProps>();
+  const [showAd, setShowAd] = useState(false);
 
-  return isAdFree ? null : (
+  useEffect(() => {
+    const updateBannerVisibility = () => setShowAd(true);
+
+    navigation.addListener("transitionEnd", updateBannerVisibility);
+
+    return () => {
+      navigation.removeListener("transitionEnd", updateBannerVisibility);
+    };
+  });
+
+  return (
     <BaseCard title="Ad" testID="adCardBase" {...props}>
-      {!isAnimating ? (
+      {showAd ? (
         <AppodealBanner
           style={{
             height: 250,

@@ -76,29 +76,29 @@ export default function Index(): JSX.Element {
 
   return (
     <ApolloProvider client={client}>
-      <PaperProvider theme={theme}>
-        <ViewShotProvider>
-          <UserProvider>
-            <NavigationContainer ref={navRef}>
-              <View style={styles.parent}>
-                <StatusBar
-                  backgroundColor={theme.colors.primaryDark}
-                  style="light"
-                />
+      <ViewShotProvider>
+        <UserProvider>
+          <NavigationContainer ref={navRef}>
+            <View style={styles.parent}>
+              <StatusBar
+                backgroundColor={theme.colors.primaryDark}
+                style="light"
+              />
+              <PaperProvider theme={theme}>
                 <SnackbarProvider>
                   <AnimationProvider>
-                    <RatingHandler numSessions={5} />
                     <ChangeLog currentVersion={nativeBuildVersion as string} />
+                    <RatingHandler numSessions={5} />
                     <View style={styles.container}>
                       <Pages navRef={navRef} />
                     </View>
                   </AnimationProvider>
                 </SnackbarProvider>
-              </View>
-            </NavigationContainer>
-          </UserProvider>
-        </ViewShotProvider>
-      </PaperProvider>
+              </PaperProvider>
+            </View>
+          </NavigationContainer>
+        </UserProvider>
+      </ViewShotProvider>
     </ApolloProvider>
   );
 }
