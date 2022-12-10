@@ -57,7 +57,7 @@ const conjBase = {
 (useConjugations as jest.Mock).mockReturnValue({
   loading: false,
   data: {
-    conjuations: [
+    getConjugations: [
       { name: "declarative past informal high", ...conjBase },
       { name: "declarative present informal high", ...conjBase },
       { name: "declarative future informal high", ...conjBase },
@@ -99,6 +99,17 @@ describe("DisplayPage", () => {
         { skip: true }
       );
     });
+
+    expect(useConjugations).toHaveBeenCalledWith(
+      {
+        input: {
+          stem: entry.term,
+          isAdj: false,
+          conjugations: favConjugations,
+        },
+      },
+      { skip: true }
+    );
   });
 
   it("shows cards correctly", async () => {
@@ -140,6 +151,17 @@ describe("DisplayPage", () => {
         { skip: false }
       );
     });
+
+    expect(useConjugations).toHaveBeenCalledWith(
+      {
+        input: {
+          stem: entry.term,
+          isAdj: false,
+          conjugations: favConjugations,
+        },
+      },
+      { skip: false }
+    );
 
     fireEvent.press(result.getByText("See all"));
     await waitFor(() =>

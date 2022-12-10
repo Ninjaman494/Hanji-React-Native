@@ -3,20 +3,8 @@ import { useEffect, useState } from "react";
 import { ConjugationName, Formality, Tense } from "../utils/conjugationTypes";
 
 const CONJUGATIONS = gql`
-  query ConjugationsQuery(
-    $stem: String!
-    $isAdj: Boolean!
-    $honorific: Boolean!
-    $regular: Boolean
-    $conjugations: [ConjugationInput]
-  ) {
-    conjugations(
-      stem: $stem
-      isAdj: $isAdj
-      honorific: $honorific
-      regular: $regular
-      conjugations: $conjugations
-    ) {
+  query GetConjugations($input: ConjugationsInput!) {
+    getConjugations(input: $input) {
       name
       conjugation
       type
@@ -43,15 +31,20 @@ export type Conjugation = {
 };
 
 export interface UseConjugationsVars {
-  stem: string;
-  isAdj: boolean;
-  honorific: boolean;
-  regular?: boolean;
-  conjugations?: { name: string; honorific: boolean }[];
+  input: {
+    stem: string;
+    isAdj: boolean;
+    honorific?: boolean;
+    regular?: boolean;
+    conjugations?: {
+      name: string;
+      honorific: boolean;
+    }[];
+  };
 }
 
 type ConjugationsResponse = {
-  conjugations?: Conjugation[];
+  getConjugations?: Conjugation[];
 };
 
 const useConjugations = (
@@ -70,7 +63,7 @@ const useConjugations = (
   useEffect(() => {
     if (data) {
       setConjugations(
-        data.conjugations?.map((c) => ({
+        data.getConjugations?.map((c) => ({
           ...c,
           speechLevel: c.speechLevel
             .toLowerCase()
@@ -81,7 +74,7 @@ const useConjugations = (
     }
   }, [data, setConjugations]);
 
-  return { data: { conjugations }, ...rest };
+  return { data: { getConjugations: conjugations }, ...rest };
 };
 
 export default useConjugations;

@@ -32,10 +32,8 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
   } = useGetEntry(id as string);
   const entry = entryData?.entry;
 
-  const stem = entry?.term;
+  const stem = entry?.term as string;
   const isAdj = entry?.pos === "Adjective";
-  const honorific = false;
-
   const isAdjVerb = isAdj || entry?.pos === "Verb";
 
   useEffect(() => {
@@ -52,17 +50,16 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
     error: conjError,
     data: conjData,
   } = useConjugations(
+    { input: { stem, isAdj, conjugations: favConjugations } },
     {
-      stem: stem as string,
-      isAdj: isAdj,
-      honorific: false, // Required in conjugations, is ignored by server
-      conjugations: favConjugations,
-    },
-    {
-      skip: !entry || !isAdjVerb || favorites?.length === 0,
+      skip:
+        !entry ||
+        !isAdjVerb ||
+        !favConjugations ||
+        favConjugations?.length === 0,
     }
   );
-  const conjugations = conjData?.conjugations;
+  const conjugations = conjData?.getConjugations;
 
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
@@ -95,9 +92,9 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
               style={styles.card}
               onPress={() =>
                 navigation.push("Conjugations", {
-                  stem: stem as string,
+                  stem,
                   isAdj,
-                  honorific,
+                  honorific: false,
                 })
               }
             />
