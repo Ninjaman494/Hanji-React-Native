@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import React, { useEffect, useState } from "react";
 import "react-native";
 import { View } from "react-native";
@@ -7,10 +8,13 @@ import { NavigationProps } from "typings/navigation";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 const AdCard = (props: BaseCardProps): JSX.Element | null => {
+  const { isAdFree } = useGetAdFreeStatus();
   const navigation = useNavigation<NavigationProps>();
   const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
+    if (isAdFree) return;
+
     const updateBannerVisibility = () => setShowAd(true);
 
     navigation.addListener("transitionEnd", updateBannerVisibility);
@@ -18,9 +22,9 @@ const AdCard = (props: BaseCardProps): JSX.Element | null => {
     return () => {
       navigation.removeListener("transitionEnd", updateBannerVisibility);
     };
-  });
+  }, [isAdFree]);
 
-  return (
+  return isAdFree ? null : (
     <BaseCard title="Ad" testID="adCardBase" {...props}>
       {showAd ? (
         <AppodealBanner
