@@ -88,16 +88,6 @@ describe("DisplayPage", () => {
       expect(result.queryByText("Examples")).toBeFalsy();
       expect(result.queryByText("Synonyms")).toBeFalsy();
       expect(result.queryByText("Antonyms")).toBeFalsy();
-
-      expect(useConjugations).toHaveBeenCalledWith(
-        {
-          stem: entry.term,
-          isAdj: false,
-          honorific: false,
-          conjugations: favConjugations,
-        },
-        { skip: true }
-      );
     });
 
     expect(useConjugations).toHaveBeenCalledWith(
@@ -140,16 +130,6 @@ describe("DisplayPage", () => {
       expect(result.queryByText("Examples")).toBeTruthy();
       expect(result.queryByText("Synonyms")).toBeTruthy();
       expect(result.queryByText("Antonyms")).toBeTruthy();
-
-      expect(useConjugations).toHaveBeenCalledWith(
-        {
-          stem: entry.term,
-          isAdj: false,
-          honorific: false,
-          conjugations: favConjugations,
-        },
-        { skip: false }
-      );
     });
 
     expect(useConjugations).toHaveBeenCalledWith(
