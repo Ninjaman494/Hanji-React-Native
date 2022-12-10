@@ -6,7 +6,8 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Button, Dialog, Portal, Subheading, Text } from "react-native-paper";
+import { Modal } from "react-native";
+import { Button, Dialog, Subheading, Text } from "react-native-paper";
 import changelogRaw from "./change-log.json";
 
 export interface ChangelogUpdate {
@@ -44,7 +45,7 @@ const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
   const onDismiss = useCallback(() => setVisible(false), [setUpdate]);
 
   return (
-    <Portal>
+    <Modal visible={visible} transparent>
       <Dialog visible={visible} onDismiss={onDismiss} {...rest}>
         <Dialog.Title>What's New</Dialog.Title>
         <Dialog.Content>
@@ -60,7 +61,7 @@ const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
           <Button onPress={onDismiss}>OK</Button>
         </Dialog.Actions>
       </Dialog>
-    </Portal>
+    </Modal>
   );
 };
 
