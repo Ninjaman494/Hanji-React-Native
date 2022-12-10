@@ -1,4 +1,14 @@
 {
+  "44": {
+    "name": "3.1.2",
+    "date": "Dec. 11th 2022",
+    "features": [
+      "Fixed a bug where bug reports couldn't be sent with screenshots",
+      "Fixed a bug where ad free status chouldn't be manually refreshed",
+      "Fixed an issue with ads not displaying",
+      "Updated dependencies"
+    ]
+  },
   "43": {
     "name": "3.1.1",
     "date": "Nov. 2nd 2022",
