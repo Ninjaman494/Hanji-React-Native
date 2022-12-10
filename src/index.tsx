@@ -32,7 +32,10 @@ import theme from "theme";
 import setupAds from "utils/setupAds";
 
 const client = new ApolloClient({
-  link: createUploadLink({ uri: SERVER_URL }),
+  link: createUploadLink({
+    uri: SERVER_URL,
+    headers: { "apollo-require-preflight": true },
+  }),
   cache: new InMemoryCache(),
 });
 
