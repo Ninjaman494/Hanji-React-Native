@@ -45,7 +45,7 @@ const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
   const onDismiss = useCallback(() => setVisible(false), [setUpdate]);
 
   return (
-    <Modal visible={visible} transparent>
+    <Modal visible={visible} transparent onRequestClose={onDismiss}>
       <Dialog visible={visible} onDismiss={onDismiss} {...rest}>
         <Dialog.Title>What's New</Dialog.Title>
         <Dialog.Content>
