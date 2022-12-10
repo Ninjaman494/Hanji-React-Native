@@ -2,6 +2,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import useGetFavorites from "hooks/useGetFavorites";
 import { useSnackbar } from "providers/SnackbarProvider";
 import React, { useCallback, useState } from "react";
@@ -17,6 +18,7 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
   const { colors } = useTheme();
   const { favorites, loading, refetch } = useGetFavorites();
   const { showSnackbar } = useSnackbar();
+  const { setAdFree } = useGetAdFreeStatus();
   const [checkDesc, setCheckDesc] = useState(CHECK_AD_FREE_DESC);
 
   const styles = StyleSheet.create({
@@ -35,8 +37,10 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
 
     try {
       const { entitlements } = await Purchases.restorePurchases();
+      const isAdFree = !!entitlements.active.ad_free_entitlement;
+      setAdFree(isAdFree);
       showSnackbar(
-        entitlements.active.ad_free_entitlement
+        isAdFree
           ? "Ad-free purchase activated, thank you for supporting Hanji!"
           : "Ad-free purchase not found"
       );

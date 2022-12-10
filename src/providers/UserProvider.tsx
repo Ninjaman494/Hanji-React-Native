@@ -10,6 +10,7 @@ interface UserProviderValue {
   isAdFree: boolean;
   sessionCount: number;
   surveyState: SurveyState;
+  setAdFree: (status:boolean) => void
 }
 
 export enum SurveyState {
@@ -26,6 +27,7 @@ export const UserContext = createContext<UserProviderValue>({
   isAdFree: false,
   sessionCount: -1,
   surveyState: SurveyState.NOT_ASKED,
+  setAdFree: () => {}
 });
 
 const UserProvider: FC = ({ children }) => {
@@ -69,7 +71,7 @@ const UserProvider: FC = ({ children }) => {
   }, [setAdFree, setNumSessions]);
 
   return (
-    <UserContext.Provider value={{ isAdFree, sessionCount, surveyState }}>
+    <UserContext.Provider value={{ isAdFree, sessionCount, surveyState, setAdFree }}>
       {children}
     </UserContext.Provider>
   );
