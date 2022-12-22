@@ -25,6 +25,9 @@ const setupSentry = (): void => {
   setJSExceptionHandler((error, isFatal) => {
     Native.captureException(error, {
       level: isFatal ? Fatal : Error,
+      extra: {
+        exceptionSource: "JsException",
+      },
     });
 
     Alert.alert(
@@ -40,7 +43,11 @@ const setupSentry = (): void => {
   }, false);
 
   setNativeExceptionHandler(
-    (errStr) => Native.captureException(errStr, { level: Fatal }),
+    (errStr) =>
+      Native.captureException(errStr, {
+        level: Fatal,
+        extra: { exceptionSource: "NativeException" },
+      }),
     false,
     true
   );
