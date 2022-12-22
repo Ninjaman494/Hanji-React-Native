@@ -1,8 +1,8 @@
 import { Laila_500Medium, useFonts } from "@expo-google-fonts/laila";
 import { AdCard, AppBar, AppLayout } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
-import AppLoading from "expo-app-loading";
-import React, { useMemo, useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect, useMemo, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Searchbar, Text } from "react-native-paper";
 import { ScreenProps } from "typings/navigation";
@@ -33,6 +33,9 @@ export const DEFAULT_FAVORITES = [
     honorific: false,
   },
 ];
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -69,9 +72,13 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
   const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
 
-  return !fontLoaded ? (
-    <AppLoading />
-  ) : (
+  useEffect(() => {
+    (async () => {
+      if (fontLoaded) await SplashScreen.hideAsync();
+    })();
+  }, [fontLoaded]);
+
+  return !fontLoaded ? null : (
     <View style={styles.container}>
       <SlideInTop shouldAnimate scrollY={scrollY} extendedHeight={200}>
         <AppBar hideBack hideSearch />
