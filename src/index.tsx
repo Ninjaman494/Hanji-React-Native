@@ -1,7 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import NetInfo from "@react-native-community/netinfo";
 import analytics from "@react-native-firebase/analytics";
 import {
   NavigationContainer,
@@ -10,6 +9,7 @@ import {
 import { createUploadLink } from "apollo-upload-client";
 import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
+import useCheckNetInfo from "hooks/useCheckNetInfo";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
@@ -45,21 +45,14 @@ const USER_ID_KEY = "USER_ID";
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
-  const [isConnected, setIsConnected] = useState<boolean | null>(false);
-
-  // Listen to internet connection changes
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      console.log("Connection type", state.type);
-      console.log("Is connected?", state.isInternetReachable);
-      setIsConnected(state.isInternetReachable);
-    });
-    return unsubscribe;
-  });
+  const netInfo = useCheckNetInfo();
+  const [setupComplete, setSetupComplete] = useState(false);
 
   useEffect(() => {
-    // We need internet to setup third-party APIs
-    if (!isConnected) return;
+    // We need internet to setup third-party APIs, and should
+    // only setup once
+    if (!netInfo?.isInternetReachable || setupComplete) return;
+    console.log("hi there");
 
     let unsubscribeMessaging: (() => void) | null = null;
     if (Platform.OS === "android" || Platform.OS === "ios") {
@@ -80,8 +73,10 @@ export default function Index(): JSX.Element {
       await analytics().setUserId(id);
     })();
 
+    setSetupComplete(true);
+
     if (unsubscribeMessaging) return unsubscribeMessaging;
-  }, [isConnected]);
+  }, [netInfo]);
 
   useEffect(() => {
     if (favorites === null && !loading && !error) {
