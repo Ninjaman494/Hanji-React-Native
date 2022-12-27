@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SERVER_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import NetInfo from "@react-native-community/netinfo";
 import analytics from "@react-native-firebase/analytics";
 import {
   NavigationContainer,
@@ -19,7 +20,7 @@ import RatingHandler from "providers/RatingHandler";
 import SnackbarProvider from "providers/SnackbarProvider";
 import UserProvider from "providers/UserProvider";
 import ViewShotProvider from "providers/ViewShotProvider";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import Purchases from "react-native-purchases";
@@ -44,12 +45,28 @@ const USER_ID_KEY = "USER_ID";
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
+  const [isConnected, setIsConnected] = useState<boolean | null>(false);
+
+  // Listen to internet connection changes
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isInternetReachable);
+      setIsConnected(state.isInternetReachable);
+    });
+    return unsubscribe;
+  });
 
   useEffect(() => {
+    // We need internet to setup third-party APIs
+    if (!isConnected) return;
+
+    let unsubscribeMessaging: (() => void) | null = null;
     if (Platform.OS === "android" || Platform.OS === "ios") {
       setupSentry();
       setupPurchases();
       setupAds();
+      unsubscribeMessaging = setupMessaging();
     }
 
     (async () => {
@@ -63,8 +80,8 @@ export default function Index(): JSX.Element {
       await analytics().setUserId(id);
     })();
 
-    return setupMessaging();
-  }, []);
+    if (unsubscribeMessaging) return unsubscribeMessaging;
+  }, [isConnected]);
 
   useEffect(() => {
     if (favorites === null && !loading && !error) {

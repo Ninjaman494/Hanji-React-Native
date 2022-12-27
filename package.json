@@ -62,7 +62,8 @@
     "react-native-view-shot": "3.5.0",
     "react-native-web": "0.17.1",
     "sentry-expo": "^4.0.0",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "@react-native-community/netinfo": "6.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
