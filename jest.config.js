@@ -4,7 +4,7 @@ module.exports = {
   setupFiles: ["./src/jestSetup.tsx"],
   setupFilesAfterEnv: ["./src/jestPostSetup.ts"],
   transformIgnorePatterns: [
-    "node_modules/(?!(@react-native|@react-native-firebase|react-native.*|expo.*|@expo.*|@sentry|static-container|sentry-expo)/)",
+    "node_modules/(?!(@react-native|@react-native-firebase|react-native.*|expo.*|@expo.*|@sentry|static-container|sentry-expo|react-native-device-info)/)",
   ],
   collectCoverageFrom: ["src/**/*.ts", "src/**/*.tsx"],
   moduleNameMapper: {

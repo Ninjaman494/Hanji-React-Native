@@ -5,12 +5,14 @@ jest.mock("setupPurchases");
 jest.mock("utils/setupAds");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useSetFavorites");
+jest.mock("hooks/useCheckNetInfo");
 jest.mock("Pages", () => ({
   __esModule: true,
   default: () => <div>Pages</div>,
 }));
 
 import { render } from "@testing-library/react-native";
+import useCheckNetInfo from "hooks/useCheckNetInfo";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Index from "index";
@@ -27,6 +29,8 @@ jest.useFakeTimers();
 
 const setFavorites = jest.fn();
 (useSetFavorites as jest.Mock).mockReturnValue({ setFavorites });
+
+(useCheckNetInfo as jest.Mock).mockReturnValue({ isInternetReachable: true });
 
 describe("Index", () => {
   beforeEach(() => {
@@ -80,5 +84,18 @@ describe("Index", () => {
     render(<Index />);
 
     expect(setupAds).toHaveBeenCalled();
+  });
+
+  it("skips third-party initialization if internet is down", () => {
+    (useCheckNetInfo as jest.Mock).mockReturnValueOnce({
+      isInternetReachable: false,
+    });
+
+    render(<Index />);
+
+    expect(setupSentry).not.toHaveBeenCalled();
+    expect(setupPurchases).not.toHaveBeenCalled();
+    expect(setupMessaging).not.toHaveBeenCalled();
+    expect(setupAds).not.toHaveBeenCalled();
   });
 });
