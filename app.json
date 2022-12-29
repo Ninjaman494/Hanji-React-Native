@@ -36,7 +36,6 @@
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
       "sentry-expo",
-      "expo-updates"
     ],
     "hooks": {
       "postPublish": [
