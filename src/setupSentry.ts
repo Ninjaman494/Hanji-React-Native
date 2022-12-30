@@ -20,10 +20,9 @@ const setupSentry = (): void => {
   });
 
   // Global error handlers
-  const { Fatal, Error } = Native.Severity;
   setJSExceptionHandler((error, isFatal) => {
     Native.captureException(error, {
-      level: isFatal ? Fatal : Error,
+      level: isFatal ? "fatal" : "error",
       extra: {
         exceptionSource: "JsException",
       },
@@ -44,7 +43,7 @@ const setupSentry = (): void => {
   setNativeExceptionHandler(
     (errStr) =>
       Native.captureException(errStr, {
-        level: Fatal,
+        level: "fatal",
         extra: { exceptionSource: "NativeException" },
       }),
     false,

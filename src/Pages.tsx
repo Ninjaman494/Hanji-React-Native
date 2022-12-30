@@ -35,7 +35,7 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
           Native?.addBreadcrumb({
             category: "navigation",
             message: `Route changed to ${route?.name}`,
-            level: Native.Severity.Info,
+            level: "info",
             data: route?.params,
           });
 
