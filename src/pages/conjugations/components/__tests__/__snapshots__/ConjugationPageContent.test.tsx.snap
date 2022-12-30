@@ -23,7 +23,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
     getItemCount={[Function]}
     initialNumToRender={4}
     keyExtractor={[Function]}
-    nativeID="animatedComponent"
     onContentSizeChange={[Function]}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
@@ -47,7 +46,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
       >
         <View
           collapsable={false}
-          nativeID="animatedComponent"
           style={
             {
               "backgroundColor": "#ffffff",
@@ -147,6 +145,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                           [
                             {
                               "minHeight": 30,
+                              "paddingRight": 16,
                             },
                             {
                               "marginBottom": 2,
@@ -194,7 +193,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   accessible={true}
                   collapsable={false}
                   focusable={true}
-                  nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}
@@ -314,7 +312,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   accessible={true}
                   collapsable={false}
                   focusable={true}
-                  nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}
@@ -434,7 +431,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   accessible={true}
                   collapsable={false}
                   focusable={true}
-                  nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}
@@ -561,7 +557,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
       >
         <View
           collapsable={false}
-          nativeID="animatedComponent"
           style={
             {
               "backgroundColor": "#ffffff",
@@ -661,6 +656,7 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                           [
                             {
                               "minHeight": 30,
+                              "paddingRight": 16,
                             },
                             {
                               "marginBottom": 2,
@@ -708,7 +704,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   accessible={true}
                   collapsable={false}
                   focusable={true}
-                  nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}
@@ -828,7 +823,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   accessible={true}
                   collapsable={false}
                   focusable={true}
-                  nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}
@@ -948,7 +942,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
                   accessible={true}
                   collapsable={false}
                   focusable={true}
-                  nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}

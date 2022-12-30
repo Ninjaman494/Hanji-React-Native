@@ -17,6 +17,7 @@ const baseConjugation = {
 };
 
 const props = {
+  title: "Conjugations",
   conjugations: [
     {
       name: "name 1" as ConjugationName,
