@@ -1,3 +1,4 @@
+import { reloadAsync } from "expo-updates";
 import { Alert } from "react-native";
 import {
   setJSExceptionHandler,
@@ -34,7 +35,7 @@ const setupSentry = (): void => {
       [
         {
           text: "Restart",
-          onPress: async () => {},
+          onPress: async () => await reloadAsync(),
         },
       ]
     );
