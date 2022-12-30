@@ -6,6 +6,7 @@ jest.mock("hooks/useGetAdFreeStatus", () =>
   jest.fn().mockReturnValue({ isAdFree: true })
 );
 jest.mock("utils/logEvent");
+jest.mock("expo-modules-core");
 
 const mock = {
   push: jest.fn(),
