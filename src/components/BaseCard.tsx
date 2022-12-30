@@ -2,10 +2,14 @@ import React, { ComponentProps, FC } from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Button, Card, useTheme } from "react-native-paper";
 
-export type BaseCardProps = Omit<ComponentProps<typeof Card>, "children"> & {
+export type BaseCardProps = Omit<
+  ComponentProps<typeof Card>,
+  "mode" | "children"
+> & {
   title?: string;
   style?: StyleProp<ViewStyle>;
   rightIcon?: (props: { size: number }) => React.ReactNode;
+  children?: React.ReactNode;
   btnProps?: Omit<ComponentProps<typeof Button>, "children"> & {
     text: string;
   };

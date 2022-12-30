@@ -2,6 +2,7 @@ import React, {
   createContext,
   FC,
   MutableRefObject,
+  PropsWithChildren,
   useContext,
   useRef,
 } from "react";
@@ -11,10 +12,11 @@ const ViewShotContext = createContext<MutableRefObject<
   ViewShot | undefined
 > | null>(null);
 
-const ViewShotProvider: FC = ({ children }) => {
+const ViewShotProvider: FC<PropsWithChildren> = ({ children }) => {
   const ref = useRef<ViewShot>();
 
   return (
+    // @ts-expect-error ViewShot type incorrectly doesn't have a children prop
     <ViewShot ref={ref as MutableRefObject<ViewShot>} style={{ flex: 1 }}>
       <ViewShotContext.Provider value={ref}>
         {children}

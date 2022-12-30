@@ -1,5 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, FC, useEffect, useState } from "react";
+import React, {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
 import Purchases, {
   CustomerInfo,
   PurchasesError,
@@ -10,7 +16,7 @@ interface UserProviderValue {
   isAdFree: boolean;
   sessionCount: number;
   surveyState: SurveyState;
-  setAdFree: (status:boolean) => void
+  setAdFree: (status: boolean) => void;
 }
 
 export enum SurveyState {
@@ -27,10 +33,10 @@ export const UserContext = createContext<UserProviderValue>({
   isAdFree: false,
   sessionCount: -1,
   surveyState: SurveyState.NOT_ASKED,
-  setAdFree: () => {}
+  setAdFree: () => {},
 });
 
-const UserProvider: FC = ({ children }) => {
+const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAdFree, setAdFree] = useState(false);
   const [sessionCount, setNumSessions] = useState(-1);
   const [surveyState, setSurveyState] = useState(SurveyState.NOT_ASKED);
@@ -71,7 +77,9 @@ const UserProvider: FC = ({ children }) => {
   }, [setAdFree, setNumSessions]);
 
   return (
-    <UserContext.Provider value={{ isAdFree, sessionCount, surveyState, setAdFree }}>
+    <UserContext.Provider
+      value={{ isAdFree, sessionCount, surveyState, setAdFree }}
+    >
       {children}
     </UserContext.Provider>
   );

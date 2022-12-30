@@ -3,11 +3,11 @@ import {
   RenderAPI,
   RenderOptions,
 } from "@testing-library/react-native";
-import React, { FC, ReactElement } from "react";
+import React, { FC, PropsWithChildren, ReactElement } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import theme from "theme";
 
-const Providers: FC = ({ children }) => {
+const Providers: FC<PropsWithChildren> = ({ children }) => {
   return <PaperProvider theme={theme}>{children}</PaperProvider>;
 };
 

@@ -1,4 +1,10 @@
-import React, { createContext, FC, useMemo, useState } from "react";
+import React, {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useMemo,
+  useState,
+} from "react";
 
 interface AnimationProviderValue {
   isAnimating: boolean;
@@ -12,7 +18,7 @@ export const AnimationContext = createContext<AnimationProviderValue>({
   finishedAnimation: () => {},
 });
 
-const AnimationProvider: FC = ({ children }) => {
+const AnimationProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAnimating, setAnimating] = useState(false);
 
   const value = useMemo(
