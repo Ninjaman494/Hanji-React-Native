@@ -148,11 +148,6 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    // compileOptions {
-    //     sourceCompatibility JavaVersion.VERSION_1_8
-    //     targetCompatibility JavaVersion.VERSION_1_8
-    // }
-
     defaultConfig {
         applicationId 'com.a494studios.koreanconjugator'
         minSdkVersion rootProject.ext.minSdkVersion
@@ -291,10 +286,6 @@ android {
 
         }
     }
-    
-    // packagingOptions {
-    //    exclude("META-INF/*.kotlin_module") 
-    // }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
