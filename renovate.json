@@ -47,7 +47,7 @@
     {
       "groupName": "Expo Dependencies",
       "enabled": false,
-      "matchPackagePatterns": ["expo*"]
+      "matchPackagePatterns": ["expo*", "sentry-expo"]
     },
     {
       "groupName": "Formik Dependencies",
