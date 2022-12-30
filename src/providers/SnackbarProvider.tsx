@@ -59,13 +59,13 @@ const SnackbarProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <SnackbarContext.Provider value={value}>
+      {children}
       <Snackbar
         visible={!!snackbarText}
         onDismiss={() => setSnackbarText(null)}
       >
         {snackbarText}
       </Snackbar>
-      {children}
     </SnackbarContext.Provider>
   );
 };
