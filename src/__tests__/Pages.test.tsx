@@ -29,7 +29,7 @@ describe("Pages component", () => {
     expect(Native.addBreadcrumb).toHaveBeenCalledWith({
       category: "navigation",
       message: "Route changed to MainPage",
-      level: Native.Severity.Info,
+      level: "info",
       data: { foo: "bar" },
     });
   });

@@ -10,10 +10,10 @@ describe("AcknowledgementsPage", () => {
     const result = render(<AcknowledgementsPage />);
 
     expect(result.getByText("@apollo/client")).toBeTruthy();
-    expect(result.getByText(`Version: 3.5.6`)).toBeTruthy();
+    expect(result.getByText(`Version: 3.7.3`)).toBeTruthy();
 
     expect(result.getByText("expo-status-bar")).toBeTruthy();
-    expect(result.getByText("Version: 1.1.0")).toBeTruthy();
+    expect(result.getByText("Version: 1.4.2")).toBeTruthy();
 
     expect(result.getByText("formik")).toBeTruthy();
     expect(result.getByText("Version: 2.2.9")).toBeTruthy();

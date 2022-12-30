@@ -2,6 +2,7 @@ import React, {
   createContext,
   FC,
   MutableRefObject,
+  PropsWithChildren,
   useContext,
   useRef,
 } from "react";
@@ -11,7 +12,7 @@ const ViewShotContext = createContext<MutableRefObject<
   ViewShot | undefined
 > | null>(null);
 
-const ViewShotProvider: FC = ({ children }) => {
+const ViewShotProvider: FC<PropsWithChildren> = ({ children }) => {
   const ref = useRef<ViewShot>();
 
   return (

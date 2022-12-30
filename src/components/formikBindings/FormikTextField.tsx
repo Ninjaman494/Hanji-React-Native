@@ -6,6 +6,7 @@ import { FormikContext } from "typings/utils";
 
 export type FormikTextFieldProps = ComponentProps<typeof TextInput> & {
   name: string;
+  label: string;
   hint?: string;
   hideError?: boolean;
 };

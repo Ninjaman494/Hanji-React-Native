@@ -12,7 +12,6 @@ exports[`ConjugationCard displays conjugations 1`] = `
 >
   <View
     collapsable={false}
-    nativeID="animatedComponent"
     style={
       {
         "backgroundColor": "#ffffff",
@@ -55,6 +54,86 @@ exports[`ConjugationCard displays conjugations 1`] = `
         style={
           [
             {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingLeft": 16,
+            },
+            {
+              "minHeight": 50,
+            },
+            {},
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": 1,
+                "flexDirection": "column",
+                "justifyContent": "center",
+              },
+            ]
+          }
+        >
+          <Text
+            numberOfLines={1}
+            style={
+              [
+                {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                },
+                {
+                  "textAlign": "left",
+                },
+                [
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "writingDirection": "ltr",
+                  },
+                  [
+                    {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    [
+                      {
+                        "minHeight": 30,
+                        "paddingRight": 16,
+                      },
+                      {
+                        "marginBottom": 2,
+                      },
+                      {
+                        "color": "#3F51B5",
+                        "fontSize": 16,
+                        "fontWeight": "400",
+                      },
+                    ],
+                  ],
+                ],
+              ]
+            }
+          >
+            Conjugations
+          </Text>
+        </View>
+        <View />
+      </View>
+      <View
+        style={
+          [
+            {
               "paddingHorizontal": 16,
             },
             undefined,
@@ -78,7 +157,6 @@ exports[`ConjugationCard displays conjugations 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -198,7 +276,6 @@ exports[`ConjugationCard displays conjugations 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -318,7 +395,6 @@ exports[`ConjugationCard displays conjugations 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

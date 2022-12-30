@@ -1,6 +1,7 @@
 import React, {
   createContext,
   FC,
+  PropsWithChildren,
   useCallback,
   useContext,
   useMemo,
@@ -21,7 +22,7 @@ const SnackbarContext = createContext<SnackbarProviderValue>({
   showError: () => {},
 });
 
-const SnackbarProvider: FC = ({ children }) => {
+const SnackbarProvider: FC<PropsWithChildren> = ({ children }) => {
   const [snackbarText, setSnackbarText] = useState<string | null>(null);
 
   const showSnackbar = useCallback(
@@ -58,13 +59,13 @@ const SnackbarProvider: FC = ({ children }) => {
 
   return (
     <SnackbarContext.Provider value={value}>
+      {children}
       <Snackbar
         visible={!!snackbarText}
         onDismiss={() => setSnackbarText(null)}
       >
         {snackbarText}
       </Snackbar>
-      {children}
     </SnackbarContext.Provider>
   );
 };
