@@ -3,19 +3,6 @@ import messaging from "@react-native-firebase/messaging";
 import handleBackgroundMessage from "utils/handleBackgroundMessage";
 
 const setupMessaging = (): (() => void) => {
-  // Required for iOS, no-op for Android
-  messaging()
-    .requestPermission()
-    .then((authStatus) => {
-      const enabled =
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-      if (enabled) {
-        console.log("Authorization status:", authStatus);
-      }
-    });
-
   // TODO: Remove when done testing
   messaging()
     .getToken()
@@ -24,7 +11,7 @@ const setupMessaging = (): (() => void) => {
   // Required on Android
   notifee.createChannel({
     id: "wod",
-    name: "Word of the Day Notifications",
+    name: "Word of the Day",
     description: "Get notified when there's a new Word of the Day",
   });
 
