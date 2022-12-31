@@ -50,6 +50,7 @@ export default function Index(): JSX.Element {
       setupSentry();
       setupPurchases();
       setupAds();
+      setupMessaging();
     }
 
     (async () => {
@@ -62,8 +63,6 @@ export default function Index(): JSX.Element {
       await Purchases.logIn(id);
       await analytics().setUserId(id);
     })();
-
-    return setupMessaging();
   }, []);
 
   useEffect(() => {
