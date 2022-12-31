@@ -3,9 +3,7 @@ import messaging from "@react-native-firebase/messaging";
 
 const setupMessaging = () => {
   (async () => {
-    // TODO: Remove when done testing
-    const token = await messaging().getToken();
-    console.log("TOKEN:", token);
+    await messaging().subscribeToTopic("all");
 
     // Required on Android
     await notifee.createChannel({
