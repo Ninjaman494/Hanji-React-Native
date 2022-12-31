@@ -4,12 +4,10 @@ import { registerRootComponent } from "expo";
 import "expo-dev-client";
 import "react-native-gesture-handler";
 import { enableScreens } from "react-native-screens";
-import handleBackgroundMessage from "utils/handleBackgroundMessage";
 import App from "./App";
 
 messaging().setBackgroundMessageHandler(async (msg) => {
   console.log("BACKGROUND MSG", JSON.stringify(msg, null, 2));
-  await handleBackgroundMessage(msg);
 });
 
 analytics().setAnalyticsCollectionEnabled(
