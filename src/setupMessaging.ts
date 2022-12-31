@@ -3,22 +3,25 @@ import messaging from "@react-native-firebase/messaging";
 import handleBackgroundMessage from "utils/handleBackgroundMessage";
 
 const setupMessaging = (): (() => void) => {
-  // TODO: Remove when done testing
-  messaging()
-    .getToken()
-    .then((token) => console.log("TOKEN:", token));
+  let unsubscribe = () => {};
 
-  // Required on Android
-  notifee.createChannel({
-    id: "wod",
-    name: "Word of the Day",
-    description: "Get notified when there's a new Word of the Day",
-  });
+  (async () => {
+    // TODO: Remove when done testing
+    const token = await messaging().getToken();
+    console.log("TOKEN:", token);
 
-  const unsubscribe = messaging().onMessage(async (msg) => {
-    console.log("MESSAGE RECEIVED:", JSON.stringify(msg, null, 2));
-    await handleBackgroundMessage(msg);
-  });
+    // Required on Android
+    await notifee.createChannel({
+      id: "wod",
+      name: "Word of the Day",
+      description: "Get notified when there's a new Word of the Day",
+    });
+
+    unsubscribe = messaging().onMessage(async (msg) => {
+      console.log("MESSAGE RECEIVED:", JSON.stringify(msg, null, 2));
+      await handleBackgroundMessage(msg);
+    });
+  })();
 
   return unsubscribe;
 };
