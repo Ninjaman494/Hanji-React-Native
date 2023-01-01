@@ -1,6 +1,6 @@
 jest.mock("sentry-expo");
 jest.mock("setupSentry");
-jest.mock("setupMessaging");
+jest.mock("setupMessaging", () => jest.fn());
 jest.mock("setupPurchases");
 jest.mock("utils/setupAds");
 jest.mock("hooks/useGetFavorites");
