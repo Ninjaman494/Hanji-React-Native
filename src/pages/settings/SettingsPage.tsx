@@ -1,3 +1,4 @@
+import notifee from "@notifee/react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { AppBar } from "components";
 import Constants from "expo-constants";
@@ -76,6 +77,10 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
             title="Check Ad-free Status"
             description={checkDesc}
             onPress={checkAdFree}
+          />
+          <List.Item
+            title="Manage Notifications"
+            onPress={async () => await notifee.openNotificationSettings()}
           />
         </List.Section>
         <List.Subheader style={styles.header}>Legal Information</List.Subheader>

@@ -1,4 +1,8 @@
-import { NavigationContainerRefWithCurrent } from "@react-navigation/native";
+import messaging from "@react-native-firebase/messaging";
+import {
+  NavigationContainerRefWithCurrent,
+  useNavigation,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
@@ -11,10 +15,11 @@ import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import SurveyPage from "pages/survey/SurveyPage";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "react-native";
 import { Native } from "sentry-expo";
-import { StackParamList } from "typings/navigation";
+import { NavigationProps, StackParamList } from "typings/navigation";
+import handleNotificationReceived from "utils/handleNotificationReceived";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 const { Navigator, Screen } = createStackNavigator<StackParamList>();
@@ -24,6 +29,17 @@ interface PagesProps {
 }
 
 const Pages: FC<PagesProps> = ({ navRef }) => {
+  const navigation = useNavigation<NavigationProps>();
+
+  useEffect(() => {
+    messaging().onNotificationOpenedApp((msg) =>
+      handleNotificationReceived(msg, navigation)
+    );
+    messaging()
+      .getInitialNotification()
+      .then((msg) => msg && handleNotificationReceived(msg, navigation));
+  }, [navigation]);
+
   return (
     <Navigator
       initialRouteName="Main"

@@ -1,6 +1,16 @@
 jest.mock("sentry-expo");
 jest.mock("react-native-gesture-handler");
+jest.mock("utils/handleNotificationReceived");
+jest.mock("@react-native-firebase/messaging", () => {
+  const onNotificationOpenedApp = jest.fn(async () => {});
+  const getInitialNotification = jest.fn(async () => {});
+  return () => ({ onNotificationOpenedApp, getInitialNotification });
+});
+jest.mock("@notifee/react-native", () => ({
+  requestPermission: jest.fn(),
+}));
 
+import messaging from "@react-native-firebase/messaging";
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -48,5 +58,18 @@ describe("Pages component", () => {
         screen_class: "MainPage",
       },
     });
+  });
+
+  it("sets up notification listeners", () => {
+    const { onNotificationOpenedApp, getInitialNotification } = messaging();
+
+    render(
+      <NavigationContainer>
+        <Pages navRef={navRef as any} />
+      </NavigationContainer>
+    );
+
+    expect(onNotificationOpenedApp).toHaveBeenCalled();
+    expect(getInitialNotification).toHaveBeenCalled();
   });
 });

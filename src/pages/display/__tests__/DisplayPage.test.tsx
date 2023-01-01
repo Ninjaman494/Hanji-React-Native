@@ -2,6 +2,7 @@ jest.mock("hooks/useGetEntry");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useConjugations");
 
+import notifee from "@notifee/react-native";
 import useConjugations from "hooks/useConjugations";
 import useGetEntry from "hooks/useGetEntry";
 import useGetFavorites from "hooks/useGetFavorites";
@@ -44,6 +45,10 @@ const conjBase = {
   romanization: "romanization",
   reasons: [],
 };
+
+jest.mock("@notifee/react-native", () => ({
+  requestPermission: jest.fn(),
+}));
 
 (useGetFavorites as jest.Mock).mockReturnValue({
   loading: false,
@@ -165,5 +170,18 @@ describe("DisplayPage", () => {
       type: LOG_EVENT.SELECT_CONTENT,
       params: { item_id: entry.term, content_type: entry.pos },
     });
+  });
+
+  it("asks for notifications permissions after a delay", async () => {
+    (useGetEntry as jest.Mock).mockReturnValue({
+      loading: false,
+      data: { entry },
+    });
+
+    render(<DisplayPage {...(props as any)} />);
+
+    await new Promise((r) => setTimeout(r, 600));
+
+    expect(notifee.requestPermission).toHaveBeenCalled();
   });
 });

@@ -35,7 +35,8 @@
     "plugins": [
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
-      "sentry-expo"
+      "sentry-expo",
+      "@notifee/react-native"
     ],
     "hooks": {
       "postPublish": [
