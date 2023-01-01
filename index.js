@@ -7,10 +7,12 @@ import { enableScreens } from "react-native-screens";
 import App from "./App";
 
 messaging().setBackgroundMessageHandler(async (msg) => {
+  // eslint-disable-next-line no-undef
   console.log("BACKGROUND MSG", JSON.stringify(msg, null, 2));
 });
 
 analytics().setAnalyticsCollectionEnabled(
+  // eslint-disable-next-line no-undef
   process.env.NODE_ENV !== "development"
 );
 
