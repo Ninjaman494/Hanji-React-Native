@@ -1,6 +1,4 @@
-import messaging, {
-  FirebaseMessagingTypes,
-} from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 import {
   NavigationContainerRefWithCurrent,
   useNavigation,
@@ -21,6 +19,7 @@ import React, { FC, useEffect } from "react";
 import "react-native";
 import { Native } from "sentry-expo";
 import { NavigationProps, StackParamList } from "typings/navigation";
+import handleNotificationReceived from "utils/handleNotificationReceived";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 const { Navigator, Screen } = createStackNavigator<StackParamList>();
@@ -33,19 +32,12 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
   const navigation = useNavigation<NavigationProps>();
 
   useEffect(() => {
-    const onNotificationReceived = (
-      msg: FirebaseMessagingTypes.RemoteMessage
-    ) => {
-      console.log("Received: ", JSON.stringify(msg, null, 2));
-      if (msg.data?.type === "wod") {
-        navigation.navigate("Display", { entryId: msg.data.entryId });
-      }
-    };
-
-    messaging().onNotificationOpenedApp(onNotificationReceived);
+    messaging().onNotificationOpenedApp((msg) =>
+      handleNotificationReceived(msg, navigation)
+    );
     messaging()
       .getInitialNotification()
-      .then((msg) => msg && onNotificationReceived(msg));
+      .then((msg) => msg && handleNotificationReceived(msg, navigation));
   }, [navigation]);
 
   return (
