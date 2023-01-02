@@ -6,9 +6,6 @@ jest.mock("@react-native-firebase/messaging", () => {
   const getInitialNotification = jest.fn(async () => {});
   return () => ({ onNotificationOpenedApp, getInitialNotification });
 });
-jest.mock("@notifee/react-native", () => ({
-  requestPermission: jest.fn(),
-}));
 
 import messaging from "@react-native-firebase/messaging";
 import {

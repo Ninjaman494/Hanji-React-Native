@@ -7,6 +7,10 @@ jest.mock("hooks/useGetAdFreeStatus", () =>
 );
 jest.mock("utils/logEvent");
 jest.mock("expo-modules-core");
+jest.mock("@notifee/react-native", () => ({
+  requestPermission: jest.fn(),
+  openNotificationSettings: jest.fn(),
+}));
 
 const mock = {
   push: jest.fn(),

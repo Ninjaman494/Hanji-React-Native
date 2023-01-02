@@ -46,10 +46,6 @@ const conjBase = {
   reasons: [],
 };
 
-jest.mock("@notifee/react-native", () => ({
-  requestPermission: jest.fn(),
-}));
-
 (useGetFavorites as jest.Mock).mockReturnValue({
   loading: false,
   favorites: favConjugations.map(({ name, honorific }, i) => ({
