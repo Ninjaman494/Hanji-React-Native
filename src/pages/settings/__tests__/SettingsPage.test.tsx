@@ -19,10 +19,6 @@ import SettingsPage from "../SettingsPage";
 
 jest.spyOn(StoreReview, "storeUrl").mockReturnValue("store-url");
 
-jest.mock("@notifee/react-native", () => ({
-  openNotificationSettings: jest.fn(),
-}));
-
 const version = "1.0.0";
 jest.mock("expo-constants", () => ({
   ...jest.requireActual("expo-constants"),
