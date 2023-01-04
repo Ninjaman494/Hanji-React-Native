@@ -54,7 +54,6 @@ export default function Index(): JSX.Element {
     if (!netInfo?.isInternetReachable || setupComplete) return;
     console.log("hi there");
 
-    let unsubscribeMessaging: (() => void) | null = null;
     if (Platform.OS === "android" || Platform.OS === "ios") {
       setupSentry();
       setupPurchases();
@@ -74,8 +73,6 @@ export default function Index(): JSX.Element {
     })();
 
     setSetupComplete(true);
-
-    if (unsubscribeMessaging) return unsubscribeMessaging;
   }, [netInfo]);
 
   useEffect(() => {
