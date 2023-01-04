@@ -52,7 +52,6 @@ export default function Index(): JSX.Element {
     // We need internet to setup third-party APIs, and should
     // only setup once
     if (!netInfo?.isInternetReachable || setupComplete) return;
-    console.log("hi there");
 
     if (Platform.OS === "android" || Platform.OS === "ios") {
       setupSentry();
