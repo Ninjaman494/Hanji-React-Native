@@ -28,7 +28,7 @@ const FinalSlide: FC<FinalSlideProps> = ({ onPress }) => {
           mode="outlined"
           label="Email Address (optional)"
           accessibilityLabel="Email Address"
-          autoCompleteType="email"
+          autoComplete="email"
           textContentType="emailAddress"
           keyboardType="email-address"
           value={text}

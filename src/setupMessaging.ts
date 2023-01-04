@@ -1,24 +1,17 @@
+import notifee from "@notifee/react-native";
 import messaging from "@react-native-firebase/messaging";
 
-const setupMessaging = (): (() => void) => {
-  // Required for iOS, no-op for Android
-  messaging()
-    .requestPermission()
-    .then((authStatus) => {
-      const enabled =
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+const setupMessaging = () => {
+  (async () => {
+    await messaging().subscribeToTopic("all");
 
-      if (enabled) {
-        console.log("Authorization status:", authStatus);
-      }
+    // Required on Android
+    await notifee.createChannel({
+      id: "wod",
+      name: "Word of the Day",
+      description: "Get notified when there's a new Word of the Day",
     });
-
-  const unsubscribe = messaging().onMessage(async (msg) => {
-    console.log("MESSAGE RECEIVED:", JSON.stringify(msg, null, 2));
-  });
-
-  return unsubscribe;
+  })();
 };
 
 export default setupMessaging;

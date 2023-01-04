@@ -5,6 +5,7 @@ jest.mock("react-native/Libraries/Linking/Linking");
 jest.mock("expo-store-review");
 jest.mock("react-native-purchases");
 
+import notifee from "@notifee/react-native";
 import * as StoreReview from "expo-store-review";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import useGetFavorites from "hooks/useGetFavorites";
@@ -41,8 +42,11 @@ jest.mock("expo-constants", () => ({
   refetch: jest.fn(),
 });
 
-const setAdFree= jest.fn();
-(useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false, setAdFree });
+const setAdFree = jest.fn();
+(useGetAdFreeStatus as jest.Mock).mockReturnValue({
+  isAdFree: false,
+  setAdFree,
+});
 
 const showSnackbar = jest.fn();
 const showError = jest.fn();
@@ -69,7 +73,7 @@ describe("SettingsPage", () => {
     });
   });
 
-  it("goes to the Privacy Polcy webpage", async () => {
+  it("goes to the Privacy Policy webpage", async () => {
     const openURL = jest.spyOn(Linking, "openURL");
     const result = render(<SettingsPage {...(props as any)} />);
 
@@ -89,6 +93,14 @@ describe("SettingsPage", () => {
     await waitFor(() => {
       expect(openURL).toHaveBeenCalledWith("https://hanji.vercel.app/terms");
     });
+  });
+
+  it("goes to the notification settings", () => {
+    const result = render(<SettingsPage {...(props as any)} />);
+
+    fireEvent.press(result.getByText("Manage Notifications"));
+
+    expect(notifee.openNotificationSettings).toHaveBeenCalled();
   });
 
   describe("About section", () => {

@@ -59,7 +59,7 @@ export default function Index(): JSX.Element {
       setupSentry();
       setupPurchases();
       setupAds();
-      unsubscribeMessaging = setupMessaging();
+      setupMessaging();
     }
 
     (async () => {

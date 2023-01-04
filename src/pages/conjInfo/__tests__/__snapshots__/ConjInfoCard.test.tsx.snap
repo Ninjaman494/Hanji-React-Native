@@ -12,7 +12,6 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
 >
   <View
     collapsable={false}
-    nativeID="animatedComponent"
     style={
       {
         "backgroundColor": "#ffffff",
@@ -112,6 +111,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                     [
                       {
                         "minHeight": 30,
+                        "paddingRight": 16,
                       },
                       {
                         "marginBottom": 2,
@@ -133,7 +133,6 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
         <View>
           <Text
             collapsable={false}
-            nativeID="animatedComponent"
             numberOfLines={1}
             style={
               {
@@ -145,7 +144,7 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
                 "fontSize": 15,
                 "fontWeight": "500",
                 "height": 30,
-                "lineHeight": 30,
+                "lineHeight": 15,
                 "marginRight": 16,
                 "minWidth": 30,
                 "opacity": 0,
@@ -493,7 +492,6 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
 >
   <View
     collapsable={false}
-    nativeID="animatedComponent"
     style={
       {
         "backgroundColor": "#ffffff",
@@ -593,6 +591,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                     [
                       {
                         "minHeight": 30,
+                        "paddingRight": 16,
                       },
                       {
                         "marginBottom": 2,
@@ -614,7 +613,6 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
         <View>
           <Text
             collapsable={false}
-            nativeID="animatedComponent"
             numberOfLines={1}
             style={
               {
@@ -626,7 +624,7 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
                 "fontSize": 15,
                 "fontWeight": "500",
                 "height": 30,
-                "lineHeight": 30,
+                "lineHeight": 15,
                 "marginRight": 16,
                 "minWidth": 30,
                 "opacity": 1,

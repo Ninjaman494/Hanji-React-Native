@@ -63,7 +63,5 @@
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
-
-    <activity android:name="expo.modules.devmenu.DevMenuActivity" android:exported="false"/>
   </application>
 </manifest>

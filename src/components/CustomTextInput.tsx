@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { TextInput as NativeTextInput } from "react-native";
-import { TextInput } from "react-native-paper";
-import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
+import { TextInput, TextInputProps } from "react-native-paper";
 
 const CustomTextInput: FC<Omit<TextInputProps, "theme">> = ({ ...rest }) => {
   return (

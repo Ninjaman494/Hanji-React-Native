@@ -1,6 +1,13 @@
 jest.mock("sentry-expo");
 jest.mock("react-native-gesture-handler");
+jest.mock("utils/handleNotificationReceived");
+jest.mock("@react-native-firebase/messaging", () => {
+  const onNotificationOpenedApp = jest.fn(async () => {});
+  const getInitialNotification = jest.fn(async () => {});
+  return () => ({ onNotificationOpenedApp, getInitialNotification });
+});
 
+import messaging from "@react-native-firebase/messaging";
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -29,7 +36,7 @@ describe("Pages component", () => {
     expect(Native.addBreadcrumb).toHaveBeenCalledWith({
       category: "navigation",
       message: "Route changed to MainPage",
-      level: Native.Severity.Info,
+      level: "info",
       data: { foo: "bar" },
     });
   });
@@ -48,5 +55,18 @@ describe("Pages component", () => {
         screen_class: "MainPage",
       },
     });
+  });
+
+  it("sets up notification listeners", () => {
+    const { onNotificationOpenedApp, getInitialNotification } = messaging();
+
+    render(
+      <NavigationContainer>
+        <Pages navRef={navRef as any} />
+      </NavigationContainer>
+    );
+
+    expect(onNotificationOpenedApp).toHaveBeenCalled();
+    expect(getInitialNotification).toHaveBeenCalled();
   });
 });

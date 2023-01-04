@@ -1,3 +1,4 @@
+import notifee from "@notifee/react-native";
 import { AdCard, AppBar, AppLayout, BaseCard } from "components";
 import { SlideInBody, SlideInTop } from "components/animations";
 import useConjugations from "hooks/useConjugations";
@@ -42,6 +43,15 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
         type: LOG_EVENT.SELECT_CONTENT,
         params: { item_id: entry.term, content_type: entry.pos },
       });
+    }
+  }, [entry]);
+
+  // Ask permission after they start using the app instead of
+  // as soon as it launches
+  useEffect(() => {
+    if (entry) {
+      const timeout = setTimeout(() => notifee.requestPermission(), 600);
+      return () => clearTimeout(timeout);
     }
   }, [entry]);
 

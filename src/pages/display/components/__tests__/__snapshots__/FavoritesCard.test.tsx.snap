@@ -12,7 +12,6 @@ exports[`FavoritesCard component displays favorites 1`] = `
 >
   <View
     collapsable={false}
-    nativeID="animatedComponent"
     style={
       {
         "backgroundColor": "#ffffff",
@@ -78,7 +77,6 @@ exports[`FavoritesCard component displays favorites 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -198,7 +196,6 @@ exports[`FavoritesCard component displays favorites 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -318,7 +315,6 @@ exports[`FavoritesCard component displays favorites 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -453,7 +449,6 @@ exports[`FavoritesCard component displays favorites 1`] = `
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
             style={
               {
                 "backgroundColor": "transparent",
@@ -463,6 +458,13 @@ exports[`FavoritesCard component displays favorites 1`] = `
                 "borderWidth": 0,
                 "elevation": 0,
                 "minWidth": "auto",
+                "shadowColor": "#000000",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
               }
             }
           >

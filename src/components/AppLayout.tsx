@@ -10,6 +10,7 @@ import ErrorDialog from "./ErrorDialog";
 export interface AppLayoutProps extends AppBarProps {
   loading?: boolean;
   error?: ApolloError;
+  children?: React.ReactNode;
 }
 
 const AppLayout: React.FC<AppLayoutProps> = ({ loading, error, children }) => {
