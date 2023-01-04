@@ -9,6 +9,7 @@ import {
 import { createUploadLink } from "apollo-upload-client";
 import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
+import useCheckNetInfo from "hooks/useCheckNetInfo";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
 import Pages from "Pages";
@@ -19,7 +20,7 @@ import RatingHandler from "providers/RatingHandler";
 import SnackbarProvider from "providers/SnackbarProvider";
 import UserProvider from "providers/UserProvider";
 import ViewShotProvider from "providers/ViewShotProvider";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import Purchases from "react-native-purchases";
@@ -44,8 +45,14 @@ const USER_ID_KEY = "USER_ID";
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();
   const { setFavorites } = useSetFavorites();
+  const netInfo = useCheckNetInfo();
+  const [setupComplete, setSetupComplete] = useState(false);
 
   useEffect(() => {
+    // We need internet to setup third-party APIs, and should
+    // only setup once
+    if (!netInfo?.isInternetReachable || setupComplete) return;
+
     if (Platform.OS === "android" || Platform.OS === "ios") {
       setupSentry();
       setupPurchases();
@@ -63,7 +70,9 @@ export default function Index(): JSX.Element {
       await Purchases.logIn(id);
       await analytics().setUserId(id);
     })();
-  }, []);
+
+    setSetupComplete(true);
+  }, [netInfo]);
 
   useEffect(() => {
     if (favorites === null && !loading && !error) {
