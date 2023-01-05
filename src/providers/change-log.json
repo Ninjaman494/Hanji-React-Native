@@ -1,4 +1,13 @@
 {
+  "45": {
+    "name": "3.1.3",
+    "date": "Jan. 5th 2023",
+    "features": [
+      "Fixed an issue with the splash screen when Hanji starts up",
+      "Add notifications for when Word of the Day gets updated, can be disabled in your phone's settings.",
+      "Updated dependencies"
+    ]
+  },
   "44": {
     "name": "3.1.2",
     "date": "Dec. 11th 2022",
