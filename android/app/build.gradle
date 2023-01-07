@@ -97,6 +97,7 @@ project.ext.sentryCli = [
 ]
 
 apply from: new File(reactNativeRoot, "react.gradle")
+apply from: new File(["node", "--print", "require.resolve('@sentry/react-native/package.json')"].execute().text.trim(), "../sentry.gradle")
 
 /**
  * Set this to true to create two separate APKs instead of one:
