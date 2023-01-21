@@ -8,15 +8,17 @@ import {
 import { init } from "sentry-expo";
 import setupSentry from "setupSentry";
 
-describe("setupExpo", () => {
+const mockInstrumentation = jest.fn();
+
+describe("setupSentry", () => {
   it("initializes Sentry", () => {
-    setupSentry();
+    setupSentry(mockInstrumentation as any);
 
     expect(init).toHaveBeenCalled();
   });
 
   it("sets global error handlers", () => {
-    setupSentry();
+    setupSentry(mockInstrumentation as any);
 
     expect(setJSExceptionHandler).toHaveBeenCalled();
     expect(setNativeExceptionHandler).toHaveBeenCalled();

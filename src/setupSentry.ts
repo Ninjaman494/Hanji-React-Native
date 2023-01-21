@@ -6,7 +6,9 @@ import {
 } from "react-native-exception-handler";
 import { init, Native } from "sentry-expo";
 
-const setupSentry = (): void => {
+const setupSentry = (
+  routingInstrumentation: Native.ReactNavigationInstrumentation
+): void => {
   init({
     dsn: "https://b0c3c2bae79f4bbcbdbfdf9f3b8cc479@o1034119.ingest.sentry.io/6000706",
     beforeBreadcrumb(breadcrumb, hint) {
@@ -18,6 +20,8 @@ const setupSentry = (): void => {
     // enableInExpoDevelopment: true,
     environment:
       process.env.NODE_ENV === "development" ? "development" : "production",
+    integrations: [new Native.ReactNativeTracing({ routingInstrumentation })],
+    tracesSampleRate: 0.2,
   });
 
   // Global error handlers

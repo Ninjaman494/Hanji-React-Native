@@ -1,7 +1,10 @@
 import React from "react";
 import "react-native-url-polyfill/auto";
+import { Native } from "sentry-expo";
 import Index from "./src/index";
 
-export default function App(): JSX.Element {
+const App = () => {
   return <Index />;
-}
+};
+
+export default Native.wrap(App);
