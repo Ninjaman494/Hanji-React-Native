@@ -40,8 +40,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const routingInstrumentation = new Native.ReactNavigationInstrumentation();
-
 const USER_ID_KEY = "USER_ID";
 
 export default function Index(): JSX.Element {
@@ -56,7 +54,7 @@ export default function Index(): JSX.Element {
     if (!netInfo?.isInternetReachable || setupComplete) return;
 
     if (Platform.OS === "android" || Platform.OS === "ios") {
-      setupSentry(routingInstrumentation);
+      setupSentry();
       setupPurchases();
       setupAds();
       setupMessaging();
@@ -91,12 +89,7 @@ export default function Index(): JSX.Element {
     <ApolloProvider client={client}>
       <ViewShotProvider>
         <UserProvider>
-          <NavigationContainer
-            ref={navRef}
-            onReady={() =>
-              routingInstrumentation.registerNavigationContainer(navRef)
-            }
-          >
+          <NavigationContainer ref={navRef}>
             <View style={styles.parent}>
               <StatusBar
                 backgroundColor={theme.colors.primaryDark}
