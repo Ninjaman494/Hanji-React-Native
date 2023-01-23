@@ -2,7 +2,7 @@
   "expo": {
     "name": "Hanji",
     "slug": "Korean-Conjugator",
-    "version": "3.1.3",
+    "version": "3.1.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
