@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Favorite } from "hooks/useGetFavorites";
 import { useCallback, useState } from "react";
-import { FAVORITES_KEY } from "utils/asyncStorageKeys";
+import { FAVORITES_KEY } from "utils/asyncStorageHelper";
 
 export interface SetFavoritesResponse {
   setFavorites: (favorites: Favorite[]) => Promise<void>;

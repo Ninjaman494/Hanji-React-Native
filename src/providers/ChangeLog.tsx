@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { Modal } from "react-native";
 import { Button, Dialog, Subheading, Text } from "react-native-paper";
-import { LAST_VERSION_KEY } from "utils/asyncStorageKeys";
+import { LAST_VERSION_KEY } from "utils/asyncStorageHelper";
 import changelogRaw from "./change-log.json";
 
 export interface ChangelogUpdate {

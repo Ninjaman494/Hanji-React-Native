@@ -10,7 +10,7 @@ import Purchases, {
   CustomerInfo,
   PurchasesError,
 } from "react-native-purchases";
-import { RESTORED_KEY, SESSIONS_KEY } from "utils/asyncStorageKeys";
+import { RESTORED_KEY, SESSIONS_KEY } from "utils/asyncStorageHelper";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 interface UserProviderValue {

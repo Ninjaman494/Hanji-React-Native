@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
-import { FAVORITES_KEY } from "utils/asyncStorageKeys";
+import { FAVORITES_KEY } from "utils/asyncStorageHelper";
 import { ConjugationName } from "utils/conjugationTypes";
 
 export type Favorite = {
