@@ -1,7 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Favorite } from "hooks/useGetFavorites";
 import { useCallback, useState } from "react";
-import { FAVORITES_KEY } from "utils/asyncStorageHelper";
+import { FAVORITES_KEY, setAsyncStorage } from "utils/asyncStorageHelper";
 
 export interface SetFavoritesResponse {
   setFavorites: (favorites: Favorite[]) => Promise<void>;
@@ -17,7 +16,7 @@ const useSetFavorites = (): SetFavoritesResponse => {
     async (favorites: Favorite[]) => {
       setLoading(true);
       try {
-        await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+        await setAsyncStorage(FAVORITES_KEY, favorites);
       } catch (e) {
         setError(e as Error);
       } finally {

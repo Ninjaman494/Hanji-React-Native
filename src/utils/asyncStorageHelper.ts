@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 /**
  * AsyncStorage key for user id which is synced
  * between Sentry,RevenueCat, and Firebase
@@ -31,3 +33,35 @@ export const RESTORED_KEY = "RESTORED_PURCHASES";
  * dialog has been shown
  */
 export const SHOWN_KEY = "ALREADY_SHOWN";
+
+export const convertToInt = (val: string | null) => (val ? parseInt(val) : 0);
+
+export const convertToObj = (val: string | null) =>
+  val ? JSON.parse(val) : null;
+
+export const convertToBool = (val: string | null) => val === "true";
+
+export const setAsyncStorage = async (
+  key: string,
+  val: string | number | boolean | object
+) => {
+  const valType = typeof val;
+
+  let newVal: string;
+  switch (valType) {
+    case "string":
+      newVal = val as string;
+      break;
+    case "number":
+      newVal = val.toString();
+      break;
+    case "boolean":
+      newVal = val ? "true" : "false";
+      break;
+    default:
+      newVal = JSON.stringify(val);
+      break;
+  }
+
+  await AsyncStorage.setItem(key, newVal);
+};

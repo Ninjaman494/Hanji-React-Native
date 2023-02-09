@@ -1,7 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as StoreReview from "expo-store-review";
 import { FC, useEffect } from "react";
-import { SESSIONS_KEY, SHOWN_KEY } from "utils/asyncStorageHelper";
+import {
+  convertToBool,
+  convertToInt,
+  SESSIONS_KEY,
+  setAsyncStorage,
+  SHOWN_KEY,
+} from "utils/asyncStorageHelper";
 
 export interface RatingDialog {
   numSessions: number;
@@ -13,13 +19,14 @@ const RatingHandler: FC<RatingDialog> = ({ numSessions }) => {
       const sessionString = await AsyncStorage.getItem(SESSIONS_KEY);
       const shownString = await AsyncStorage.getItem(SHOWN_KEY);
 
-      const sessions = sessionString ? parseInt(sessionString) + 1 : 1;
-      await AsyncStorage.setItem(SESSIONS_KEY, sessions.toString());
+      const wasShown = convertToBool(shownString);
+      const sessions = convertToInt(sessionString) + 1;
+      await setAsyncStorage(SESSIONS_KEY, sessions);
 
-      if (shownString !== "true" && sessions >= numSessions) {
+      if (!wasShown && sessions >= numSessions) {
         if (await StoreReview.hasAction()) {
           await StoreReview.requestReview();
-          await AsyncStorage.setItem(SHOWN_KEY, "true");
+          await setAsyncStorage(SHOWN_KEY, true);
         }
       }
     })();
