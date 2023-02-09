@@ -4,8 +4,9 @@ jest.mock("@react-native-async-storage/async-storage");
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
-import SurveyHandler, { FILLED_OUT_KEY } from "providers/SurveyHandler";
+import SurveyHandler from "providers/SurveyHandler";
 import React from "react";
+import { FILLED_OUT_KEY } from "utils/asyncStorageKeys";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 
 (useGetAdFreeStatus as jest.Mock).mockReturnValue({ sessionCount: 5 });

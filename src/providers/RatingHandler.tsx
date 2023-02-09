@@ -1,13 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as StoreReview from "expo-store-review";
 import { FC, useEffect } from "react";
+import { SESSIONS_KEY, SHOWN_KEY } from "utils/asyncStorageKeys";
 
 export interface RatingDialog {
   numSessions: number;
 }
-
-const SESSIONS_KEY = "NUM_SESSIONS";
-const SHOWN_KEY = "ALREADY_SHOWN";
 
 const RatingHandler: FC<RatingDialog> = ({ numSessions }) => {
   useEffect(() => {

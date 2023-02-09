@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { Modal } from "react-native";
 import { Button, Dialog, Subheading, Text } from "react-native-paper";
+import { LAST_VERSION_KEY } from "utils/asyncStorageKeys";
 import changelogRaw from "./change-log.json";
 
 export interface ChangelogUpdate {
@@ -20,8 +21,6 @@ export interface ChangeLogProps
   extends Omit<ComponentProps<typeof Dialog>, "children" | "visible"> {
   currentVersion: string;
 }
-
-const LAST_VERSION_KEY = "LAST_VERSION";
 
 const changelog = changelogRaw as Record<string, ChangelogUpdate | null>;
 

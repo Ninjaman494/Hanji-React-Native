@@ -30,6 +30,7 @@ import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
 import theme from "theme";
+import { USER_ID_KEY } from "utils/asyncStorageKeys";
 import setupAds from "utils/setupAds";
 
 const client = new ApolloClient({
@@ -41,8 +42,6 @@ const client = new ApolloClient({
 });
 
 const routingInstrumentation = new Native.ReactNavigationInstrumentation();
-
-const USER_ID_KEY = "USER_ID";
 
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();

@@ -5,6 +5,7 @@ import React, { ComponentProps, FC, useEffect, useState } from "react";
 import "react-native";
 import { Button, Dialog, Portal, Text } from "react-native-paper";
 import { NavigationProps } from "typings/navigation";
+import { FILLED_OUT_KEY, LAST_ASKED_KEY } from "utils/asyncStorageKeys";
 
 export type SurveyHandlerProps = Omit<
   ComponentProps<typeof Dialog>,
@@ -13,8 +14,6 @@ export type SurveyHandlerProps = Omit<
 
 const NUM_SESSIONS = 5;
 const ASK_AGAIN_WAIT_TIME = 432000000; // 5 days in milliseconds
-export const FILLED_OUT_KEY = "FILLED_OUT";
-export const LAST_ASKED_KEY = "LAST_ASKED";
 
 const SurveyHandler: FC<SurveyHandlerProps> = (props) => {
   const navigation = useNavigation<NavigationProps>();

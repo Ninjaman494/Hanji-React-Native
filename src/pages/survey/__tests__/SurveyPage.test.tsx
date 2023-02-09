@@ -6,9 +6,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import useCreateSurveySubmission from "hooks/useCreateSurveySubmission";
 import { useSnackbar } from "providers/SnackbarProvider";
-import { FILLED_OUT_KEY } from "providers/SurveyHandler";
 import React from "react";
 import "react-native";
+import { FILLED_OUT_KEY } from "utils/asyncStorageKeys";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { fireEvent, render, RenderAPI, waitFor } from "utils/testUtils";
 import SurveyPage from "../SurveyPage";

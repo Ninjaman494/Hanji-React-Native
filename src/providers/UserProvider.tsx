@@ -10,6 +10,11 @@ import Purchases, {
   CustomerInfo,
   PurchasesError,
 } from "react-native-purchases";
+import {
+  RESTORED_KEY,
+  SESSIONS_KEY,
+  SURVEYS_KEY,
+} from "utils/asyncStorageKeys";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 interface UserProviderValue {
@@ -24,10 +29,6 @@ export enum SurveyState {
   ASK_AGAIN = "ASK_AGAIN",
   DONT_ASK_AGAIN = "DONT_ASK_AGAIN",
 }
-
-export const RESTORED_KEY = "RESTORED_PURCHASES";
-export const SESSIONS_KEY = "NUM_SESSIONS";
-export const SURVEYS_KEY = "NUM_SURVEYS";
 
 export const UserContext = createContext<UserProviderValue>({
   isAdFree: false,
