@@ -10,51 +10,30 @@ import Purchases, {
   CustomerInfo,
   PurchasesError,
 } from "react-native-purchases";
-import {
-  RESTORED_KEY,
-  SESSIONS_KEY,
-  SURVEYS_KEY,
-} from "utils/asyncStorageKeys";
+import { RESTORED_KEY, SESSIONS_KEY } from "utils/asyncStorageKeys";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 interface UserProviderValue {
   isAdFree: boolean;
   sessionCount: number;
-  surveyState: SurveyState;
   setAdFree: (status: boolean) => void;
-}
-
-export enum SurveyState {
-  NOT_ASKED = "NOT_ASKED",
-  ASK_AGAIN = "ASK_AGAIN",
-  DONT_ASK_AGAIN = "DONT_ASK_AGAIN",
 }
 
 export const UserContext = createContext<UserProviderValue>({
   isAdFree: false,
   sessionCount: -1,
-  surveyState: SurveyState.NOT_ASKED,
   setAdFree: () => {},
 });
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAdFree, setAdFree] = useState(false);
   const [sessionCount, setNumSessions] = useState(-1);
-  const [surveyState, setSurveyState] = useState(SurveyState.NOT_ASKED);
 
   useEffect(() => {
     (async () => {
       // Get and increment sessions count
       const sessionString = await AsyncStorage.getItem(SESSIONS_KEY);
       setNumSessions(sessionString ? parseInt(sessionString) + 1 : 1);
-
-      // Get survey state
-      const surveyString = await AsyncStorage.getItem(SURVEYS_KEY);
-      if (!surveyString || !(surveyString in SurveyState)) {
-        await AsyncStorage.setItem(SURVEYS_KEY, SurveyState.NOT_ASKED);
-      } else {
-        setSurveyState(surveyString as SurveyState);
-      }
 
       // Get ad free status
       try {
@@ -78,9 +57,7 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [setAdFree, setNumSessions]);
 
   return (
-    <UserContext.Provider
-      value={{ isAdFree, sessionCount, surveyState, setAdFree }}
-    >
+    <UserContext.Provider value={{ isAdFree, sessionCount, setAdFree }}>
       {children}
     </UserContext.Provider>
   );

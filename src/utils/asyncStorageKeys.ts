@@ -26,25 +26,8 @@ export const SESSIONS_KEY = "NUM_SESSIONS";
  */
 export const RESTORED_KEY = "RESTORED_PURCHASES";
 
-/* ---------- Survey Related keys ---------- */
-
 /**
- *  AsyncStorage key for whether the survey has
- * been filled out
- */
-export const FILLED_OUT_KEY = "FILLED_OUT";
-/**
- * AsyncStorage key for when user was last
- * asked to fill out the survey, as a date string
- */
-export const LAST_ASKED_KEY = "LAST_ASKED";
-/**
- * AsyncStorage key for whether the survey has
- * already been shown
+ * AsyncStorage key for whether the rating request
+ * dialog has been shown
  */
 export const SHOWN_KEY = "ALREADY_SHOWN";
-/**
- * AsyncStorage key for the survey state, which
- * should be one of SurveyState
- */
-export const SURVEYS_KEY = "NUM_SURVEYS";

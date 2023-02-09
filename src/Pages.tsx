@@ -14,7 +14,6 @@ import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
-import SurveyPage from "pages/survey/SurveyPage";
 import React, { FC, useEffect } from "react";
 import "react-native";
 import { Native } from "sentry-expo";
@@ -90,7 +89,6 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
       <Screen name="Acknowledgements" component={AcknowledgementsPage} />
       <Screen name="BugReport" component={BugReportPage} />
       <Screen name="Conjugator" component={ConjugatorPage} />
-      <Screen name="Survey" component={SurveyPage} />
     </Navigator>
   );
 };
