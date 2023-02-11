@@ -109,7 +109,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         <HintTooltip
           isVisible={showPopup}
           onClose={() => setShowPopup(false)}
-          text="See all conjugations!"
+          text="Click for more conjugations!"
         >
           <Button onPress={onPress} color={colors.accent}>
             See all
