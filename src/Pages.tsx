@@ -4,6 +4,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import logPageView from "logging/logPageView";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
@@ -45,22 +46,26 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
       detachInactiveScreens={true}
       screenOptions={{ headerShown: false }}
       screenListeners={{
-        focus: () => {
+        focus: async () => {
           const route = navRef.getCurrentRoute();
+          if (!route) return;
+
           Native?.addBreadcrumb({
             category: "navigation",
-            message: `Route changed to ${route?.name}`,
+            message: `Route changed to ${route.name}`,
             level: "info",
-            data: route?.params,
+            data: route.params,
           });
 
           logEvent({
             type: LOG_EVENT.SCREEN_VIEW,
             params: {
-              screen_name: route?.name,
-              screen_class: route?.name,
+              screen_name: route.name,
+              screen_class: route.name,
             },
           });
+
+          await logPageView(route);
         },
       }}
     >
