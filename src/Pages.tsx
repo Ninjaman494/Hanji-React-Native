@@ -4,7 +4,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import logPageView from "logging/logPageView";
+import { logPageView } from "logging/PageView";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
@@ -65,7 +65,7 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
             },
           });
 
-          await logPageView(route);
+          await logPageView(route.name);
         },
       }}
     >

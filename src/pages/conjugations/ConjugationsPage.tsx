@@ -2,6 +2,7 @@ import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
 import ErrorDialog from "components/ErrorDialog";
 import useConjugations from "hooks/useConjugations";
+import { logHonorificToggled } from "logging/honorificToggled";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
@@ -65,6 +66,7 @@ const ConjugationsPage: React.FC<ScreenProps<"Conjugations">> = ({
         onPress={() => {
           setHonorific(!honorific);
           containerY.setValue(0);
+          logHonorificToggled();
         }}
       />
       {error ? (
