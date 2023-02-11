@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { BaseCard, BaseCardProps } from "components";
+import HintTooltip from "components/HintTooltip";
 import { Conjugation } from "hooks/useConjugations";
 import { Favorite } from "hooks/useGetFavorites";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
@@ -23,6 +24,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
 }) => {
   const { colors, padding, textSizes } = useTheme();
   const history = useNavigation<NavigationProps>();
+  const [showPopup, setShowPopup] = useState(true);
 
   const style = StyleSheet.create({
     conjView: {
@@ -104,9 +106,15 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         )}
       </Grid>
       <Card.Actions style={style.actions}>
-        <Button onPress={onPress} color={colors.accent}>
-          See all
-        </Button>
+        <HintTooltip
+          isVisible={showPopup}
+          onClose={() => setShowPopup(false)}
+          text="Hello World!"
+        >
+          <Button onPress={onPress} color={colors.accent}>
+            See all
+          </Button>
+        </HintTooltip>
       </Card.Actions>
     </BaseCard>
   );

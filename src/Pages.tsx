@@ -4,7 +4,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { logPageView } from "logging/PageView";
+import { logPageView } from "logging/pageView";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";

@@ -1,0 +1,26 @@
+import { FC } from "react";
+import { Platform, StatusBar } from "react-native";
+import { Text } from "react-native-paper";
+import Tooltip, { TooltipProps } from "react-native-walkthrough-tooltip";
+
+interface HintTooltipProps extends TooltipProps {
+  text: string;
+}
+
+const HintTooltip: FC<HintTooltipProps> = ({ text, ...rest }) => {
+  return (
+    <Tooltip
+      useInteractionManager
+      placement="top"
+      backgroundColor="rgba(0,0,0,0)"
+      content={<Text>{text}</Text>}
+      contentStyle={{ backgroundColor: "#BABABA" }}
+      topAdjustment={
+        Platform.OS === "android" ? -(StatusBar.currentHeight ?? 0) : 0
+      }
+      {...rest}
+    />
+  );
+};
+
+export default HintTooltip;

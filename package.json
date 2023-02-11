@@ -64,6 +64,7 @@
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^9.0.0",
     "react-native-view-shot": "3.4.0",
+    "react-native-walkthrough-tooltip": "^1.5.0",
     "react-native-web": "~0.18.7",
     "sentry-expo": "~6.0.0",
     "yup": "^0.32.9"
