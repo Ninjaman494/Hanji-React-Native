@@ -41,6 +41,39 @@ export const convertToObj = (val: string | null) =>
 
 export const convertToBool = (val: string | null) => val === "true";
 
+export const getAsyncStorage = async <
+  T extends "string" | "number" | "boolean" | "object"
+>(
+  key: string,
+  type: T
+): Promise<
+  T extends "string"
+    ? string | null
+    : T extends "number"
+    ? number
+    : T extends "boolean"
+    ? boolean
+    : unknown
+> => {
+  const val = await AsyncStorage.getItem(key);
+  let newVal;
+  switch (type) {
+    case "string":
+      newVal = val as string;
+      break;
+    case "number":
+      newVal = val ? parseInt(val) : 0;
+      break;
+    case "boolean":
+      newVal = val === "true";
+      break;
+    default:
+      newVal = val ? JSON.parse(val) : null;
+      break;
+  }
+  return newVal;
+};
+
 export const setAsyncStorage = async (
   key: string,
   val: string | number | boolean | object

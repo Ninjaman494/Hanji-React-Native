@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {
   createContext,
   FC,
@@ -10,7 +9,12 @@ import Purchases, {
   CustomerInfo,
   PurchasesError,
 } from "react-native-purchases";
-import { RESTORED_KEY, SESSIONS_KEY } from "utils/asyncStorageHelper";
+import {
+  getAsyncStorage,
+  RESTORED_KEY,
+  SESSIONS_KEY,
+  setAsyncStorage,
+} from "utils/asyncStorageHelper";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 interface UserProviderValue {
@@ -32,19 +36,22 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     (async () => {
       // Get and increment sessions count
-      const sessionString = await AsyncStorage.getItem(SESSIONS_KEY);
-      setNumSessions(sessionString ? parseInt(sessionString) + 1 : 1);
+      const sessions = await getAsyncStorage(SESSIONS_KEY, "number");
+      setNumSessions(sessions + 1);
 
       // Get ad free status
       try {
-        const restoredPurchases = await AsyncStorage.getItem(RESTORED_KEY);
+        const restoredPurchases = await getAsyncStorage(
+          RESTORED_KEY,
+          "boolean"
+        );
         let info: CustomerInfo;
         if (restoredPurchases) {
           info = await Purchases.getCustomerInfo();
         } else {
           // Make a network call to restore purchases via Google Play/App store
           info = await Purchases.restorePurchases();
-          await AsyncStorage.setItem(RESTORED_KEY, "true");
+          await setAsyncStorage(RESTORED_KEY, true);
         }
 
         setAdFree(!!info.entitlements.active.ad_free_entitlement);
