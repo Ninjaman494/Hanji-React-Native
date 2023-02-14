@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { PageName } from "typings/navigation";
 
 /**
  * AsyncStorage key for user id which is synced
@@ -34,6 +35,27 @@ export const RESTORED_KEY = "RESTORED_PURCHASES";
  */
 export const SHOWN_KEY = "ALREADY_SHOWN";
 
+/**
+ * Has the honorific toggle on Conjugations Page
+ * been used
+ */
+export const HONORIFIC_TOGGLED_KEY = "HONORIFIC_TOGGLED";
+
+export type PageVisitKey = `${PageName}_VISIT_COUNT`;
+
+export type PopupShownKey = `${string}_POPUP_SHOWN`;
+
+export type AsyncStorageKey =
+  | typeof USER_ID_KEY
+  | typeof FAVORITES_KEY
+  | typeof LAST_VERSION_KEY
+  | typeof SESSIONS_KEY
+  | typeof RESTORED_KEY
+  | typeof SHOWN_KEY
+  | typeof HONORIFIC_TOGGLED_KEY
+  | PageVisitKey
+  | PopupShownKey;
+
 export const convertToInt = (val: string | null) => (val ? parseInt(val) : 0);
 
 export const convertToObj = (val: string | null) =>
@@ -44,7 +66,7 @@ export const convertToBool = (val: string | null) => val === "true";
 export const getAsyncStorage = async <
   T extends "string" | "number" | "boolean" | "object"
 >(
-  key: string,
+  key: AsyncStorageKey,
   type: T
 ): Promise<
   T extends "string"
@@ -75,7 +97,7 @@ export const getAsyncStorage = async <
 };
 
 export const setAsyncStorage = async (
-  key: string,
+  key: AsyncStorageKey,
   val: string | number | boolean | object
 ) => {
   const valType = typeof val;

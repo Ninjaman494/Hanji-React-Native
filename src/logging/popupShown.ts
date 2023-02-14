@@ -1,9 +1,17 @@
-import { getAsyncStorage, setAsyncStorage } from "utils/asyncStorageHelper";
+import {
+  getAsyncStorage,
+  PopupShownKey,
+  setAsyncStorage,
+} from "utils/asyncStorageHelper";
 
-export const isPopupShown = async (popup: string) =>
-  await getAsyncStorage(getKey(popup), "number");
+export enum PopupName {
+  CONJUGATIONS = "ConjugationsPopup",
+}
 
-export const logPopupShown = async (page: string, shown = true) =>
-  await setAsyncStorage(getKey(page), shown);
+export const isPopupShown = async (popup: PopupName) =>
+  await getAsyncStorage(getKey(popup), "boolean");
 
-const getKey = (popup: string) => `${popup}_POPUP_SHOWN`;
+export const logPopupShown = async (popup: PopupName, shown = true) =>
+  await setAsyncStorage(getKey(popup), shown);
+
+const getKey = (popup: PopupName): PopupShownKey => `${popup}_POPUP_SHOWN`;

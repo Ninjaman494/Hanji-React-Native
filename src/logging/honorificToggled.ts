@@ -1,9 +1,11 @@
-import { getAsyncStorage, setAsyncStorage } from "utils/asyncStorageHelper";
-
-const KEY = "HONORIFIC_TOGGLED";
+import {
+  getAsyncStorage,
+  HONORIFIC_TOGGLED_KEY,
+  setAsyncStorage,
+} from "utils/asyncStorageHelper";
 
 export const hasHonorificToggled = async () =>
-  await getAsyncStorage(KEY, "boolean");
+  await getAsyncStorage(HONORIFIC_TOGGLED_KEY, "boolean");
 
 export const logHonorificToggled = async (toggled = true) =>
-  await setAsyncStorage(KEY, toggled);
+  await setAsyncStorage(HONORIFIC_TOGGLED_KEY, toggled);
