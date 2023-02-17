@@ -4,7 +4,7 @@ jest.mock("utils/buyAdFree");
 
 import { useNavigation } from "@react-navigation/native";
 import AppBar from "components/AppBar";
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import useUserContext from "hooks/useUserContext";
 import { useViewShot } from "providers/ViewShotProvider";
 import React from "react";
 import "react-native";
@@ -82,7 +82,7 @@ describe("AppBar component", () => {
     });
 
     it("can handle ad free upgrades", async () => {
-      (useGetAdFreeStatus as jest.Mock).mockReturnValue({ isAdFree: false });
+      (useUserContext as jest.Mock).mockReturnValue({ isAdFree: false });
 
       const component = render(<AppBar {...props} />);
 

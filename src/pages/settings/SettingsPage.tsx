@@ -3,8 +3,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { AppBar } from "components";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import useGetFavorites from "hooks/useGetFavorites";
+import useUserContext from "hooks/useUserContext";
 import { useSnackbar } from "providers/SnackbarProvider";
 import React, { useCallback, useState } from "react";
 import { Linking, StyleSheet, View } from "react-native";
@@ -21,7 +21,7 @@ const SettingsPage: React.FC<ScreenProps<PageName.SETTINGS>> = ({
   const { colors } = useTheme();
   const { favorites, loading, refetch } = useGetFavorites();
   const { showSnackbar } = useSnackbar();
-  const { setAdFree } = useGetAdFreeStatus();
+  const { setAdFree } = useUserContext();
   const [checkDesc, setCheckDesc] = useState(CHECK_AD_FREE_DESC);
 
   const styles = StyleSheet.create({

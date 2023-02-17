@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import useUserContext from "hooks/useUserContext";
 import { useSnackbar } from "providers/SnackbarProvider";
 import { useViewShot } from "providers/ViewShotProvider";
 import * as React from "react";
@@ -23,7 +23,7 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showMenu, setShowMenu] = useState(false);
 
-  const { isAdFree } = useGetAdFreeStatus();
+  const { isAdFree } = useUserContext();
   const navigation = useNavigation<NavigationProps>();
   const takeScreenshot = useViewShot();
   const { showSnackbar } = useSnackbar();

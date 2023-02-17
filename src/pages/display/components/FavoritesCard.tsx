@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { BaseCard, BaseCardProps } from "components";
 import HintTooltip from "components/HintTooltip";
 import { Conjugation } from "hooks/useConjugations";
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import { Favorite } from "hooks/useGetFavorites";
+import useUserContext from "hooks/useUserContext";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
@@ -25,7 +25,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
 }) => {
   const { colors, padding, textSizes } = useTheme();
   const history = useNavigation<NavigationProps>();
-  const { pageViews } = useGetAdFreeStatus();
+  const { pageViews } = useUserContext();
   const [showPopup, setShowPopup] = useState(
     pageViews.Display >= 3 && pageViews.Conjugations == 0
   );

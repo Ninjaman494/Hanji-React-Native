@@ -1,4 +1,4 @@
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import useUserContext from "hooks/useUserContext";
 import { useCallback } from "react";
 import { PageName } from "typings/navigation";
 import {
@@ -11,7 +11,7 @@ export const getPageView = async (page: PageName) =>
   await getAsyncStorage(getKey(page), "number");
 
 export const useLogPageView = () => {
-  const { updateStore } = useGetAdFreeStatus();
+  const { updateStore } = useUserContext();
 
   const logPageView = useCallback(
     async (page: PageName) => {

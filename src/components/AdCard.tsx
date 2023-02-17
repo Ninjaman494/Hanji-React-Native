@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
+import useUserContext from "hooks/useUserContext";
 import React, { useEffect, useState } from "react";
 import "react-native";
 import { View } from "react-native";
@@ -8,7 +8,7 @@ import { NavigationProps } from "typings/navigation";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
 const AdCard = (props: BaseCardProps): JSX.Element | null => {
-  const { isAdFree } = useGetAdFreeStatus();
+  const { isAdFree } = useUserContext();
   const navigation = useNavigation<NavigationProps>();
   const [showAd, setShowAd] = useState(false);
 

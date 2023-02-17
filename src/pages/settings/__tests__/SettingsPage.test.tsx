@@ -7,8 +7,8 @@ jest.mock("react-native-purchases");
 
 import notifee from "@notifee/react-native";
 import * as StoreReview from "expo-store-review";
-import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import useGetFavorites from "hooks/useGetFavorites";
+import useUserContext from "hooks/useUserContext";
 import { useSnackbar } from "providers/SnackbarProvider";
 import React from "react";
 import { Linking } from "react-native";
@@ -43,7 +43,7 @@ jest.mock("expo-constants", () => ({
 });
 
 const setAdFree = jest.fn();
-(useGetAdFreeStatus as jest.Mock).mockReturnValue({
+(useUserContext as jest.Mock).mockReturnValue({
   isAdFree: false,
   setAdFree,
 });
