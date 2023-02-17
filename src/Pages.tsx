@@ -4,7 +4,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { logPageView } from "logging/pageView";
+import { useLogPageView } from "logging/pageView";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
@@ -30,6 +30,7 @@ interface PagesProps {
 
 const Pages: FC<PagesProps> = ({ navRef }) => {
   const navigation = useNavigation<NavigationProps>();
+  const logPageView = useLogPageView();
 
   useEffect(() => {
     messaging().onNotificationOpenedApp((msg) =>

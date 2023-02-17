@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BaseCard, BaseCardProps } from "components";
 import HintTooltip from "components/HintTooltip";
 import { Conjugation } from "hooks/useConjugations";
+import useGetAdFreeStatus from "hooks/useGetAdFreeStatus";
 import { Favorite } from "hooks/useGetFavorites";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
@@ -24,7 +25,10 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
 }) => {
   const { colors, padding, textSizes } = useTheme();
   const history = useNavigation<NavigationProps>();
-  const [showPopup, setShowPopup] = useState(true);
+  const { pageViews } = useGetAdFreeStatus();
+  const [showPopup, setShowPopup] = useState(
+    pageViews.Display >= 3 && pageViews.Conjugations == 0
+  );
 
   const style = StyleSheet.create({
     conjView: {

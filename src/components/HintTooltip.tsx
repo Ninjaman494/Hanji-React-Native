@@ -10,6 +10,9 @@ interface HintTooltipProps extends TooltipProps {
 const HintTooltip: FC<HintTooltipProps> = ({ text, ...rest }) => (
   <Tooltip
     disableShadow
+    closeOnBackgroundInteraction
+    closeOnChildInteraction
+    closeOnContentInteraction
     useInteractionManager
     placement="top"
     backgroundColor="rgba(0,0,0,0)"
