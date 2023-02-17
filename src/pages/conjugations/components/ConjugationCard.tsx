@@ -5,7 +5,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { NavigationProps } from "typings/navigation";
+import { NavigationProps, PageName } from "typings/navigation";
 import { Formality } from "utils/conjugationTypes";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
@@ -58,7 +58,7 @@ const ConjugationCard: React.FC<ConjugationCardProps> = ({
                   honorific: conjugation.honorific,
                 },
               });
-              navigation.push("ConjInfo", { conjugation });
+              navigation.push(PageName.CONJINFO, { conjugation });
             }}
           >
             <Col size={5}>

@@ -10,12 +10,14 @@ import React, { useCallback, useState } from "react";
 import { Linking, StyleSheet, View } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import Purchases, { PurchasesError } from "react-native-purchases";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
 const CHECK_AD_FREE_DESC = "Click here to check your ad-free status";
 
-const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
+const SettingsPage: React.FC<ScreenProps<PageName.SETTINGS>> = ({
+  navigation,
+}) => {
   const { colors } = useTheme();
   const { favorites, loading, refetch } = useGetFavorites();
   const { showSnackbar } = useSnackbar();
@@ -68,7 +70,7 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
         <List.Section>
           <List.Item
             title="Favorites"
-            onPress={() => navigation.push("Favorites")}
+            onPress={() => navigation.push(PageName.FAVORITES)}
             description={
               loading ? "Loading..." : `You have ${favorites?.length} favorites`
             }
@@ -105,7 +107,7 @@ const SettingsPage: React.FC<ScreenProps<"Settings">> = ({ navigation }) => {
           />
           <List.Item
             title="Acknowledgements"
-            onPress={() => navigation.push("Acknowledgements")}
+            onPress={() => navigation.push(PageName.ACKNOWLEDGEMENTS)}
           />
           <List.Item title="Version" description={Constants.nativeAppVersion} />
         </List.Section>

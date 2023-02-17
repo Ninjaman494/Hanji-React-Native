@@ -7,7 +7,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { TextInput as NativeInput } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
-import { NavigationProps } from "typings/navigation";
+import { NavigationProps, PageName } from "typings/navigation";
 import buyAdFree from "utils/buyAdFree";
 
 export const APP_BAR_HEIGHT = 56 + Constants.statusBarHeight;
@@ -36,12 +36,6 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
     color: "white",
   };
 
-  const doSearch = () => {
-    if (searchQuery) {
-      navigation.push("Search", { query: searchQuery });
-    }
-  };
-
   // Reset state when leaving page
   useEffect(() => {
     const unsubscribe = navigation.addListener("blur", () => {
@@ -67,7 +61,10 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
           accessibilityLabel="search input"
           value={searchQuery}
           onChangeText={setSearchQuery}
-          onSubmitEditing={doSearch}
+          onSubmitEditing={() =>
+            searchQuery &&
+            navigation.push(PageName.SEARCH, { query: searchQuery })
+          }
           placeholder="Search in Korean or English..."
           placeholderTextColor={colors.primaryLight}
           selectionColor={colors.accent}
@@ -98,13 +95,13 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
         }
       >
         <Menu.Item
-          onPress={() => navigation.push("Settings")}
+          onPress={() => navigation.push(PageName.SETTINGS)}
           title="Settings"
         />
         <Menu.Item
           onPress={async () => {
             const uri = await takeScreenshot?.();
-            navigation.push("BugReport", { screenshot: uri as string });
+            navigation.push(PageName.BUGREPORT, { screenshot: uri as string });
           }}
           title="Report a Bug"
         />

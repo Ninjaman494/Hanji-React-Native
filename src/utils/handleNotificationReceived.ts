@@ -1,5 +1,5 @@
 import { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
-import { NavigationProps } from "typings/navigation";
+import { NavigationProps, PageName } from "typings/navigation";
 
 const handleNotificationReceived = (
   msg: FirebaseMessagingTypes.RemoteMessage,
@@ -7,7 +7,7 @@ const handleNotificationReceived = (
 ) => {
   console.log("Received: ", JSON.stringify(msg, null, 2));
   if (msg.data?.type === "wod") {
-    navigation.navigate("Display", { entryId: msg.data.entryId });
+    navigation.navigate(PageName.DISPLAY, { entryId: msg.data.entryId });
   }
 };
 export default handleNotificationReceived;

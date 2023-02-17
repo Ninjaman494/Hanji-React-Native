@@ -6,10 +6,10 @@ import { logHonorificToggled } from "logging/honorificToggled";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
-const ConjugationsPage: React.FC<ScreenProps<"Conjugations">> = ({
+const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
   route,
   navigation,
 }) => {

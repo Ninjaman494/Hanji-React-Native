@@ -4,7 +4,7 @@ import { SlideInBody, SlideInTop } from "components/animations";
 import React, { useMemo, useState } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Searchbar, Text } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import {
   ConjugationName,
   ConjugationType,
@@ -33,7 +33,7 @@ export const DEFAULT_FAVORITES = [
   },
 ];
 
-const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
+const MainPage: React.FC<ScreenProps<PageName.MAIN>> = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const [fontLoaded] = useFonts({
@@ -61,7 +61,7 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
 
   const doSearch = () => {
     if (searchQuery) {
-      navigation.push("Search", { query: searchQuery });
+      navigation.push(PageName.SEARCH, { query: searchQuery });
     }
   };
 
@@ -98,7 +98,9 @@ const MainPage: React.FC<ScreenProps<"Main">> = ({ navigation }) => {
           />
           <WODCard
             style={styles.card}
-            onSeeEntry={(entryId) => navigation.push("Display", { entryId })}
+            onSeeEntry={(entryId) =>
+              navigation.push(PageName.DISPLAY, { entryId })
+            }
           />
           <AdCard style={[styles.card, { marginBottom: 16 }]} />
         </SlideInBody>

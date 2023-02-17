@@ -13,7 +13,7 @@ import { useSnackbar } from "providers/SnackbarProvider";
 import React, { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, useTheme } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import getUser from "utils/getUser";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import * as yup from "yup";
@@ -30,7 +30,10 @@ const validationSchema = yup.object().shape({
   type: yup.string().label("Feedback Type").required(),
 });
 
-const BugReportPage: FC<ScreenProps<"BugReport">> = ({ route, navigation }) => {
+const BugReportPage: FC<ScreenProps<PageName.BUGREPORT>> = ({
+  route,
+  navigation,
+}) => {
   const { padding, colors } = useTheme();
   const { screenshot: uri } = route.params;
   const { goBack } = navigation;

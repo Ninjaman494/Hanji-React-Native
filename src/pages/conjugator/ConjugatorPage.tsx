@@ -13,7 +13,7 @@ import {
   View,
 } from "react-native";
 import { Portal, ProgressBar, useTheme } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import ConjugationsList from "./ConjugationsList";
 
 const pos = [
@@ -33,7 +33,7 @@ interface FormValues {
   honorific: boolean;
 }
 
-const ConjugatorPage: FC<ScreenProps<"Conjugator">> = ({
+const ConjugatorPage: FC<ScreenProps<PageName.CONJUGATOR>> = ({
   route,
   navigation,
 }) => {

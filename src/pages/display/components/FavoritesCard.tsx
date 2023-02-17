@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { NavigationProps } from "typings/navigation";
+import { NavigationProps, PageName } from "typings/navigation";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 export type FavoritesCardProps = BaseCardProps & {
@@ -80,7 +80,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                     honorific: conjugation?.honorific,
                   },
                 });
-                history.push("ConjInfo", {
+                history.push(PageName.CONJINFO, {
                   conjugation: conjugation as Conjugation,
                 });
               }}

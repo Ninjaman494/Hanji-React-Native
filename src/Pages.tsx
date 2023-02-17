@@ -18,7 +18,7 @@ import SettingsPage from "pages/settings/SettingsPage";
 import React, { FC, useEffect } from "react";
 import "react-native";
 import { Native } from "sentry-expo";
-import { NavigationProps, StackParamList } from "typings/navigation";
+import { NavigationProps, PageName, StackParamList } from "typings/navigation";
 import handleNotificationReceived from "utils/handleNotificationReceived";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
@@ -42,7 +42,7 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
 
   return (
     <Navigator
-      initialRouteName="Main"
+      initialRouteName={PageName.MAIN}
       detachInactiveScreens={true}
       screenOptions={{ headerShown: false }}
       screenListeners={{
@@ -65,14 +65,14 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
             },
           });
 
-          await logPageView(route.name);
+          await logPageView(route.name as PageName);
         },
       }}
     >
-      <Screen name="Main" component={MainPage} />
-      <Screen name="Search" component={SearchPage} />
+      <Screen name={PageName.MAIN} component={MainPage} />
+      <Screen name={PageName.SEARCH} component={SearchPage} />
       <Screen
-        name="Display"
+        name={PageName.DISPLAY}
         component={DisplayPage}
         options={({ route: { params } }) => ({
           transitionSpec: {
@@ -87,13 +87,16 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
           },
         })}
       />
-      <Screen name="Conjugations" component={ConjugationsPage} />
-      <Screen name="ConjInfo" component={ConjInfoPage} />
-      <Screen name="Settings" component={SettingsPage} />
-      <Screen name="Favorites" component={FavoritesPage} />
-      <Screen name="Acknowledgements" component={AcknowledgementsPage} />
-      <Screen name="BugReport" component={BugReportPage} />
-      <Screen name="Conjugator" component={ConjugatorPage} />
+      <Screen name={PageName.CONJUGATIONS} component={ConjugationsPage} />
+      <Screen name={PageName.CONJINFO} component={ConjInfoPage} />
+      <Screen name={PageName.SETTINGS} component={SettingsPage} />
+      <Screen name={PageName.FAVORITES} component={FavoritesPage} />
+      <Screen
+        name={PageName.ACKNOWLEDGEMENTS}
+        component={AcknowledgementsPage}
+      />
+      <Screen name={PageName.BUGREPORT} component={BugReportPage} />
+      <Screen name={PageName.CONJUGATOR} component={ConjugatorPage} />
     </Navigator>
   );
 };
