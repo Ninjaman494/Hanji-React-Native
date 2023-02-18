@@ -3,12 +3,12 @@ import { BaseCard, BaseCardProps } from "components";
 import HintTooltip from "components/HintTooltip";
 import { Conjugation } from "hooks/useConjugations";
 import { Favorite } from "hooks/useGetFavorites";
-import useUserContext from "hooks/useUserContext";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
 import { NavigationProps, PageName } from "typings/navigation";
+import { PopupName } from "typings/popup";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 export type FavoritesCardProps = BaseCardProps & {
@@ -25,8 +25,6 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
 }) => {
   const { colors, padding, textSizes } = useTheme();
   const history = useNavigation<NavigationProps>();
-  const { pageViews } = useUserContext();
-  const [showPopup, setShowPopup] = useState(true);
 
   const style = StyleSheet.create({
     conjView: {
@@ -109,9 +107,9 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
       </Grid>
       <Card.Actions style={style.actions}>
         <HintTooltip
-          isVisible={showPopup}
-          onRequestClose={() => setShowPopup(false)}
+          popupName={PopupName.CONJUGATIONS}
           text="Click for more conjugations!"
+          offset={36}
           from={
             <TouchableOpacity>
               <Button onPress={onPress} color={colors.accent}>

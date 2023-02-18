@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PageName } from "typings/navigation";
+import { PopupName } from "../typings/popup";
 
 /**
  * AsyncStorage key for user id which is synced
@@ -43,7 +44,7 @@ export const HONORIFIC_TOGGLED_KEY = "HONORIFIC_TOGGLED";
 
 export type PageVisitKey = `${PageName}_VISIT_COUNT`;
 
-export type PopupShownKey = `${string}_POPUP_SHOWN`;
+export type PopupShownKey = `${PopupName}_POPUP_SHOWN`;
 
 export type AsyncStorageKey =
   | typeof USER_ID_KEY

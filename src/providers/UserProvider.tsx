@@ -1,7 +1,7 @@
 import { UserContext } from "hooks/useUserContext";
 import { hasHonorificToggled } from "logging/honorificToggled";
 import { getPageView } from "logging/pageView";
-import { isPopupShown, PopupName } from "logging/popupShown";
+import { isPopupShown } from "logging/popupShown";
 import React, {
   FC,
   PropsWithChildren,
@@ -14,6 +14,7 @@ import Purchases, {
   PurchasesError,
 } from "react-native-purchases";
 import { PageName } from "typings/navigation";
+import { PopupName } from "typings/popup";
 import {
   getAsyncStorage,
   RESTORED_KEY,

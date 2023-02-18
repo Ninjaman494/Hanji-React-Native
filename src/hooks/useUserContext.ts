@@ -1,6 +1,6 @@
-import { PopupName } from "logging/popupShown";
 import { createContext, useContext } from "react";
 import { PageName } from "typings/navigation";
+import { PopupName } from "typings/popup";
 
 type PageViewsMap = Record<PageName, number>;
 
