@@ -1,8 +1,8 @@
+import { UserContext } from "hooks/useUserContext";
 import { hasHonorificToggled } from "logging/honorificToggled";
 import { getPageView } from "logging/pageView";
 import { isPopupShown, PopupName } from "logging/popupShown";
 import React, {
-  createContext,
   FC,
   PropsWithChildren,
   useCallback,
@@ -22,35 +22,11 @@ import {
 } from "utils/asyncStorageHelper";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
-type PageViewsMap = Record<PageName, number>;
-
-type PopupOpensMap = Record<PopupName, boolean>;
-
-interface UserProviderValue {
-  isAdFree: boolean;
-  sessionCount: number;
-  honorificToggled: boolean;
-  pageViews: PageViewsMap;
-  popupOpens: PopupOpensMap;
-  setAdFree: (status: boolean) => void;
-  updateStore: () => Promise<void>;
-}
-
-const defaultPageViewsMap = {} as PageViewsMap;
+const defaultPageViewsMap = {} as Record<PageName, number>;
 Object.values(PageName).forEach((n) => (defaultPageViewsMap[n] = 0));
 
-const defaultPopupMap = {} as PopupOpensMap;
+const defaultPopupMap = {} as Record<PopupName, boolean>;
 Object.values(PopupName).forEach((n) => (defaultPopupMap[n] = false));
-
-export const UserContext = createContext<UserProviderValue>({
-  isAdFree: false,
-  sessionCount: -1,
-  honorificToggled: false,
-  pageViews: defaultPageViewsMap,
-  popupOpens: defaultPopupMap,
-  setAdFree: () => {},
-  updateStore: () => Promise.resolve(),
-});
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAdFree, setAdFree] = useState(false);
