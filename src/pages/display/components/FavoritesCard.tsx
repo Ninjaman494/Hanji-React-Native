@@ -5,7 +5,7 @@ import { Conjugation } from "hooks/useConjugations";
 import { Favorite } from "hooks/useGetFavorites";
 import useUserContext from "hooks/useUserContext";
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
 import { NavigationProps, PageName } from "typings/navigation";
@@ -26,9 +26,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
   const { colors, padding, textSizes } = useTheme();
   const history = useNavigation<NavigationProps>();
   const { pageViews } = useUserContext();
-  const [showPopup, setShowPopup] = useState(
-    pageViews.Display >= 3 && pageViews.Conjugations == 0
-  );
+  const [showPopup, setShowPopup] = useState(true);
 
   const style = StyleSheet.create({
     conjView: {
@@ -112,13 +110,16 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
       <Card.Actions style={style.actions}>
         <HintTooltip
           isVisible={showPopup}
-          onClose={() => setShowPopup(false)}
+          onRequestClose={() => setShowPopup(false)}
           text="Click for more conjugations!"
-        >
-          <Button onPress={onPress} color={colors.accent}>
-            See all
-          </Button>
-        </HintTooltip>
+          from={
+            <TouchableOpacity>
+              <Button onPress={onPress} color={colors.accent}>
+                See all
+              </Button>
+            </TouchableOpacity>
+          }
+        />
       </Card.Actions>
     </BaseCard>
   );
