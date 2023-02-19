@@ -1,17 +1,15 @@
 import useUserContext from "hooks/useUserContext";
 import { useLogPopupShown } from "logging/popupShown";
-import { forwardRef, ReactNode, useMemo, useState } from "react";
+import { forwardRef, useMemo, useState } from "react";
 import { Platform, StatusBar } from "react-native";
 import { Text } from "react-native-paper";
 import Popover from "react-native-popover-view/dist/Popover";
-import { PopoverProps } from "react-native-popover-view/dist/Types";
 import { PopupName } from "typings/popup";
 
 interface HintTooltipProps
-  extends Omit<PopoverProps, "isVisible" | "children"> {
+  extends Omit<Popover["props"], "isVisible" | "children"> {
   text: string;
   popupName: PopupName;
-  from?: ReactNode;
 }
 
 const HintTooltip = forwardRef<Popover, HintTooltipProps>(
@@ -27,6 +25,9 @@ const HintTooltip = forwardRef<Popover, HintTooltipProps>(
           break;
         case PopupName.FAVORITES:
           show = sessionCount >= 5 && pageViews.Favorites === 0;
+          break;
+        case PopupName.CONJINFO:
+          show = pageViews.Conjugations >= 2;
           break;
         default:
           return false;
