@@ -1,12 +1,15 @@
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
 import { easeOutExpo } from "components/animations/SlideInBody";
 import ErrorDialog from "components/ErrorDialog";
+import HintTooltip from "components/HintTooltip";
 import useConjugations from "hooks/useConjugations";
 import { logHonorificToggled } from "logging/honorificToggled";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
+import { Rect } from "react-native-popover-view";
 import { PageName, ScreenProps } from "typings/navigation";
+import { PopupName } from "typings/popup";
 import ConjugationsPageContent from "./components/ConjugationPageContent";
 
 const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
@@ -47,6 +50,9 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
     outputRange: [Dimensions.get("window").height, 0],
   });
 
+  // Get position for honorific switch hint
+  const [pos, setPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
+
   useEffect(() => {
     if (!loading && conjugations) {
       Animated.timing(containerY, {
@@ -63,12 +69,21 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
       <AppBar title="Conjugations" />
       <HonorificSwitch
         honorific={honorific}
+        onLayout={({ nativeEvent }) => setPos(nativeEvent.layout)}
         onPress={() => {
           setHonorific(!honorific);
           containerY.setValue(0);
           logHonorificToggled();
         }}
       />
+      {pos.width != 0 && (
+        <HintTooltip
+          popupName={PopupName.HONORIFIC}
+          text="Try switching to honorific forms!"
+          from={new Rect(pos.x, pos.y, pos.width, pos.height)}
+          offset={52}
+        />
+      )}
       {error ? (
         <ErrorDialog visible error={error} onDismiss={navigation.goBack} />
       ) : loading ? (

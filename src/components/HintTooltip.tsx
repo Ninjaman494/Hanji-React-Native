@@ -14,7 +14,8 @@ interface HintTooltipProps
 
 const HintTooltip = forwardRef<Popover, HintTooltipProps>(
   ({ text, popupName, ...rest }, ref) => {
-    const { sessionCount, pageViews, popupOpens } = useUserContext();
+    const { sessionCount, pageViews, popupOpens, honorificToggled } =
+      useUserContext();
     const logPopupShown = useLogPopupShown();
 
     const shouldShow = useMemo(() => {
@@ -29,6 +30,8 @@ const HintTooltip = forwardRef<Popover, HintTooltipProps>(
         case PopupName.CONJINFO:
           show = pageViews.Conjugations >= 2;
           break;
+        case PopupName.HONORIFIC:
+          return pageViews.Conjugations >= 5 && !honorificToggled;
         default:
           return false;
       }
