@@ -1,3 +1,5 @@
+import useUserContext from "hooks/useUserContext";
+import { useCallback } from "react";
 import {
   getAsyncStorage,
   HONORIFIC_TOGGLED_KEY,
@@ -7,5 +9,16 @@ import {
 export const hasHonorificToggled = async () =>
   await getAsyncStorage(HONORIFIC_TOGGLED_KEY, "boolean");
 
-export const logHonorificToggled = async (toggled = true) =>
-  await setAsyncStorage(HONORIFIC_TOGGLED_KEY, toggled);
+export const useLogHonorificTogled = () => {
+  const { updateStore } = useUserContext();
+
+  const logHonorificToggled = useCallback(
+    async (toggled: boolean) => {
+      await setAsyncStorage(HONORIFIC_TOGGLED_KEY, toggled);
+      await updateStore();
+    },
+    [updateStore]
+  );
+
+  return logHonorificToggled;
+};
