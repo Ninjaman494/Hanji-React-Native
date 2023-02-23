@@ -1,11 +1,19 @@
 // @ts-expect-error import doesn't have type
 import mockRNCNetInfo from "@react-native-community/netinfo/jest/netinfo-mock.js";
 import { EffectCallback } from "react";
+import { PageName as MockPageName } from "typings/navigation";
+import { PopupName as MockPopupName } from "typings/popup";
 
 jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
-jest.mock("hooks/useGetAdFreeStatus", () =>
-  jest.fn().mockReturnValue({ isAdFree: true })
+jest.mock("hooks/useUserContext", () =>
+  jest.fn().mockReturnValue({
+    isAdFree: true,
+    honorificToggled: false,
+    sessionCount: 0,
+    pageViews: Object.values(MockPageName).map((v) => ({ [v]: 0 })),
+    popupOpens: Object.values(MockPopupName).map((v) => ({ [v]: true })),
+  })
 );
 jest.mock("utils/logEvent");
 jest.mock("expo-modules-core");

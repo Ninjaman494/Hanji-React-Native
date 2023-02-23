@@ -1,6 +1,6 @@
 jest.mock("providers/SnackbarProvider");
 jest.mock("hooks/useGetFavorites");
-jest.mock("hooks/useGetAdFreeStatus");
+jest.mock("hooks/useUserContext");
 jest.mock("react-native/Libraries/Linking/Linking");
 jest.mock("expo-store-review");
 jest.mock("react-native-purchases");

@@ -1,5 +1,5 @@
 jest.mock("providers/ViewShotProvider");
-jest.mock("hooks/useGetAdFreeStatus");
+jest.mock("hooks/useUserContext");
 jest.mock("utils/buyAdFree");
 
 import { useNavigation } from "@react-navigation/native";
