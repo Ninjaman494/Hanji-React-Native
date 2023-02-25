@@ -1,12 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { BaseCard, BaseCardProps } from "components";
+import HintTooltip from "components/HintTooltip";
 import { Conjugation } from "hooks/useConjugations";
 import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Col, Grid, Row } from "react-native-easy-grid";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { NavigationProps } from "typings/navigation";
+import { NavigationProps, PageName } from "typings/navigation";
+import { PopupName } from "typings/popup";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
 export type FavoritesCardProps = BaseCardProps & {
@@ -78,7 +80,7 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
                     honorific: conjugation?.honorific,
                   },
                 });
-                history.push("ConjInfo", {
+                history.push(PageName.CONJINFO, {
                   conjugation: conjugation as Conjugation,
                 });
               }}
@@ -104,9 +106,18 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         )}
       </Grid>
       <Card.Actions style={style.actions}>
-        <Button onPress={onPress} color={colors.accent}>
-          See all
-        </Button>
+        <HintTooltip
+          popupName={PopupName.CONJUGATIONS}
+          text="Click for more conjugations!"
+          offset={36}
+          from={
+            <TouchableOpacity>
+              <Button onPress={onPress} color={colors.accent}>
+                See all
+              </Button>
+            </TouchableOpacity>
+          }
+        />
       </Card.Actions>
     </BaseCard>
   );

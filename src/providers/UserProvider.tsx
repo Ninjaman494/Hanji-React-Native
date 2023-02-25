@@ -1,8 +1,11 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { UserContext } from "hooks/useUserContext";
+import { hasHonorificToggled } from "logging/honorificToggled";
+import { getPageView } from "logging/pageView";
+import { isPopupShown } from "logging/popupShown";
 import React, {
-  createContext,
   FC,
   PropsWithChildren,
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -10,61 +13,71 @@ import Purchases, {
   CustomerInfo,
   PurchasesError,
 } from "react-native-purchases";
+import { PageName } from "typings/navigation";
+import { PopupName } from "typings/popup";
+import {
+  getAsyncStorage,
+  RESTORED_KEY,
+  SESSIONS_KEY,
+  setAsyncStorage,
+} from "utils/asyncStorageHelper";
 import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 
-interface UserProviderValue {
-  isAdFree: boolean;
-  sessionCount: number;
-  surveyState: SurveyState;
-  setAdFree: (status: boolean) => void;
-}
+const defaultPageViewsMap = {} as Record<PageName, number>;
+Object.values(PageName).forEach((n) => (defaultPageViewsMap[n] = 0));
 
-export enum SurveyState {
-  NOT_ASKED = "NOT_ASKED",
-  ASK_AGAIN = "ASK_AGAIN",
-  DONT_ASK_AGAIN = "DONT_ASK_AGAIN",
-}
-
-export const RESTORED_KEY = "RESTORED_PURCHASES";
-export const SESSIONS_KEY = "NUM_SESSIONS";
-export const SURVEYS_KEY = "NUM_SURVEYS";
-
-export const UserContext = createContext<UserProviderValue>({
-  isAdFree: false,
-  sessionCount: -1,
-  surveyState: SurveyState.NOT_ASKED,
-  setAdFree: () => {},
-});
+const defaultPopupMap = {} as Record<PopupName, boolean>;
+Object.values(PopupName).forEach((n) => (defaultPopupMap[n] = false));
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAdFree, setAdFree] = useState(false);
   const [sessionCount, setNumSessions] = useState(-1);
-  const [surveyState, setSurveyState] = useState(SurveyState.NOT_ASKED);
+  const [pageViews, setPageViews] = useState(defaultPageViewsMap);
+  const [popupOpens, setPopupOpens] = useState(defaultPopupMap);
+  const [honorificToggled, setHonorificToggled] = useState(false);
+
+  const updateStore = useCallback(async () => {
+    // Get page views
+    const newPageViews = pageViews;
+    Object.values(PageName).forEach(
+      async (n) => (newPageViews[n] = await getPageView(n))
+    );
+    setPageViews(newPageViews);
+
+    // Get popup opens
+    const newPopupOpens = popupOpens;
+    Object.values(PopupName).forEach(
+      async (n) => (newPopupOpens[n] = await isPopupShown(n))
+    );
+    setPopupOpens(newPopupOpens);
+
+    // Get honorific toggled
+    const toggled = await hasHonorificToggled();
+    setHonorificToggled(toggled);
+  }, [setPageViews, setPopupOpens, setHonorificToggled]);
 
   useEffect(() => {
     (async () => {
       // Get and increment sessions count
-      const sessionString = await AsyncStorage.getItem(SESSIONS_KEY);
-      setNumSessions(sessionString ? parseInt(sessionString) + 1 : 1);
+      const sessions = await getAsyncStorage(SESSIONS_KEY, "number");
+      setNumSessions(sessions + 1);
 
-      // Get survey state
-      const surveyString = await AsyncStorage.getItem(SURVEYS_KEY);
-      if (!surveyString || !(surveyString in SurveyState)) {
-        await AsyncStorage.setItem(SURVEYS_KEY, SurveyState.NOT_ASKED);
-      } else {
-        setSurveyState(surveyString as SurveyState);
-      }
+      // Setup flagging related stores
+      await updateStore();
 
       // Get ad free status
       try {
-        const restoredPurchases = await AsyncStorage.getItem(RESTORED_KEY);
+        const restoredPurchases = await getAsyncStorage(
+          RESTORED_KEY,
+          "boolean"
+        );
         let info: CustomerInfo;
         if (restoredPurchases) {
           info = await Purchases.getCustomerInfo();
         } else {
           // Make a network call to restore purchases via Google Play/App store
           info = await Purchases.restorePurchases();
-          await AsyncStorage.setItem(RESTORED_KEY, "true");
+          await setAsyncStorage(RESTORED_KEY, true);
         }
 
         setAdFree(!!info.entitlements.active.ad_free_entitlement);
@@ -74,11 +87,19 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         setAdFree(false);
       }
     })();
-  }, [setAdFree, setNumSessions]);
+  }, [setNumSessions, updateStore, setAdFree]);
 
   return (
     <UserContext.Provider
-      value={{ isAdFree, sessionCount, surveyState, setAdFree }}
+      value={{
+        isAdFree,
+        sessionCount,
+        pageViews,
+        popupOpens,
+        honorificToggled,
+        setAdFree,
+        updateStore,
+      }}
     >
       {children}
     </UserContext.Provider>

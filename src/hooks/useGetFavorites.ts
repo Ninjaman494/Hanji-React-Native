@@ -1,5 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
+import { FAVORITES_KEY, getAsyncStorage } from "utils/asyncStorageHelper";
 import { ConjugationName } from "utils/conjugationTypes";
 
 export type Favorite = {
@@ -15,8 +15,6 @@ export interface GetFavoritesResponse {
   refetch: () => Promise<void>;
 }
 
-export const FAVORITES_KEY = "@favorites_Key";
-
 const useGetFavorites = (): GetFavoritesResponse => {
   const [favorites, setFavorites] = useState<Favorite[] | null>(null);
   const [loading, setLoading] = useState(true);
@@ -24,12 +22,8 @@ const useGetFavorites = (): GetFavoritesResponse => {
 
   const fetchFavorites = useCallback(async () => {
     try {
-      const value = await AsyncStorage.getItem(FAVORITES_KEY);
-      if (value !== null) {
-        setFavorites(JSON.parse(value));
-      } else {
-        setFavorites(null);
-      }
+      const value = await getAsyncStorage(FAVORITES_KEY, "object");
+      setFavorites(value as Favorite[] | null);
     } catch (e) {
       setError(e as Error);
     } finally {

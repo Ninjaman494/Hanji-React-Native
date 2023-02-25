@@ -3,10 +3,10 @@ import { SlideInBody, SlideInTop } from "components/animations";
 import React, { useMemo } from "react";
 import { Animated, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import ConjInfoCard from "./ConjInfoCard";
 
-const ConjInfoPage: React.FC<ScreenProps<"ConjInfo">> = ({ route }) => {
+const ConjInfoPage: React.FC<ScreenProps<PageName.CONJINFO>> = ({ route }) => {
   const { conjugation } = route.params;
 
   const { padding } = useTheme();
