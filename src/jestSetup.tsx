@@ -15,6 +15,7 @@ jest.mock("hooks/useUserContext", () => ({
     sessionCount: 0,
     pageViews: Object.values(MockPageName).map((v) => ({ [v]: 0 })),
     popupOpens: Object.values(MockPopupName).map((v) => ({ [v]: true })),
+    updateStore: jest.fn(),
   }),
 }));
 jest.mock("utils/logEvent");
