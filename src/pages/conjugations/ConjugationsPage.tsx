@@ -3,7 +3,7 @@ import { easeOutExpo } from "components/animations/SlideInBody";
 import ErrorDialog from "components/ErrorDialog";
 import HintTooltip from "components/HintTooltip";
 import useConjugations from "hooks/useConjugations";
-import { useLogHonorificTogled } from "logging/honorificToggled";
+import { useLogHonorificToggled } from "logging/honorificToggled";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
@@ -52,7 +52,7 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
 
   // Get position for honorific switch hint
   const [pos, setPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
-  const logHonorificToggled = useLogHonorificTogled();
+  const logHonorificToggled = useLogHonorificToggled();
 
   useEffect(() => {
     if (!loading && conjugations) {

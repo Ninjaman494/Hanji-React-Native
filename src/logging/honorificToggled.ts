@@ -9,7 +9,7 @@ import {
 export const hasHonorificToggled = async () =>
   await getAsyncStorage(HONORIFIC_TOGGLED_KEY, "boolean");
 
-export const useLogHonorificTogled = () => {
+export const useLogHonorificToggled = () => {
   const { updateStore } = useUserContext();
 
   const logHonorificToggled = useCallback(
