@@ -6,15 +6,17 @@ import { PopupName as MockPopupName } from "typings/popup";
 
 jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
-jest.mock("hooks/useUserContext", () =>
-  jest.fn().mockReturnValue({
+jest.mock("hooks/useUserContext", () => ({
+  __esModule: true,
+  ...jest.requireActual("hooks/useUserContext"),
+  default: jest.fn().mockReturnValue({
     isAdFree: true,
     honorificToggled: false,
     sessionCount: 0,
     pageViews: Object.values(MockPageName).map((v) => ({ [v]: 0 })),
     popupOpens: Object.values(MockPopupName).map((v) => ({ [v]: true })),
-  })
-);
+  }),
+}));
 jest.mock("utils/logEvent");
 jest.mock("expo-modules-core");
 jest.mock("@notifee/react-native", () => ({
