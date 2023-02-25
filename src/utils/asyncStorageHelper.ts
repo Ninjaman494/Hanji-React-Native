@@ -57,13 +57,6 @@ export type AsyncStorageKey =
   | PageVisitKey
   | PopupShownKey;
 
-export const convertToInt = (val: string | null) => (val ? parseInt(val) : 0);
-
-export const convertToObj = (val: string | null) =>
-  val ? JSON.parse(val) : null;
-
-export const convertToBool = (val: string | null) => val === "true";
-
 export const getAsyncStorage = async <
   T extends "string" | "number" | "boolean" | "object"
 >(
