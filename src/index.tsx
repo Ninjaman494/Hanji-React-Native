@@ -30,6 +30,7 @@ import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
 import theme from "theme";
+import { getAsyncStorage, USER_ID_KEY } from "utils/asyncStorageHelper";
 import setupAds from "utils/setupAds";
 
 const client = new ApolloClient({
@@ -41,8 +42,6 @@ const client = new ApolloClient({
 });
 
 const routingInstrumentation = new Native.ReactNavigationInstrumentation();
-
-const USER_ID_KEY = "USER_ID";
 
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();
@@ -63,7 +62,7 @@ export default function Index(): JSX.Element {
     }
 
     (async () => {
-      let id = await AsyncStorage.getItem(USER_ID_KEY);
+      let id = await getAsyncStorage(USER_ID_KEY, "string");
       if (!id) {
         id = uuid.v4().toString();
         await AsyncStorage.setItem(USER_ID_KEY, id);

@@ -5,11 +5,14 @@ import SearchResultsPage from "pages/searchResults/SearchResultsPage";
 import React, { useEffect } from "react";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import NoResultsModal from "./NoResultsModal";
 
-const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
+const SearchPage: React.FC<ScreenProps<PageName.SEARCH>> = ({
+  route,
+  navigation,
+}) => {
   const { query } = route.params;
 
   if (query) {
@@ -26,7 +29,7 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
 
     useEffect(() => {
       if (results?.length === 1) {
-        navigation.replace("Display", {
+        navigation.replace(PageName.DISPLAY, {
           entryId: results[0].id,
           noAnimate: true,
         });
@@ -55,7 +58,7 @@ const SearchPage: React.FC<ScreenProps<"Search">> = ({ route, navigation }) => {
           query={trimmedQuery}
           onDismiss={navigation.goBack}
           onConjugatorPress={() =>
-            navigation.replace("Conjugator", { term: trimmedQuery })
+            navigation.replace(PageName.CONJUGATOR, { term: trimmedQuery })
           }
         />
       </>

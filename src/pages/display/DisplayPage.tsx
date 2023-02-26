@@ -7,13 +7,13 @@ import useGetFavorites from "hooks/useGetFavorites";
 import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import { ScreenProps } from "typings/navigation";
+import { PageName, ScreenProps } from "typings/navigation";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import DefPosCard from "./components/DefPosCard";
 import ExamplesCard from "./components/ExamplesCard";
 import FavoritesCard from "./components/FavoritesCard";
 
-const DisplayPage: React.FC<ScreenProps<"Display">> = ({
+const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
   route,
   navigation,
 }) => {
@@ -101,7 +101,7 @@ const DisplayPage: React.FC<ScreenProps<"Display">> = ({
               title="Conjugations"
               style={styles.card}
               onPress={() =>
-                navigation.push("Conjugations", {
+                navigation.push(PageName.CONJUGATIONS, {
                   stem,
                   isAdj,
                   honorific: false,

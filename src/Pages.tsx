@@ -4,6 +4,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useLogPageView } from "logging/pageView";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
@@ -14,11 +15,10 @@ import MainPage from "pages/main/MainPage";
 import SearchPage from "pages/search/SearchPage";
 import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
-import SurveyPage from "pages/survey/SurveyPage";
 import React, { FC, useEffect } from "react";
 import "react-native";
 import { Native } from "sentry-expo";
-import { NavigationProps, StackParamList } from "typings/navigation";
+import { NavigationProps, PageName, StackParamList } from "typings/navigation";
 import handleNotificationReceived from "utils/handleNotificationReceived";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 
@@ -30,6 +30,7 @@ interface PagesProps {
 
 const Pages: FC<PagesProps> = ({ navRef }) => {
   const navigation = useNavigation<NavigationProps>();
+  const logPageView = useLogPageView();
 
   useEffect(() => {
     messaging().onNotificationOpenedApp((msg) =>
@@ -42,33 +43,37 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
 
   return (
     <Navigator
-      initialRouteName="Main"
+      initialRouteName={PageName.MAIN}
       detachInactiveScreens={true}
       screenOptions={{ headerShown: false }}
       screenListeners={{
-        focus: () => {
+        focus: async () => {
           const route = navRef.getCurrentRoute();
+          if (!route) return;
+
           Native?.addBreadcrumb({
             category: "navigation",
-            message: `Route changed to ${route?.name}`,
+            message: `Route changed to ${route.name}`,
             level: "info",
-            data: route?.params,
+            data: route.params,
           });
 
           logEvent({
             type: LOG_EVENT.SCREEN_VIEW,
             params: {
-              screen_name: route?.name,
-              screen_class: route?.name,
+              screen_name: route.name,
+              screen_class: route.name,
             },
           });
+
+          await logPageView(route.name as PageName);
         },
       }}
     >
-      <Screen name="Main" component={MainPage} />
-      <Screen name="Search" component={SearchPage} />
+      <Screen name={PageName.MAIN} component={MainPage} />
+      <Screen name={PageName.SEARCH} component={SearchPage} />
       <Screen
-        name="Display"
+        name={PageName.DISPLAY}
         component={DisplayPage}
         options={({ route: { params } }) => ({
           transitionSpec: {
@@ -83,14 +88,16 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
           },
         })}
       />
-      <Screen name="Conjugations" component={ConjugationsPage} />
-      <Screen name="ConjInfo" component={ConjInfoPage} />
-      <Screen name="Settings" component={SettingsPage} />
-      <Screen name="Favorites" component={FavoritesPage} />
-      <Screen name="Acknowledgements" component={AcknowledgementsPage} />
-      <Screen name="BugReport" component={BugReportPage} />
-      <Screen name="Conjugator" component={ConjugatorPage} />
-      <Screen name="Survey" component={SurveyPage} />
+      <Screen name={PageName.CONJUGATIONS} component={ConjugationsPage} />
+      <Screen name={PageName.CONJINFO} component={ConjInfoPage} />
+      <Screen name={PageName.SETTINGS} component={SettingsPage} />
+      <Screen name={PageName.FAVORITES} component={FavoritesPage} />
+      <Screen
+        name={PageName.ACKNOWLEDGEMENTS}
+        component={AcknowledgementsPage}
+      />
+      <Screen name={PageName.BUGREPORT} component={BugReportPage} />
+      <Screen name={PageName.CONJUGATOR} component={ConjugatorPage} />
     </Navigator>
   );
 };

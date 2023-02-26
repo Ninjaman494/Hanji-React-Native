@@ -15,7 +15,6 @@ export enum LOG_EVENT {
   SELECT_FAV = "select_fav",
   REPORT_BUG = "report_bug",
   MAKE_SUGGESTION = "make_suggestion",
-  SUBMIT_SURVEY = "submit_survey",
 }
 
 type LogEventVars =
@@ -45,8 +44,7 @@ type LogEventVars =
         | LOG_EVENT.ADD_FAVORITE
         | LOG_EVENT.SELECT_FAV
         | LOG_EVENT.REPORT_BUG
-        | LOG_EVENT.MAKE_SUGGESTION
-        | LOG_EVENT.SUBMIT_SURVEY;
+        | LOG_EVENT.MAKE_SUGGESTION;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       params: Record<string, any>;
     };

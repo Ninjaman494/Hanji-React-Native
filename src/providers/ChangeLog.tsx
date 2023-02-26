@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { Modal } from "react-native";
 import { Button, Dialog, Subheading, Text } from "react-native-paper";
+import { getAsyncStorage, LAST_VERSION_KEY } from "utils/asyncStorageHelper";
 import changelogRaw from "./change-log.json";
 
 export interface ChangelogUpdate {
@@ -21,8 +22,6 @@ export interface ChangeLogProps
   currentVersion: string;
 }
 
-const LAST_VERSION_KEY = "LAST_VERSION";
-
 const changelog = changelogRaw as Record<string, ChangelogUpdate | null>;
 
 const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
@@ -32,9 +31,9 @@ const ChangeLog: FC<ChangeLogProps> = ({ currentVersion, ...rest }) => {
   useEffect(() => {
     (async () => {
       const update = changelog[currentVersion as string];
-      const lastVersion = await AsyncStorage.getItem(LAST_VERSION_KEY);
+      const lastVersion = await getAsyncStorage(LAST_VERSION_KEY, "string");
 
-      if (!!update && !!lastVersion && lastVersion !== currentVersion) {
+      if (!!update && lastVersion !== currentVersion) {
         setVisible(true);
         setUpdate(update);
       }

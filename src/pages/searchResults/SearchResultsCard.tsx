@@ -10,7 +10,7 @@ import {
   TouchableRipple,
   useTheme,
 } from "react-native-paper";
-import { NavigationProps } from "typings/navigation";
+import { NavigationProps, PageName } from "typings/navigation";
 
 export interface SearchResultsCardProps {
   entry: Entry;
@@ -34,7 +34,7 @@ const SearchResultsCard: React.FC<SearchResultsCardProps> = ({
   }
 
   const onPress = useCallback(
-    () => navigation.push("Display", { entryId: entry.id }),
+    () => navigation.push(PageName.DISPLAY, { entryId: entry.id }),
     [navigation, entry.id]
   );
 
