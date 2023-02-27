@@ -1,11 +1,16 @@
 jest.mock("hooks/useGetEntry");
 jest.mock("hooks/useGetFavorites");
 jest.mock("hooks/useConjugations");
+jest.mock("logging/notificationsPermission");
 
 import notifee from "@notifee/react-native";
 import useConjugations from "hooks/useConjugations";
 import useGetEntry from "hooks/useGetEntry";
 import useGetFavorites from "hooks/useGetFavorites";
+import {
+  hasAskedNotificationPermission,
+  setAskedNotificationPermission,
+} from "logging/notificationsPermission";
 import DisplayPage from "pages/display/DisplayPage";
 import React from "react";
 import "react-native";
@@ -173,11 +178,13 @@ describe("DisplayPage", () => {
       loading: false,
       data: { entry },
     });
+    (hasAskedNotificationPermission as jest.Mock).mockResolvedValue(false);
 
     render(<DisplayPage {...(props as any)} />);
 
     await new Promise((r) => setTimeout(r, 600));
 
     expect(notifee.requestPermission).toHaveBeenCalled();
+    expect(setAskedNotificationPermission).toHaveBeenCalledWith(true);
   });
 });
