@@ -11,8 +11,8 @@ jest.mock("@react-native-async-storage/async-storage");
 
 describe("notificationsPermission", () => {
   it("fetches if notification permission has been asked", async () => {
-    const isToggled = await hasAskedNotificationPermission();
-    expect(isToggled).toBe(true);
+    const hasAsked = await hasAskedNotificationPermission();
+    expect(hasAsked).toBe(true);
     expect(AsyncStorage.getItem).toHaveBeenCalledWith(ASKED_NOTIFICATION_KEY);
   });
 
