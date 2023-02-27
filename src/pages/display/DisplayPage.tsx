@@ -4,6 +4,10 @@ import { SlideInBody, SlideInTop } from "components/animations";
 import useConjugations from "hooks/useConjugations";
 import useGetEntry, { Entry } from "hooks/useGetEntry";
 import useGetFavorites from "hooks/useGetFavorites";
+import {
+  hasAskedNotificationPermission,
+  setAskedNotificationPermission,
+} from "logging/notificationsPermission";
 import React, { useEffect, useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
@@ -49,10 +53,16 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
   // Ask permission after they start using the app instead of
   // as soon as it launches
   useEffect(() => {
-    if (entry) {
-      const timeout = setTimeout(() => notifee.requestPermission(), 600);
-      return () => clearTimeout(timeout);
-    }
+    if (!entry) return;
+
+    const timeout = setTimeout(async () => {
+      const hasAsked = await hasAskedNotificationPermission();
+      if (!hasAsked) {
+        await notifee.requestPermission();
+        await setAskedNotificationPermission(true);
+      }
+    }, 600);
+    return () => clearTimeout(timeout);
   }, [entry]);
 
   const {

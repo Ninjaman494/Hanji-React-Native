@@ -42,6 +42,12 @@ export const SHOWN_KEY = "ALREADY_SHOWN";
  */
 export const HONORIFIC_TOGGLED_KEY = "HONORIFIC_TOGGLED";
 
+/**
+ * Has the user been asked permission to show
+ * notifications
+ */
+export const ASKED_NOTIFICATION_KEY = "ASKED_NOTIFICATION";
+
 export type PageVisitKey = `${PageName}_VISIT_COUNT`;
 
 export type PopupShownKey = `${PopupName}_POPUP_SHOWN`;
@@ -54,6 +60,7 @@ export type AsyncStorageKey =
   | typeof RESTORED_KEY
   | typeof SHOWN_KEY
   | typeof HONORIFIC_TOGGLED_KEY
+  | typeof ASKED_NOTIFICATION_KEY
   | PageVisitKey
   | PopupShownKey;
 
