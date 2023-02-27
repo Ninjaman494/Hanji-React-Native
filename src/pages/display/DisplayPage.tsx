@@ -101,7 +101,7 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
           <DefPosCard entry={entry as Entry} style={styles.card} />
           {entry?.note && (
             <BaseCard title="Note" style={styles.card}>
-              <Text>{entry.note}</Text>
+              <Text style={styles.cardText}>{entry.note}</Text>
             </BaseCard>
           )}
           {isAdjVerb && (
@@ -125,12 +125,12 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
           )}
           {entry?.synonyms && (
             <BaseCard title="Synonyms" style={styles.card}>
-              <Text style={styles.synAnt}>{entry.synonyms.join(", ")}</Text>
+              <Text style={styles.cardText}>{entry.synonyms.join(", ")}</Text>
             </BaseCard>
           )}
           {entry?.antonyms && (
             <BaseCard title="Antonyms" style={styles.card}>
-              <Text style={styles.synAnt}>{entry.antonyms.join(", ")}</Text>
+              <Text style={styles.cardText}>{entry.antonyms.join(", ")}</Text>
             </BaseCard>
           )}
         </SlideInBody>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  synAnt: {
+  cardText: {
     paddingHorizontal: 16,
     fontSize: 20,
   },
