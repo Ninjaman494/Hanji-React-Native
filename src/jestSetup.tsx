@@ -29,11 +29,12 @@ const mock = {
 jest.mock("@react-navigation/native", () => ({
   ...jest.requireActual("@react-navigation/native"),
   useFocusEffect: (func: EffectCallback) => func(),
-  useNavigationContainerRef: () => ({
+  useNavigationContainerRef: jest.fn().mockReturnValue({
     getCurrentRoute: () => ({
       name: "MainPage",
       params: { foo: "bar" },
     }),
+    isReady: jest.fn().mockReturnValue(true),
   }),
   useNavigation: () => mock,
 }));

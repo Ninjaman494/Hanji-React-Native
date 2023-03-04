@@ -69,4 +69,14 @@ describe("Pages component", () => {
     expect(onNotificationOpenedApp).toHaveBeenCalled();
     expect(getInitialNotification).toHaveBeenCalled();
   });
+
+  it("verifies that the navigation ref is ready before using it", () => {
+    render(
+      <NavigationContainer>
+        <Pages navRef={navRef as any} />
+      </NavigationContainer>
+    );
+
+    expect(navRef.isReady).toHaveBeenCalled();
+  });
 });

@@ -46,6 +46,7 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
       screenOptions={{ headerShown: false }}
       screenListeners={{
         focus: async () => {
+          if (!navRef.isReady()) return;
           const route = navRef.getCurrentRoute();
           if (!route) return;
 
