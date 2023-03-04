@@ -46,7 +46,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
       >
         <View
           collapsable={false}
-          onLayout={[Function]}
           style={
             {
               "backgroundColor": "#ffffff",
@@ -558,7 +557,6 @@ exports[`ConjugationPageContent component groups conjugations based on type 1`] 
       >
         <View
           collapsable={false}
-          onLayout={[Function]}
           style={
             {
               "backgroundColor": "#ffffff",

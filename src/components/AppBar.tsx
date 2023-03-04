@@ -8,9 +8,7 @@ import { useEffect, useState } from "react";
 import { TextInput as NativeInput } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
 import { NavigationProps, PageName } from "typings/navigation";
-import { PopupName } from "typings/popup";
 import buyAdFree from "utils/buyAdFree";
-import HintTooltip from "./HintTooltip";
 
 export const APP_BAR_HEIGHT = 56 + Constants.statusBarHeight;
 
@@ -83,45 +81,39 @@ const AppBar: React.FC<AppBarProps> = ({ title, hideSearch, hideBack }) => {
           onPress={() => setSearching(!searching)}
         />
       )}
-      <HintTooltip
-        popupName={PopupName.FAVORITES}
-        text="Customize Favorites in Settings"
-        from={
-          <Menu
-            visible={showMenu}
-            onDismiss={() => setShowMenu(false)}
-            statusBarHeight={Constants.statusBarHeight}
-            anchor={
-              <Appbar.Action
-                icon="dots-vertical"
-                color="white"
-                accessibilityLabel="overflow menu button"
-                onPress={() => setShowMenu(true)}
-              />
-            }
-          >
-            <Menu.Item
-              onPress={() => navigation.push(PageName.SETTINGS)}
-              title="Settings"
-            />
-            <Menu.Item
-              onPress={async () => {
-                const uri = await takeScreenshot?.();
-                navigation.push(PageName.BUGREPORT, {
-                  screenshot: uri as string,
-                });
-              }}
-              title="Report a Bug"
-            />
-            {!isAdFree && (
-              <Menu.Item
-                onPress={() => buyAdFree(showSnackbar)}
-                title="Remove Ads"
-              />
-            )}
-          </Menu>
+      <Menu
+        visible={showMenu}
+        onDismiss={() => setShowMenu(false)}
+        statusBarHeight={Constants.statusBarHeight}
+        anchor={
+          <Appbar.Action
+            icon="dots-vertical"
+            color="white"
+            accessibilityLabel="overflow menu button"
+            onPress={() => setShowMenu(true)}
+          />
         }
-      />
+      >
+        <Menu.Item
+          onPress={() => navigation.push(PageName.SETTINGS)}
+          title="Settings"
+        />
+        <Menu.Item
+          onPress={async () => {
+            const uri = await takeScreenshot?.();
+            navigation.push(PageName.BUGREPORT, {
+              screenshot: uri as string,
+            });
+          }}
+          title="Report a Bug"
+        />
+        {!isAdFree && (
+          <Menu.Item
+            onPress={() => buyAdFree(showSnackbar)}
+            title="Remove Ads"
+          />
+        )}
+      </Menu>
     </Appbar.Header>
   );
 };

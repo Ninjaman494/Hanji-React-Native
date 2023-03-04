@@ -3,7 +3,7 @@ import {
   AsyncStorageKey,
   FAVORITES_KEY,
   getAsyncStorage,
-  HONORIFIC_TOGGLED_KEY,
+  RESTORED_KEY,
   SESSIONS_KEY,
   setAsyncStorage,
   USER_ID_KEY,
@@ -13,7 +13,7 @@ jest.mock("@react-native-async-storage/async-storage");
 
 const STRING_KEY = USER_ID_KEY;
 const INT_KEY = SESSIONS_KEY;
-const BOOL_KEY = HONORIFIC_TOGGLED_KEY;
+const BOOL_KEY = RESTORED_KEY;
 const OBJ_KEY = FAVORITES_KEY;
 
 const STRING_VAL = "foobar";
