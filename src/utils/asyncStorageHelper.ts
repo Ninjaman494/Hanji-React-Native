@@ -1,6 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { PageName } from "typings/navigation";
-import { PopupName } from "../typings/popup";
 
 /**
  * AsyncStorage key for user id which is synced
@@ -37,20 +35,10 @@ export const RESTORED_KEY = "RESTORED_PURCHASES";
 export const SHOWN_KEY = "ALREADY_SHOWN";
 
 /**
- * Has the honorific toggle on Conjugations Page
- * been used
- */
-export const HONORIFIC_TOGGLED_KEY = "HONORIFIC_TOGGLED";
-
-/**
  * Has the user been asked permission to show
  * notifications
  */
 export const ASKED_NOTIFICATION_KEY = "ASKED_NOTIFICATION";
-
-export type PageVisitKey = `${PageName}_VISIT_COUNT`;
-
-export type PopupShownKey = `${PopupName}_POPUP_SHOWN`;
 
 export type AsyncStorageKey =
   | typeof USER_ID_KEY
@@ -59,10 +47,7 @@ export type AsyncStorageKey =
   | typeof SESSIONS_KEY
   | typeof RESTORED_KEY
   | typeof SHOWN_KEY
-  | typeof HONORIFIC_TOGGLED_KEY
-  | typeof ASKED_NOTIFICATION_KEY
-  | PageVisitKey
-  | PopupShownKey;
+  | typeof ASKED_NOTIFICATION_KEY;
 
 export const getAsyncStorage = async <
   T extends "string" | "number" | "boolean" | "object"
