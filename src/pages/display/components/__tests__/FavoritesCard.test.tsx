@@ -68,12 +68,7 @@ const props = {
 describe("FavoritesCard component", () => {
   it("displays favorites", () => {
     const component = render(<FavoritesCard {...props} />);
-    favorites.forEach(({ name }) =>
-      expect(component.getByText(name)).toBeTruthy()
-    );
-    props.conjugations.forEach(({ conjugation }) =>
-      expect(component.getByText(conjugation)).toBeTruthy()
-    );
+    expect(component).toMatchSnapshot();
   });
 
   it("displays empty state", () => {
