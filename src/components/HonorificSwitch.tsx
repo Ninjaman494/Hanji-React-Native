@@ -1,18 +1,13 @@
 import React, { FC } from "react";
-import { LayoutChangeEvent, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Switch, Text, useTheme } from "react-native-paper";
 
 export interface HonorificSwitchProps {
   honorific: boolean;
   onPress: (value: boolean) => void;
-  onLayout?: (e: LayoutChangeEvent) => void;
 }
 
-const HonorificSwitch: FC<HonorificSwitchProps> = ({
-  honorific,
-  onPress,
-  onLayout,
-}) => {
+const HonorificSwitch: FC<HonorificSwitchProps> = ({ honorific, onPress }) => {
   const { padding, colors, textSizes } = useTheme();
 
   const styles = StyleSheet.create({
@@ -40,7 +35,6 @@ const HonorificSwitch: FC<HonorificSwitchProps> = ({
         thumbColor="white"
         trackColor={{ false: colors?.primaryDark, true: "#FFFFFF88" }}
         onValueChange={onPress}
-        onLayout={onLayout}
       />
     </View>
   );
