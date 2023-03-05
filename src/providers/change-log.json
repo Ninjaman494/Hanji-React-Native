@@ -1,4 +1,14 @@
 {
+  "47": {
+    "name": "3.1.5",
+    "date": "Mar. 6th 2023",
+    "features": [
+      "Notifications permission is now only asked once",
+      "Fixed an issue with ad-free upgrades",
+      "Fixed padding on word notes",
+      "Fixed an issue with page navigation"
+    ]
+  },
   "46": {
     "name": "3.1.4",
     "date": "Jan. 23rd 2023",
