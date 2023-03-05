@@ -1,3 +1,4 @@
+import useCheckPurchasesConfigured from "hooks/useCheckPurchasesConfigured";
 import { UserContext } from "hooks/useUserContext";
 import React, { FC, PropsWithChildren, useEffect, useState } from "react";
 import Purchases, {
@@ -15,19 +16,25 @@ import getPurchaseErrorMessage from "utils/getPurchaseErrorMessage";
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAdFree, setAdFree] = useState(false);
   const [sessionCount, setNumSessions] = useState(-1);
+  const isConfigured = useCheckPurchasesConfigured();
 
+  // Get and increment sessions count
   useEffect(() => {
-    (async () => {
-      // Get and increment sessions count
-      const sessions = await getAsyncStorage(SESSIONS_KEY, "number");
-      setNumSessions(sessions + 1);
+    getAsyncStorage(SESSIONS_KEY, "number").then((sessions) =>
+      setNumSessions(sessions + 1)
+    );
+  }, [setNumSessions]);
 
-      // Get ad free status
+  // Get ad free status
+  useEffect(() => {
+    if (!isConfigured) return;
+    (async () => {
       try {
         const restoredPurchases = await getAsyncStorage(
           RESTORED_KEY,
           "boolean"
         );
+
         let info: CustomerInfo;
         if (restoredPurchases) {
           info = await Purchases.getCustomerInfo();
@@ -44,7 +51,7 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         setAdFree(false);
       }
     })();
-  }, [setNumSessions, setAdFree]);
+  }, [isConfigured, setAdFree]);
 
   return (
     <UserContext.Provider
