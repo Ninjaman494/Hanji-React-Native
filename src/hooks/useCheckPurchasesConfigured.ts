@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Purchases from "react-native-purchases";
 
-const MINUTE_MS = 1000;
+const MINUTE_MS = 60000;
 
 /**
  * Hook that checks if RevenueCat's Purchases object has been
@@ -15,14 +15,13 @@ const useCheckPurchasesConfigured = () => {
   const [isConfigured, setConfigured] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(async () => {
+    const checkPurchases = async () => {
       const configured = await Purchases.isConfigured();
       setConfigured(configured);
+      if (!configured) setTimeout(checkPurchases, MINUTE_MS);
+    };
 
-      if (configured) clearInterval(interval);
-    }, MINUTE_MS);
-
-    return () => clearInterval(interval);
+    checkPurchases();
   }, [setConfigured]);
 
   return isConfigured;
