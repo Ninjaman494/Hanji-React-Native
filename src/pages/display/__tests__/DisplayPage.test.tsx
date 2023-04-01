@@ -97,6 +97,7 @@ describe("DisplayPage", () => {
       expect(result.queryByText("Antonyms")).toBeFalsy();
     });
 
+    // Verify hook is called with skip
     expect(useConjugations).toHaveBeenCalledWith(
       {
         input: {
@@ -140,6 +141,7 @@ describe("DisplayPage", () => {
       expect(result.queryByText("Antonyms")).toBeTruthy();
     });
 
+    // Verify conjugations hook isn't skipped
     expect(useConjugations).toHaveBeenCalledWith(
       {
         input: {
@@ -151,6 +153,28 @@ describe("DisplayPage", () => {
       },
       { skip: false }
     );
+  });
+
+  it("redirects to Conjugations Page", async () => {
+    (useGetEntry as jest.Mock).mockReturnValue({
+      loading: false,
+      data: {
+        entry: {
+          ...entry,
+          note: "This is a note",
+          synonyms: ["synonym"],
+          antonyms: ["antonym"],
+          examples: [
+            {
+              sentence: "sentence",
+              translation: "translation",
+            },
+          ],
+        },
+      },
+    });
+
+    const result = render(<DisplayPage {...(props as any)} />);
 
     fireEvent.press(result.getByText("See all"));
     await waitFor(() =>
@@ -158,6 +182,7 @@ describe("DisplayPage", () => {
         stem: entry.term,
         isAdj: false,
         honorific: false,
+        regular: true,
       })
     );
   });
