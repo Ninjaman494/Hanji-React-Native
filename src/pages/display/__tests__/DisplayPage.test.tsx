@@ -37,6 +37,7 @@ const entry = {
   id: "id",
   term: "term",
   pos: "Verb",
+  regular: true,
   definitions: ["def 1", "def 2", "def 3"],
 };
 
@@ -101,6 +102,7 @@ describe("DisplayPage", () => {
         input: {
           stem: entry.term,
           isAdj: false,
+          regular: true,
           conjugations: favConjugations,
         },
       },
@@ -143,6 +145,7 @@ describe("DisplayPage", () => {
         input: {
           stem: entry.term,
           isAdj: false,
+          regular: true,
           conjugations: favConjugations,
         },
       },
