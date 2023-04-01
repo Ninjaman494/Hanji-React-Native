@@ -36,6 +36,7 @@ const props = {
       stem: "stem",
       isAdj: true,
       honorific: false,
+      regular: true,
     },
   },
 };
@@ -51,6 +52,7 @@ describe("ConjugationsPage", () => {
             stem: "stem",
             isAdj: true,
             honorific: false,
+            regular: true,
           },
         },
         hookOptions
@@ -70,6 +72,7 @@ describe("ConjugationsPage", () => {
             stem: "stem",
             isAdj: true,
             honorific: true,
+            regular: true,
           },
         },
         hookOptions

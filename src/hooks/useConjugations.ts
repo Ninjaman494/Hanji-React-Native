@@ -35,7 +35,7 @@ export interface UseConjugationsVars {
     stem: string;
     isAdj: boolean;
     honorific?: boolean;
-    regular?: boolean;
+    regular: boolean | undefined; // If an entry has regular it MUST be passed in
     conjugations?: {
       name: string;
       honorific: boolean;

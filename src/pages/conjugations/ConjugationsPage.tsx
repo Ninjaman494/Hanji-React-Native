@@ -12,7 +12,7 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
   route,
   navigation,
 }) => {
-  const { stem, isAdj, honorific: initialHonorific } = route.params;
+  const { stem, isAdj, regular, honorific: initialHonorific } = route.params;
   const [honorific, setHonorific] = useState(initialHonorific);
 
   const { padding, colors, textSizes } = useTheme();
@@ -34,7 +34,7 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
   });
 
   const { loading, error, data } = useConjugations(
-    { input: { stem, isAdj, honorific } },
+    { input: { stem, isAdj, honorific, regular } },
     { notifyOnNetworkStatusChange: true, fetchPolicy: "cache-and-network" }
   );
   const conjugations = data?.getConjugations;
