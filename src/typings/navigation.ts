@@ -18,7 +18,12 @@ export type StackParamList = {
   [PageName.MAIN]: undefined;
   [PageName.SEARCH]: { query: string };
   [PageName.DISPLAY]: { entryId: string; noAnimate?: boolean };
-  [PageName.CONJUGATIONS]: { stem: string; isAdj: boolean; honorific: boolean };
+  [PageName.CONJUGATIONS]: {
+    stem: string;
+    isAdj: boolean;
+    honorific: boolean;
+    regular: boolean | undefined;
+  };
   [PageName.CONJINFO]: { conjugation: Conjugation };
   [PageName.SETTINGS]: undefined;
   [PageName.FAVORITES]: undefined;

@@ -40,6 +40,7 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
   const stem = entry?.term as string;
   const isAdj = entry?.pos === "Adjective";
   const isAdjVerb = isAdj || entry?.pos === "Verb";
+  const regular = entry?.regular;
 
   useEffect(() => {
     if (entry) {
@@ -70,7 +71,14 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
     error: conjError,
     data: conjData,
   } = useConjugations(
-    { input: { stem, isAdj, conjugations: favConjugations } },
+    {
+      input: {
+        stem,
+        isAdj,
+        regular,
+        conjugations: favConjugations,
+      },
+    },
     {
       skip:
         !entry ||
@@ -114,6 +122,7 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
                 navigation.push(PageName.CONJUGATIONS, {
                   stem,
                   isAdj,
+                  regular,
                   honorific: false,
                 })
               }
