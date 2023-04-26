@@ -124,6 +124,7 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
                   isAdj,
                   regular,
                   honorific: false,
+                  alwaysHonorific: entry.alwaysHonorific,
                 })
               }
             />
