@@ -12,12 +12,14 @@ import logEvent, { LOG_EVENT } from "utils/logEvent";
 export type FavoritesCardProps = BaseCardProps & {
   favorites: Favorite[];
   conjugations?: Conjugation[];
+  alwaysHonorific: boolean;
   onPress: () => void;
 };
 
 const FavoritesCard: React.FC<FavoritesCardProps> = ({
   favorites,
   conjugations,
+  alwaysHonorific,
   onPress,
   ...rest
 }) => {
@@ -49,7 +51,8 @@ const FavoritesCard: React.FC<FavoritesCardProps> = ({
         (prev, curr) => {
           const conjugation = conjugations?.find(
             ({ name, honorific }) =>
-              name === curr.conjugationName && honorific === curr.honorific
+              name === curr.conjugationName &&
+              (honorific === curr.honorific || alwaysHonorific)
           );
           return conjugation
             ? [...prev, { name: curr.name, conjugation }]

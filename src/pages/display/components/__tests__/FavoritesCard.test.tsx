@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { Conjugation } from "hooks/useConjugations";
 import { Favorite } from "hooks/useGetFavorites";
 import React from "react";
 import "react-native";
@@ -48,20 +49,21 @@ const props = {
   conjugations: [
     {
       name: "declarative past informal high" as ConjugationName,
-      conjugation: "conj 1",
+      conjugation: "갔어요",
       ...baseConjugation,
     },
     {
       name: "declarative present informal high" as ConjugationName,
-      conjugation: "conj 2",
+      conjugation: "가요",
       ...baseConjugation,
     },
     {
       name: "declarative future informal high" as ConjugationName,
-      conjugation: "conj 3",
+      conjugation: "갈 거예요",
       ...baseConjugation,
     },
   ],
+  alwaysHonorific: false,
   onPress: jest.fn(),
 };
 
@@ -122,11 +124,93 @@ describe("FavoritesCard component", () => {
       <FavoritesCard
         favorites={customFavorites}
         conjugations={[props.conjugations[0]]}
+        alwaysHonorific={false}
         onPress={jest.fn()}
       />
     );
 
     expect(component.getByText("Favorite 1")).toBeTruthy();
     expect(component.queryByText("Favorite 2")).toBeNull();
+  });
+
+  it("distingushes b/w honorific and normal versions of a conjugation", () => {
+    const customConj: Conjugation[] = [
+      {
+        name: "declarative present informal high",
+        conjugation: "가요",
+        ...baseConjugation,
+      },
+      {
+        name: "declarative present informal high",
+        conjugation: "가세요",
+        ...baseConjugation,
+        honorific: true,
+      },
+    ];
+
+    const customFav: Favorite[] = [
+      {
+        name: "Regular Present",
+        conjugationName: "declarative present informal high",
+        honorific: false,
+      },
+      {
+        name: "Honorific Present",
+        conjugationName: "declarative present informal high",
+        honorific: true,
+      },
+    ];
+
+    const component = render(
+      <FavoritesCard
+        favorites={customFav}
+        conjugations={customConj}
+        alwaysHonorific={false}
+        onPress={jest.fn()}
+      />
+    );
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it("displays conjugations for always honorific verbs", () => {
+    const customConj: Conjugation[] = [
+      {
+        name: "declarative past informal high",
+        conjugation: "계셨어요",
+        ...baseConjugation,
+        honorific: true,
+      },
+      {
+        name: "declarative present informal high",
+        conjugation: "계세요",
+        ...baseConjugation,
+        honorific: true,
+      },
+    ];
+
+    const customFav: Favorite[] = [
+      {
+        name: "Past",
+        conjugationName: "declarative past informal high",
+        honorific: false,
+      },
+      {
+        name: "Present",
+        conjugationName: "declarative present informal high",
+        honorific: false,
+      },
+    ];
+
+    const component = render(
+      <FavoritesCard
+        favorites={customFav}
+        conjugations={customConj}
+        alwaysHonorific={true}
+        onPress={jest.fn()}
+      />
+    );
+
+    expect(component).toMatchSnapshot();
   });
 });

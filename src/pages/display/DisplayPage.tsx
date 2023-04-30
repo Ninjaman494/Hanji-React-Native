@@ -41,6 +41,7 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
   const isAdj = entry?.pos === "Adjective";
   const isAdjVerb = isAdj || entry?.pos === "Verb";
   const regular = entry?.regular;
+  const alwaysHonorific = entry?.alwaysHonorific ?? false;
 
   useEffect(() => {
     if (entry) {
@@ -116,6 +117,7 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
             <FavoritesCard
               favorites={favorites ?? []}
               conjugations={conjugations}
+              alwaysHonorific={alwaysHonorific}
               title="Conjugations"
               style={styles.card}
               onPress={() =>
@@ -123,8 +125,8 @@ const DisplayPage: React.FC<ScreenProps<PageName.DISPLAY>> = ({
                   stem,
                   isAdj,
                   regular,
+                  alwaysHonorific,
                   honorific: false,
-                  alwaysHonorific: entry.alwaysHonorific,
                 })
               }
             />
