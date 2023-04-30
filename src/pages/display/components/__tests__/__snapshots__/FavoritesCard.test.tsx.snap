@@ -1,5 +1,445 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FavoritesCard component displays conjugations for always honorific verbs 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "#ffffff",
+        "borderColor": "rgba(0, 0, 0, 0.12)",
+        "borderRadius": 10,
+        "elevation": 5,
+        "shadowColor": "#000000",
+        "shadowOffset": {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 5,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "flexGrow": 1,
+          "flexShrink": 1,
+        }
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "paddingHorizontal": 16,
+            },
+            undefined,
+            {
+              "paddingBottom": 8,
+              "paddingHorizontal": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column",
+              "paddingHorizontal": 16,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "flex": 1,
+                "flexDirection": "row",
+                "marginBottom": 8,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              onPress={[Function]}
+              style={
+                {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 8,
+                }
+              }
+            >
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  Past
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "flex": 1,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  :
+                </Text>
+              </View>
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  계셨어요
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "flex": 1,
+                "flexDirection": "row",
+                "marginBottom": 8,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              onPress={[Function]}
+              style={
+                {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 8,
+                }
+              }
+            >
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  Present
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "flex": 1,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  :
+                </Text>
+              </View>
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  계세요
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+                "padding": 8,
+              },
+              {
+                "justifyContent": "flex-end",
+                "paddingBottom": 0,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderRadius": 10,
+                "borderStyle": "solid",
+                "borderWidth": 0,
+                "elevation": 0,
+                "minWidth": "auto",
+                "shadowColor": "#000000",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              }
+            }
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                [
+                  {
+                    "overflow": "hidden",
+                  },
+                  {
+                    "borderRadius": 10,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      [
+                        {
+                          "letterSpacing": 1,
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        {
+                          "marginHorizontal": 8,
+                        },
+                        {
+                          "textTransform": "uppercase",
+                        },
+                        {
+                          "color": "#F44336",
+                          "fontFamily": "System",
+                          "fontWeight": "500",
+                        },
+                        {
+                          "fontFamily": "System",
+                          "fontWeight": "500",
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  See all
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`FavoritesCard component displays favorites 1`] = `
 <View
   collapsable={false}
@@ -187,7 +627,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                     ]
                   }
                 >
-                  conj 1
+                  갔어요
                 </Text>
               </View>
             </View>
@@ -306,7 +746,7 @@ exports[`FavoritesCard component displays favorites 1`] = `
                     ]
                   }
                 >
-                  conj 2
+                  가요
                 </Text>
               </View>
             </View>
@@ -425,7 +865,447 @@ exports[`FavoritesCard component displays favorites 1`] = `
                     ]
                   }
                 >
-                  conj 3
+                  갈 거예요
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+                "padding": 8,
+              },
+              {
+                "justifyContent": "flex-end",
+                "paddingBottom": 0,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderRadius": 10,
+                "borderStyle": "solid",
+                "borderWidth": 0,
+                "elevation": 0,
+                "minWidth": "auto",
+                "shadowColor": "#000000",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              }
+            }
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                [
+                  {
+                    "overflow": "hidden",
+                  },
+                  {
+                    "borderRadius": 10,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      [
+                        {
+                          "letterSpacing": 1,
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        {
+                          "marginHorizontal": 8,
+                        },
+                        {
+                          "textTransform": "uppercase",
+                        },
+                        {
+                          "color": "#F44336",
+                          "fontFamily": "System",
+                          "fontWeight": "500",
+                        },
+                        {
+                          "fontFamily": "System",
+                          "fontWeight": "500",
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  See all
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`FavoritesCard component distingushes b/w honorific and normal versions of a conjugation 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "#ffffff",
+        "borderColor": "rgba(0, 0, 0, 0.12)",
+        "borderRadius": 10,
+        "elevation": 5,
+        "shadowColor": "#000000",
+        "shadowOffset": {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 5,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "flexGrow": 1,
+          "flexShrink": 1,
+        }
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "paddingHorizontal": 16,
+            },
+            undefined,
+            {
+              "paddingBottom": 8,
+              "paddingHorizontal": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column",
+              "paddingHorizontal": 16,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "flex": 1,
+                "flexDirection": "row",
+                "marginBottom": 8,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              onPress={[Function]}
+              style={
+                {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 8,
+                }
+              }
+            >
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  Regular Present
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "flex": 1,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  :
+                </Text>
+              </View>
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  가요
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "flex": 1,
+                "flexDirection": "row",
+                "marginBottom": 8,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              onPress={[Function]}
+              style={
+                {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 8,
+                }
+              }
+            >
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  Honorific Present
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "flex": 1,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  :
+                </Text>
+              </View>
+              <View
+                size={5}
+                style={
+                  {
+                    "flex": 5,
+                    "flexDirection": "column",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                      },
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "fontSize": 20,
+                      },
+                    ]
+                  }
+                >
+                  가세요
                 </Text>
               </View>
             </View>

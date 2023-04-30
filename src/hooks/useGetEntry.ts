@@ -15,6 +15,7 @@ const ENTRY = gql`
       }
       regular
       note
+      alwaysHonorific
     }
   }
 `;
@@ -32,6 +33,7 @@ export type Entry = {
   }[];
   regular?: boolean;
   note?: string;
+  alwaysHonorific: boolean;
 };
 
 type GetEntryResponse = {

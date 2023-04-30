@@ -183,6 +183,7 @@ describe("DisplayPage", () => {
         isAdj: false,
         honorific: false,
         regular: true,
+        alwaysHonorific: false,
       })
     );
   });

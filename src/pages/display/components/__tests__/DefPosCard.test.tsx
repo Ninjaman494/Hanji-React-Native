@@ -10,6 +10,7 @@ describe("DefPosCard component", () => {
       term: "term",
       pos: "pos",
       definitions: ["def 1", "def 2", "def 3"],
+      alwaysHonorific: false,
     },
   };
 

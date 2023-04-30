@@ -23,6 +23,7 @@ export type StackParamList = {
     isAdj: boolean;
     honorific: boolean;
     regular: boolean | undefined;
+    alwaysHonorific: boolean;
   };
   [PageName.CONJINFO]: { conjugation: Conjugation };
   [PageName.SETTINGS]: undefined;

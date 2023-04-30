@@ -12,7 +12,13 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
   route,
   navigation,
 }) => {
-  const { stem, isAdj, regular, honorific: initialHonorific } = route.params;
+  const {
+    stem,
+    isAdj,
+    regular,
+    honorific: initialHonorific,
+    alwaysHonorific,
+  } = route.params;
   const [honorific, setHonorific] = useState(initialHonorific);
 
   const { padding, colors, textSizes } = useTheme();
@@ -60,13 +66,15 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
   return (
     <View style={styles.parent}>
       <AppBar title="Conjugations" />
-      <HonorificSwitch
-        honorific={honorific}
-        onPress={() => {
-          setHonorific(!honorific);
-          containerY.setValue(0);
-        }}
-      />
+      {!alwaysHonorific && (
+        <HonorificSwitch
+          honorific={honorific}
+          onPress={() => {
+            setHonorific(!honorific);
+            containerY.setValue(0);
+          }}
+        />
+      )}
       {error ? (
         <ErrorDialog visible error={error} onDismiss={navigation.goBack} />
       ) : loading ? (
