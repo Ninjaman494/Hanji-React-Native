@@ -37,6 +37,7 @@ const props = {
       isAdj: true,
       honorific: false,
       regular: true,
+      alwaysHonorific: false,
     },
   },
 };
@@ -78,5 +79,21 @@ describe("ConjugationsPage", () => {
         hookOptions
       );
     });
+  });
+
+  it("hides honorific toggle for always honorific verbs", () => {
+    const customProps = {
+      navigation: props.navigation,
+      route: {
+        params: {
+          ...props.route.params,
+          alwaysHonorific: true,
+        },
+      },
+    };
+
+    const result = render(<ConjugationsPage {...(customProps as any)} />);
+
+    expect(result.queryByRole("switch")).toBeNull();
   });
 });
