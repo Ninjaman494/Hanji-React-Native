@@ -26,6 +26,7 @@ const searchResults: Entry[] = [
     term: "term 1",
     pos: "verb",
     definitions: ["def 1", "def 2"],
+    alwaysHonorific: false,
   },
   {
     id: "2",
@@ -33,6 +34,7 @@ const searchResults: Entry[] = [
     pos: "verb",
     definitions: ["def 1", "def 2"],
     synonyms: ["synonym"],
+    alwaysHonorific: false,
   },
   {
     id: "3",
@@ -40,6 +42,7 @@ const searchResults: Entry[] = [
     pos: "verb",
     definitions: ["def 1", "def 2"],
     examples: [{ sentence: "sentence", translation: "translation" }],
+    alwaysHonorific: false,
   },
 ];
 
