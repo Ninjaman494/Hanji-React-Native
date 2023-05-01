@@ -1,4 +1,12 @@
 {
+  "48": {
+    "name": "3.1.6",
+    "date": "May 1st 2023",
+    "features": [
+      "Verbs that are always in honorific form no longer have regular conjugations",
+      "Updated dependencies"
+    ]
+  },
   "47": {
     "name": "3.1.5",
     "date": "Mar. 6th 2023",
