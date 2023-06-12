@@ -1,8 +1,8 @@
-import { AdCard, AppBar, AppLayout } from "components";
-import { SlideInBody, SlideInTop } from "components/animations";
+import { AdCard, AppBar } from "components";
+import useSlideUpAnimation from "components/animations/useSlideUpAnimation";
 import { Entry } from "hooks/useGetEntry";
 import React, { useMemo } from "react";
-import { Animated, View } from "react-native";
+import { Animated, Dimensions, FlatList, View } from "react-native";
 import SearchResultsCard from "./SearchResultsCard";
 
 export interface SearchResultsPageProps {
@@ -25,36 +25,37 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   results,
 }) => {
-  const scrollY = useMemo(() => new Animated.Value(150), []);
   const containerY = useMemo(() => new Animated.Value(0), []);
+  const containerTranslate = containerY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [Dimensions.get("window").height, 0],
+  });
 
   const resultsWithAd =
     results.length < 3
       ? [...results, "ad"]
       : [...results.slice(0, 2), "ad", ...results.slice(2)];
 
+  useSlideUpAnimation(containerY);
+
   return (
     <View style={{ flex: 1 }}>
-      <SlideInTop scrollY={scrollY} shouldAnimate>
-        <AppBar title={`Results for: ${query}`} />
-      </SlideInTop>
-      <AppLayout>
-        <SlideInBody
+      <AppBar title={`Results for: ${query}`} />
+      <Animated.View
+        style={{ transform: [{ translateY: containerTranslate }] }}
+      >
+        <FlatList
           data={resultsWithAd}
+          keyExtractor={(item) => (item as any).id ?? item}
           renderItem={({ item }) =>
             item === "ad" ? (
               <AdCard style={styles.card} />
             ) : (
-              <SearchResultsCard entry={item} style={styles.card} />
+              <SearchResultsCard entry={item as Entry} style={styles.card} />
             )
           }
-          keyExtractor={(item) => item.id ?? item}
-          scrollY={scrollY}
-          containerY={containerY}
-          flatlist
-          shouldAnimate
         />
-      </AppLayout>
+      </Animated.View>
     </View>
   );
 };

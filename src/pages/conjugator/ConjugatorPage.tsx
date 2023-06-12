@@ -1,4 +1,5 @@
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
+import useSlideUpAnimation from "components/animations/useSlideUpAnimation";
 import ErrorDialog from "components/ErrorDialog";
 import Select from "components/Select";
 import useConjugations from "hooks/useConjugations";
@@ -7,7 +8,6 @@ import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
-  Easing,
   ScrollView,
   StyleSheet,
   View,
@@ -84,16 +84,7 @@ const ConjugatorPage: FC<ScreenProps<PageName.CONJUGATOR>> = ({
     outputRange: [Dimensions.get("window").height, 0],
   });
 
-  useEffect(() => {
-    if (!conjLoading) {
-      Animated.timing(containerY, {
-        toValue: 100,
-        duration: 500,
-        easing: Easing.bezier(0.645, 0.045, 0.355, 1.0),
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [conjLoading]);
+  useSlideUpAnimation(containerY, !conjLoading);
 
   useEffect(() => {
     if (stems && stems?.length > 0) {

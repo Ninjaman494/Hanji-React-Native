@@ -1,5 +1,4 @@
-import { useFocusEffect } from "@react-navigation/native";
-import React, { FC, useCallback } from "react";
+import React, { FC } from "react";
 import {
   Animated,
   Dimensions,
@@ -7,6 +6,7 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
+import useSlideUpAnimation from "./useSlideUpAnimation";
 
 interface SlideInScrollView extends Animated.ComponentProps<ScrollView> {
   flatlist: false;
@@ -33,20 +33,7 @@ const SlideInBody: FC<SlideInBodyProps> = (props) => {
     outputRange: [Dimensions.get("window").height, minimumHeight],
   });
 
-  useFocusEffect(
-    useCallback(() => {
-      if (shouldAnimate) {
-        Animated.timing(containerY, {
-          toValue: 100,
-          duration: 500,
-          easing: easeOutExpo,
-          useNativeDriver: false,
-        }).start();
-      }
-
-      return () => containerY.setValue(0);
-    }, [shouldAnimate])
-  );
+  useSlideUpAnimation(containerY, shouldAnimate);
 
   const sharedProps = {
     style: [props.style, { transform: [{ translateY: containerTranslate }] }],
