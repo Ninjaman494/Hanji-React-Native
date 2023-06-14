@@ -11,6 +11,7 @@ const SEARCH = gql`
         definitions
       }
       cursor
+      autocorrected
     }
   }
 `;
@@ -19,6 +20,7 @@ type SearchResponse = {
   search: {
     results: Entry[];
     cursor: number | null;
+    autocorrected: string | null;
   };
 };
 
