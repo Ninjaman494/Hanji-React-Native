@@ -48,6 +48,8 @@ const searchResults: Entry[] = [
 
 const { replace, goBack } = props.navigation;
 
+jest.useFakeTimers();
+
 describe("SearchPage", () => {
   it("redirects to display if only one result", () => {
     (useSearch as jest.Mock).mockReturnValue({
@@ -79,6 +81,28 @@ describe("SearchPage", () => {
 
     const result = render(<SearchPage {...(props as any)} />);
 
+    expect(result.queryByText("Showing results")).toBeFalsy();
+    expect(result.getByText("term 1")).toBeTruthy();
+    expect(result.getByText("term 2")).toBeTruthy();
+    expect(result.getByText("term 3")).toBeTruthy();
+  });
+
+  it("shows autocorrect notification", () => {
+    (useSearch as jest.Mock).mockReturnValue({
+      loading: false,
+      data: {
+        search: {
+          results: searchResults,
+          autocorrected: "autocorrect suggestion",
+        },
+      },
+    });
+
+    const result = render(<SearchPage {...(props as any)} />);
+
+    expect(
+      result.getByText("Showing results for autocorrect suggestion")
+    ).toBeTruthy();
     expect(result.getByText("term 1")).toBeTruthy();
     expect(result.getByText("term 2")).toBeTruthy();
     expect(result.getByText("term 3")).toBeTruthy();

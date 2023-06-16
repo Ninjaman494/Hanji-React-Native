@@ -1,11 +1,5 @@
 import React, { FC } from "react";
-import {
-  Animated,
-  Dimensions,
-  Easing,
-  FlatList,
-  ScrollView,
-} from "react-native";
+import { Animated, Dimensions, FlatList, ScrollView } from "react-native";
 import useSlideUpAnimation from "./useSlideUpAnimation";
 
 interface SlideInScrollView extends Animated.ComponentProps<ScrollView> {
@@ -22,8 +16,6 @@ export type SlideInBodyProps = (SlideInScrollView | SlideInFlatList) & {
   shouldAnimate: boolean;
   minimumHeight?: number;
 };
-
-export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 
 const SlideInBody: FC<SlideInBodyProps> = (props) => {
   const { containerY, scrollY, shouldAnimate, minimumHeight = 0 } = props;

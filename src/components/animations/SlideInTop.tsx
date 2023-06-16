@@ -2,7 +2,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import React, { FC, useCallback } from "react";
 import { Animated, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { easeOutExpo } from "./SlideInBody";
+import { easeOutExpo } from "./useSlideUpAnimation";
 
 export interface SlideInTopProps extends Animated.ComponentProps<View> {
   scrollY: Animated.Value;

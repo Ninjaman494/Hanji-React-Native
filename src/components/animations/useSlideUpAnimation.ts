@@ -1,7 +1,8 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
-import { Animated } from "react-native";
-import { easeOutExpo } from "./SlideInBody";
+import { Animated, Easing } from "react-native";
+
+export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
 
 const useSlideUpAnimation = (value: Animated.Value, shouldAnimate = true) => {
   useFocusEffect(
