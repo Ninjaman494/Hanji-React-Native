@@ -20,6 +20,10 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
 }) => {
   const { padding } = useTheme();
   const styles = StyleSheet.create({
+    listParent: {
+      flexGrow: 1,
+      height: 500,
+    },
     autocorrectText: {
       fontSize: 16,
       marginHorizontal: padding.horizontal,
@@ -57,12 +61,12 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
       <AppBar title={`Results for: ${query}`} />
       <Animated.View
         style={{
-          flexGrow: 1,
-          height: 500,
+          ...styles.listParent,
           transform: [{ translateY: containerTranslate }],
         }}
       >
         <FlatList
+          contentContainerStyle={{ paddingBottom: padding.vertical }}
           data={resultsWithMore}
           keyExtractor={(item) => (item as any).id ?? item}
           renderItem={({ item }) =>
