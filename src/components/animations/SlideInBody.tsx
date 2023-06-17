@@ -1,13 +1,6 @@
-import { useFocusEffect } from "@react-navigation/native";
-import useGetAnimating from "hooks/useGetAnimating";
-import React, { FC, useCallback } from "react";
-import {
-  Animated,
-  Dimensions,
-  Easing,
-  FlatList,
-  ScrollView,
-} from "react-native";
+import React, { FC } from "react";
+import { Animated, Dimensions, FlatList, ScrollView } from "react-native";
+import useSlideUpAnimation from "./useSlideUpAnimation";
 
 interface SlideInScrollView extends Animated.ComponentProps<ScrollView> {
   flatlist: false;
@@ -24,8 +17,6 @@ export type SlideInBodyProps = (SlideInScrollView | SlideInFlatList) & {
   minimumHeight?: number;
 };
 
-export const easeOutExpo = Easing.bezier(0.19, 1.0, 0.22, 1.0);
-
 const SlideInBody: FC<SlideInBodyProps> = (props) => {
   const { containerY, scrollY, shouldAnimate, minimumHeight = 0 } = props;
 
@@ -34,24 +25,7 @@ const SlideInBody: FC<SlideInBodyProps> = (props) => {
     outputRange: [Dimensions.get("window").height, minimumHeight],
   });
 
-  const { startingAnimation, finishedAnimation } = useGetAnimating();
-
-  useFocusEffect(
-    useCallback(() => {
-      if (shouldAnimate) {
-        startingAnimation();
-
-        Animated.timing(containerY, {
-          toValue: 100,
-          duration: 500,
-          easing: easeOutExpo,
-          useNativeDriver: false,
-        }).start(finishedAnimation);
-      }
-
-      return () => containerY.setValue(0);
-    }, [shouldAnimate])
-  );
+  useSlideUpAnimation(containerY, shouldAnimate);
 
   const sharedProps = {
     style: [props.style, { transform: [{ translateY: containerTranslate }] }],

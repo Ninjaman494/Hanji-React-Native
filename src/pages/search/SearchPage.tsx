@@ -19,6 +19,7 @@ const SearchPage: React.FC<ScreenProps<PageName.SEARCH>> = ({
     const trimmedQuery = query.trim();
     const { data, error } = useSearch(trimmedQuery, null);
     const results = data?.search?.results;
+    const autocorrected = data?.search?.autocorrected;
 
     useEffect(() => {
       logEvent({
@@ -28,7 +29,7 @@ const SearchPage: React.FC<ScreenProps<PageName.SEARCH>> = ({
     }, []);
 
     useEffect(() => {
-      if (results?.length === 1) {
+      if (results?.length === 1 && !autocorrected) {
         navigation.replace(PageName.DISPLAY, {
           entryId: results[0].id,
           noAnimate: true,
@@ -38,11 +39,13 @@ const SearchPage: React.FC<ScreenProps<PageName.SEARCH>> = ({
 
     return (
       <>
-        {results && results.length > 1 ? (
+        {results &&
+        (results.length > 1 || (results.length === 1 && autocorrected)) ? (
           <SearchResultsPage
             query={trimmedQuery}
             results={results}
             cursor={data?.search?.cursor}
+            autocorrected={data?.search?.autocorrected}
           />
         ) : (
           <View style={{ flex: 1 }}>

@@ -1,8 +1,8 @@
 import { AppBar, HonorificSwitch, LoadingScreen } from "components";
-import { easeOutExpo } from "components/animations/SlideInBody";
+import useSlideUpAnimation from "components/animations/useSlideUpAnimation";
 import ErrorDialog from "components/ErrorDialog";
 import useConjugations from "hooks/useConjugations";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { PageName, ScreenProps } from "typings/navigation";
@@ -52,16 +52,7 @@ const ConjugationsPage: React.FC<ScreenProps<PageName.CONJUGATIONS>> = ({
     outputRange: [Dimensions.get("window").height, 0],
   });
 
-  useEffect(() => {
-    if (!loading && conjugations) {
-      Animated.timing(containerY, {
-        toValue: 100,
-        duration: 500,
-        easing: easeOutExpo,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [loading, conjugations]);
+  useSlideUpAnimation(containerY, !loading && !!conjugations);
 
   return (
     <View style={styles.parent}>
