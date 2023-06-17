@@ -23,6 +23,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     autocorrectText: {
       fontSize: 16,
       marginHorizontal: padding.horizontal,
+      marginVertical: padding.vertical,
     },
     query: {
       fontWeight: "bold",
@@ -40,10 +41,14 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     outputRange: [Dimensions.get("window").height, 0],
   });
 
-  const resultsWithAd =
+  // Add ad card
+  let resultsWithMore =
     results.length < 3
       ? [...results, "ad"]
       : [...results.slice(0, 2), "ad", ...results.slice(2)];
+
+  // Add autocorrect text
+  if (autocorrected) resultsWithMore = ["search", ...resultsWithMore];
 
   useSlideUpAnimation(containerY);
 
@@ -52,22 +57,22 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
       <AppBar title={`Results for: ${query}`} />
       <Animated.View
         style={{
-          paddingTop: padding.vertical,
+          flexGrow: 1,
+          height: 500,
           transform: [{ translateY: containerTranslate }],
         }}
       >
-        {autocorrected && (
-          <Text style={styles.autocorrectText}>
-            <Text>Showing results for </Text>
-            <Text style={styles.query}>{`${autocorrected}`}</Text>
-          </Text>
-        )}
         <FlatList
-          data={resultsWithAd}
+          data={resultsWithMore}
           keyExtractor={(item) => (item as any).id ?? item}
           renderItem={({ item }) =>
             item === "ad" ? (
               <AdCard style={styles.card} />
+            ) : item === "search" ? (
+              <Text style={styles.autocorrectText}>
+                <Text>Showing results for </Text>
+                <Text style={styles.query}>{`${autocorrected}`}</Text>
+              </Text>
             ) : (
               <SearchResultsCard entry={item as Entry} style={styles.card} />
             )
