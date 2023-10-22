@@ -1,9 +1,10 @@
 import { AdCard, AppBar } from "components";
 import useSlideUpAnimation from "components/animations/useSlideUpAnimation";
 import { Entry } from "hooks/useGetEntry";
-import React, { useMemo } from "react";
+import useLazySearch from "hooks/useLazySearch";
+import React, { useEffect, useMemo, useState } from "react";
 import { Animated, Dimensions, FlatList, StyleSheet, View } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { ActivityIndicator, Text, useTheme } from "react-native-paper";
 import SearchResultsCard from "./SearchResultsCard";
 
 export interface SearchResultsPageProps {
@@ -17,8 +18,9 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   autocorrected,
   results,
+  cursor,
 }) => {
-  const { padding } = useTheme();
+  const { padding, colors } = useTheme();
   const styles = StyleSheet.create({
     listParent: {
       flexGrow: 1,
@@ -37,6 +39,9 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
       marginVertical: padding.vertical,
       marginHorizontal: padding.horizontal,
     },
+    loadingIndicator: {
+      marginBottom: padding.vertical,
+    },
   });
 
   const containerY = useMemo(() => new Animated.Value(0), []);
@@ -45,14 +50,24 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     outputRange: [Dimensions.get("window").height, 0],
   });
 
+  const [search, { data, loading }] = useLazySearch();
+
   // Add ad card
-  let resultsWithMore =
+  const [fullResults, setFullResults] = useState(
     results.length < 3
       ? [...results, "ad"]
-      : [...results.slice(0, 2), "ad", ...results.slice(2)];
+      : [...results.slice(0, 2), "ad", ...results.slice(2)]
+  );
 
   // Add autocorrect text
+  let resultsWithMore = fullResults;
   if (autocorrected) resultsWithMore = ["search", ...resultsWithMore];
+
+  // Update results when we load more data
+  useEffect(() => {
+    cursor = data?.search.cursor;
+    setFullResults([...fullResults, ...(data?.search.results ?? [])]);
+  }, [data, setFullResults]);
 
   useSlideUpAnimation(containerY);
 
@@ -66,7 +81,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
         }}
       >
         <FlatList
-          contentContainerStyle={{ paddingBottom: padding.vertical }}
+          contentContainerStyle={{ paddingBottom: 50 }}
           data={resultsWithMore}
           keyExtractor={(item) => (item as any).id ?? item}
           renderItem={({ item }) =>
@@ -81,7 +96,21 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
               <SearchResultsCard entry={item as Entry} style={styles.card} />
             )
           }
+          onEndReached={() => {
+            cursor != -1 &&
+              search({
+                variables: { query, cursor: cursor ? cursor + 1 : null },
+              });
+          }}
+          onEndReachedThreshold={0.2}
         />
+        {loading && (
+          <ActivityIndicator
+            animating
+            color={colors.accent}
+            style={styles.loadingIndicator}
+          />
+        )}
       </Animated.View>
     </View>
   );
