@@ -70,7 +70,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     if (!data) return; // Skip first render
 
     setCursor(data.search.cursor);
-    setFullResults([...fullResults, ...(data?.search.results ?? [])]);
+    setFullResults([...fullResults, ...data.search.results]);
   }, [data, setFullResults]);
 
   useSlideUpAnimation(containerY);
