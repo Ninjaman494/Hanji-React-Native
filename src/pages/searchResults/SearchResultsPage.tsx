@@ -103,7 +103,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
           onEndReached={() => {
             cursor != -1 &&
               search({
-                variables: { query, cursor: cursor ? cursor + 1 : null },
+                variables: { query, cursor: cursor ?? null },
               });
           }}
           onEndReachedThreshold={0.2}
