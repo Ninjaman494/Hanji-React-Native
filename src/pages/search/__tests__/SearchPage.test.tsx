@@ -104,32 +104,46 @@ describe("SearchPage", () => {
       },
     };
 
-    beforeEach(() => {
-      (useSearch as jest.Mock).mockReturnValue({
-        data: {
-          search: {
-            results: searchResults,
+    describe("when there's more data to load", () => {
+      beforeEach(() => {
+        (useSearch as jest.Mock).mockReturnValue({
+          data: {
+            search: {
+              results: searchResults,
+              cursor: searchResults.length,
+            },
+          },
+          loading: false,
+        });
+      });
+
+      it("shows loading indicator", () => {
+        const result = render(<SearchPage {...(props as any)} />);
+        fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+
+        expect(search).toHaveBeenCalledWith({
+          variables: {
+            query: props.route.params.query,
             cursor: searchResults.length,
           },
-        },
-        loading: false,
+        });
       });
-    });
 
-    it("fetches more data if avaliable", () => {
-      const result = render(<SearchPage {...(props as any)} />);
-      fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+      it("loads data", () => {
+        // Override top-level mock
+        (useLazySearch as jest.Mock).mockReturnValue([
+          search,
+          { data: undefined, loading: true },
+        ]);
 
-      expect(search).toHaveBeenCalledWith({
-        variables: {
-          query: props.route.params.query,
-          cursor: searchResults.length,
-        },
+        const result = render(<SearchPage {...(props as any)} />);
+        fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+
+        expect(result.getByAccessibilityHint("loading")).toBeTruthy();
       });
     });
 
     it("does not fetch more data if not avaliable", () => {
-      // Override beforeEach mock
       (useSearch as jest.Mock).mockReturnValue({
         data: {
           search: {
@@ -144,19 +158,6 @@ describe("SearchPage", () => {
       fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
 
       expect(search).not.toHaveBeenCalled();
-    });
-
-    it("shows loading indicator", () => {
-      // Override beforeEach mock
-      (useLazySearch as jest.Mock).mockReturnValue([
-        search,
-        { data: undefined, loading: true },
-      ]);
-
-      const result = render(<SearchPage {...(props as any)} />);
-      fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
-
-      expect(result.getByAccessibilityHint("loading")).toBeTruthy();
     });
   });
 
