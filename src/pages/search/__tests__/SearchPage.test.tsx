@@ -1,6 +1,8 @@
 jest.mock("hooks/useSearch");
+jest.mock("hooks/useLazySearch");
 
 import { Entry } from "hooks/useGetEntry";
+import useLazySearch from "hooks/useLazySearch";
 import useSearch from "hooks/useSearch";
 import React from "react";
 import "react-native";
@@ -50,6 +52,11 @@ const { replace, goBack } = props.navigation;
 
 jest.useFakeTimers();
 
+(useLazySearch as jest.Mock).mockReturnValue([
+  jest.fn(),
+  { data: null, loading: false },
+]);
+
 describe("SearchPage", () => {
   it("redirects to display if only one result", () => {
     (useSearch as jest.Mock).mockReturnValue({
@@ -85,6 +92,77 @@ describe("SearchPage", () => {
     expect(result.getByText("term 1")).toBeTruthy();
     expect(result.getByText("term 2")).toBeTruthy();
     expect(result.getByText("term 3")).toBeTruthy();
+  });
+
+  it("fetches more results when the user scrolls to the bottom", async () => {
+    const initialData = {
+      search: {
+        results: searchResults,
+        cursor: searchResults.length,
+      },
+    };
+    (useSearch as jest.Mock).mockReturnValue({
+      data: initialData,
+      loading: false,
+    });
+
+    const search = jest.fn();
+    (useLazySearch as jest.Mock).mockReturnValueOnce([
+      search,
+      { data: undefined, loading: false },
+    ]);
+
+    const result = render(<SearchPage {...(props as any)} />);
+
+    expect(result.getByText(searchResults[0].term)).toBeTruthy();
+    expect(result.getByText(searchResults[1].term)).toBeTruthy();
+    expect(result.getByText(searchResults[2].term)).toBeTruthy();
+
+    const extraResults = searchResults.map(({ id, ...rest }) => {
+      const newId = (parseInt(id) + searchResults.length).toString();
+      return {
+        ...rest,
+        id: newId,
+        term: `term ${newId}`,
+      };
+    });
+    (useLazySearch as jest.Mock).mockReturnValueOnce([
+      search,
+      {
+        data: {
+          search: {
+            results: extraResults,
+            cursor: searchResults.length + extraResults.length,
+          },
+        },
+        loading: false,
+      },
+    ]);
+
+    const eventData = {
+      nativeEvent: {
+        contentOffset: {
+          y: 500,
+          x: 0,
+        },
+        contentSize: {
+          height: 500,
+          width: 100,
+        },
+        layoutMeasurement: {
+          height: 100,
+          width: 100,
+        },
+      },
+    };
+    fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+
+    expect(search).toHaveBeenCalledWith({
+      variables: {
+        query: props.route.params.query,
+        cursor: initialData.search.cursor + 1,
+      },
+    });
   });
 
   it("shows autocorrect notification", () => {

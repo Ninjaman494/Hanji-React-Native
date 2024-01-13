@@ -18,7 +18,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   autocorrected,
   results,
-  cursor,
+  cursor: initialCursor,
 }) => {
   const { padding, colors } = useTheme();
   const styles = StyleSheet.create({
@@ -52,6 +52,8 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
 
   const [search, { data, loading }] = useLazySearch();
 
+  const [cursor, setCursor] = useState(initialCursor);
+
   // Add ad card
   const [fullResults, setFullResults] = useState(
     results.length < 3
@@ -65,7 +67,9 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
 
   // Update results when we load more data
   useEffect(() => {
-    cursor = data?.search.cursor;
+    if (!data) return; // Skip first render
+
+    setCursor(data.search.cursor);
     setFullResults([...fullResults, ...(data?.search.results ?? [])]);
   }, [data, setFullResults]);
 
