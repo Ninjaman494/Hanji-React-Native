@@ -113,6 +113,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
             animating
             color={colors.accent}
             style={styles.loadingIndicator}
+            accessibilityHint="loading"
           />
         )}
       </Animated.View>
