@@ -52,9 +52,10 @@ const { replace, goBack } = props.navigation;
 
 jest.useFakeTimers();
 
+const search = jest.fn();
 (useLazySearch as jest.Mock).mockReturnValue([
-  jest.fn(),
-  { data: null, loading: false },
+  search,
+  { data: undefined, loading: false },
 ]);
 
 describe("SearchPage", () => {
@@ -95,7 +96,6 @@ describe("SearchPage", () => {
   });
 
   describe("when user scrolls to the bottom", () => {
-    const search = jest.fn();
     const eventData = {
       nativeEvent: {
         contentOffset: { y: 500, x: 0 },
@@ -114,10 +114,6 @@ describe("SearchPage", () => {
         },
         loading: false,
       });
-      (useLazySearch as jest.Mock).mockReturnValue([
-        search,
-        { data: undefined, loading: false },
-      ]);
     });
 
     it("fetches more data if avaliable", () => {
