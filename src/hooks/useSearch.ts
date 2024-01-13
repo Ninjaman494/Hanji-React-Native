@@ -1,7 +1,7 @@
 import { gql, QueryResult, useQuery } from "@apollo/client";
 import { Entry } from "hooks/useGetEntry";
 
-const SEARCH = gql`
+export const SEARCH = gql`
   query SearchQuery($query: String!, $cursor: Int) {
     search(query: $query, cursor: $cursor) {
       results {
@@ -16,7 +16,7 @@ const SEARCH = gql`
   }
 `;
 
-type SearchResponse = {
+export type SearchResponse = {
   search: {
     results: Entry[];
     cursor: number | null;

@@ -1,6 +1,8 @@
 jest.mock("hooks/useSearch");
+jest.mock("hooks/useLazySearch");
 
 import { Entry } from "hooks/useGetEntry";
+import useLazySearch from "hooks/useLazySearch";
 import useSearch from "hooks/useSearch";
 import React from "react";
 import "react-native";
@@ -50,6 +52,12 @@ const { replace, goBack } = props.navigation;
 
 jest.useFakeTimers();
 
+const search = jest.fn();
+(useLazySearch as jest.Mock).mockReturnValue([
+  search,
+  { data: undefined, loading: false },
+]);
+
 describe("SearchPage", () => {
   it("redirects to display if only one result", () => {
     (useSearch as jest.Mock).mockReturnValue({
@@ -85,6 +93,72 @@ describe("SearchPage", () => {
     expect(result.getByText("term 1")).toBeTruthy();
     expect(result.getByText("term 2")).toBeTruthy();
     expect(result.getByText("term 3")).toBeTruthy();
+  });
+
+  describe("when user scrolls to the bottom", () => {
+    const eventData = {
+      nativeEvent: {
+        contentOffset: { y: 500, x: 0 },
+        contentSize: { height: 500, width: 100 },
+        layoutMeasurement: { height: 100, width: 100 },
+      },
+    };
+
+    describe("when there's more data to load", () => {
+      beforeEach(() => {
+        (useSearch as jest.Mock).mockReturnValue({
+          data: {
+            search: {
+              results: searchResults,
+              cursor: searchResults.length,
+            },
+          },
+          loading: false,
+        });
+      });
+
+      it("shows loading indicator", () => {
+        const result = render(<SearchPage {...(props as any)} />);
+        fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+
+        expect(search).toHaveBeenCalledWith({
+          variables: {
+            query: props.route.params.query,
+            cursor: searchResults.length,
+          },
+        });
+      });
+
+      it("loads data", () => {
+        // Override top-level mock
+        (useLazySearch as jest.Mock).mockReturnValue([
+          search,
+          { data: undefined, loading: true },
+        ]);
+
+        const result = render(<SearchPage {...(props as any)} />);
+        fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+
+        expect(result.getByAccessibilityHint("loading")).toBeTruthy();
+      });
+    });
+
+    it("does not fetch more data if not avaliable", () => {
+      (useSearch as jest.Mock).mockReturnValue({
+        data: {
+          search: {
+            results: searchResults,
+            cursor: -1,
+          },
+        },
+        loading: false,
+      });
+
+      const result = render(<SearchPage {...(props as any)} />);
+      fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+
+      expect(search).not.toHaveBeenCalled();
+    });
   });
 
   it("shows autocorrect notification", () => {
