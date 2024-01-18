@@ -1,4 +1,13 @@
 {
+  "49": {
+    "name": "3.1.7",
+    "date": "Jan 18th 2024",
+    "features": [
+      "Fixed a bug where not all search results were being shown",
+      "Added autocorrect for Korean to search",
+      "Updated dependencies"
+    ]
+  },
   "48": {
     "name": "3.1.6",
     "date": "May 1st 2023",
