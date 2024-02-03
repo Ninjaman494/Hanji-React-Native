@@ -2,16 +2,9 @@ apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "com.google.firebase.firebase-perf"
 apply plugin: "com.facebook.react"
-apply plugin: "io.sentry.android.gradle"
 
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
-
-sentry {
-    autoInstallation {
-      enabled = false
-    }
-}
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
