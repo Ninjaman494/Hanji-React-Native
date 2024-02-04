@@ -97,7 +97,7 @@ project.ext.sentryCli = [
     logLevel: "debug"
 ]
 
-apply from: new File(reactNativeRoot, "react.gradle")
+// apply from: new File(reactNativeRoot, "react.gradle")
 apply from: new File(["node", "--print", "require.resolve('@sentry/react-native/package.json')"].execute().text.trim(), "../sentry.gradle")
 
 /**
