@@ -1,5 +1,5 @@
-import { PurchasesError, PURCHASES_ERROR_CODE } from "react-native-purchases";
-import { Native } from "sentry-expo";
+import { captureException } from "@sentry/react-native";
+import { PURCHASES_ERROR_CODE, PurchasesError } from "react-native-purchases";
 
 const getPurchaseErrorMessage = (
   error: PurchasesError,
@@ -25,7 +25,7 @@ const getPurchaseErrorMessage = (
     case PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR:
       return;
     default:
-      Native.captureException(error, { extra: { error } });
+      captureException(error, { extra: { error } });
       return (
         defaultMsg ??
         "An error occurred. Please try again later or contact support"

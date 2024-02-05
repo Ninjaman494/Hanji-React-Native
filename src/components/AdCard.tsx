@@ -34,7 +34,7 @@ const AdCard = (props: BaseCardProps): JSX.Element | null => {
             alignContent: "stretch",
             alignSelf: "center",
           }}
-          adSize="mrec"
+          adSize="phone"
           usesSmartSizing // (iOS specific) on Android smart banners are enabled by default.
           onAdLoaded={() => console.log("Banner view did load")}
           onAdExpired={() => console.log("Banner view expired")}

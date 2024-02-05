@@ -35,7 +35,8 @@
     "plugins": [
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
-      "expo-font"
+      "expo-font",
+      "@notifee/react-native"
     ],
     "hooks": {
       "postPublish": [

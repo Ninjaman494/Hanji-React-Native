@@ -7,7 +7,9 @@ const handleNotificationReceived = (
 ) => {
   console.log("Received: ", JSON.stringify(msg, null, 2));
   if (msg.data?.type === "wod") {
-    navigation.navigate(PageName.DISPLAY, { entryId: msg.data.entryId });
+    navigation.navigate(PageName.DISPLAY, {
+      entryId: msg.data.entryId.toString(),
+    });
   }
 };
 export default handleNotificationReceived;

@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react-native";
 import React, {
   createContext,
   FC,
@@ -8,7 +9,6 @@ import React, {
   useState,
 } from "react";
 import { Snackbar } from "react-native-paper";
-import { Native } from "sentry-expo";
 
 interface SnackbarProviderValue {
   showSnackbar: (text: string) => void;
@@ -35,7 +35,7 @@ const SnackbarProvider: FC<PropsWithChildren> = ({ children }) => {
   const showError = useCallback(
     (error: Error) => {
       console.log(JSON.stringify(error, null, 2));
-      Native.captureException(error, { extra: { error } });
+      captureException(error, { extra: { error } });
       setSnackbarText(
         error.message ?? "An error occurred. Please try again later"
       );
