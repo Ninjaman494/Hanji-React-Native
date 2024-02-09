@@ -1,4 +1,6 @@
-jest.mock("sentry-expo");
+jest.mock("@sentry/react-native");
+jest.mock("expo-store-review");
+jest.mock("react-native-purchases");
 jest.mock("setupSentry");
 jest.mock("setupMessaging", () => jest.fn());
 jest.mock("setupPurchases");
@@ -10,7 +12,14 @@ jest.mock("Pages", () => ({
   __esModule: true,
   default: () => <div>Pages</div>,
 }));
+jest.mock("@react-native-firebase/analytics", () => {
+  return () => ({
+    setAnalyticsCollectionEnabled: jest.fn(),
+    setUserId: jest.fn(),
+  });
+});
 
+import { setContext } from "@sentry/react-native";
 import { render } from "@testing-library/react-native";
 import useCheckNetInfo from "hooks/useCheckNetInfo";
 import useGetFavorites from "hooks/useGetFavorites";
@@ -19,7 +28,6 @@ import Index from "index";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import React from "react";
 import "react-native";
-import { Native } from "sentry-expo";
 import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
@@ -63,7 +71,7 @@ describe("Index", () => {
     render(<Index />);
 
     expect(setupSentry).toHaveBeenCalled();
-    expect(Native.setContext).toHaveBeenCalledWith("Favorites", {
+    expect(setContext).toHaveBeenCalledWith("Favorites", {
       favorites: DEFAULT_FAVORITES,
     });
   });
