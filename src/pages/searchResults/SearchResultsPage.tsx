@@ -87,7 +87,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
         <FlatList
           contentContainerStyle={{ paddingBottom: 50 }}
           data={resultsWithMore}
-          keyExtractor={(item) => (item as any).id ?? item}
+          keyExtractor={(item) => (item as Entry).id ?? item}
           renderItem={({ item }) =>
             item === "ad" ? (
               <AdCard style={styles.card} />
