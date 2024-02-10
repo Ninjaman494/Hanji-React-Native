@@ -1,4 +1,4 @@
-jest.mock("sentry-expo");
+jest.mock("@sentry/react-native");
 jest.mock("react-native-gesture-handler");
 jest.mock("utils/handleNotificationReceived");
 jest.mock("@react-native-firebase/messaging", () => {
@@ -12,11 +12,11 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
+import { addBreadcrumb } from "@sentry/react-native";
 import Pages from "Pages";
 import React from "react";
 import "react-native";
 import "react-native-gesture-handler/jestSetup";
-import { Native } from "sentry-expo";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
 import { render } from "utils/testUtils";
 
@@ -33,7 +33,7 @@ describe("Pages component", () => {
       </NavigationContainer>
     );
 
-    expect(Native.addBreadcrumb).toHaveBeenCalledWith({
+    expect(addBreadcrumb).toHaveBeenCalledWith({
       category: "navigation",
       message: "Route changed to MainPage",
       level: "info",

@@ -1,8 +1,8 @@
-jest.mock("sentry-expo");
+jest.mock("@sentry/react-native");
 
 import { ApolloError } from "@apollo/client";
+import { captureException } from "@sentry/react-native";
 import React from "react";
-import { Native } from "sentry-expo";
 import { render } from "utils/testUtils";
 import ErrorDialog from "../ErrorDialog";
 
@@ -11,7 +11,7 @@ describe("ErrorDialog component", () => {
     const error = new ApolloError({});
     const result = render(<ErrorDialog visible error={error} />);
 
-    expect(Native.captureException).toHaveBeenCalledWith(error, {
+    expect(captureException).toHaveBeenCalledWith(error, {
       extra: { error },
     });
     expect(
@@ -27,7 +27,7 @@ describe("ErrorDialog component", () => {
     });
     const result = render(<ErrorDialog visible error={error} />);
 
-    expect(Native.captureException).not.toHaveBeenCalled();
+    expect(captureException).not.toHaveBeenCalled();
     expect(
       result.queryByText(
         "Network request failed. Please try again later or contact support."
@@ -39,7 +39,7 @@ describe("ErrorDialog component", () => {
     const error = new ApolloError({ errorMessage: "foobar" });
     const result = render(<ErrorDialog visible error={error} />);
 
-    expect(Native.captureException).toHaveBeenCalledWith(error, {
+    expect(captureException).toHaveBeenCalledWith(error, {
       extra: { error },
     });
     expect(
