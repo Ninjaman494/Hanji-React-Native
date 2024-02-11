@@ -28,6 +28,7 @@ const favorites = [
 (useGetFavorites as jest.Mock).mockReturnValue({
   loading: false,
   favorites,
+  refetch: jest.fn(),
 });
 
 const setFavorites = jest.fn();
