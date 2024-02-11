@@ -8,6 +8,8 @@ import "react-native";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import FavoritesPage from "../FavoritesPage";
 
+jest.useFakeTimers();
+
 const favorites = [
   {
     name: "favorite 1",
