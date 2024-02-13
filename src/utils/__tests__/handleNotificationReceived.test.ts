@@ -5,6 +5,7 @@ const msg = {
     type: "wod",
     entryId: "가다0",
   },
+  fcmOptions: {},
 };
 
 const navigate = jest.fn();

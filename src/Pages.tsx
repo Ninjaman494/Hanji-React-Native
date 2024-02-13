@@ -4,6 +4,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { addBreadcrumb } from "@sentry/react-native";
 import BugReportPage from "pages/bugReport/BugReportPage";
 import ConjInfoPage from "pages/conjInfo/ConjInfoPage";
 import ConjugationsPage from "pages/conjugations/ConjugationsPage";
@@ -16,7 +17,6 @@ import AcknowledgementsPage from "pages/settings/AcknowledgementsPage";
 import SettingsPage from "pages/settings/SettingsPage";
 import React, { FC, useEffect } from "react";
 import "react-native";
-import { Native } from "sentry-expo";
 import { NavigationProps, PageName, StackParamList } from "typings/navigation";
 import handleNotificationReceived from "utils/handleNotificationReceived";
 import logEvent, { LOG_EVENT } from "utils/logEvent";
@@ -50,7 +50,7 @@ const Pages: FC<PagesProps> = ({ navRef }) => {
           const route = navRef.getCurrentRoute();
           if (!route) return;
 
-          Native?.addBreadcrumb({
+          addBreadcrumb({
             category: "navigation",
             message: `Route changed to ${route.name}`,
             level: "info",

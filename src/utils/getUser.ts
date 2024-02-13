@@ -1,8 +1,8 @@
-import { Native } from "sentry-expo";
+import { User, withScope } from "@sentry/react-native";
 
-const getUser = (): Native.User | undefined => {
-  let user: Native.User | undefined;
-  Native.withScope((scope) => (user = scope.getUser()));
+const getUser = (): User | undefined => {
+  let user: User | undefined;
+  withScope((scope) => (user = scope.getUser()));
   return user;
 };
 

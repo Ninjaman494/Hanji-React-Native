@@ -96,14 +96,6 @@ describe("SearchPage", () => {
   });
 
   describe("when user scrolls to the bottom", () => {
-    const eventData = {
-      nativeEvent: {
-        contentOffset: { y: 500, x: 0 },
-        contentSize: { height: 500, width: 100 },
-        layoutMeasurement: { height: 100, width: 100 },
-      },
-    };
-
     describe("when there's more data to load", () => {
       beforeEach(() => {
         (useSearch as jest.Mock).mockReturnValue({
@@ -118,18 +110,6 @@ describe("SearchPage", () => {
       });
 
       it("shows loading indicator", () => {
-        const result = render(<SearchPage {...(props as any)} />);
-        fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
-
-        expect(search).toHaveBeenCalledWith({
-          variables: {
-            query: props.route.params.query,
-            cursor: searchResults.length,
-          },
-        });
-      });
-
-      it("loads data", () => {
         // Override top-level mock
         (useLazySearch as jest.Mock).mockReturnValue([
           search,
@@ -137,9 +117,21 @@ describe("SearchPage", () => {
         ]);
 
         const result = render(<SearchPage {...(props as any)} />);
-        fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+        fireEvent(result.getByTestId("searchList"), "onEndReached");
 
         expect(result.getByAccessibilityHint("loading")).toBeTruthy();
+      });
+
+      it("loads data", async () => {
+        const result = render(<SearchPage {...(props as any)} />);
+        fireEvent(result.getByTestId("searchList"), "onEndReached");
+
+        expect(search).toHaveBeenCalledWith({
+          variables: {
+            query: props.route.params.query,
+            cursor: searchResults.length,
+          },
+        });
       });
     });
 
@@ -155,7 +147,7 @@ describe("SearchPage", () => {
       });
 
       const result = render(<SearchPage {...(props as any)} />);
-      fireEvent.scroll(result.getByText(searchResults[2].term), eventData);
+      fireEvent(result.getByTestId("searchList"), "onEndReached");
 
       expect(search).not.toHaveBeenCalled();
     });

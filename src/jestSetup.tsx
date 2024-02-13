@@ -12,7 +12,11 @@ jest.mock("hooks/useUserContext", () => ({
     sessionCount: 0,
   }),
 }));
-jest.mock("utils/logEvent");
+jest.mock("utils/logEvent", () => ({
+  __esModule: true,
+  default: jest.fn(),
+  LOG_EVENT: {},
+}));
 jest.mock("expo-modules-core");
 jest.mock("@notifee/react-native", () => ({
   requestPermission: jest.fn(),

@@ -109,7 +109,7 @@ const BugReportPage: FC<ScreenProps<PageName.BUGREPORT>> = ({
         variables: {
           feedback: values.feedback,
           type: values.type,
-          email: user?.id,
+          email: user?.id?.toString(),
           image: values.includeImage ? file : undefined,
           deviceInfo,
         },

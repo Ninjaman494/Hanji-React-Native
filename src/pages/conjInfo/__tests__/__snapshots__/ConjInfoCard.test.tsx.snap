@@ -31,7 +31,11 @@ exports[`ConjInfoCard component displays a regular conjugation 1`] = `
     <View
       accessibilityState={
         {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessible={true}
@@ -511,7 +515,11 @@ exports[`ConjInfoCard component displays an honorific conjugation 1`] = `
     <View
       accessibilityState={
         {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessible={true}

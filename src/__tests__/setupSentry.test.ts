@@ -1,11 +1,11 @@
 jest.mock("react-native-exception-handler");
-jest.mock("sentry-expo");
+jest.mock("@sentry/react-native");
 
+import { init } from "@sentry/react-native";
 import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
 } from "react-native-exception-handler";
-import { init } from "sentry-expo";
 import setupSentry from "setupSentry";
 
 const mockInstrumentation = jest.fn();

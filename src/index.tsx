@@ -6,13 +6,14 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
+import * as Sentry from "@sentry/react-native";
+import Pages from "Pages";
 import { createUploadLink } from "apollo-upload-client";
 import { nativeBuildVersion } from "expo-application";
 import { StatusBar } from "expo-status-bar";
 import useCheckNetInfo from "hooks/useCheckNetInfo";
 import useGetFavorites from "hooks/useGetFavorites";
 import useSetFavorites from "hooks/useSetFavorites";
-import Pages from "Pages";
 import { DEFAULT_FAVORITES } from "pages/main/MainPage";
 import ChangeLog from "providers/ChangeLog";
 import RatingHandler from "providers/RatingHandler";
@@ -24,12 +25,11 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import Purchases from "react-native-purchases";
 import uuid from "react-native-uuid";
-import { Native } from "sentry-expo";
 import setupMessaging from "setupMessaging";
 import setupPurchases from "setupPurchases";
 import setupSentry from "setupSentry";
 import theme from "theme";
-import { getAsyncStorage, USER_ID_KEY } from "utils/asyncStorageHelper";
+import { USER_ID_KEY, getAsyncStorage } from "utils/asyncStorageHelper";
 import setupAds from "utils/setupAds";
 
 const client = new ApolloClient({
@@ -40,7 +40,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const routingInstrumentation = new Native.ReactNavigationInstrumentation();
+const routingInstrumentation = new Sentry.ReactNavigationInstrumentation();
 
 export default function Index(): JSX.Element {
   const { favorites, loading, error } = useGetFavorites();
@@ -66,7 +66,7 @@ export default function Index(): JSX.Element {
         id = uuid.v4().toString();
         await AsyncStorage.setItem(USER_ID_KEY, id);
       }
-      Native?.setUser({ id });
+      Sentry?.setUser({ id });
       await Purchases.logIn(id);
       await analytics().setUserId(id);
     })();
@@ -77,9 +77,9 @@ export default function Index(): JSX.Element {
   useEffect(() => {
     if (favorites === null && !loading && !error) {
       setFavorites(DEFAULT_FAVORITES);
-      Native?.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
+      Sentry?.setContext("Favorites", { favorites: DEFAULT_FAVORITES });
     } else if (favorites) {
-      Native?.setContext("Favorites", { favorites });
+      Sentry?.setContext("Favorites", { favorites });
     }
   }, [favorites, loading, error, DEFAULT_FAVORITES, setFavorites]);
 

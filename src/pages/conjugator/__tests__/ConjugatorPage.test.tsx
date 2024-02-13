@@ -9,6 +9,8 @@ import { ConjugationName, Formality, Tense } from "utils/conjugationTypes";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import ConjugatorPage from "../ConjugatorPage";
 
+jest.useFakeTimers();
+
 const conjugation = {
   name: "name 1" as ConjugationName,
   conjugation: "conj 1",

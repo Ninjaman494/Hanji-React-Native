@@ -8,6 +8,8 @@ import "react-native";
 import { fireEvent, render, waitFor } from "utils/testUtils";
 import FavoritesPage from "../FavoritesPage";
 
+jest.useFakeTimers();
+
 const favorites = [
   {
     name: "favorite 1",
@@ -28,6 +30,7 @@ const favorites = [
 (useGetFavorites as jest.Mock).mockReturnValue({
   loading: false,
   favorites,
+  refetch: jest.fn(),
 });
 
 const setFavorites = jest.fn();
