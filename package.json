@@ -70,10 +70,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@testing-library/dom": "^9.0.0",
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/dom": "^10.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/jest-native": "^5.0.0",
-    "@testing-library/react-native": "^11.0.0",
+    "@testing-library/react-native": "^13.0.0",
     "@testing-library/user-event": "^14.0.0",
     "@types/apollo-upload-client": "^17.0.0",
     "@types/jest": "^29.0.0",
