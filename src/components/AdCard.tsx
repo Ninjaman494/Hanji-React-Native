@@ -7,18 +7,28 @@ import { AppodealMrec } from "react-native-appodeal";
 import { NavigationProps } from "typings/navigation";
 import BaseCard, { BaseCardProps } from "./BaseCard";
 
-const AdCard = (props: BaseCardProps): JSX.Element | null => {
+export type AdCardProps = BaseCardProps & {
+  startWithAdShown?: boolean;
+};
+
+const AdCard = ({
+  startWithAdShown = false,
+  ...rest
+}: AdCardProps): JSX.Element | null => {
   const { isAdFree } = useUserContext();
   const navigation = useNavigation<NavigationProps>();
-  const [showAd, setShowAd] = useState(false);
+  const [showAd, setShowAd] = useState(startWithAdShown);
+
+  useEffect(() => {
+    showAd
+      ? console.log("[HANJI AD] Showing ad")
+      : console.log("[HANJI AD] Not showing ad");
+  }, [showAd]);
 
   useEffect(() => {
     if (isAdFree) return;
 
-    const updateBannerVisibility = () => {
-      setShowAd(true);
-      console.log("[HANJI AD] Showing ad");
-    };
+    const updateBannerVisibility = () => setShowAd(true);
 
     navigation.addListener("transitionEnd", updateBannerVisibility);
 
@@ -28,7 +38,7 @@ const AdCard = (props: BaseCardProps): JSX.Element | null => {
   }, [isAdFree]);
 
   return isAdFree ? null : (
-    <BaseCard title="Ad" testID="adCardBase" {...props}>
+    <BaseCard title="Ad" testID="adCardBase" {...rest}>
       {showAd ? (
         <AppodealMrec
           style={{
