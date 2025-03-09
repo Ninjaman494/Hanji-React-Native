@@ -153,7 +153,7 @@ dependencies {
     }
 
     // User added dependencies
-    implementation 'com.appodeal.ads:sdk:3.2.0+'
+    implementation 'com.appodeal.ads:sdk:3.4.1.0'
     implementation 'com.android.support:multidex:1.0.3'
 }
 
