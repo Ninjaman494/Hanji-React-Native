@@ -102,10 +102,7 @@ const MainPage: React.FC<ScreenProps<PageName.MAIN>> = ({ navigation }) => {
               navigation.push(PageName.DISPLAY, { entryId })
             }
           />
-          <AdCard
-            style={[styles.card, { marginBottom: 16 }]}
-            startWithAdShown
-          />
+          <AdCard style={[styles.card, { marginBottom: 16 }]} />
         </SlideInBody>
       </AppLayout>
     </View>
