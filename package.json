@@ -1,6 +1,6 @@
 {
   "name": "hanji-app",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "scripts": {
     "start": "npx expo start --dev-client",
     "test": "jest",

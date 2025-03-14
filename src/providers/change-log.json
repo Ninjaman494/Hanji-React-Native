@@ -1,4 +1,9 @@
 {
+  "51": {
+    "name": "3.2.1",
+    "date": "Mar. 14th 2025",
+    "features": ["Updated dependencies"]
+  },
   "50": {
     "name": "3.2.0",
     "date": "Feb 14th 2024",
