@@ -1,4 +1,3 @@
-// @ts-expect-error import doesn't have type
 import mockRNCNetInfo from "@react-native-community/netinfo/jest/netinfo-mock.js";
 import { EffectCallback } from "react";
 
