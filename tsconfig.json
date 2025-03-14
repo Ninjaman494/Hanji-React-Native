@@ -6,13 +6,13 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "noEmit": true,
-    "skipLibCheck": true,
     "resolveJsonModule": true,
+    // Required until Appodeal fixes their TS errors
+    "noImplicitAny": false,
     "strict": true,
     "esModuleInterop": true,
     "baseUrl": "./src",
     "typeRoots": ["./node_modules/@types", "./src/typings"]
   },
-  "exclude": ["./node_modules"],
   "extends": "expo/tsconfig.base"
 }

@@ -17,7 +17,7 @@ const setupSentry = (
       }
       return breadcrumb;
     },
-    // enableInExpoDevelopment: true,
+    enabled: !__DEV__,
     environment:
       process.env.NODE_ENV === "development" ? "development" : "production",
     integrations: [new Sentry.ReactNativeTracing({ routingInstrumentation })],

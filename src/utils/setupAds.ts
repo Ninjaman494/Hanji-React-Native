@@ -6,7 +6,7 @@ import {
 } from "react-native-appodeal";
 
 const setupAds = () => {
-  Appodeal.setTesting(false);
+  Appodeal.setTesting(__DEV__);
   Appodeal.setLogLevel(AppodealLogLevel.VERBOSE);
   Appodeal.initialize(APPODEAL_KEY, AppodealAdType.MREC);
 };
